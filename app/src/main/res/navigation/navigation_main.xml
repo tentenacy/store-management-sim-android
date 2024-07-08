@@ -11,16 +11,7 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.tenutz.storemngsim.ui.signup.SignupFragment"
-        android:label="SignupFragment"
-        tools:layout="@layout/fragment_signup" >
-        <action
-            android:id="@+id/action_signupFragment_to_signupFormFragment"
+            android:id="@+id/action_loginFragment_to_signupFormFragment"
             app:destination="@id/signupFormFragment" />
     </fragment>
     <fragment

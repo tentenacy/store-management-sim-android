@@ -29,8 +29,8 @@ class LoginFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textLoginSignup.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment())
+        binding.imageLoginKakao.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFormFragment())
         }
     }
 
