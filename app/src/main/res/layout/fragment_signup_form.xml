@@ -6,15 +6,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_signup_form_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/text_signup_form_title"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/ns_regular"
-            android:includeFontPadding="false"
             android:text="점주님의\n정보를 입력해주세요."
             android:textColor="#1d1d1b"
             android:textSize="24sp"
@@ -48,11 +49,11 @@
 
         <TextView
             android:id="@+id/text_signup_form_biz_no"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/ns_regular"
-            android:includeFontPadding="false"
             android:text="사업자 번호"
             android:textColor="#1d1d1b"
             android:textSize="14sp"
@@ -62,6 +63,7 @@
 
         <EditText
             android:id="@+id/edit_signup_form_biz_no"
+            style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -71,7 +73,6 @@
             android:gravity="center"
             android:hint="사업자번호 입력"
             android:importantForAutofill="no"
-            android:includeFontPadding="false"
             android:inputType="numberSigned"
             android:maxLength="10"
             android:padding="14dp"
@@ -100,6 +101,7 @@
 
         <EditText
             android:id="@+id/edit_signup_form_phone"
+            style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -109,7 +111,6 @@
             android:fontFamily="@font/ns_regular"
             android:gravity="center"
             android:importantForAutofill="no"
-            android:includeFontPadding="false"
             android:inputType="phone"
             android:padding="14dp"
             android:textColor="#1d1d1b"
