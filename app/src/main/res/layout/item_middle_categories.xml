@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="use"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/constraint_imain_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="9dp">
+
+        <TextView
+            android:id="@+id/text_imain_categories_name"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="#1d1d1b"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="빽다방 인천굴포천역점" />
+
+        <TextView
+            android:id="@+id/text_imain_categories_code"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="#a0a0a0"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_imain_categories_name"
+            tools:text="0000000000" />
+
+        <TextView
+            android:id="@+id/text_imain_categories_use"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="@{use}"
+            android:fontFamily="@font/ns_regular"
+            android:text='@{use ? "사용" : "미사용"}'
+            android:textColor='@{use ? "#4e93ce" : "#a0a0a0"}'
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="사용"
+            tools:textColor="#4e93ce" />
+
+        <View
+            android:id="@+id/view_imain_categories_use"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@{use ? @drawable/circle_use : @drawable/circle_use_not}"
+            app:layout_constraintBottom_toBottomOf="@id/text_imain_categories_use"
+            app:layout_constraintEnd_toStartOf="@id/text_imain_categories_use"
+            app:layout_constraintTop_toTopOf="@id/text_imain_categories_use"
+            tools:background="@drawable/circle_use" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
