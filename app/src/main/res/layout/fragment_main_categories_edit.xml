@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_main_categories_edit_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/image_main_categories_edit_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="뒤로가기"
+            android:src="@drawable/ic_black_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_categories_edit_title"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:text="카테고리 관리"
+            android:textColor="#1d1d1b"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_main_categories_edit_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image_main_categories_edit_back"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/image_main_categories_edit_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="메인으로 이동"
+            android:src="@drawable/ic_black_home"
+            app:layout_constraintBottom_toBottomOf="@+id/image_main_categories_edit_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_main_categories_edit_back"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_categories_edit_label_main_category"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="38dp"
+            android:fontFamily="@font/ns_bold"
+            android:text="대분류 목록"
+            android:textColor="#1d1d1b"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_main_categories_edit_title"
+            tools:ignore="HardcodedText" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_main_categories_all_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_main_categories_edit_label_main_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_main_categories_edit_label_main_category">
+
+            <TextView
+                android:id="@+id/text_main_categories_edit_all"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ns_regular"
+                android:text="전체"
+                android:textColor="#4e93ce"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/image_main_categories_edit_all"
+                android:layout_width="10.7dp"
+                android:layout_height="7.5dp"
+                android:layout_marginEnd="5.83dp"
+                android:contentDescription="전체 선택 이미지"
+                android:src="@drawable/ic_check_all_checked"
+                app:layout_constraintBottom_toBottomOf="@id/text_main_categories_edit_all"
+                app:layout_constraintEnd_toStartOf="@id/text_main_categories_edit_all"
+                app:layout_constraintTop_toTopOf="@id/text_main_categories_edit_all"
+                tools:ignore="HardcodedText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_main_categories_edit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/constraint_main_categories_edit_bottom_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_main_categories_edit_label_main_category"
+            tools:listitem="@layout/item_main_categories" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_main_categories_edit_bottom_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#dddddd"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/image_main_categories_edit_bottom"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_white_delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/text_main_categories_edit_bottom"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/text_main_categories_edit_bottom"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ns_regular"
+                android:text="삭제"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image_main_categories_edit_bottom"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
