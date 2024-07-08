@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_signup_form_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_signup_form_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:includeFontPadding="false"
+            android:text="점주님의\n정보를 입력해주세요."
+            android:textColor="#1d1d1b"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.28845"
+            tools:ignore="HardcodedText"/>
+
+
+        <ImageView
+            android:id="@+id/image_signup_form_man"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_info_man"
+            android:translationX="-20dp"
+            app:layout_constraintStart_toEndOf="@id/text_signup_form_description"
+            app:layout_constraintBottom_toTopOf="@id/view_signup_form_dummy"
+            android:contentDescription="남자 이미지"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:id="@+id/view_signup_form_dummy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/text_signup_form_description"
+            app:layout_constraintEnd_toEndOf="@id/text_signup_form_description"
+            app:layout_constraintTop_toTopOf="@id/text_signup_form_description"
+            app:layout_constraintBottom_toBottomOf="@id/text_signup_form_description" />
+
+        <TextView
+            android:id="@+id/text_signup_form_biz_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:includeFontPadding="false"
+            android:textColor="#1d1d1b"
+            android:textSize="14sp"
+            android:layout_marginTop="30dp"
+            android:text="사업자 번호"
+            app:layout_constraintTop_toBottomOf="@id/text_signup_form_description"
+            app:layout_constraintStart_toStartOf="@id/text_signup_form_description" />
+
+        <EditText
+            android:id="@+id/edit_signup_form_biz_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="14dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/ns_regular"
+            android:textSize="16sp"
+            android:textColorHint="#dddddd"
+            android:textColor="#1d1d1b"
+            android:hint="사업자번호 입력"
+            android:background="@drawable/input_radius"
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:inputType="numberSigned"
+            android:importantForAutofill="no"
+            android:maxLength="10"
+            app:layout_constraintTop_toBottomOf="@id/text_signup_form_biz_no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_signup_form_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:includeFontPadding="false"
+            android:textColor="#1d1d1b"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:text="전화번호"
+            app:layout_constraintTop_toBottomOf="@id/edit_signup_form_biz_no"
+            app:layout_constraintStart_toStartOf="@id/edit_signup_form_biz_no"
+            tools:ignore="HardcodedText" />
+
+
+        <EditText
+            android:id="@+id/edit_signup_form_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input_radius"
+            android:enabled="false"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:importantForAutofill="no"
+            android:includeFontPadding="false"
+            android:inputType="phone"
+            android:padding="14dp"
+            android:textColor="#1d1d1b"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_signup_form_phone"
+            tools:ignore="HardcodedText,SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_signup_form_signup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:textSize="18sp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:padding="18dp"
+            android:background="@drawable/btn_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="HardcodedText"
+            tools:enabled="false" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
