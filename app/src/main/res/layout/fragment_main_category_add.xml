@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_main_category_add_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/image_main_category_add_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="뒤로가기"
+            android:src="@drawable/ic_black_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_category_add_ftitle"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:text="대분류 추가"
+            android:textColor="#1d1d1b"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_main_category_add_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image_main_category_add_back"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/image_main_category_add_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="메인으로 이동"
+            android:src="@drawable/ic_black_home"
+            app:layout_constraintBottom_toBottomOf="@+id/image_main_category_add_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_main_category_add_back"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_category_add_title"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="38dp"
+            android:fontFamily="@font/ns_regular"
+            android:text="대분류 정보를\n입력해주세요."
+            android:textColor="#1d1d1b"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_main_category_add_ftitle"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_category_add_category_name"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/ns_regular"
+            android:text="카테고리명(한글)"
+            android:textColor="#1d1d1b"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_main_category_add_title"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:id="@+id/view_main_category_add_category_name_required"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circle_required"
+            app:layout_constraintStart_toEndOf="@id/text_main_category_add_category_name"
+            app:layout_constraintTop_toTopOf="@id/text_main_category_add_category_name" />
+
+        <EditText
+            android:id="@+id/edit_main_category_add_category_name"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input_radius"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:hint="회사/브랜드 입력(한글만 입력가능)"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="#1d1d1b"
+            android:textColorHint="#dddddd"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_main_category_add_category_name"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_category_add_category_code"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:text="카테고리 코드"
+            android:textColor="#1d1d1b"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_main_category_add_category_name"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:id="@+id/view_main_category_add_category_code_required"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circle_required"
+            app:layout_constraintStart_toEndOf="@id/text_main_category_add_category_code"
+            app:layout_constraintTop_toTopOf="@id/text_main_category_add_category_code" />
+
+        <EditText
+            android:id="@+id/edit_main_category_add_category_code"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/input_radius"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:hint="카테고리코드 입력"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="14dp"
+            android:textColor="#1d1d1b"
+            android:textColorHint="#dddddd"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_main_category_add_category_code"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_category_add_use"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:text="사용여부"
+            android:textColor="#1d1d1b"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_main_category_add_category_code"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:id="@+id/view_main_category_add_use_required"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/circle_required"
+            app:layout_constraintStart_toEndOf="@id/text_main_category_add_use"
+            app:layout_constraintTop_toTopOf="@id/text_main_category_add_use" />
+
+        <RadioGroup
+            android:id="@+id/radiogroup_main_category_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:checkedButton="@id/radio_main_category_add_use"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_main_category_add_use">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/radio_main_category_add_use"
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_circle"
+                android:fontFamily="@font/ns_regular"
+                android:includeFontPadding="false"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="8dp"
+                android:text="사용"
+                android:textColor="#1d1d1b"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/radio_main_category_add_use_not"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_circle"
+                android:fontFamily="@font/ns_regular"
+                android:includeFontPadding="false"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="8dp"
+                android:text="미사용"
+                android:textColor="#1d1d1b"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+        </RadioGroup>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_main_category_add_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bottom"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="저장"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:enabled="false"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

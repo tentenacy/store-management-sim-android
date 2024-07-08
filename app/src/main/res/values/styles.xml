@@ -4,5 +4,14 @@
         <item name="android:letterSpacing">-0.05</item>
         <item name="android:includeFontPadding">false</item>
     </style>
-
+    <style name="CheckBox" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:background">@drawable/checkbox</item>
+    </style>
+    <style name="CheckBoxText" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:background">@drawable/checkbox_circle</item>
+        <item name="android:letterSpacing">-0.05</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 </resources>
