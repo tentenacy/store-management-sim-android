@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_middle_category_add_container"
+        android:id="@+id/constraint_middle_category_details_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/image_middle_category_add_back"
+            android:id="@+id/image_middle_category_details_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
@@ -21,90 +21,75 @@
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_middle_category_add_ftitle"
+            android:id="@+id/text_middle_category_details_ftitle"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_bold"
-            android:text="중분류 추가"
+            android:text="중분류 상세"
             android:textColor="#1d1d1b"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/image_middle_category_add_back"
+            app:layout_constraintBottom_toBottomOf="@id/image_middle_category_details_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image_middle_category_add_back"
+            app:layout_constraintTop_toTopOf="@id/image_middle_category_details_back"
             tools:ignore="HardcodedText" />
 
         <ImageView
-            android:id="@+id/image_middle_category_add_home"
+            android:id="@+id/image_middle_category_details_home"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"
             android:contentDescription="메인으로 이동"
             android:src="@drawable/ic_black_home"
-            app:layout_constraintBottom_toBottomOf="@+id/image_middle_category_add_back"
+            app:layout_constraintBottom_toBottomOf="@+id/image_middle_category_details_back"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_middle_category_add_back"
+            app:layout_constraintTop_toTopOf="@+id/image_middle_category_details_back"
             tools:ignore="HardcodedText" />
 
         <ScrollView
-            android:id="@+id/scroll_middle_category_add"
+            android:id="@+id/scroll_middle_category_details"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="18dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_middle_category_add_save"
+            app:layout_constraintBottom_toTopOf="@id/btn_middle_category_details_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_middle_category_add_ftitle">
+            app:layout_constraintTop_toBottomOf="@id/text_middle_category_details_ftitle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_middle_category_add_scroll_container"
+                android:id="@+id/constraint_middle_category_details_scroll_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_title"
+                    android:id="@+id/text_middle_category_details_name"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/ns_regular"
-                    android:text="중분류 정보를\n입력해주세요."
-                    android:textColor="#1d1d1b"
-                    android:textSize="24sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@+id/text_middle_category_add_name"
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/ns_regular"
                     android:text="카테고리명(한글)"
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_middle_category_add_title"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_middle_category_add_name_required"
+                    android:id="@+id/view_middle_category_details_name_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_middle_category_add_name"
-                    app:layout_constraintTop_toTopOf="@id/text_middle_category_add_name" />
+                    app:layout_constraintStart_toEndOf="@id/text_middle_category_details_name"
+                    app:layout_constraintTop_toTopOf="@id/text_middle_category_details_name" />
 
                 <EditText
-                    android:id="@+id/edit_middle_category_add_name"
+                    android:id="@+id/edit_middle_category_details_name"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -123,11 +108,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_name"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_name"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_code"
+                    android:id="@+id/text_middle_category_details_code"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -138,22 +123,22 @@
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_add_name"
+                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_details_name"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_middle_category_add_code_required"
+                    android:id="@+id/view_middle_category_details_code_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_middle_category_add_code"
-                    app:layout_constraintTop_toTopOf="@id/text_middle_category_add_code" />
+                    app:layout_constraintStart_toEndOf="@id/text_middle_category_details_code"
+                    app:layout_constraintTop_toTopOf="@id/text_middle_category_details_code" />
 
                 <EditText
-                    android:id="@+id/edit_middle_category_add_code"
+                    android:id="@+id/edit_middle_category_details_code"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -172,11 +157,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_code"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_code"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_use"
+                    android:id="@+id/text_middle_category_details_use"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,33 +172,33 @@
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_add_code"
+                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_details_code"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_middle_category_add_use_required"
+                    android:id="@+id/view_middle_category_details_use_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_middle_category_add_use"
-                    app:layout_constraintTop_toTopOf="@id/text_middle_category_add_use" />
+                    app:layout_constraintStart_toEndOf="@id/text_middle_category_details_use"
+                    app:layout_constraintTop_toTopOf="@id/text_middle_category_details_use" />
 
                 <RadioGroup
-                    android:id="@+id/radiogroup_middle_category_add"
+                    android:id="@+id/radiogroup_middle_category_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:checkedButton="@id/radio_middle_category_add_use"
+                    android:checkedButton="@id/radio_middle_category_details_use"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_use">
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_use">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/radio_middle_category_add_use"
+                        android:id="@+id/radio_middle_category_details_use"
                         style="@style/Text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -230,7 +215,7 @@
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/radio_middle_category_add_use_not"
+                        android:id="@+id/radio_middle_category_details_use_not"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -248,7 +233,7 @@
                 </RadioGroup>
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_biz_no"
+                    android:id="@+id/text_middle_category_details_biz_no"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -259,22 +244,22 @@
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/radiogroup_middle_category_add"
+                    app:layout_constraintTop_toBottomOf="@id/radiogroup_middle_category_details"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_middle_category_add_biz_no_required"
+                    android:id="@+id/view_middle_category_details_biz_no_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_middle_category_add_biz_no"
-                    app:layout_constraintTop_toTopOf="@id/text_middle_category_add_biz_no" />
+                    app:layout_constraintStart_toEndOf="@id/text_middle_category_details_biz_no"
+                    app:layout_constraintTop_toTopOf="@id/text_middle_category_details_biz_no" />
 
                 <EditText
-                    android:id="@+id/edit_middle_category_add_biz_no"
+                    android:id="@+id/edit_middle_category_details_biz_no"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -293,11 +278,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_biz_no"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_biz_no"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_owner_name"
+                    android:id="@+id/text_middle_category_details_owner_name"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -308,11 +293,11 @@
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_add_biz_no"
+                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_details_biz_no"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_middle_category_add_owner_name"
+                    android:id="@+id/edit_middle_category_details_owner_name"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -331,11 +316,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_owner_name"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_owner_name"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_phone"
+                    android:id="@+id/text_middle_category_details_phone"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -346,11 +331,11 @@
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_add_owner_name"
+                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_details_owner_name"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_middle_category_add_phone"
+                    android:id="@+id/edit_middle_category_details_phone"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -369,11 +354,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_phone"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_phone"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_address"
+                    android:id="@+id/text_middle_category_details_address"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -384,11 +369,11 @@
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_add_phone"
+                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_details_phone"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_middle_category_add_address"
+                    android:id="@+id/edit_middle_category_details_address"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -407,13 +392,13 @@
                     android:textColor="#1d1d1b"
                     android:textColorHint="#dddddd"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toStartOf="@id/btn_middle_category_add_search"
+                    app:layout_constraintEnd_toStartOf="@id/btn_middle_category_details_search"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_address"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_address"
                     tools:ignore="HardcodedText" />
 
                 <Button
-                    android:id="@+id/btn_middle_category_add_search"
+                    android:id="@+id/btn_middle_category_details_search"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -432,15 +417,15 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:cornerRadius="16dp"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_middle_category_add_address"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_middle_category_details_address"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edit_middle_category_add_address"
+                    app:layout_constraintTop_toTopOf="@id/edit_middle_category_details_address"
                     app:layout_constraintWidth_max="200dp"
                     tools:ignore="HardcodedText" />
 
 
                 <EditText
-                    android:id="@+id/edit_middle_category_add_address_detail"
+                    android:id="@+id/edit_middle_category_details_address_detail"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -459,11 +444,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_middle_category_add_address"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_middle_category_details_address"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_tid"
+                    android:id="@+id/text_middle_category_details_tid"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -474,11 +459,11 @@
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_add_address_detail"
+                    app:layout_constraintTop_toBottomOf="@id/edit_middle_category_details_address_detail"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_middle_category_add_tid"
+                    android:id="@+id/edit_middle_category_details_tid"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -496,10 +481,163 @@
                     android:textColorHint="#dddddd"
                     android:textSize="16sp"
                     android:layout_marginBottom="100dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_tid"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_middle_category_details_created_by"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="생성자"
+                    android:textColor="#1d1d1b"
+                    android:textSize="14sp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_middle_category_details_tid"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_middle_category_details_created_by"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="#a0a0a0"
+                    android:textSize="16sp"
+                    android:enabled="false"
+                    tools:text="생성자"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_created_by"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_middle_category_details_created_at"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="생성일자"
+                    android:textColor="#1d1d1b"
+                    android:textSize="14sp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_middle_category_details_created_by"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_middle_category_details_created_at"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="#a0a0a0"
+                    android:textSize="16sp"
+                    android:enabled="false"
+                    tools:text="0000-00-00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_created_at"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_middle_category_details_updated_by"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="수정자"
+                    android:textColor="#1d1d1b"
+                    android:textSize="14sp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_middle_category_details_created_at"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_middle_category_details_updated_by"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="#a0a0a0"
+                    android:textSize="16sp"
+                    android:enabled="false"
+                    tools:text="수정자"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_updated_by"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_middle_category_details_updated_at"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="수정일자"
+                    android:textColor="#1d1d1b"
+                    android:textSize="14sp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_middle_category_details_updated_by"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_middle_category_details_updated_at"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="#a0a0a0"
+                    android:textSize="16sp"
+                    android:enabled="false"
+                    tools:text="0000-00-00"
+                    android:layout_marginBottom="100dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_tid"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_details_updated_at"
                     tools:ignore="HardcodedText" />
 
 
@@ -508,7 +646,7 @@
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_middle_category_add_save"
+            android:id="@+id/btn_middle_category_details_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_bottom"
