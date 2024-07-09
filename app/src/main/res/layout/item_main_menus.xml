@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="use"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_imain_menus_thumbnail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/placeholder_thumbnail"
+            android:contentDescription="메뉴 썸네일"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_imain_menus_name"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="#1d1d1b"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/text_imain_menus_amount"
+            app:layout_constraintStart_toEndOf="@id/image_imain_menus_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/image_imain_menus_thumbnail"
+            tools:text="에스프레소" />
+
+        <TextView
+            android:id="@+id/text_imain_menus_code"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="#a0a0a0"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/text_imain_menus_name"
+            app:layout_constraintTop_toBottomOf="@id/text_imain_menus_name"
+            tools:text="000001" />
+
+        <TextView
+            android:id="@+id/text_imain_categories_use"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="17dp"
+            android:fontFamily="@font/ns_regular"
+            android:text='@{use != null ? (use ? "사용" : "미사용") : "삭제됨"}'
+            android:textColor='@{use != null ? (use ? @color/use : @color/use_not) : @color/deleted}'
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_imain_categories_use"
+            app:layout_constraintTop_toBottomOf="@id/text_imain_menus_code"
+            tools:text="사용"
+            tools:textColor="#4e93ce" />
+
+        <View
+            android:id="@+id/view_imain_categories_use"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@{use != null ? (use ? @drawable/circle_use : @drawable/circle_use_not) : @drawable/rect_deleted}"
+            app:layout_constraintBottom_toBottomOf="@id/text_imain_categories_use"
+            app:layout_constraintStart_toStartOf="@id/text_imain_menus_code"
+            app:layout_constraintTop_toTopOf="@id/text_imain_categories_use"
+            tools:background="@drawable/circle_use" />
+
+        <TextView
+            android:id="@+id/text_imain_menus_origin_amount"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:foreground="@drawable/striking_text"
+            android:paddingStart="1dp"
+            android:textColor="#a0a0a0"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@id/text_imain_menus_unit_kr_1"
+            app:layout_constraintBottom_toBottomOf="@id/text_imain_menus_unit_kr_1"
+            app:layout_constraintTop_toTopOf="@id/text_imain_menus_unit_kr_1"
+            tools:ignore="RtlSymmetry"
+            tools:text="2,000" />
+
+        <TextView
+            android:id="@+id/text_imain_menus_unit_kr_1"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:foreground="@drawable/striking_text"
+            android:paddingEnd="1dp"
+            android:text="원"
+            android:textColor="#a0a0a0"
+            android:textSize="12sp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/text_imain_menus_unit_kr_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/text_imain_menus_amount"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:paddingStart="1dp"
+            android:textColor="#1d1d1b"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/text_imain_menus_unit_kr_2"
+            app:layout_constraintBottom_toBottomOf="@id/text_imain_menus_unit_kr_2"
+            app:layout_constraintTop_toTopOf="@id/text_imain_menus_unit_kr_2"
+            tools:ignore="RtlSymmetry"
+            tools:text="1,900" />
+
+        <TextView
+            android:id="@+id/text_imain_menus_unit_kr_2"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:paddingEnd="1dp"
+            android:text="원"
+            android:textColor="#1d1d1b"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_imain_menus_unit_kr_1"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

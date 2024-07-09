@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="use">#4e93ce</color>
     <color name="use_not">#a0a0a0</color>
+    <color name="deleted">#a0a0a0</color>
 </resources>

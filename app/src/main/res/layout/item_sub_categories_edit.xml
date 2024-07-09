@@ -22,7 +22,7 @@
             android:id="@+id/constraint_isub_categories_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_16dp"
+            android:background="@drawable/radius_16dp_ffffff"
             android:paddingHorizontal="20dp"
             android:paddingVertical="24dp">
 
