@@ -52,7 +52,7 @@
             android:enabled="@{use}"
             android:fontFamily="@font/ns_regular"
             android:text='@{use ? "사용" : "미사용"}'
-            android:textColor='@{use ? "#4e93ce" : "#a0a0a0"}'
+            android:textColor='@{use ? @color/use : @color/use_not}'
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
