@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="use"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linearisub_categories_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="20dp"
+        android:background="#f3f9ff">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_isub_categories_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radius_16dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="24dp">
+
+            <TextView
+                android:id="@+id/text_isub_categories_name"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="#1d1d1b"
+                android:textSize="16sp"
+                tools:text="커피"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_isub_categories_code"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="#a0a0a0"
+                android:textSize="12sp"
+                tools:text="0000000000"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_isub_categories_name" />
+
+            <TextView
+                android:id="@+id/text_isub_categories_use"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{use}"
+                android:fontFamily="@font/ns_regular"
+                android:text='@{use ? "사용" : "미사용"}'
+                android:textColor='@{use ? @color/use : @color/use_not}'
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="사용"
+                tools:textColor="#4e93ce" />
+
+            <View
+                android:id="@+id/view_isub_categories_use"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="4dp"
+                android:background="@{use ? @drawable/circle_use : @drawable/circle_use_not}"
+                app:layout_constraintBottom_toBottomOf="@id/text_isub_categories_use"
+                app:layout_constraintEnd_toStartOf="@id/text_isub_categories_use"
+                app:layout_constraintTop_toTopOf="@id/text_isub_categories_use"
+                tools:background="@drawable/circle_use" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</layout>
