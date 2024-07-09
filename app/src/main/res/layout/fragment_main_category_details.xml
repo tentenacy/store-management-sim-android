@@ -423,7 +423,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_main_category_details_save"
             app:layout_constraintStart_toStartOf="parent"
-            tools:enabled="false"
             tools:ignore="HardcodedText" />
 
         <androidx.appcompat.widget.AppCompatButton
