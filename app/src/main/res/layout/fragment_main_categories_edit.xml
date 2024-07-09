@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ns_regular"
                 android:text="전체"
-                android:textColor="#4e93ce"
+                android:textColor="#a0a0a0"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +93,7 @@
                 android:layout_height="7.5dp"
                 android:layout_marginEnd="5.83dp"
                 android:contentDescription="전체 선택 이미지"
-                android:src="@drawable/ic_check_all_checked"
+                android:src="@drawable/ic_check_all"
                 app:layout_constraintBottom_toBottomOf="@id/text_main_categories_edit_all"
                 app:layout_constraintEnd_toStartOf="@id/text_main_categories_edit_all"
                 app:layout_constraintTop_toTopOf="@id/text_main_categories_edit_all"
@@ -110,7 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_main_categories_edit_label_main_category"
-            tools:listitem="@layout/item_main_categories" />
+            tools:listitem="@layout/item_main_categories_edit" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_main_categories_edit_bottom_container"

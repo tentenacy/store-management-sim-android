@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="checked"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_imiddle_categories_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="9dp">
+
+        <TextView
+            android:id="@+id/text_imiddle_categories_edit_name"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="#1d1d1b"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/check_imiddle_categories_edit"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="빽다방" />
+
+        <TextView
+            android:id="@+id/text_imiddle_categories_edit_code"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="#a0a0a0"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_imiddle_categories_edit_name"
+            app:layout_constraintTop_toBottomOf="@id/text_imiddle_categories_edit_name"
+            tools:text="0000000000" />
+
+        <ImageView
+            android:id="@+id/image_imiddle_categories_edit_list"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="대분류 순서 변경"
+            android:src="@drawable/ic_grey_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <CheckBox
+            android:id="@+id/check_imiddle_categories_edit"
+            style="@style/CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
