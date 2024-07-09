@@ -49,6 +49,7 @@
 
             <Button
                 android:id="@+id/btn_signup_success_main_main"
+                style="@style/Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/rect_4476"

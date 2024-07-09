@@ -37,7 +37,7 @@
 
         <Button
             android:id="@+id/btn_menu_mng_category"
-            style="@style/Text"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -59,7 +59,7 @@
 
         <Button
             android:id="@+id/btn_menu_mng_main_menu"
-            style="@style/Text"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -79,7 +79,7 @@
 
         <Button
             android:id="@+id/btn_menu_mng_option_menu"
-            style="@style/Text"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -100,7 +100,7 @@
 
         <Button
             android:id="@+id/btn_menu_mng_option_group"
-            style="@style/Text"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
