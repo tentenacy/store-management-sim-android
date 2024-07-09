@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_regular"
-            android:textColor="#1d1d1b"
+            android:textColor="@color/rect_4474"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/ns_regular"
-            android:textColor="#a0a0a0"
+            android:textColor="@color/rect_4480"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,13 +52,13 @@
             android:enabled="@{use}"
             android:fontFamily="@font/ns_regular"
             android:text='@{use ? "사용" : "미사용"}'
-            android:textColor='@{use ? @color/use : @color/use_not}'
+            android:textColor='@{use ? @color/rect_4475 : @color/rect_4480}'
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="사용"
-            tools:textColor="#4e93ce" />
+            tools:textColor="@color/rect_4475" />
 
         <View
             android:id="@+id/view_imain_categories_use"

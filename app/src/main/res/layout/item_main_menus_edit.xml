@@ -28,11 +28,11 @@
             android:id="@+id/image_imain_menus_thumbnail"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/placeholder_thumbnail"
             android:contentDescription="메뉴 썸네일"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/check_imain_categories_edit"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
 
@@ -112,112 +112,31 @@
             app:layout_constraintTop_toTopOf="@id/text_imain_categories_use"
             tools:background="@drawable/circle_use" />
 
-        <TextView
-            android:id="@+id/text_imain_menus_origin_amount"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/ns_bold"
-            android:foreground="@drawable/striking_text"
-            android:paddingStart="1dp"
-            android:textColor="@color/rect_4480"
-            android:textSize="12sp"
-            android:visibility="@{discounted ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/text_imain_menus_unit_kr_1"
-            app:layout_constraintEnd_toStartOf="@id/text_imain_menus_unit_kr_1"
-            app:layout_constraintTop_toTopOf="@id/text_imain_menus_unit_kr_1"
-            tools:ignore="RtlSymmetry"
-            tools:text="2,000" />
-
-        <TextView
-            android:id="@+id/text_imain_menus_unit_kr_1"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/image_imain_categories_edit_list"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="2dp"
-            android:fontFamily="@font/ns_regular"
-            android:foreground="@drawable/striking_text"
-            android:paddingEnd="1dp"
-            android:text="원"
-            android:textColor="@color/rect_4480"
-            android:textSize="12sp"
-            android:visibility="@{discounted ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toTopOf="@id/text_imain_menus_unit_kr_2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:ignore="HardcodedText,RtlSymmetry" />
-
-        <TextView
-            android:id="@+id/text_imain_menus_amount"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/ns_bold"
-            android:paddingStart="1dp"
-            android:textColor="@{outOfStock ? @color/rect_4480 : @color/rect_4474}"
-            android:textSize="16sp"
-            android:visibility="@{discounted ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/text_imain_menus_unit_kr_2"
-            app:layout_constraintEnd_toStartOf="@id/text_imain_menus_unit_kr_2"
-            app:layout_constraintTop_toTopOf="@id/text_imain_menus_unit_kr_2"
-            tools:ignore="RtlSymmetry"
-            tools:text="1,900" />
-
-        <TextView
-            android:id="@+id/text_imain_menus_unit_kr_2"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/ns_regular"
-            android:paddingEnd="1dp"
-            android:text="원"
-            android:textColor="@color/rect_4474"
-            android:textSize="16sp"
-            android:visibility="@{discounted ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_imain_menus_unit_kr_1"
-            tools:ignore="HardcodedText,RtlSymmetry" />
-
-        <TextView
-            android:id="@+id/text_imain_menus_not_discounted_amount"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/ns_bold"
-            android:paddingStart="1dp"
-            android:textColor="@color/rect_4474"
-            android:textSize="16sp"
-            android:visibility="@{discounted ? View.INVISIBLE : View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/text_imain_menus_not_discounted_unit_kr"
-            app:layout_constraintEnd_toStartOf="@id/text_imain_menus_not_discounted_unit_kr"
-            app:layout_constraintTop_toTopOf="@id/text_imain_menus_not_discounted_unit_kr"
-            tools:ignore="RtlSymmetry"
-            tools:text="1,900"
-            tools:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/text_imain_menus_not_discounted_unit_kr"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/ns_regular"
-            android:paddingEnd="1dp"
-            android:text="원"
-            android:textColor="@{outOfStock ? @color/rect_4480 : @color/rect_4474}"
-            android:textSize="16sp"
-            android:visibility="@{discounted ? View.INVISIBLE : View.VISIBLE}"
+            android:contentDescription="대분류 순서 변경"
+            android:src="@drawable/ic_grey_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText,RtlSymmetry"
-            tools:visibility="invisible" />
+            tools:ignore="HardcodedText" />
+
+
+        <CheckBox
+            android:id="@+id/check_imain_categories_edit"
+            style="@style/CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

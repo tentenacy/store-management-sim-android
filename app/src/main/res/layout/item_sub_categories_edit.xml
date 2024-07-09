@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="8dp"
         android:paddingHorizontal="20dp"
-        android:background="#f3f9ff">
+        android:background="@color/rect_2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_isub_categories_container"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/ns_regular"
-                android:textColor="#1d1d1b"
+                android:textColor="@color/rect_4474"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/check_isub_categories_edit"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/ns_regular"
-                android:textColor="#a0a0a0"
+                android:textColor="@color/rect_4480"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/text_isub_categories_edit_name"

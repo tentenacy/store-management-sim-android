@@ -10,4 +10,14 @@
     <color name="use">#4e93ce</color>
     <color name="use_not">#a0a0a0</color>
     <color name="deleted">#a0a0a0</color>
+    <color name="rect_4474">#1D1D1B</color>
+    <color name="rect_4475">#4E93CE</color>
+    <color name="rect_4476">#3763A1</color>
+    <color name="rect_4480">#A0A0A0</color>
+    <color name="rect_4481">#DDDDDD</color>
+    <color name="rect_4482">#EFEFEF</color>
+    <color name="rect_4485">#F6F7F9</color>
+    <color name="rect_2">#F3F9FF</color>
+    <color name="rect_4483">#EDF4F9</color>
+
 </resources>

@@ -14,7 +14,7 @@
         android:id="@+id/constraint_sub_categories_edit_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#3763a1">
+        android:background="@color/rect_4476">
 
         <ImageView
             android:id="@+id/image_sub_categories_edit_back"
@@ -73,7 +73,7 @@
             android:id="@+id/constraint_middle_categories_edit_bottom_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#dddddd"
+            android:background="@color/rect_4481"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
