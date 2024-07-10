@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_main_menu_add_container"
+        android:id="@+id/constraint_main_menu_details_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/image_main_menu_add_back"
+            android:id="@+id/image_main_menu_details_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
@@ -21,76 +21,61 @@
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_main_menu_add_ftitle"
+            android:id="@+id/text_main_menu_details_ftitle"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_bold"
-            android:text="메인메뉴 추가"
+            android:text="메인메뉴 상세"
             android:textColor="@color/rect_4474"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/image_main_menu_add_back"
+            app:layout_constraintBottom_toBottomOf="@id/image_main_menu_details_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image_main_menu_add_back"
+            app:layout_constraintTop_toTopOf="@id/image_main_menu_details_back"
             tools:ignore="HardcodedText" />
 
         <ImageView
-            android:id="@+id/image_main_menu_add_home"
+            android:id="@+id/image_main_menu_details_home"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"
             android:contentDescription="메인으로 이동"
             android:src="@drawable/ic_black_home"
-            app:layout_constraintBottom_toBottomOf="@+id/image_main_menu_add_back"
+            app:layout_constraintBottom_toBottomOf="@+id/image_main_menu_details_back"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_main_menu_add_back"
+            app:layout_constraintTop_toTopOf="@+id/image_main_menu_details_back"
             tools:ignore="HardcodedText" />
 
         <ScrollView
-            android:id="@+id/scroll_main_menu_add"
+            android:id="@+id/scroll_main_menu_details"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="18dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_main_menu_add_save"
+            app:layout_constraintBottom_toTopOf="@id/btn_main_menu_details_edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_main_menu_add_ftitle">
+            app:layout_constraintTop_toBottomOf="@id/text_main_menu_details_ftitle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_main_menu_add_scroll_container"
+                android:id="@+id/constraint_main_menu_details_scroll_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/text_main_menu_add_title"
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/image_main_menu_details_thumbnail"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="@font/ns_regular"
-                    android:text="메인메뉴 정보를\n입력해주세요."
-                    android:textColor="@color/rect_4474"
-                    android:textSize="24sp"
+                    android:contentDescription="메뉴 썸네일 이미지"
+                    android:src="@drawable/placeholder"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
-                <ImageView
-                    android:id="@+id/image_main_menu_add_thumbnail"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
-                    android:contentDescription="메뉴 썸네일 이미지"
-                    android:src="@drawable/placeholder"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_add_title"
-                    tools:ignore="HardcodedText" />
-
                 <TextView
-                    android:id="@+id/text_main_menu_add_name"
+                    android:id="@+id/text_main_menu_details_name"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,22 +86,22 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/image_main_menu_add_thumbnail"
+                    app:layout_constraintTop_toBottomOf="@id/image_main_menu_details_thumbnail"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_name_required"
+                    android:id="@+id/view_main_menu_details_name_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_name"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_name" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_details_name"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_name" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_name"
+                    android:id="@+id/edit_main_menu_details_name"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -135,11 +120,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_name"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_name"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_code"
+                    android:id="@+id/text_main_menu_details_code"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -150,22 +135,22 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_name"
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_details_name"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_code_required"
+                    android:id="@+id/view_main_menu_details_code_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_code"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_code" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_details_code"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_code" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_code"
+                    android:id="@+id/edit_main_menu_details_code"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -184,11 +169,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_code"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_code"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_use"
+                    android:id="@+id/text_main_menu_details_use"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -199,33 +184,33 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_code"
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_details_code"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_use_required"
+                    android:id="@+id/view_main_menu_details_use_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_use"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_use" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_details_use"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_use" />
 
                 <RadioGroup
-                    android:id="@+id/radiogroup_main_menu_add"
+                    android:id="@+id/radiogroup_main_menu_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:checkedButton="@id/radio_main_menu_add_use"
+                    android:checkedButton="@id/radio_main_menu_details_use"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_use">
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_use">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/radio_main_menu_add_use"
+                        android:id="@+id/radio_main_menu_details_use"
                         style="@style/Text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -242,7 +227,7 @@
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/radio_main_menu_add_use_not"
+                        android:id="@+id/radio_main_menu_details_use_not"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -260,7 +245,7 @@
                 </RadioGroup>
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_biz_no"
+                    android:id="@+id/text_main_menu_details_biz_no"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -271,22 +256,22 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/radiogroup_main_menu_add"
+                    app:layout_constraintTop_toBottomOf="@id/radiogroup_main_menu_details"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_biz_no_required"
+                    android:id="@+id/view_main_menu_details_biz_no_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_biz_no"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_biz_no" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_details_biz_no"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_biz_no" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_biz_no"
+                    android:id="@+id/edit_main_menu_details_biz_no"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -305,11 +290,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_biz_no"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_biz_no"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_discounted_amount"
+                    android:id="@+id/text_main_menu_details_discounted_amount"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -320,11 +305,11 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_biz_no"
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_details_biz_no"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_discounted_amount"
+                    android:id="@+id/edit_main_menu_details_discounted_amount"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -343,11 +328,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_discounted_amount"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_discounted_amount"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_label_packaging"
+                    android:id="@+id/text_main_menu_details_label_packaging"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -358,22 +343,22 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_discounted_amount"
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_details_discounted_amount"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_packaging_required"
+                    android:id="@+id/view_main_menu_details_packaging_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_label_packaging"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_label_packaging" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_details_label_packaging"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_label_packaging" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_packaging"
+                    android:id="@+id/text_main_menu_details_packaging"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -391,24 +376,24 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_label_packaging"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_label_packaging"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/image_main_menu_add_packaging"
+                    android:id="@+id/image_main_menu_details_packaging"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="포장여부 선택"
                     android:rotation="-90"
                     android:src="@drawable/ic_black_arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/text_main_menu_add_packaging"
-                    app:layout_constraintEnd_toEndOf="@id/text_main_menu_add_packaging"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_packaging"
+                    app:layout_constraintBottom_toBottomOf="@id/text_main_menu_details_packaging"
+                    app:layout_constraintEnd_toEndOf="@id/text_main_menu_details_packaging"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_packaging"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_packaging_amount"
+                    android:id="@+id/text_main_menu_details_packaging_amount"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -419,11 +404,11 @@
                     android:textColor="#1d1d1b"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_add_packaging"
+                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_details_packaging"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_packaging_amount"
+                    android:id="@+id/edit_main_menu_details_packaging_amount"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -443,11 +428,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_packaging_amount"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_packaging_amount"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_oos"
+                    android:id="@+id/text_main_menu_details_oos"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -458,33 +443,33 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_packaging_amount"
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_details_packaging_amount"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_oos_required"
+                    android:id="@+id/view_main_menu_details_oos_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_oos"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_oos" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_details_oos"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_oos" />
 
                 <RadioGroup
-                    android:id="@+id/radiogroup_main_menu_add_oos"
+                    android:id="@+id/radiogroup_main_menu_details_oos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:checkedButton="@id/radio_main_menu_add_oos_not"
+                    android:checkedButton="@id/radio_main_menu_details_oos_not"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_oos">
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_oos">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/radio_main_menu_add_oos_not"
+                        android:id="@+id/radio_main_menu_details_oos_not"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -501,7 +486,7 @@
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/radio_main_menu_add_oos"
+                        android:id="@+id/radio_main_menu_details_oos"
                         style="@style/Text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -520,7 +505,7 @@
                 </RadioGroup>
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_ingredient"
+                    android:id="@+id/text_main_menu_details_ingredient"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -531,33 +516,33 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/radiogroup_main_menu_add_oos"
+                    app:layout_constraintTop_toBottomOf="@id/radiogroup_main_menu_details_oos"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_ingredient_required"
+                    android:id="@+id/view_main_menu_details_ingredient_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_ingredient"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_ingredient" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_details_ingredient"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_ingredient" />
 
                 <RadioGroup
-                    android:id="@+id/radiogroup_main_menu_add_ingredient"
+                    android:id="@+id/radiogroup_main_menu_details_ingredient"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:checkedButton="@id/radio_main_menu_add_show_ingredient"
+                    android:checkedButton="@id/radio_main_menu_details_show_ingredient"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_ingredient">
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_ingredient">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/radio_main_menu_add_show_ingredient"
+                        android:id="@+id/radio_main_menu_details_show_ingredient"
                         style="@style/Text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -574,7 +559,7 @@
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/radio_main_menu_add_hide_ingredient"
+                        android:id="@+id/radio_main_menu_details_hide_ingredient"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -592,7 +577,7 @@
                 </RadioGroup>
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_label_ingredient_details"
+                    android:id="@+id/text_main_menu_details_label_ingredient_details"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -603,11 +588,11 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/radiogroup_main_menu_add_ingredient"
+                    app:layout_constraintTop_toBottomOf="@id/radiogroup_main_menu_details_ingredient"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_ingredient_details"
+                    android:id="@+id/edit_main_menu_details_ingredient_details"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -626,11 +611,11 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_label_ingredient_details"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_label_ingredient_details"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_label_highlight"
+                    android:id="@+id/text_main_menu_details_label_highlight"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -641,22 +626,22 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_ingredient_details"
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_details_ingredient_details"
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_highlight_required"
+                    android:id="@+id/view_main_menu_details_highlight_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_label_highlight"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_label_highlight" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_details_label_highlight"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_label_highlight" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_highlight"
+                    android:id="@+id/text_main_menu_details_highlight"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -674,24 +659,24 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_label_highlight"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_label_highlight"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/image_main_menu_add_highlight"
+                    android:id="@+id/image_main_menu_details_highlight"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="메뉴 강조 유형 선택"
                     android:rotation="-90"
                     android:src="@drawable/ic_black_arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/text_main_menu_add_highlight"
-                    app:layout_constraintEnd_toEndOf="@id/text_main_menu_add_highlight"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_highlight"
+                    app:layout_constraintBottom_toBottomOf="@id/text_main_menu_details_highlight"
+                    app:layout_constraintEnd_toEndOf="@id/text_main_menu_details_highlight"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_details_highlight"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_show_datetime"
+                    android:id="@+id/text_main_menu_details_show_datetime"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -702,11 +687,11 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_add_highlight"
+                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_details_highlight"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_show_sdate"
+                    android:id="@+id/edit_main_menu_details_show_sdate"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -727,19 +712,19 @@
                     app:layout_constraintEnd_toStartOf="@id/image_main_menu_hyphen_1"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_show_datetime"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_show_datetime"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/image_main_menu_add_show_sdate"
+                    android:id="@+id/image_main_menu_details_show_sdate"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="메뉴 표시 시작 날짜 설정"
                     android:src="@drawable/ic_black_calendar"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_add_show_sdate"
-                    app:layout_constraintEnd_toEndOf="@id/edit_main_menu_add_show_sdate"
-                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_add_show_sdate"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_details_show_sdate"
+                    app:layout_constraintEnd_toEndOf="@id/edit_main_menu_details_show_sdate"
+                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_details_show_sdate"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
@@ -749,14 +734,14 @@
                     android:layout_marginHorizontal="11dp"
                     android:contentDescription="메뉴 표시 시작 날짜부터 끝 날짜까지"
                     android:src="@drawable/ic_black_hyphen"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_add_show_sdate"
-                    app:layout_constraintEnd_toStartOf="@id/edit_main_menu_add_show_edate"
-                    app:layout_constraintStart_toEndOf="@id/edit_main_menu_add_show_sdate"
-                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_add_show_sdate"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_details_show_sdate"
+                    app:layout_constraintEnd_toStartOf="@id/edit_main_menu_details_show_edate"
+                    app:layout_constraintStart_toEndOf="@id/edit_main_menu_details_show_sdate"
+                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_details_show_sdate"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_show_edate"
+                    android:id="@+id/edit_main_menu_details_show_edate"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -781,19 +766,19 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/image_main_menu_add_show_edate"
+                    android:id="@+id/image_main_menu_details_show_edate"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="메뉴 표시 끝 날짜 설정"
                     android:src="@drawable/ic_black_calendar"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_add_show_edate"
-                    app:layout_constraintEnd_toEndOf="@id/edit_main_menu_add_show_edate"
-                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_add_show_edate"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_details_show_edate"
+                    app:layout_constraintEnd_toEndOf="@id/edit_main_menu_details_show_edate"
+                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_details_show_edate"
                     tools:ignore="HardcodedText" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_main_menu_add_show_stime"
+                    android:id="@+id/constraint_main_menu_details_show_stime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -803,10 +788,10 @@
                     android:paddingVertical="2dp"
                     app:layout_constraintEnd_toStartOf="@id/image_main_menu_hyphen_2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_show_sdate">
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_details_show_sdate">
 
                     <EditText
-                        android:id="@+id/edit_main_menu_add_show_shour"
+                        android:id="@+id/edit_main_menu_details_show_shour"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -822,13 +807,13 @@
                         android:textColorHint="@color/rect_4474"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/text_main_menu_add_show_stime_colon"
+                        app:layout_constraintEnd_toStartOf="@id/text_main_menu_details_show_stime_colon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
                     <TextView
-                        android:id="@+id/text_main_menu_add_show_stime_colon"
+                        android:id="@+id/text_main_menu_details_show_stime_colon"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -838,14 +823,14 @@
                         android:textColor="@color/rect_4474"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/edit_main_menu_add_show_smin"
+                        app:layout_constraintEnd_toStartOf="@id/edit_main_menu_details_show_smin"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toEndOf="@id/edit_main_menu_add_show_shour"
+                        app:layout_constraintStart_toEndOf="@id/edit_main_menu_details_show_shour"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
                     <EditText
-                        android:id="@+id/edit_main_menu_add_show_smin"
+                        android:id="@+id/edit_main_menu_details_show_smin"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -862,7 +847,7 @@
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/text_main_menu_add_show_stime_colon"
+                        app:layout_constraintStart_toEndOf="@id/text_main_menu_details_show_stime_colon"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
@@ -876,14 +861,14 @@
                     android:layout_marginHorizontal="11dp"
                     android:contentDescription="메뉴 표시 시작 날짜부터 끝 날짜까지"
                     android:src="@drawable/ic_black_hyphen"
-                    app:layout_constraintBottom_toBottomOf="@id/constraint_main_menu_add_show_stime"
-                    app:layout_constraintEnd_toStartOf="@id/constraint_main_menu_add_show_etime"
-                    app:layout_constraintStart_toEndOf="@id/constraint_main_menu_add_show_stime"
-                    app:layout_constraintTop_toTopOf="@id/constraint_main_menu_add_show_stime"
+                    app:layout_constraintBottom_toBottomOf="@id/constraint_main_menu_details_show_stime"
+                    app:layout_constraintEnd_toStartOf="@id/constraint_main_menu_details_show_etime"
+                    app:layout_constraintStart_toEndOf="@id/constraint_main_menu_details_show_stime"
+                    app:layout_constraintTop_toTopOf="@id/constraint_main_menu_details_show_stime"
                     tools:ignore="HardcodedText" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_main_menu_add_show_etime"
+                    android:id="@+id/constraint_main_menu_details_show_etime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -897,7 +882,7 @@
                     app:layout_constraintTop_toTopOf="@id/image_main_menu_hyphen_2">
 
                     <EditText
-                        android:id="@+id/edit_main_menu_add_show_ehour"
+                        android:id="@+id/edit_main_menu_details_show_ehour"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -913,13 +898,13 @@
                         android:textColorHint="@color/rect_4474"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/text_main_menu_add_show_etime_colon"
+                        app:layout_constraintEnd_toStartOf="@id/text_main_menu_details_show_etime_colon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
                     <TextView
-                        android:id="@+id/text_main_menu_add_show_etime_colon"
+                        android:id="@+id/text_main_menu_details_show_etime_colon"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -929,14 +914,14 @@
                         android:textColor="@color/rect_4474"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/edit_main_menu_add_show_emin"
+                        app:layout_constraintEnd_toStartOf="@id/edit_main_menu_details_show_emin"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toEndOf="@id/edit_main_menu_add_show_ehour"
+                        app:layout_constraintStart_toEndOf="@id/edit_main_menu_details_show_ehour"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
                     <EditText
-                        android:id="@+id/edit_main_menu_add_show_emin"
+                        android:id="@+id/edit_main_menu_details_show_emin"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -953,7 +938,7 @@
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/text_main_menu_add_show_etime_colon"
+                        app:layout_constraintStart_toEndOf="@id/text_main_menu_details_show_etime_colon"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
@@ -961,7 +946,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_show_weekday"
+                    android:id="@+id/text_main_menu_details_show_weekday"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -972,11 +957,11 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/constraint_main_menu_add_show_stime"
+                    app:layout_constraintTop_toBottomOf="@id/constraint_main_menu_details_show_stime"
                     tools:ignore="HardcodedText" />
 
                 <ScrollView
-                    android:id="@+id/scroll_main_menu_add_show_weekday"
+                    android:id="@+id/scroll_main_menu_details_show_weekday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
@@ -984,16 +969,16 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_add_show_weekday">
+                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_details_show_weekday">
 
                     <LinearLayout
-                        android:id="@+id/linear_main_menu_add_show_weekday_container"
+                        android:id="@+id/linear_main_menu_details_show_weekday_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_show_weekday_sun"
+                            android:id="@+id/text_main_menu_details_show_weekday_sun"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1008,7 +993,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_show_weekday_mon"
+                            android:id="@+id/text_main_menu_details_show_weekday_mon"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1023,7 +1008,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_show_weekday_tue"
+                            android:id="@+id/text_main_menu_details_show_weekday_tue"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1038,7 +1023,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_show_weekday_wed"
+                            android:id="@+id/text_main_menu_details_show_weekday_wed"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1053,7 +1038,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_show_weekday_thu"
+                            android:id="@+id/text_main_menu_details_show_weekday_thu"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1068,7 +1053,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_show_weekday_fri"
+                            android:id="@+id/text_main_menu_details_show_weekday_fri"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1083,7 +1068,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_show_weekday_sat"
+                            android:id="@+id/text_main_menu_details_show_weekday_sat"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1101,7 +1086,7 @@
                 </ScrollView>
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_event_datetime"
+                    android:id="@+id/text_main_menu_details_event_datetime"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1112,11 +1097,11 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/scroll_main_menu_add_show_weekday"
+                    app:layout_constraintTop_toBottomOf="@id/scroll_main_menu_details_show_weekday"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_event_sdate"
+                    android:id="@+id/edit_main_menu_details_event_sdate"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1137,19 +1122,19 @@
                     app:layout_constraintEnd_toStartOf="@id/image_main_menu_hyphen_3"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_event_datetime"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_event_datetime"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/image_main_menu_add_event_sdate"
+                    android:id="@+id/image_main_menu_details_event_sdate"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="이벤트 시작 날짜 설정"
                     android:src="@drawable/ic_black_calendar"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_add_event_sdate"
-                    app:layout_constraintEnd_toEndOf="@id/edit_main_menu_add_event_sdate"
-                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_add_event_sdate"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_details_event_sdate"
+                    app:layout_constraintEnd_toEndOf="@id/edit_main_menu_details_event_sdate"
+                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_details_event_sdate"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
@@ -1159,14 +1144,14 @@
                     android:layout_marginHorizontal="11dp"
                     android:contentDescription="이벤트 시작 날짜부터 끝 날짜까지"
                     android:src="@drawable/ic_black_hyphen"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_add_event_sdate"
-                    app:layout_constraintEnd_toStartOf="@id/edit_main_menu_add_event_edate"
-                    app:layout_constraintStart_toEndOf="@id/edit_main_menu_add_event_sdate"
-                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_add_event_sdate"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_details_event_sdate"
+                    app:layout_constraintEnd_toStartOf="@id/edit_main_menu_details_event_edate"
+                    app:layout_constraintStart_toEndOf="@id/edit_main_menu_details_event_sdate"
+                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_details_event_sdate"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_event_edate"
+                    android:id="@+id/edit_main_menu_details_event_edate"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1191,19 +1176,19 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/image_main_menu_add_event_edate"
+                    android:id="@+id/image_main_menu_details_event_edate"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="이벤트 끝 날짜 설정"
                     android:src="@drawable/ic_black_calendar"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_add_event_edate"
-                    app:layout_constraintEnd_toEndOf="@id/edit_main_menu_add_event_edate"
-                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_add_event_edate"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_main_menu_details_event_edate"
+                    app:layout_constraintEnd_toEndOf="@id/edit_main_menu_details_event_edate"
+                    app:layout_constraintTop_toTopOf="@id/edit_main_menu_details_event_edate"
                     tools:ignore="HardcodedText" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_main_menu_add_event_stime"
+                    android:id="@+id/constraint_main_menu_details_event_stime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -1213,10 +1198,10 @@
                     android:paddingVertical="2dp"
                     app:layout_constraintEnd_toStartOf="@id/image_main_menu_hyphen_4"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_event_sdate">
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_details_event_sdate">
 
                     <EditText
-                        android:id="@+id/edit_main_menu_add_event_shour"
+                        android:id="@+id/edit_main_menu_details_event_shour"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1232,13 +1217,13 @@
                         android:textColorHint="@color/rect_4474"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/text_main_menu_add_event_stime_colon"
+                        app:layout_constraintEnd_toStartOf="@id/text_main_menu_details_event_stime_colon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
                     <TextView
-                        android:id="@+id/text_main_menu_add_event_stime_colon"
+                        android:id="@+id/text_main_menu_details_event_stime_colon"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1248,14 +1233,14 @@
                         android:textColor="@color/rect_4474"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/edit_main_menu_add_event_smin"
+                        app:layout_constraintEnd_toStartOf="@id/edit_main_menu_details_event_smin"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toEndOf="@id/edit_main_menu_add_event_shour"
+                        app:layout_constraintStart_toEndOf="@id/edit_main_menu_details_event_shour"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
                     <EditText
-                        android:id="@+id/edit_main_menu_add_event_smin"
+                        android:id="@+id/edit_main_menu_details_event_smin"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1272,7 +1257,7 @@
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/text_main_menu_add_event_stime_colon"
+                        app:layout_constraintStart_toEndOf="@id/text_main_menu_details_event_stime_colon"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
@@ -1286,14 +1271,14 @@
                     android:layout_marginHorizontal="11dp"
                     android:contentDescription="이벤트 시작 날짜부터 끝 날짜까지"
                     android:src="@drawable/ic_black_hyphen"
-                    app:layout_constraintBottom_toBottomOf="@id/constraint_main_menu_add_event_stime"
-                    app:layout_constraintEnd_toStartOf="@id/constraint_main_menu_add_event_etime"
-                    app:layout_constraintStart_toEndOf="@id/constraint_main_menu_add_event_stime"
-                    app:layout_constraintTop_toTopOf="@id/constraint_main_menu_add_event_stime"
+                    app:layout_constraintBottom_toBottomOf="@id/constraint_main_menu_details_event_stime"
+                    app:layout_constraintEnd_toStartOf="@id/constraint_main_menu_details_event_etime"
+                    app:layout_constraintStart_toEndOf="@id/constraint_main_menu_details_event_stime"
+                    app:layout_constraintTop_toTopOf="@id/constraint_main_menu_details_event_stime"
                     tools:ignore="HardcodedText" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_main_menu_add_event_etime"
+                    android:id="@+id/constraint_main_menu_details_event_etime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -1307,7 +1292,7 @@
                     app:layout_constraintTop_toTopOf="@id/image_main_menu_hyphen_4">
 
                     <EditText
-                        android:id="@+id/edit_main_menu_add_event_ehour"
+                        android:id="@+id/edit_main_menu_details_event_ehour"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1323,13 +1308,13 @@
                         android:textColorHint="@color/rect_4474"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/text_main_menu_add_event_etime_colon"
+                        app:layout_constraintEnd_toStartOf="@id/text_main_menu_details_event_etime_colon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
                     <TextView
-                        android:id="@+id/text_main_menu_add_event_etime_colon"
+                        android:id="@+id/text_main_menu_details_event_etime_colon"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1339,14 +1324,14 @@
                         android:textColor="@color/rect_4474"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/edit_main_menu_add_event_emin"
+                        app:layout_constraintEnd_toStartOf="@id/edit_main_menu_details_event_emin"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toEndOf="@id/edit_main_menu_add_event_ehour"
+                        app:layout_constraintStart_toEndOf="@id/edit_main_menu_details_event_ehour"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
                     <EditText
-                        android:id="@+id/edit_main_menu_add_event_emin"
+                        android:id="@+id/edit_main_menu_details_event_emin"
                         style="@style/Text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1363,7 +1348,7 @@
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/text_main_menu_add_event_etime_colon"
+                        app:layout_constraintStart_toEndOf="@id/text_main_menu_details_event_etime_colon"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
 
@@ -1371,7 +1356,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_event_weekday"
+                    android:id="@+id/text_main_menu_details_event_weekday"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1382,12 +1367,12 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/constraint_main_menu_add_event_stime"
+                    app:layout_constraintTop_toBottomOf="@id/constraint_main_menu_details_event_stime"
                     tools:ignore="HardcodedText" />
 
 
                 <ScrollView
-                    android:id="@+id/scroll_main_menu_add_event_weekday"
+                    android:id="@+id/scroll_main_menu_details_event_weekday"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
@@ -1395,16 +1380,16 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_add_event_weekday">
+                    app:layout_constraintTop_toBottomOf="@id/text_main_menu_details_event_weekday">
 
                     <LinearLayout
-                        android:id="@+id/linear_main_menu_add_event_weekday_container"
+                        android:id="@+id/linear_main_menu_details_event_weekday_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_event_weekday_sun"
+                            android:id="@+id/text_main_menu_details_event_weekday_sun"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1419,7 +1404,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_event_weekday_mon"
+                            android:id="@+id/text_main_menu_details_event_weekday_mon"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1434,7 +1419,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_event_weekday_tue"
+                            android:id="@+id/text_main_menu_details_event_weekday_tue"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1449,7 +1434,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_event_weekday_wed"
+                            android:id="@+id/text_main_menu_details_event_weekday_wed"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1464,7 +1449,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_event_weekday_thu"
+                            android:id="@+id/text_main_menu_details_event_weekday_thu"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1479,7 +1464,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_event_weekday_fri"
+                            android:id="@+id/text_main_menu_details_event_weekday_fri"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1494,7 +1479,7 @@
                             tools:ignore="HardcodedText" />
 
                         <TextView
-                            android:id="@+id/text_main_menu_add_event_weekday_sat"
+                            android:id="@+id/text_main_menu_details_event_weekday_sat"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1512,7 +1497,7 @@
                 </ScrollView>
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_label_memo"
+                    android:id="@+id/text_main_menu_details_label_memo"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -1523,11 +1508,11 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/scroll_main_menu_add_event_weekday"
+                    app:layout_constraintTop_toBottomOf="@id/scroll_main_menu_details_event_weekday"
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_memo"
+                    android:id="@+id/edit_main_menu_details_memo"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1548,7 +1533,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_label_memo"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_details_label_memo"
                     tools:ignore="HardcodedText" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1556,19 +1541,56 @@
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_main_menu_add_save"
+            android:id="@+id/btn_main_menu_details_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_bottom"
+            android:background="@color/rect_4476"
             android:fontFamily="@font/ns_regular"
             android:gravity="center"
             android:padding="18dp"
-            android:text="저장"
+            android:text="편집"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:enabled="false"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_main_menu_details_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/rect_4475"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="취소"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_main_menu_details_save"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_main_menu_details_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/rect_4476"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="수정"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@id/btn_main_menu_details_cancel"
             tools:enabled="false"
             tools:ignore="HardcodedText" />
 
