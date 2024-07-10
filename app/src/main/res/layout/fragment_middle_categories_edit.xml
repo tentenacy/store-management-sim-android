@@ -168,7 +168,7 @@
             app:layout_constraintTop_toTopOf="@id/text_middle_categories_edit_label_middle_category">
 
             <TextView
-                android:id="@+id/text_middle_categories_edit_edit_all"
+                android:id="@+id/text_middle_categories_edit_all"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -182,15 +182,15 @@
                 tools:ignore="HardcodedText" />
 
             <ImageView
-                android:id="@+id/image_middle_categories_edit_edit_all"
+                android:id="@+id/image_middle_categories_edit_all"
                 android:layout_width="10.7dp"
                 android:layout_height="7.5dp"
                 android:layout_marginEnd="5.83dp"
                 android:contentDescription="전체 선택 이미지"
                 android:src="@drawable/ic_check_all"
-                app:layout_constraintBottom_toBottomOf="@id/text_middle_categories_edit_edit_all"
-                app:layout_constraintEnd_toStartOf="@id/text_middle_categories_edit_edit_all"
-                app:layout_constraintTop_toTopOf="@id/text_middle_categories_edit_edit_all"
+                app:layout_constraintBottom_toBottomOf="@id/text_middle_categories_edit_all"
+                app:layout_constraintEnd_toStartOf="@id/text_middle_categories_edit_all"
+                app:layout_constraintTop_toTopOf="@id/text_middle_categories_edit_all"
                 tools:ignore="HardcodedText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

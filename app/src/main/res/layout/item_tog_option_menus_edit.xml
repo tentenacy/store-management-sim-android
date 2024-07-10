@@ -15,9 +15,9 @@
 
         <import type="android.view.View" />
     </data>
-    
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_itog_option_menus"
+        android:id="@+id/card_itog_option_menus_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -26,24 +26,24 @@
         app:cardCornerRadius="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_itog_option_menus_container"
+            android:id="@+id/constraint_itog_option_menus_edit_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/image_itog_option_menus_thumbnail"
+                android:id="@+id/image_itog_option_menus_edit_thumbnail"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/placeholder_logo"
                 android:contentDescription="메뉴 썸네일"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/check_imain_categories_edit"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/text_itog_option_menus_name"
+                android:id="@+id/text_itog_option_menus_edit_name"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,8 +53,8 @@
                 android:maxLines="1"
                 android:textColor="@{outOfStock ? @color/rect_4480 : @color/rect_4474}"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@id/image_itog_option_menus_thumbnail"
-                app:layout_constraintTop_toTopOf="@id/image_itog_option_menus_thumbnail"
+                app:layout_constraintStart_toEndOf="@id/image_itog_option_menus_edit_thumbnail"
+                app:layout_constraintTop_toTopOf="@id/image_itog_option_menus_edit_thumbnail"
                 tools:text="옵션메뉴1"
                 tools:textColor="@color/rect_4474" />
 
@@ -71,14 +71,14 @@
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:visibility="@{outOfStock ? View.VISIBLE : View.INVISIBLE}"
-                app:layout_constraintBottom_toBottomOf="@id/text_itog_option_menus_name"
-                app:layout_constraintStart_toEndOf="@id/text_itog_option_menus_name"
-                app:layout_constraintTop_toTopOf="@id/text_itog_option_menus_name"
+                app:layout_constraintBottom_toBottomOf="@id/text_itog_option_menus_edit_name"
+                app:layout_constraintStart_toEndOf="@id/text_itog_option_menus_edit_name"
+                app:layout_constraintTop_toTopOf="@id/text_itog_option_menus_edit_name"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
 
             <TextView
-                android:id="@+id/text_itog_option_menus_code"
+                android:id="@+id/text_itog_option_menus_edit_code"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,8 +86,8 @@
                 android:fontFamily="@font/ns_regular"
                 android:textColor="@color/rect_4480"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/text_itog_option_menus_name"
-                app:layout_constraintTop_toBottomOf="@id/text_itog_option_menus_name"
+                app:layout_constraintStart_toStartOf="@id/text_itog_option_menus_edit_name"
+                app:layout_constraintTop_toBottomOf="@id/text_itog_option_menus_edit_name"
                 tools:text="000003" />
 
             <TextView
@@ -104,7 +104,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/view_imain_categories_use"
-                app:layout_constraintTop_toBottomOf="@id/text_itog_option_menus_code"
+                app:layout_constraintTop_toBottomOf="@id/text_itog_option_menus_edit_code"
                 tools:text="사용"
                 tools:textColor="@color/rect_4475" />
 
@@ -114,44 +114,38 @@
                 android:layout_height="8dp"
                 android:background="@{use != null ? (use ? @drawable/circle_use : @drawable/circle_use_not) : @drawable/rect_deleted}"
                 app:layout_constraintBottom_toBottomOf="@id/text_imain_categories_use"
-                app:layout_constraintStart_toStartOf="@id/text_itog_option_menus_code"
+                app:layout_constraintStart_toStartOf="@id/text_itog_option_menus_edit_code"
                 app:layout_constraintTop_toTopOf="@id/text_imain_categories_use"
                 tools:background="@drawable/circle_use" />
 
-            <TextView
-                android:id="@+id/text_itog_option_menus_not_discounted_amount"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ns_bold"
-                android:paddingStart="1dp"
-                android:textColor="@color/rect_4474"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/text_itog_option_menus_not_discounted_unit_kr"
-                app:layout_constraintEnd_toStartOf="@id/text_itog_option_menus_not_discounted_unit_kr"
-                app:layout_constraintTop_toTopOf="@id/text_itog_option_menus_not_discounted_unit_kr"
-                tools:ignore="RtlSymmetry"
-                tools:text="1,000" />
-
-            <TextView
-                android:id="@+id/text_itog_option_menus_not_discounted_unit_kr"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+            <ImageView
+                android:id="@+id/image_imain_categories_edit_list"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/ns_regular"
-                android:paddingEnd="1dp"
-                android:text="원"
-                android:textColor="@{outOfStock ? @color/rect_4480 : @color/rect_4474}"
-                android:textSize="16sp"
+                android:contentDescription="대분류 순서 변경"
+                android:src="@drawable/ic_grey_list"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText,RtlSymmetry" />
+                tools:ignore="HardcodedText" />
+
+
+            <CheckBox
+                android:id="@+id/check_imain_categories_edit"
+                style="@style/CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        
+
     </androidx.cardview.widget.CardView>
-    
+
 </layout>
