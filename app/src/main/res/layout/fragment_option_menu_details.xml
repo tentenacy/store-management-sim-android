@@ -1,0 +1,1450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_option_menu_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_option_menu_details_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="뒤로가기"
+            android:src="@drawable/ic_black_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_option_menu_details_ftitle"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:text="옵션메뉴 상세"
+            android:textColor="@color/rect_4474"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_option_menu_details_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image_option_menu_details_back"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/image_option_menu_details_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="메인으로 이동"
+            android:src="@drawable/ic_black_home"
+            app:layout_constraintBottom_toBottomOf="@+id/image_option_menu_details_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_option_menu_details_back"
+            tools:ignore="HardcodedText" />
+
+        <ScrollView
+            android:id="@+id/scroll_option_menu_details"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_option_menu_details_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_option_menu_details_ftitle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_option_menu_details_scroll_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_option_menu_details_thumbnail"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:contentDescription="메뉴 썸네일 이미지"
+                    android:src="@drawable/placeholder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_name"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="옵션명(한글)"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image_option_menu_details_thumbnail"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:id="@+id/view_option_menu_details_name_required"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/circle_required"
+                    app:layout_constraintStart_toEndOf="@id/text_option_menu_details_name"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_name" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_name"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:hint="옵션메뉴 입력(한글)"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4481"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_name"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_code"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="옵션 코드"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_option_menu_details_name"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:id="@+id/view_option_menu_details_code_required"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/circle_required"
+                    app:layout_constraintStart_toEndOf="@id/text_option_menu_details_code"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_code" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_code"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:hint="옵션코드 입력"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4481"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_code"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_use"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="사용여부"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_option_menu_details_code"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:id="@+id/view_option_menu_details_use_required"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/circle_required"
+                    app:layout_constraintStart_toEndOf="@id/text_option_menu_details_use"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_use" />
+
+                <RadioGroup
+                    android:id="@+id/radiogroup_option_menu_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:checkedButton="@id/radio_option_menu_details_use"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_use">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radio_option_menu_details_use"
+                        style="@style/Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/checkbox_circle"
+                        android:fontFamily="@font/ns_regular"
+                        android:includeFontPadding="false"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="8dp"
+                        android:text="사용"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radio_option_menu_details_use_not"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/checkbox_circle"
+                        android:fontFamily="@font/ns_regular"
+                        android:includeFontPadding="false"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="8dp"
+                        android:text="미사용"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_biz_no"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="23dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="가격"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/radiogroup_option_menu_details"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:id="@+id/view_option_menu_details_biz_no_required"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/circle_required"
+                    app:layout_constraintStart_toEndOf="@id/text_option_menu_details_biz_no"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_biz_no" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_biz_no"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:hint="가격 입력"
+                    android:importantForAutofill="no"
+                    android:inputType="numberSigned"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4481"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_biz_no"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_discounted_amount"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="할인가격"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_option_menu_details_biz_no"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_discounted_amount"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:hint="가격 입력"
+                    android:importantForAutofill="no"
+                    android:inputType="numberSigned"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4481"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_discounted_amount"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_label_packaging"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="포장여부"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_option_menu_details_discounted_amount"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:id="@+id/view_option_menu_details_packaging_required"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/circle_required"
+                    app:layout_constraintStart_toEndOf="@id/text_option_menu_details_label_packaging"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_label_packaging" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_packaging"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/radius_16dp_f6f7f9"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:paddingStart="30dp"
+                    android:paddingEnd="30dp"
+                    android:text="매장 포장"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_label_packaging"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/image_option_menu_details_packaging"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="포장여부 선택"
+                    android:rotation="-90"
+                    android:src="@drawable/ic_black_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/text_option_menu_details_packaging"
+                    app:layout_constraintEnd_toEndOf="@id/text_option_menu_details_packaging"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_packaging"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_packaging_amount"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="포장추가 비용"
+                    android:textColor="#1d1d1b"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_option_menu_details_packaging"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_packaging_amount"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="100dp"
+                    android:background="@drawable/input_radius"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:hint="가격 입력"
+                    android:importantForAutofill="no"
+                    android:inputType="numberSigned"
+                    android:maxLines="1"
+                    android:padding="14dp"
+                    android:textColor="#1d1d1b"
+                    android:textColorHint="@color/rect_4481"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_packaging_amount"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_oos"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="품절여부"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_option_menu_details_packaging_amount"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:id="@+id/view_option_menu_details_oos_required"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/circle_required"
+                    app:layout_constraintStart_toEndOf="@id/text_option_menu_details_oos"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_oos" />
+
+                <RadioGroup
+                    android:id="@+id/radiogroup_option_menu_details_oos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:checkedButton="@id/radio_option_menu_details_oos_not"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_oos">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radio_option_menu_details_oos_not"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/checkbox_circle"
+                        android:fontFamily="@font/ns_regular"
+                        android:includeFontPadding="false"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="8dp"
+                        android:text="미품절"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radio_option_menu_details_oos"
+                        style="@style/Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/checkbox_circle"
+                        android:fontFamily="@font/ns_regular"
+                        android:includeFontPadding="false"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="8dp"
+                        android:text="품절"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_label_highlight"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="메뉴 강조 유형"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/radiogroup_option_menu_details_oos"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:id="@+id/view_option_menu_details_highlight_required"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/circle_required"
+                    app:layout_constraintStart_toEndOf="@id/text_option_menu_details_label_highlight"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_label_highlight" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_highlight"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/radius_16dp_f6f7f9"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:paddingStart="30dp"
+                    android:paddingEnd="30dp"
+                    android:text="미사용"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_label_highlight"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/image_option_menu_details_highlight"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="메뉴 강조 유형 선택"
+                    android:rotation="-90"
+                    android:src="@drawable/ic_black_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/text_option_menu_details_highlight"
+                    app:layout_constraintEnd_toEndOf="@id/text_option_menu_details_highlight"
+                    app:layout_constraintTop_toTopOf="@id/text_option_menu_details_highlight"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_show_datetime"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="메뉴 표시 기간/시간 설정"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_option_menu_details_highlight"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_show_sdate"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:enabled="false"
+                    android:fontFamily="@font/ns_regular"
+                    android:hint="0000-00-00"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4480"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/image_main_menu_hyphen_1"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_show_datetime"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/image_option_menu_details_show_sdate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="메뉴 표시 시작 날짜 설정"
+                    android:src="@drawable/ic_black_calendar"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_option_menu_details_show_sdate"
+                    app:layout_constraintEnd_toEndOf="@id/edit_option_menu_details_show_sdate"
+                    app:layout_constraintTop_toTopOf="@id/edit_option_menu_details_show_sdate"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/image_main_menu_hyphen_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="11dp"
+                    android:contentDescription="메뉴 표시 시작 날짜부터 끝 날짜까지"
+                    android:src="@drawable/ic_black_hyphen"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_option_menu_details_show_sdate"
+                    app:layout_constraintEnd_toStartOf="@id/edit_option_menu_details_show_edate"
+                    app:layout_constraintStart_toEndOf="@id/edit_option_menu_details_show_sdate"
+                    app:layout_constraintTop_toTopOf="@id/edit_option_menu_details_show_sdate"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_show_edate"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/input_radius"
+                    android:enabled="false"
+                    android:fontFamily="@font/ns_regular"
+                    android:hint="0000-00-00"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4480"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/image_main_menu_hyphen_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/image_main_menu_hyphen_1"
+                    app:layout_constraintTop_toTopOf="@id/image_main_menu_hyphen_1"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/image_option_menu_details_show_edate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="메뉴 표시 끝 날짜 설정"
+                    android:src="@drawable/ic_black_calendar"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_option_menu_details_show_edate"
+                    app:layout_constraintEnd_toEndOf="@id/edit_option_menu_details_show_edate"
+                    app:layout_constraintTop_toTopOf="@id/edit_option_menu_details_show_edate"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_option_menu_details_show_stime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/radius_16dp_f6f7f9"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="2dp"
+                    app:layout_constraintEnd_toStartOf="@id/image_main_menu_hyphen_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_option_menu_details_show_sdate">
+
+                    <EditText
+                        android:id="@+id/edit_option_menu_details_show_shour"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/ns_regular"
+                        android:hint="00"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/rect_4474"
+                        android:textColorHint="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/text_option_menu_details_show_stime_colon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/text_option_menu_details_show_stime_colon"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:fontFamily="@font/ns_regular"
+                        android:text=":"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/edit_option_menu_details_show_smin"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@id/edit_option_menu_details_show_shour"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/edit_option_menu_details_show_smin"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/ns_regular"
+                        android:hint="00"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/rect_4474"
+                        android:textColorHint="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/text_option_menu_details_show_stime_colon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/image_main_menu_hyphen_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="11dp"
+                    android:contentDescription="메뉴 표시 시작 날짜부터 끝 날짜까지"
+                    android:src="@drawable/ic_black_hyphen"
+                    app:layout_constraintBottom_toBottomOf="@id/constraint_option_menu_details_show_stime"
+                    app:layout_constraintEnd_toStartOf="@id/constraint_option_menu_details_show_etime"
+                    app:layout_constraintStart_toEndOf="@id/constraint_option_menu_details_show_stime"
+                    app:layout_constraintTop_toTopOf="@id/constraint_option_menu_details_show_stime"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_option_menu_details_show_etime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/radius_16dp_f6f7f9"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="2dp"
+                    app:layout_constraintBottom_toBottomOf="@id/image_main_menu_hyphen_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/image_main_menu_hyphen_2"
+                    app:layout_constraintTop_toTopOf="@id/image_main_menu_hyphen_2">
+
+                    <EditText
+                        android:id="@+id/edit_option_menu_details_show_ehour"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/ns_regular"
+                        android:hint="00"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/rect_4474"
+                        android:textColorHint="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/text_option_menu_details_show_etime_colon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/text_option_menu_details_show_etime_colon"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:fontFamily="@font/ns_regular"
+                        android:text=":"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/edit_option_menu_details_show_emin"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@id/edit_option_menu_details_show_ehour"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/edit_option_menu_details_show_emin"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/ns_regular"
+                        android:hint="00"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/rect_4474"
+                        android:textColorHint="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/text_option_menu_details_show_etime_colon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_show_weekday"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="이벤트 표시 요일 설정"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraint_option_menu_details_show_stime"
+                    tools:ignore="HardcodedText" />
+
+                <ScrollView
+                    android:id="@+id/scroll_option_menu_details_show_weekday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_option_menu_details_show_weekday">
+
+                    <LinearLayout
+                        android:id="@+id/linear_option_menu_details_show_weekday_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_show_weekday_sun"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="일"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_show_weekday_mon"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="월"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_show_weekday_tue"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="화"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_show_weekday_wed"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="수"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_show_weekday_thu"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="목"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_show_weekday_fri"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="금"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_show_weekday_sat"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="토"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+                </ScrollView>
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_event_datetime"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="이벤트 기간/시간 설정"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/scroll_option_menu_details_show_weekday"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_event_sdate"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:enabled="false"
+                    android:fontFamily="@font/ns_regular"
+                    android:hint="0000-00-00"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4480"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/image_main_menu_hyphen_3"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_option_menu_details_event_datetime"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/image_option_menu_details_event_sdate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="이벤트 시작 날짜 설정"
+                    android:src="@drawable/ic_black_calendar"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_option_menu_details_event_sdate"
+                    app:layout_constraintEnd_toEndOf="@id/edit_option_menu_details_event_sdate"
+                    app:layout_constraintTop_toTopOf="@id/edit_option_menu_details_event_sdate"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/image_main_menu_hyphen_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="11dp"
+                    android:contentDescription="이벤트 시작 날짜부터 끝 날짜까지"
+                    android:src="@drawable/ic_black_hyphen"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_option_menu_details_event_sdate"
+                    app:layout_constraintEnd_toStartOf="@id/edit_option_menu_details_event_edate"
+                    app:layout_constraintStart_toEndOf="@id/edit_option_menu_details_event_sdate"
+                    app:layout_constraintTop_toTopOf="@id/edit_option_menu_details_event_sdate"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_option_menu_details_event_edate"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/input_radius"
+                    android:enabled="false"
+                    android:fontFamily="@font/ns_regular"
+                    android:hint="0000-00-00"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4480"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/image_main_menu_hyphen_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/image_main_menu_hyphen_3"
+                    app:layout_constraintTop_toTopOf="@id/image_main_menu_hyphen_3"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:id="@+id/image_option_menu_details_event_edate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="이벤트 끝 날짜 설정"
+                    android:src="@drawable/ic_black_calendar"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_option_menu_details_event_edate"
+                    app:layout_constraintEnd_toEndOf="@id/edit_option_menu_details_event_edate"
+                    app:layout_constraintTop_toTopOf="@id/edit_option_menu_details_event_edate"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_option_menu_details_event_stime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/radius_16dp_f6f7f9"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="2dp"
+                    app:layout_constraintEnd_toStartOf="@id/image_main_menu_hyphen_4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_option_menu_details_event_sdate">
+
+                    <EditText
+                        android:id="@+id/edit_option_menu_details_event_shour"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/ns_regular"
+                        android:hint="00"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/rect_4474"
+                        android:textColorHint="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/text_option_menu_details_event_stime_colon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/text_option_menu_details_event_stime_colon"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:fontFamily="@font/ns_regular"
+                        android:text=":"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/edit_option_menu_details_event_smin"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@id/edit_option_menu_details_event_shour"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/edit_option_menu_details_event_smin"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/ns_regular"
+                        android:hint="00"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/rect_4474"
+                        android:textColorHint="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/text_option_menu_details_event_stime_colon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/image_main_menu_hyphen_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="11dp"
+                    android:contentDescription="이벤트 시작 날짜부터 끝 날짜까지"
+                    android:src="@drawable/ic_black_hyphen"
+                    app:layout_constraintBottom_toBottomOf="@id/constraint_option_menu_details_event_stime"
+                    app:layout_constraintEnd_toStartOf="@id/constraint_option_menu_details_event_etime"
+                    app:layout_constraintStart_toEndOf="@id/constraint_option_menu_details_event_stime"
+                    app:layout_constraintTop_toTopOf="@id/constraint_option_menu_details_event_stime"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_option_menu_details_event_etime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/radius_16dp_f6f7f9"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="2dp"
+                    app:layout_constraintBottom_toBottomOf="@id/image_main_menu_hyphen_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/image_main_menu_hyphen_4"
+                    app:layout_constraintTop_toTopOf="@id/image_main_menu_hyphen_4">
+
+                    <EditText
+                        android:id="@+id/edit_option_menu_details_event_ehour"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/ns_regular"
+                        android:hint="00"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/rect_4474"
+                        android:textColorHint="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/text_option_menu_details_event_etime_colon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/text_option_menu_details_event_etime_colon"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:fontFamily="@font/ns_regular"
+                        android:text=":"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/edit_option_menu_details_event_emin"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@id/edit_option_menu_details_event_ehour"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <EditText
+                        android:id="@+id/edit_option_menu_details_event_emin"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/ns_regular"
+                        android:hint="00"
+                        android:importantForAutofill="no"
+                        android:inputType="date"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:textColor="@color/rect_4474"
+                        android:textColorHint="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/text_option_menu_details_event_etime_colon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/text_option_menu_details_event_weekday"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:text="이벤트 요일 설정"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraint_option_menu_details_event_stime"
+                    tools:ignore="HardcodedText" />
+
+
+                <ScrollView
+                    android:id="@+id/scroll_option_menu_details_event_weekday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="100dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_option_menu_details_event_weekday">
+
+                    <LinearLayout
+                        android:id="@+id/linear_option_menu_details_event_weekday_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_event_weekday_sun"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="일"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_event_weekday_mon"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="월"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_event_weekday_tue"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="화"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_event_weekday_wed"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="수"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_event_weekday_thu"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="목"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_event_weekday_fri"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="금"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/text_option_menu_details_event_weekday_sat"
+                            style="@style/Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="5dp"
+                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:fontFamily="@font/ns_regular"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:text="토"
+                            android:textColor="@color/rect_4480"
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_option_menu_details_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/rect_4476"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="편집"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:enabled="false"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_option_menu_details_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/rect_4475"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="취소"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_option_menu_details_save"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_option_menu_details_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/rect_4476"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="수정"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@id/btn_option_menu_details_cancel"
+            tools:enabled="false"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
