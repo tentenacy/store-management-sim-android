@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_option_menus_container"
+        android:id="@+id/coordinator_option_groups_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_option_menus_container"
+            android:id="@+id/constraint_option_groups_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
 
             <ImageView
-                android:id="@+id/image_option_menus_back"
+                android:id="@+id/image_option_groups_back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="20dp"
@@ -27,34 +27,34 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/text_option_menus_title"
+                android:id="@+id/text_option_groups_title"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ns_bold"
-                android:text="옵션메뉴 관리"
+                android:text="옵션그룹 관리"
                 android:textColor="@color/rect_4474"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/image_option_menus_back"
+                app:layout_constraintBottom_toBottomOf="@id/image_option_groups_back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/image_option_menus_back"
+                app:layout_constraintTop_toTopOf="@id/image_option_groups_back"
                 tools:ignore="HardcodedText" />
 
             <ImageView
-                android:id="@+id/image_option_menus_home"
+                android:id="@+id/image_option_groups_home"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="20dp"
                 android:contentDescription="메인으로 이동"
                 android:src="@drawable/ic_black_home"
-                app:layout_constraintBottom_toBottomOf="@+id/image_option_menus_back"
+                app:layout_constraintBottom_toBottomOf="@+id/image_option_groups_back"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/image_option_menus_back"
+                app:layout_constraintTop_toTopOf="@+id/image_option_groups_back"
                 tools:ignore="HardcodedText" />
 
             <EditText
-                android:id="@+id/edit_option_menus_search"
+                android:id="@+id/edit_option_groups_search"
                 style="@style/Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:background="@drawable/search_radius"
                 android:fontFamily="@font/ns_regular"
                 android:gravity="start"
-                android:hint="메뉴 코드 검색"
+                android:hint="옵션그룹 코드 검색"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLines="1"
@@ -75,7 +75,7 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_option_menus_title"
+                app:layout_constraintTop_toBottomOf="@id/text_option_groups_title"
                 tools:ignore="HardcodedText" />
 
             <ImageView
@@ -84,47 +84,28 @@
                 android:layout_marginStart="10dp"
                 android:contentDescription="돋보기 이미지"
                 android:src="@drawable/ic_grey_search"
-                app:layout_constraintBottom_toBottomOf="@id/edit_option_menus_search"
-                app:layout_constraintStart_toStartOf="@id/edit_option_menus_search"
-                app:layout_constraintTop_toTopOf="@id/edit_option_menus_search"
+                app:layout_constraintBottom_toBottomOf="@id/edit_option_groups_search"
+                app:layout_constraintStart_toStartOf="@id/edit_option_groups_search"
+                app:layout_constraintTop_toTopOf="@id/edit_option_groups_search"
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/text_option_menus_label_main_category"
+                android:id="@+id/text_option_groups_label_main_category"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/ns_bold"
-                android:text="옵션메뉴 목록"
+                android:text="옵션그룹 목록"
                 android:textColor="@color/rect_4474"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_option_menus_search"
+                app:layout_constraintTop_toBottomOf="@id/edit_option_groups_search"
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/text_option_menus_show_hide_removal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="삭제메뉴 숨기기"
-                style="@style/Text"
-                android:background="@drawable/radius_8dp_edf4f9"
-                android:fontFamily="@font/ns_regular"
-                android:paddingVertical="6dp"
-                android:paddingHorizontal="10dp"
-                android:textColor="@color/rect_4475"
-                android:textSize="14sp"
-                android:layout_marginStart="10dp"
-                app:layout_constraintStart_toEndOf="@id/text_option_menus_label_main_category"
-                app:layout_constraintTop_toTopOf="@id/text_option_menus_label_main_category"
-                app:layout_constraintBottom_toBottomOf="@id/text_option_menus_label_main_category"
-                tools:ignore="HardcodedText"/>
-
-
-           <TextView
-                android:id="@+id/text_option_menus_edit"
+                android:id="@+id/text_option_groups_edit"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,13 +115,13 @@
                 android:text="편집"
                 android:textColor="@color/rect_4475"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/text_option_menus_label_main_category"
+                app:layout_constraintBottom_toBottomOf="@+id/text_option_groups_label_main_category"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_option_menus_label_main_category"
+                app:layout_constraintTop_toTopOf="@id/text_option_groups_label_main_category"
                 tools:ignore="HardcodedText" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_option_menus"
+                android:id="@+id/recycler_option_groups"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
@@ -148,13 +129,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_option_menus_label_main_category"
-                tools:listitem="@layout/item_option_menus" />
+                app:layout_constraintTop_toBottomOf="@id/text_option_groups_label_main_category"
+                tools:listitem="@layout/item_option_groups" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_option_menus_add"
+            android:id="@+id/fab_option_groups_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -162,7 +143,7 @@
             android:backgroundTint="@color/rect_4476"
             android:contentDescription="대분류 카테고리 추가"
             android:src="@drawable/ic_white_plus"
-            app:layout_anchor="@id/constraint_option_menus_container"
+            app:layout_anchor="@id/constraint_option_groups_container"
             app:layout_anchorGravity="end|bottom"
             app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
             app:layout_constraintBottom_toBottomOf="parent"

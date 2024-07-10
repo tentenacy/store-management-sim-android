@@ -80,7 +80,7 @@
                 tools:ignore="HardcodedText" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/text_sub_categories"
+                android:id="@+id/recycler_sub_categories"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="18dp"

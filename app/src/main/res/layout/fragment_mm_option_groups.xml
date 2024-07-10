@@ -190,7 +190,7 @@
                 tools:ignore="HardcodedText" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/text_mm_option_groups"
+                android:id="@+id/recycler_mm_option_groups"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
