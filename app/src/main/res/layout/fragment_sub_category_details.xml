@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_bold"
-            android:text="대분류 상세"
+            android:text="소분류 상세"
             android:textColor="@color/rect_4474"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@id/image_sub_category_details_back"

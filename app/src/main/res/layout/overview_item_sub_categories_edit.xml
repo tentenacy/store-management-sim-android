@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/rect_2"
     android:orientation="vertical">
 
-    <include layout="@layout/item_sub_categories_top" />
+    <include layout="@layout/item_sub_categories_edit_top" />
     <include layout="@layout/item_sub_categories_edit" />
     <include layout="@layout/item_sub_categories_edit" />
     <include layout="@layout/item_sub_categories_edit" />
