@@ -81,7 +81,7 @@
             tools:text="000003" />
 
         <TextView
-            android:id="@+id/text_imain_categories_use"
+            android:id="@+id/text_ioption_menus_use"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,19 +93,19 @@
             android:textColor='@{use != null ? (use ? @color/rect_4475 : @color/rect_4480) : @color/rect_4480}'
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/view_imain_categories_use"
+            app:layout_constraintStart_toEndOf="@id/view_ioption_menus_use"
             app:layout_constraintTop_toBottomOf="@id/text_imain_menus_code"
             tools:text="사용"
             tools:textColor="@color/rect_4475" />
 
         <View
-            android:id="@+id/view_imain_categories_use"
+            android:id="@+id/view_ioption_menus_use"
             android:layout_width="8dp"
             android:layout_height="8dp"
             android:background="@{use != null ? (use ? @drawable/circle_use : @drawable/circle_use_not) : @drawable/rect_deleted}"
-            app:layout_constraintBottom_toBottomOf="@id/text_imain_categories_use"
+            app:layout_constraintBottom_toBottomOf="@id/text_ioption_menus_use"
             app:layout_constraintStart_toStartOf="@id/text_imain_menus_code"
-            app:layout_constraintTop_toTopOf="@id/text_imain_categories_use"
+            app:layout_constraintTop_toTopOf="@id/text_ioption_menus_use"
             tools:background="@drawable/circle_use" />
 
         <TextView

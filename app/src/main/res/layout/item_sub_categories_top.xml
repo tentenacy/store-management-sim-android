@@ -12,8 +12,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/rect_4476">
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_sub_categories_dummy_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/rect_4476"
+            app:layout_constraintBottom_toBottomOf="@id/view_sub_categories_dummy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_sub_categories_main_category_name"
@@ -164,23 +173,12 @@
             app:layout_constraintStart_toStartOf="@id/constraint_sub_categories_details_container"
             app:layout_constraintTop_toTopOf="@id/constraint_sub_categories_details_container" />
 
-        <View
-            android:id="@+id/view_sub_categories_dummy_2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/rect_2"
-            app:layout_constraintBottom_toBottomOf="@id/constraint_sub_categories_details_container"
-            app:layout_constraintTop_toBottomOf="@id/view_sub_categories_dummy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/rect_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_sub_categories_dummy_2">
+            app:layout_constraintTop_toBottomOf="@id/constraint_sub_categories_details_container">
 
             <TextView
                 android:id="@+id/text_sub_categories_label_middle_category"

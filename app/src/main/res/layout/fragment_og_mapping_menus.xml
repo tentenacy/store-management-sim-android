@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="use"
+            type="Boolean" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_og_mapping_menus_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_og_mapping_menus_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/image_og_mapping_menus_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:contentDescription="뒤로가기"
+                android:src="@drawable/ic_black_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/text_og_mapping_menus_title"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ns_bold"
+                android:text="맵핑메뉴 조회"
+                android:textColor="@color/rect_4474"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/image_og_mapping_menus_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/image_og_mapping_menus_back"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/image_og_mapping_menus_home"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="메인으로 이동"
+                android:src="@drawable/ic_black_home"
+                app:layout_constraintBottom_toBottomOf="@+id/image_og_mapping_menus_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/image_og_mapping_menus_back"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/text_og_mapping_menus_main_category_name"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="38dp"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="@color/rect_4474"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_og_mapping_menus_title"
+                tools:ignore="HardcodedText"
+                tools:text="그룹1" />
+
+            <TextView
+                android:id="@+id/text_og_mapping_menus_main_category_code"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="@color/rect_4480"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/text_og_mapping_menus_main_category_name"
+                app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_main_category_name"
+                tools:text="0000000000" />
+
+            <TextView
+                android:id="@+id/text_og_mapping_menus_main_category_use"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="10dp"
+                android:enabled="@{use}"
+                android:fontFamily="@font/ns_regular"
+                android:text='@{use ? "사용" : "미사용"}'
+                android:textColor='@{use ? @color/rect_4475 : @color/rect_4480}'
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/view_og_mapping_menus_main_category_use"
+                app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_main_category_code"
+                tools:text="사용"
+                tools:textColor="@color/rect_4475" />
+
+            <View
+                android:id="@+id/view_og_mapping_menus_main_category_use"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@{use ? @drawable/circle_use : @drawable/circle_use_not}"
+                app:layout_constraintBottom_toBottomOf="@id/text_og_mapping_menus_main_category_use"
+                app:layout_constraintStart_toStartOf="@id/text_og_mapping_menus_main_category_name"
+                app:layout_constraintTop_toTopOf="@id/text_og_mapping_menus_main_category_use"
+                tools:background="@drawable/circle_use" />
+
+            <Button
+                android:id="@+id/btn_og_mapping_menus_main_category_details"
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/rect_4476"
+                android:fontFamily="@font/ns_regular"
+                android:paddingHorizontal="17dp"
+                android:paddingVertical="7dp"
+                android:text="상세"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:cornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/text_og_mapping_menus_main_category_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="@id/text_og_mapping_menus_main_category_name"
+                app:layout_constraintWidth_max="200dp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:id="@+id/view_og_mapping_menus_divider_1"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/rect_4485"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_main_category_use" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_og_mapping_menus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_og_mapping_menus_divider_1"
+                app:tabIndicator="@drawable/indicator_tab"
+                app:tabIndicatorColor="@color/rect_4475"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="10dp"
+                app:tabPaddingStart="10dp"
+                app:tabSelectedTextColor="@color/rect_4475"
+                app:tabTextAppearance="@style/TabText"
+                app:tabTextColor="@color/rect_4481">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="옵션메뉴"
+                    tools:ignore="HardcodedText" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="메인메뉴"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vpager_og_mapping_menus"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tab_og_mapping_menus" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_og_mapping_menus_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/rect_4476"
+            android:contentDescription="대분류 카테고리 추가"
+            android:src="@drawable/ic_white_plus"
+            app:layout_anchor="@id/constraint_og_mapping_menus_container"
+            app:layout_anchorGravity="end|bottom"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="30dp"
+            app:tint="@color/white"
+            tools:ignore="HardcodedText" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
