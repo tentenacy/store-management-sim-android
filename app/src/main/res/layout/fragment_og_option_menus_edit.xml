@@ -11,13 +11,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_og_mapping_menus_edit_container"
+        android:id="@+id/constraint_og_option_menus_edit_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/image_og_mapping_menus_edit_back"
+            android:id="@+id/image_og_option_menus_edit_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
@@ -29,7 +29,7 @@
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_og_mapping_menus_edit_title"
+            android:id="@+id/text_og_option_menus_edit_title"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,26 +37,26 @@
             android:text="맵핑메뉴 조회"
             android:textColor="@color/rect_4474"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/image_og_mapping_menus_edit_back"
+            app:layout_constraintBottom_toBottomOf="@id/image_og_option_menus_edit_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image_og_mapping_menus_edit_back"
+            app:layout_constraintTop_toTopOf="@id/image_og_option_menus_edit_back"
             tools:ignore="HardcodedText" />
 
         <ImageView
-            android:id="@+id/image_og_mapping_menus_edit_home"
+            android:id="@+id/image_og_option_menus_edit_home"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"
             android:contentDescription="메인으로 이동"
             android:src="@drawable/ic_black_home"
-            app:layout_constraintBottom_toBottomOf="@+id/image_og_mapping_menus_edit_back"
+            app:layout_constraintBottom_toBottomOf="@+id/image_og_option_menus_edit_back"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_og_mapping_menus_edit_back"
+            app:layout_constraintTop_toTopOf="@+id/image_og_option_menus_edit_back"
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_og_mapping_menus_edit_main_category_name"
+            android:id="@+id/text_og_option_menus_edit_main_category_name"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,12 +66,12 @@
             android:textColor="@color/rect_4474"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_og_mapping_menus_edit_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_og_option_menus_edit_title"
             tools:ignore="HardcodedText"
             tools:text="그룹1" />
 
         <TextView
-            android:id="@+id/text_og_mapping_menus_edit_main_category_code"
+            android:id="@+id/text_og_option_menus_edit_main_category_code"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,12 +79,12 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@id/text_og_mapping_menus_edit_main_category_name"
-            app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_edit_main_category_name"
+            app:layout_constraintStart_toStartOf="@id/text_og_option_menus_edit_main_category_name"
+            app:layout_constraintTop_toBottomOf="@id/text_og_option_menus_edit_main_category_name"
             tools:text="0000000000" />
 
         <TextView
-            android:id="@+id/text_og_mapping_menus_edit_main_category_use"
+            android:id="@+id/text_og_option_menus_edit_main_category_use"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,43 +95,43 @@
             android:text='@{use ? "사용" : "미사용"}'
             android:textColor='@{use ? @color/rect_4475 : @color/rect_4480}'
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/view_og_mapping_menus_edit_main_category_use"
-            app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_edit_main_category_code"
+            app:layout_constraintStart_toEndOf="@id/view_og_option_menus_edit_main_category_use"
+            app:layout_constraintTop_toBottomOf="@id/text_og_option_menus_edit_main_category_code"
             tools:text="사용"
             tools:textColor="@color/rect_4475" />
 
         <View
-            android:id="@+id/view_og_mapping_menus_edit_main_category_use"
+            android:id="@+id/view_og_option_menus_edit_main_category_use"
             android:layout_width="8dp"
             android:layout_height="8dp"
             android:background="@{use ? @drawable/circle_use : @drawable/circle_use_not}"
-            app:layout_constraintBottom_toBottomOf="@id/text_og_mapping_menus_edit_main_category_use"
-            app:layout_constraintStart_toStartOf="@id/text_og_mapping_menus_edit_main_category_name"
-            app:layout_constraintTop_toTopOf="@id/text_og_mapping_menus_edit_main_category_use"
+            app:layout_constraintBottom_toBottomOf="@id/text_og_option_menus_edit_main_category_use"
+            app:layout_constraintStart_toStartOf="@id/text_og_option_menus_edit_main_category_name"
+            app:layout_constraintTop_toTopOf="@id/text_og_option_menus_edit_main_category_use"
             tools:background="@drawable/circle_use" />
 
         <View
-            android:id="@+id/view_og_mapping_menus_edit_divider_1"
+            android:id="@+id/view_og_option_menus_edit_divider_1"
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:layout_marginTop="20dp"
             android:background="@color/rect_4485"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_edit_main_category_use" />
+            app:layout_constraintTop_toBottomOf="@id/text_og_option_menus_edit_main_category_use" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_og_mapping_menus_edit_main_container"
+            android:id="@+id/constraint_og_option_menus_edit_main_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="#f3f9ff"
-            app:layout_constraintBottom_toTopOf="@id/constraint_og_mapping_menus_edit_bottom_container"
+            app:layout_constraintBottom_toTopOf="@id/constraint_og_option_menus_edit_bottom_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_og_mapping_menus_edit_divider_1">
+            app:layout_constraintTop_toBottomOf="@id/view_og_option_menus_edit_divider_1">
 
             <TextView
-                android:id="@+id/text_og_mapping_menus_edit_label_main_category"
+                android:id="@+id/text_og_option_menus_edit_label_main_category"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/text_og_mapping_menus_edit_show_hide_removal"
+                android:id="@+id/text_og_option_menus_edit_show_hide_removal"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -158,23 +158,23 @@
                 android:text="삭제메뉴 숨기기"
                 android:textColor="@color/rect_4475"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@id/text_og_mapping_menus_edit_label_main_category"
-                app:layout_constraintStart_toEndOf="@id/text_og_mapping_menus_edit_label_main_category"
-                app:layout_constraintTop_toTopOf="@id/text_og_mapping_menus_edit_label_main_category"
+                app:layout_constraintBottom_toBottomOf="@id/text_og_option_menus_edit_label_main_category"
+                app:layout_constraintStart_toEndOf="@id/text_og_option_menus_edit_label_main_category"
+                app:layout_constraintTop_toTopOf="@id/text_og_option_menus_edit_label_main_category"
                 tools:ignore="HardcodedText" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_og_mapping_menus_edit_all_container"
+                android:id="@+id/constraint_og_option_menus_edit_all_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:padding="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/text_og_mapping_menus_edit_label_main_category"
+                app:layout_constraintBottom_toBottomOf="@+id/text_og_option_menus_edit_label_main_category"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_og_mapping_menus_edit_label_main_category">
+                app:layout_constraintTop_toTopOf="@id/text_og_option_menus_edit_label_main_category">
 
                 <TextView
-                    android:id="@+id/text_og_mapping_menus_edit_all"
+                    android:id="@+id/text_og_option_menus_edit_all"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -188,20 +188,20 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/image_og_mapping_menus_edit_all"
+                    android:id="@+id/image_og_option_menus_edit_all"
                     android:layout_width="10.7dp"
                     android:layout_height="7.5dp"
                     android:layout_marginEnd="5.83dp"
                     android:contentDescription="전체 선택 이미지"
                     android:src="@drawable/ic_check_all"
-                    app:layout_constraintBottom_toBottomOf="@id/text_og_mapping_menus_edit_all"
-                    app:layout_constraintEnd_toStartOf="@id/text_og_mapping_menus_edit_all"
-                    app:layout_constraintTop_toTopOf="@id/text_og_mapping_menus_edit_all"
+                    app:layout_constraintBottom_toBottomOf="@id/text_og_option_menus_edit_all"
+                    app:layout_constraintEnd_toStartOf="@id/text_og_option_menus_edit_all"
+                    app:layout_constraintTop_toTopOf="@id/text_og_option_menus_edit_all"
                     tools:ignore="HardcodedText" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_og_mapping_menus_edit"
+                android:id="@+id/recycler_og_option_menus_edit"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="15dp"
@@ -210,13 +210,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_edit_label_main_category"
+                app:layout_constraintTop_toBottomOf="@id/text_og_option_menus_edit_label_main_category"
                 tools:listitem="@layout/item_tog_option_menus_edit" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_og_mapping_menus_edit_bottom_container"
+            android:id="@+id/constraint_og_option_menus_edit_bottom_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/rect_4481"
@@ -226,20 +226,20 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:id="@+id/image_og_mapping_menus_edit_bottom"
+                android:id="@+id/image_og_option_menus_edit_bottom"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:contentDescription="옵션메뉴 삭제 이미지"
                 android:src="@drawable/ic_white_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/text_og_mapping_menus_edit_bottom"
+                app:layout_constraintEnd_toStartOf="@id/text_og_option_menus_edit_bottom"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/text_og_mapping_menus_edit_bottom"
+                android:id="@+id/text_og_option_menus_edit_bottom"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image_og_mapping_menus_edit_bottom"
+                app:layout_constraintStart_toEndOf="@id/image_og_option_menus_edit_bottom"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
 
