@@ -4,13 +4,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/constraint_bsmain_menus_before_container"
+        android:id="@+id/constraint_bsog_main_menu_add_before_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/image_bsmain_menus_before_cancel"
+            android:id="@+id/image_bsog_main_menu_add_before_cancel"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="15dp"
@@ -20,22 +20,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_bsmain_menus_before_title"
+            android:id="@+id/text_bsog_main_menu_add_before_title"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_bold"
-            android:text="카테고리 조회 선택"
+            android:text="메인메뉴 추가선택"
             android:textColor="#000000"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/image_bsmain_menus_before_cancel"
+            app:layout_constraintBottom_toBottomOf="@id/image_bsog_main_menu_add_before_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image_bsmain_menus_before_cancel"
+            app:layout_constraintTop_toTopOf="@id/image_bsog_main_menu_add_before_cancel"
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_bsmain_menus_before_main_category"
+            android:id="@+id/text_bsog_main_menu_add_before_main_category"
             style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -53,24 +53,24 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_bsmain_menus_before_title"
+            app:layout_constraintTop_toBottomOf="@id/text_bsog_main_menu_add_before_title"
             tools:ignore="HardcodedText" />
 
         <ImageView
-            android:id="@+id/image_bsmain_menus_before_main_category"
+            android:id="@+id/image_bsog_main_menu_add_before_main_category"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="대분류 선택"
             android:rotation="-90"
             android:src="@drawable/ic_black_arrow"
-            app:layout_constraintBottom_toBottomOf="@id/text_bsmain_menus_before_main_category"
-            app:layout_constraintEnd_toEndOf="@id/text_bsmain_menus_before_main_category"
-            app:layout_constraintTop_toTopOf="@id/text_bsmain_menus_before_main_category"
+            app:layout_constraintBottom_toBottomOf="@id/text_bsog_main_menu_add_before_main_category"
+            app:layout_constraintEnd_toEndOf="@id/text_bsog_main_menu_add_before_main_category"
+            app:layout_constraintTop_toTopOf="@id/text_bsog_main_menu_add_before_main_category"
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_bsmain_menus_before_middle_category"
+            android:id="@+id/text_bsog_main_menu_add_before_middle_category"
             style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -88,24 +88,24 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_bsmain_menus_before_main_category"
+            app:layout_constraintTop_toBottomOf="@id/text_bsog_main_menu_add_before_main_category"
             tools:ignore="HardcodedText" />
 
         <ImageView
-            android:id="@+id/image_bsmain_menus_before_middle_category"
+            android:id="@+id/image_bsog_main_menu_add_before_middle_category"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="중분류 선택"
             android:rotation="-90"
             android:src="@drawable/ic_black_arrow"
-            app:layout_constraintBottom_toBottomOf="@id/text_bsmain_menus_before_middle_category"
-            app:layout_constraintEnd_toEndOf="@id/text_bsmain_menus_before_middle_category"
-            app:layout_constraintTop_toTopOf="@id/text_bsmain_menus_before_middle_category"
+            app:layout_constraintBottom_toBottomOf="@id/text_bsog_main_menu_add_before_middle_category"
+            app:layout_constraintEnd_toEndOf="@id/text_bsog_main_menu_add_before_middle_category"
+            app:layout_constraintTop_toTopOf="@id/text_bsog_main_menu_add_before_middle_category"
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_bsmain_menus_before_sub_category"
+            android:id="@+id/text_bsog_main_menu_add_before_sub_category"
             style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -123,24 +123,24 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_bsmain_menus_before_middle_category"
+            app:layout_constraintTop_toBottomOf="@id/text_bsog_main_menu_add_before_middle_category"
             tools:ignore="HardcodedText" />
 
         <ImageView
-            android:id="@+id/image_bsmain_menus_before_sub_category"
+            android:id="@+id/image_bsog_main_menu_add_before_sub_category"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="소분류 선택"
             android:rotation="-90"
             android:src="@drawable/ic_black_arrow"
-            app:layout_constraintBottom_toBottomOf="@id/text_bsmain_menus_before_sub_category"
-            app:layout_constraintEnd_toEndOf="@id/text_bsmain_menus_before_sub_category"
-            app:layout_constraintTop_toTopOf="@id/text_bsmain_menus_before_sub_category"
+            app:layout_constraintBottom_toBottomOf="@id/text_bsog_main_menu_add_before_sub_category"
+            app:layout_constraintEnd_toEndOf="@id/text_bsog_main_menu_add_before_sub_category"
+            app:layout_constraintTop_toTopOf="@id/text_bsog_main_menu_add_before_sub_category"
             tools:ignore="HardcodedText" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_bsmain_menus_before_search"
+            android:id="@+id/btn_bsog_main_menu_add_before_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -154,7 +154,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_bsmain_menus_before_sub_category"
+            app:layout_constraintTop_toBottomOf="@id/text_bsog_main_menu_add_before_sub_category"
             tools:enabled="false"
             tools:ignore="HardcodedText" />
 

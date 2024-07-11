@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="use"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_iog_option_menu_add_thumbnail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/placeholder_logo"
+            android:contentDescription="메뉴 썸네일"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_iog_option_menu_add_code"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/rect_4480"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/image_iog_option_menu_add_thumbnail"
+            app:layout_constraintTop_toTopOf="@+id/image_iog_option_menu_add_thumbnail"
+            tools:text="0000000000" />
+
+        <TextView
+            android:id="@+id/text_iog_option_menu_add_name"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/ns_regular"
+            android:maxLines="1"
+            android:textColor="@color/rect_4474"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/text_iog_option_menu_add_code"
+            app:layout_constraintTop_toBottomOf="@id/text_iog_option_menu_add_code"
+            tools:text="옵션메뉴A" />
+
+        <TextView
+            android:id="@+id/text_iog_option_menu_add_use"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="17dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/rect_4475"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_iog_option_menu_add_name"
+            app:layout_constraintTop_toBottomOf="@id/text_iog_option_menu_add_name"
+            tools:text="1,000원" />
+
+        <TextView
+            android:id="@+id/text_iog_option_menu_add"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/radius_8dp_edf4f9"
+            android:fontFamily="@font/ns_regular"
+            android:paddingHorizontal="17dp"
+            android:paddingVertical="6dp"
+            android:text="추가"
+            android:textColor="@color/rect_4475"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
