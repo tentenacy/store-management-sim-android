@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_menu_reply_post_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/text_menu_reply_post_title"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:fontFamily="@font/ns_bold"
+            android:text="메뉴 평가 답변"
+            android:textColor="@color/rect_4474"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/image_menu_reply_post_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="닫기"
+            android:src="@drawable/ic_black_x"
+            app:layout_constraintBottom_toBottomOf="@+id/text_menu_reply_post_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_menu_reply_post_title"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/edit_menu_reply_post_content"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/input_radius"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="start|top"
+            android:hint="답변내용 입력"
+            android:importantForAutofill="no"
+            android:inputType="none"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="14dp"
+            android:textColor="@color/rect_4474"
+            android:textColorHint="@color/rect_4481"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_menu_reply_post_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_menu_reply_post_title"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_menu_reply_post_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bottom"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="저장"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:enabled="false"
+            tools:ignore="HardcodedText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
