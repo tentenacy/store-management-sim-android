@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_tstatistics_menu_container"
+        android:id="@+id/constraint_tstatistics_card_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/text_tstatistics_menu_title"
+            android:id="@+id/text_tstatistics_card_title"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/ns_bold"
-            android:text="메뉴별 매출 집계"
+            android:text="카드사별 매출 집계"
             android:textColor="@color/rect_4474"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,16 +25,16 @@
             tools:ignore="HardcodedText" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_tstatistics_menu"
+            android:id="@+id/recycler_tstatistics_card"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_tstatistics_card"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_tstatistics_menu_title"
-            tools:listitem="@layout/item_tstatistics_menu" />
+            app:layout_constraintTop_toBottomOf="@id/text_tstatistics_card_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

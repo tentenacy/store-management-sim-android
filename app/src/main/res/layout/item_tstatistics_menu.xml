@@ -244,7 +244,7 @@
             android:id="@+id/image_itstatistics_menu_cash_amount_sign"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:contentDescription="카드 수익"
+            android:contentDescription="이미지 수익"
             android:src="@drawable/ic_black_plus"
             app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_cash_amount"
             app:layout_constraintEnd_toStartOf="@id/text_itstatistics_menu_cash_amount"
