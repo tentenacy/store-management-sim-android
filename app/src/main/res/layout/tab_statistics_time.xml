@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_tstatistics_time_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/text_tstatistics_time_title"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/ns_bold"
+            android:text="시간대별 매출 추이"
+            android:textColor="@color/rect_4474"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <RadioGroup
+            android:id="@+id/radiogroup_tstatistics_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/radio_tstatistics_time_all"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_tstatistics_time_title">
+
+            <RadioButton
+                android:id="@+id/radio_tstatistics_time_all"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/radio_text_radius_30dp"
+                android:button="@null"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:text="전체"
+                android:textColor="@color/radio_text"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/radio_tstatistics_time_card"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/radio_text_radius_30dp"
+                android:button="@null"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:text="카드"
+                android:textColor="@color/radio_text"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/radio_tstatistics_time_cash"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/radio_text_radius_30dp"
+                android:button="@null"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:text="현금"
+                android:textColor="@color/radio_text"
+                tools:ignore="HardcodedText" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/text_tstatistics_time_chart_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(만원)"
+            android:textColor="@color/rect_4480"
+            android:fontFamily="@font/ns_regular"
+            style="@style/Text"
+            android:textSize="10sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/text_tstatistics_time_title"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_tstatistics_time"
+            tools:ignore="HardcodedText,SmallSp" />
+
+        <TextView
+            android:id="@+id/text_tstatistics_time_chart_legend_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:textColor="@color/rect_4480"
+            android:fontFamily="@font/ns_regular"
+            style="@style/Text"
+            android:textSize="10sp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/text_tstatistics_time_chart_unit"
+            app:layout_constraintTop_toTopOf="@id/text_tstatistics_time_chart_unit" />
+
+        <View
+            android:id="@+id/view_tstatistics_time_chart_legend_cancel"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:background="@drawable/radius_2dp"
+            android:backgroundTint="#d9d9d9"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/text_tstatistics_time_chart_legend_cancel"
+            app:layout_constraintTop_toTopOf="@id/text_tstatistics_time_chart_legend_cancel"
+            app:layout_constraintEnd_toStartOf="@id/text_tstatistics_time_chart_legend_cancel" />
+
+        <TextView
+            android:id="@+id/text_tstatistics_time_chart_legend_approval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="승인"
+            android:textColor="@color/rect_4480"
+            android:fontFamily="@font/ns_regular"
+            style="@style/Text"
+            android:textSize="10sp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@id/view_tstatistics_time_chart_legend_cancel"
+            app:layout_constraintBottom_toBottomOf="@id/text_tstatistics_time_chart_unit"
+            app:layout_constraintTop_toTopOf="@id/text_tstatistics_time_chart_unit" />
+
+        <View
+            android:id="@+id/view_tstatistics_time_chart_legend_approval"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:background="@drawable/radius_2dp"
+            android:backgroundTint="@color/rect_4475"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/text_tstatistics_time_chart_legend_approval"
+            app:layout_constraintTop_toTopOf="@id/text_tstatistics_time_chart_legend_approval"
+            app:layout_constraintEnd_toStartOf="@id/text_tstatistics_time_chart_legend_approval" />
+
+        <TextView
+            android:id="@+id/text_tstatistics_time_chart_legend_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="총계"
+            android:textColor="@color/rect_4480"
+            android:fontFamily="@font/ns_regular"
+            style="@style/Text"
+            android:textSize="10sp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@id/view_tstatistics_time_chart_legend_approval"
+            app:layout_constraintBottom_toBottomOf="@id/text_tstatistics_time_chart_unit"
+            app:layout_constraintTop_toTopOf="@id/text_tstatistics_time_chart_unit" />
+
+        <View
+            android:id="@+id/view_tstatistics_time_chart_legend_total"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:background="@drawable/circle_border"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/text_tstatistics_time_chart_legend_total"
+            app:layout_constraintTop_toTopOf="@id/text_tstatistics_time_chart_legend_total"
+            app:layout_constraintEnd_toStartOf="@id/text_tstatistics_time_chart_legend_total" />
+
+        <com.github.mikephil.charting.charts.CombinedChart
+            android:id="@+id/chart_tstatistics_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_tstatistics_time_chart_unit" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

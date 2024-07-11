@@ -612,9 +612,9 @@
                 app:layout_constraintTop_toBottomOf="@id/barrier_statistics_3">
 
                 <View
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -899,9 +899,9 @@
 
                 <View
                     android:id="@+id/image_statistics_card_expandable"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="9dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
