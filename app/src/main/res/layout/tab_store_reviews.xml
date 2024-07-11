@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_tstore_reviews_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_tstore_reviews_search_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/rect_4483"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/edit_tstore_reviews_search"
+                style="@style/Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/search_radius"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="start"
+                android:hint="검색어 검색"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:paddingStart="46dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/rect_4474"
+                android:textColorHint="@color/rect_4481"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="돋보기 이미지"
+                android:src="@drawable/ic_cobalt_search"
+                app:layout_constraintBottom_toBottomOf="@id/edit_tstore_reviews_search"
+                app:layout_constraintStart_toStartOf="@id/edit_tstore_reviews_search"
+                app:layout_constraintTop_toTopOf="@id/edit_tstore_reviews_search"
+                tools:ignore="HardcodedText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RadioGroup
+            android:id="@+id/radiogroup_tstore_reviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/radio_tstore_reviews_all"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraint_tstore_reviews_search_container">
+
+            <RadioButton
+                android:id="@+id/radio_tstore_reviews_all"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/radio_text"
+                android:button="@null"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:text="전체"
+                android:textColor="@color/radio_text"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/radio_tstore_reviews_title"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/radio_text"
+                android:button="@null"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:text="제목"
+                android:textColor="@color/radio_text"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/radio_tstore_reviews_content"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/radio_text"
+                android:button="@null"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:text="내용"
+                android:textColor="@color/radio_text"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/radio_tstore_reviews_creator"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/radio_text"
+                android:button="@null"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="7dp"
+                android:text="작성자"
+                android:textColor="@color/radio_text"
+                tools:ignore="HardcodedText" />
+
+        </RadioGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_tstore_reviews"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:clipToPadding="false"
+            android:paddingBottom="84dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_tstore_reviews"
+            tools:listitem="@layout/overview_item_tstore_reviews"
+            tools:itemCount="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

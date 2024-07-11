@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_reviews_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_reviews_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="뒤로가기"
+            android:src="@drawable/ic_black_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_reviews_title"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:text="평가 관리"
+            android:textColor="@color/rect_4474"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_reviews_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image_reviews_back"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/image_reviews_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="메인으로 이동"
+            android:src="@drawable/ic_black_home"
+            app:layout_constraintBottom_toBottomOf="@+id/image_reviews_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_reviews_back"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_reviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="0dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_reviews_title"
+            app:tabIndicator="@drawable/indicator_tab_full"
+            app:tabIndicatorColor="@color/rect_4475"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/rect_4475"
+            app:tabTextAppearance="@style/TabText"
+            app:tabTextColor="@color/rect_4481">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메뉴 평가"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가맹점 평가"
+                tools:ignore="HardcodedText" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpager_reviews"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_reviews" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

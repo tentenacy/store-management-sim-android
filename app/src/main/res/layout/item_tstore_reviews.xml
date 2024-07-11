@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="replyExists"
+            type="Boolean" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_itstore_reviews_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_itstore_reviews_created_by"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/ns_bold"
+            android:textColor="@color/rect_4474"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="김길동" />
+
+        <TextView
+            android:id="@+id/text_itstore_reviews_created_at"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/rect_4480"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_created_by"
+            tools:text="2022.08.30(화)" />
+
+        <TextView
+            android:id="@+id/text_itstore_reviews_store_name"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/radius_8dp"
+            android:backgroundTint="@color/rect_4485"
+            android:fontFamily="@font/ns_regular"
+            android:paddingVertical="15dp"
+            android:paddingStart="34dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/rect_4474"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_created_at"
+            tools:text="빽다방 인천구월정각초점" />
+
+        <ImageView
+            android:id="@+id/image_itstore_reviews_place"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="메뉴 썸네일 이미지"
+            android:src="@drawable/ic_black_place"
+            app:layout_constraintBottom_toBottomOf="@id/text_itstore_reviews_store_name"
+            app:layout_constraintStart_toStartOf="@id/text_itstore_reviews_store_name"
+            app:layout_constraintTop_toTopOf="@id/text_itstore_reviews_store_name"
+            tools:ignore="HardcodedText" />
+
+        <kr.co.prnd.readmore.ReadMoreTextView
+            android:id="@+id/text_itstore_reviews_content"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/rect_4474"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_store_name"
+            app:readMoreColor="@color/rect_4480"
+            app:readMoreMaxLine="3"
+            app:readMoreText="\n\n더보기"
+            tools:text="가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용가맹점 평가내용" />
+
+        <ImageView
+            android:id="@+id/image_itstore_reviews_reply"
+            android:layout_width="11dp"
+            android:layout_height="13.21dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_cobalt_reply"
+            app:layout_constraintBottom_toBottomOf="@id/text_itstore_reviews_reply_post"
+            app:layout_constraintStart_toStartOf="@id/text_itstore_reviews_content"
+            app:layout_constraintTop_toTopOf="@id/text_itstore_reviews_reply_post" />
+
+        <TextView
+            android:id="@+id/text_itstore_reviews_reply_post"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="35dp"
+            android:fontFamily="@font/ns_regular"
+            android:padding="10dp"
+            android:text="답변 작성하기"
+            android:textColor="@color/rect_4475"
+            android:textSize="14sp"
+            android:visibility="@{replyExists ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/barrier_itstore_reviews_1"
+            app:layout_constraintStart_toEndOf="@id/image_itstore_reviews_reply"
+            app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_content"
+            app:layout_constraintVertical_bias="0"
+            tools:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/text_itstore_reviews_reply_content"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/rect_4474"
+            android:textSize="14sp"
+            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_itstore_reviews_reply"
+            app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_content"
+            tools:text="안녕하세요, 빽다방 000점 점주입니다.😄"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/text_itstore_reviews_reply_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/radius_8dp"
+            android:backgroundTint="@color/rect_4483"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="7dp"
+            android:text="답변수정"
+            android:textColor="@color/rect_4475"
+            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/barrier_itstore_reviews_1"
+            app:layout_constraintStart_toStartOf="@id/text_itstore_reviews_reply_content"
+            app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_reply_content"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/text_itstore_reviews_reply_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/radius_8dp"
+            android:backgroundTint="@color/rect_4482"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="7dp"
+            android:text="삭제"
+            android:textColor="@color/rect_4480"
+            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toEndOf="@id/text_itstore_reviews_reply_edit"
+            app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_reply_content"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_itstore_reviews_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="text_itstore_reviews_reply_edit,text_itstore_reviews_reply_post" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
