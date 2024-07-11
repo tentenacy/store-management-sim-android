@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_helps_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_helps_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/image_helps_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:contentDescription="뒤로가기"
+                android:src="@drawable/ic_black_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/text_helps_title"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ns_bold"
+                android:text="도움말"
+                android:textColor="@color/rect_4474"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/image_helps_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/image_helps_back"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:id="@+id/image_helps_home"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="메인으로 이동"
+                android:src="@drawable/ic_black_home"
+                app:layout_constraintBottom_toBottomOf="@+id/image_helps_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/image_helps_back"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/edit_helps_search"
+                style="@style/Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/search_radius"
+                android:fontFamily="@font/ns_regular"
+                android:gravity="start"
+                android:hint="검색어 입력"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:paddingStart="46dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/rect_4474"
+                android:textColorHint="@color/rect_4480"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_helps_title"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="돋보기 이미지"
+                android:src="@drawable/ic_grey_search"
+                app:layout_constraintBottom_toBottomOf="@id/edit_helps_search"
+                app:layout_constraintStart_toStartOf="@id/edit_helps_search"
+                app:layout_constraintTop_toTopOf="@id/edit_helps_search"
+                tools:ignore="HardcodedText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_helps"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_helps_search"
+                tools:listitem="@layout/item_helps" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_helps_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/rect_4476"
+            android:contentDescription="대분류 카테고리 추가"
+            android:src="@drawable/ic_white_plus"
+            app:layout_anchor="@id/constraint_helps_container"
+            app:layout_anchorGravity="end|bottom"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="30dp"
+            app:tint="@color/white"
+            tools:ignore="HardcodedText" />
+-->
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
