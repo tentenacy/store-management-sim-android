@@ -3,9 +3,12 @@ package com.tenutz.storemngsim.application
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.chibatching.kotpref.Kotpref
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
 import com.kakao.sdk.common.KakaoSdk
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.tenutz.storemngsim.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import io.reactivex.rxjava3.exceptions.UndeliverableException
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
@@ -20,7 +23,8 @@ class GlobalApplication: Application() {
 
         Logger.addLogAdapter(AndroidLogAdapter())
         Kotpref.init(this)
-//        KakaoSdk.init(this, "ac5487119a5cfed87021da97d57a6e1c")
+        KakaoSdk.init(this, BuildConfig.SOCIAL_KAKAO_CLIENT_ID)
+        AppEventsLogger.activateApp(this)
 
         RxJavaPlugins.setErrorHandler { e ->
             if (e is UndeliverableException) {

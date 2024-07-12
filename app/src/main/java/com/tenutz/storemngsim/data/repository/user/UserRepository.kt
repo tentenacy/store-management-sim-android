@@ -17,7 +17,6 @@ interface UserRepository {
 
     fun socialLogin(
         socialType: SocialType,
-        request: SocialLoginRequest
     ): Single<TokenResponse>
 
     fun reissue(request: TokenRequest): Single<TokenResponse>
