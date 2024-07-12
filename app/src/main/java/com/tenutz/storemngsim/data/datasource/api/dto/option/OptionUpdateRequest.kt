@@ -3,11 +3,11 @@ package com.tenutz.storemngsim.data.datasource.api.dto.option
 import okhttp3.MultipartBody
 
 data class OptionUpdateRequest(
-    val image: MultipartBody.Part?,
+    val image: MultipartBody.Part? = null,
     val optionName: String,
     val price: Int,
-    val discountedPrice: Int?,
-    val additionalPackagingPrice: Int?,
+    val discountedPrice: Int? = null,
+    val additionalPackagingPrice: Int? = null,
     val packaging: String,
     val outOfStock: Boolean,
     val use: Boolean,

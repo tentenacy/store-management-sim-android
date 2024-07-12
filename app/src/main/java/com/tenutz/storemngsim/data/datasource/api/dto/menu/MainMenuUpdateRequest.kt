@@ -3,11 +3,11 @@ package com.tenutz.storemngsim.data.datasource.api.dto.menu
 import okhttp3.MultipartBody
 
 data class MainMenuUpdateRequest(
-    val image: MultipartBody.Part?,
+    val image: MultipartBody.Part? = null,
     val menuName: String,
     val price: Int,
-    val discountedPrice: Int?,
-    val additionalPackagingPrice: Int?,
+    val discountedPrice: Int? = null,
+    val additionalPackagingPrice: Int? = null,
     val packaging: String,
     val outOfStock: Boolean,
     val use: Boolean,
