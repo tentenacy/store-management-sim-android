@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
 import com.tenutz.storemngsim.databinding.FragmentMenuMngBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +29,13 @@ class MainCategoriesFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.textMainCategoriesEdit.setOnClickListener {
+            findNavController().navigate(MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMainCategoriesEditFragment())
+        }
+        binding.fabMainCategoriesAdd.setOnClickListener {
+            findNavController().navigate(MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMainCategoryAddFragment())
+        }
     }
 
     override fun onDestroyView() {
