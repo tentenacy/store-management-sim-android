@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="use"
-            type="Boolean" />
+            name="args"
+            type="com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +36,7 @@
             android:maxLines="2"
             android:textColor="@color/white"
             android:textSize="24sp"
+            android:text="@{args.categoryName}"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +52,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/white"
             android:textSize="12sp"
+            android:text="@{args.categoryCode}"
             app:layout_constraintStart_toStartOf="@id/text_sub_categories_top_main_category_name"
             app:layout_constraintTop_toTopOf="@id/constraint_sub_categories_top_main_category_use_container"
             app:layout_constraintBottom_toBottomOf="@id/constraint_sub_categories_top_main_category_use_container"
@@ -73,10 +75,10 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:enabled="@{use}"
+                android:enabled="@{args.use}"
                 android:fontFamily="@font/ns_regular"
-                android:text='@{use ? "사용" : "미사용"}'
-                android:textColor='@{use ? @color/rect_4475 : @color/rect_4480}'
+                android:text='@{args.use ? "사용" : "미사용"}'
+                android:textColor='@{args.use ? @color/rect_4475 : @color/rect_4480}'
                 android:textSize="12sp"
                 android:layout_marginStart="4dp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -90,7 +92,7 @@
                 android:id="@+id/view_sub_categories_top_main_category_use"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="@{use ? @drawable/circle_use : @drawable/circle_use_not}"
+                android:background="@{args.use ? @drawable/circle_use : @drawable/circle_use_not}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -120,6 +122,7 @@
                 android:fontFamily="@font/ns_regular"
                 android:textColor="@color/rect_4474"
                 android:textSize="14sp"
+                android:text="인천 남동구 구월동 1241-1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="인천 남동구 구월동 1241-1" />
@@ -134,6 +137,7 @@
                 android:fontFamily="@font/ns_regular"
                 android:textColor="@color/rect_4475"
                 android:textSize="14sp"
+                android:text="032-463-3113"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_sub_categories_top_details_address"
                 tools:text="032-463-3113" />

@@ -3,7 +3,6 @@ package com.tenutz.storemngsim.application
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.chibatching.kotpref.Kotpref
-import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import com.kakao.sdk.common.KakaoSdk
 import com.orhanobut.logger.AndroidLogAdapter
@@ -14,7 +13,7 @@ import io.reactivex.rxjava3.exceptions.UndeliverableException
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 
 @HiltAndroidApp
-class GlobalApplication: Application() {
+class GlobalApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

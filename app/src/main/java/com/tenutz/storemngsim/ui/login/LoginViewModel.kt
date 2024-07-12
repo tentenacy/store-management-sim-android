@@ -2,7 +2,6 @@ package com.tenutz.storemngsim.ui.login
 
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.application.manager.OAuthLoginManagerSubject
-import com.tenutz.storemngsim.data.datasource.api.dto.common.TokenResponse
 import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
 import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
 import com.tenutz.storemngsim.data.datasource.sharedpref.Token

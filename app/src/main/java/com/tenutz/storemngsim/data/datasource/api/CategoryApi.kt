@@ -1,16 +1,20 @@
 package com.tenutz.storemngsim.data.datasource.api
 
 import com.tenutz.storemngsim.data.datasource.api.dto.category.*
+import io.reactivex.rxjava3.core.Completable
 import retrofit2.http.*
 
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
+import java.util.*
 
 interface CategoryApi {
 
 
     @GET("/categories/main")
-    fun mainCategories(): Single<MainCategoriesResponse>
+    fun mainCategories(
+        @Query("query") query: String? = null,
+    ): Single<MainCategoriesResponse>
 
     @GET("/categories/main/{mainCateCd}")
     fun mainCategory(
@@ -33,10 +37,10 @@ interface CategoryApi {
         @Path("mainCateCd") mainCateCd: String,
     ): Single<Unit>
 
-    @DELETE("/categories/main")
+    @HTTP(method = "DELETE", path = "/categories/main", hasBody = true)
     fun deleteMainCategories(
         @Body request: CategoriesDeleteRequest,
-    ): Single<Unit>
+    ): Completable
 
     @POST("/categories/main/priorities")
     fun changeMainCategoryPriorities(

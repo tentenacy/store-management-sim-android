@@ -59,9 +59,6 @@
         android:label="MenuMngFragment"
         tools:layout="@layout/fragment_menu_mng">
         <action
-            android:id="@+id/action_menuMngFragment_to_mainCategoriesFragment"
-            app:destination="@id/mainCategoriesFragment" />
-        <action
             android:id="@+id/action_menuMngFragment_to_mainMenusFragment"
             app:destination="@id/mainMenusFragment" />
         <action
@@ -70,24 +67,9 @@
         <action
             android:id="@+id/action_menuMngFragment_to_optionGroupsFragment"
             app:destination="@id/optionGroupsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mainCategoriesFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesFragment"
-        android:label="MainCategoriesFragment"
-        tools:layout="@layout/fragment_main_categories">
         <action
-            android:id="@+id/action_mainCategoriesFragment_to_middleCategoriesFragment"
-            app:destination="@id/middleCategoriesFragment" />
-        <action
-            android:id="@+id/action_mainCategoriesFragment_to_mainCategoriesEditFragment"
-            app:destination="@id/mainCategoriesEditFragment" />
-        <action
-            android:id="@+id/action_mainCategoriesFragment_to_mainCategoryAddFragment"
-            app:destination="@id/mainCategoryAddFragment" />
-        <action
-            android:id="@+id/action_mainCategoriesFragment_to_mainCategoryDetailsFragment"
-            app:destination="@id/mainCategoryDetailsFragment" />
+            android:id="@+id/action_menuMngFragment_to_navigation_main_category"
+            app:destination="@id/navigation_main_category" />
     </fragment>
     <fragment
         android:id="@+id/middleCategoriesFragment"
@@ -106,22 +88,10 @@
         <action
             android:id="@+id/action_middleCategoriesFragment_to_subCategoriesFragment"
             app:destination="@id/subCategoriesFragment" />
+        <argument
+            android:name="mainCategory"
+            app:argType="com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs" />
     </fragment>
-    <fragment
-        android:id="@+id/mainCategoriesEditFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditFragment"
-        android:label="MainCategoriesEditFragment"
-        tools:layout="@layout/fragment_main_categories_edit" />
-    <fragment
-        android:id="@+id/mainCategoryAddFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddFragment"
-        android:label="MainCategoryAddFragment"
-        tools:layout="@layout/fragment_main_category_add" />
-    <fragment
-        android:id="@+id/mainCategoryDetailsFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoryDetailsFragment"
-        android:label="MainCategoryDetailsFragment"
-        tools:layout="@layout/fragment_main_category_details" />
     <fragment
         android:id="@+id/middleCategoriesEditFragment"
         android:name="com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesEditFragment"
@@ -151,6 +121,9 @@
         <action
             android:id="@+id/action_subCategoriesFragment_to_subCategoryDetailsFragment"
             app:destination="@id/subCategoryDetailsFragment" />
+        <argument
+            android:name="middleCategory"
+            app:argType="com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs" />
     </fragment>
     <fragment
         android:id="@+id/subCategoriesEditFragment"
@@ -364,4 +337,49 @@
         android:name="com.tenutz.storemngsim.ui.statistics.StatisticsFragment"
         android:label="StatisticsFragment"
         tools:layout="@layout/fragment_statistics" />
+    <navigation android:id="@+id/navigation_main_category"
+        app:startDestination="@id/mainCategoriesFragment"
+        tools:ignore="InvalidNavigation">
+        <action
+            android:id="@+id/action_mainCategoriesFragment_to_middleCategoriesFragment"
+            app:destination="@id/middleCategoriesFragment" />
+        <fragment
+            android:id="@+id/mainCategoryAddFragment"
+            android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddFragment"
+            tools:layout="@layout/fragment_main_category_add"
+            android:label="MainCategoryAddFragment" />
+        <fragment
+            android:id="@+id/mainCategoryDetailsFragment"
+            android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoryDetailsFragment"
+            tools:layout="@layout/fragment_main_category_details"
+            android:label="MainCategoryDetailsFragment">
+            <argument
+                android:name="mainCategoryCode"
+                app:argType="string" />
+        </fragment>
+        <fragment
+            android:id="@+id/mainCategoriesEditFragment"
+            android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditFragment"
+            tools:layout="@layout/fragment_main_categories_edit"
+            android:label="MainCategoriesEditFragment">
+            <argument
+                android:name="mainCategories"
+                app:argType="com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse" />
+        </fragment>
+        <fragment
+            android:id="@+id/mainCategoriesFragment"
+            android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesFragment"
+            tools:layout="@layout/fragment_main_categories"
+            android:label="MainCategoriesFragment">
+            <action
+                android:id="@+id/action_mainCategoriesFragment_to_mainCategoriesEditFragment"
+                app:destination="@id/mainCategoriesEditFragment" />
+            <action
+                android:id="@+id/action_mainCategoriesFragment_to_mainCategoryAddFragment"
+                app:destination="@id/mainCategoryAddFragment" />
+            <action
+                android:id="@+id/action_mainCategoriesFragment_to_mainCategoryDetailsFragment"
+                app:destination="@id/mainCategoryDetailsFragment" />
+        </fragment>
+    </navigation>
 </navigation>

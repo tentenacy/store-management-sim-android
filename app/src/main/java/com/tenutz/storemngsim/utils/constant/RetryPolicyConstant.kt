@@ -1,4 +1,4 @@
-package com.tenutz.storemngsim.utils.constant.policy
+package com.tenutz.storemngsim.utils.constant
 
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode

@@ -18,7 +18,7 @@ class FacebookOAuthLoginHandler(private val fragment: Fragment) : FacebookCallba
 
     //로그인에 성공하면 LoginResult 매개변수에 새로운 AccessToken과 최근에 부여되거나 거부된 권한이 포함됩니다.
     //맞춤 설정할 수 있는 속성에는 LoginBehavior, DefaultAudience, ToolTipPopup.Style 및 LoginButton의 권한이 포함되어 있습니다.
-    override fun onSuccess(result: LoginResult?) {
+    override fun onSuccess(result: LoginResult) {
         result?.let {
             OAuthToken.save(
                 accessToken = it.accessToken.token,
@@ -33,7 +33,7 @@ class FacebookOAuthLoginHandler(private val fragment: Fragment) : FacebookCallba
     override fun onCancel() {
     }
 
-    override fun onError(error: FacebookException?) {
+    override fun onError(error: FacebookException) {
         fragment.requireContext().run {
             Toast.makeText(this, "error: $error", Toast.LENGTH_SHORT).show()
         }

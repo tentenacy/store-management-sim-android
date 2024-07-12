@@ -1,4 +1,4 @@
-package com.tenutz.storemngsim.utils.constant.scope
+package com.tenutz.storemngsim.utils.constant
 
 object SocialScopeConstant {
     const val FACEBOOK_SCOPE_EMAIL = "email"

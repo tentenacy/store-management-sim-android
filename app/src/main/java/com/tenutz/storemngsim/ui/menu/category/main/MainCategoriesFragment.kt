@@ -1,20 +1,71 @@
 package com.tenutz.storemngsim.ui.menu.category.main
 
+import com.tenutz.storemngsim.ui.menu.category.main.bs.MainCategoriesBottomSheetDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
+import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
-import com.tenutz.storemngsim.databinding.FragmentMenuMngBinding
+import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs
+import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class MainCategoriesFragment: Fragment() {
+class MainCategoriesFragment : Fragment() {
+
+    private lateinit var disposable: Disposable
 
     private var _binding: FragmentMainCategoriesBinding? = null
     val binding: FragmentMainCategoriesBinding get() = _binding!!
+
+    val vm: MainCategoriesViewModel by navGraphViewModels(R.id.navigation_main_category) {
+        defaultViewModelProviderFactory
+    }
+
+    private val adapter: MainCategoriesAdapter by lazy {
+        MainCategoriesAdapter {
+            MainCategoriesBottomSheetDialog(
+                onClickListener = { id, _ ->
+                    when (id) {
+                        R.id.btn_bsmain_categories_middle -> {
+                            it.categoryCode?.let { _ ->
+                                findNavController().navigate(
+                                    MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMiddleCategoriesFragment(
+                                        MiddleCategoriesNavArgs(
+                                            it.storeCode,
+                                            it.categoryCode,
+                                            it.categoryName,
+                                            it.use,
+                                            it.order,
+                                            it.createdAt,
+                                            it.lastModifiedAt,
+                                        )
+                                    )
+                                )
+                            }
+                        }
+                        R.id.btn_bsmain_categories_details -> {
+                            it.categoryCode?.let { findNavController().navigate(MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMainCategoryDetailsFragment(it)) }
+                        }
+                    }
+
+                },
+            ).show(childFragmentManager, "mainCategoriesBottomSheetDialog")
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        vm.mainCategories()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +74,8 @@ class MainCategoriesFragment: Fragment() {
     ): View? {
 
         _binding = FragmentMainCategoriesBinding.inflate(inflater, container, false)
+        binding.vm = vm
+        binding.lifecycleOwner = this
 
         return binding.root
     }
@@ -30,8 +83,39 @@ class MainCategoriesFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
+        setOnClickListeners()
+        observeData()
+    }
+
+    private fun initViews() {
+        binding.recyclerMainCategories.adapter = adapter
+        editTextObservable(binding.editMainCategoriesSearch)
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.mainCategories(it)
+            }
+    }
+
+    private fun observeData() {
+        vm.mainCategories.observe(viewLifecycleOwner) {
+            adapter.updateItems(it.mainCategories)
+            binding.recyclerMainCategories.scrollToPosition(0)
+        }
+        vm.viewEvent.observe(viewLifecycleOwner) { event ->
+            event?.getContentIfNotHandled()?.let {
+                when (it.first) {
+                }
+            }
+        }
+    }
+
+    private fun setOnClickListeners() {
         binding.textMainCategoriesEdit.setOnClickListener {
-            findNavController().navigate(MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMainCategoriesEditFragment())
+            vm.mainCategories.value?.let {
+                findNavController().navigate(MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMainCategoriesEditFragment(it))
+            }
         }
         binding.fabMainCategoriesAdd.setOnClickListener {
             findNavController().navigate(MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMainCategoryAddFragment())

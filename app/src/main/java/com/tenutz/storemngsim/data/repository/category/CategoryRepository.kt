@@ -1,111 +1,113 @@
 package com.tenutz.storemngsim.data.repository.category
 
 import com.tenutz.storemngsim.data.datasource.api.dto.category.*
+import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 interface CategoryRepository {
 
-    fun mainCategories(): Single<MainCategoriesResponse>
+    fun mainCategories(cond: CommonCondition?): Single<Result<MainCategoriesResponse>>
 
     fun mainCategory(
         mainCateCd: String,
-    ): Single<MainCategoryResponse>
+    ): Single<Result<MainCategoryResponse>>
 
     fun createMainCategory(
         request: MainCategoryCreateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun updateMainCategory(
         mainCateCd: String,
         request: MainCategoryUpdateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteMainCategory(
         mainCateCd: String,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteMainCategories(
         request: CategoriesDeleteRequest,
-    ): Single<Unit>
+    ): Completable
 
     fun changeMainCategoryPriorities(
         request: CategoryPrioritiesChangeRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun middleCategories(
         mainCateCd: String,
-    ): Single<MiddleCategoriesResponse>
+    ): Single<Result<MiddleCategoriesResponse>>
 
     fun middleCategory(
         mainCateCd: String,
         middleCateCd: String,
-    ): Single<MiddleCategoryResponse>
+    ): Single<Result<MiddleCategoryResponse>>
 
     fun createMiddleCategory(
         mainCateCd: String,
         request: MiddleCategoryCreateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun updateMiddleCategory(
         mainCateCd: String,
         middleCateCd: String,
         request: MiddleCategoryUpdateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteMiddleCategory(
         mainCateCd: String,
         middleCateCd: String,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteMiddleCategories(
         mainCateCd: String,
         request: CategoriesDeleteRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun changeMiddleCategoryPriorities(
         mainCateCd: String,
         request: CategoryPrioritiesChangeRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun subCategories(
         mainCateCd: String,
         middleCateCd: String,
-    ): Single<SubCategoriesResponse>
+    ): Single<Result<SubCategoriesResponse>>
 
     fun subCategory(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
-    ): Single<SubCategoryResponse>
+    ): Single<Result<SubCategoryResponse>>
 
     fun createSubCategory(
         mainCateCd: String,
         middleCateCd: String,
         request: SubCategoryCreateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun updateSubCategory(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         request: SubCategoryUpdateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteSubCategory(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteSubCategories(
         mainCateCd: String,
         middleCateCd: String,
         request: CategoriesDeleteRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun changeSubCategoryPriorities(
         mainCateCd: String,
         middleCateCd: String,
         request: CategoryPrioritiesChangeRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 }

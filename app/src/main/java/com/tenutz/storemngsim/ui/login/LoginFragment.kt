@@ -18,7 +18,7 @@ import com.tenutz.storemngsim.ui.login.handler.FacebookOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.GoogleOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.KakaoOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.NaverOAuthLoginHandler
-import com.tenutz.storemngsim.utils.constant.scope.SocialScopeConstant
+import com.tenutz.storemngsim.utils.constant.SocialScopeConstant
 import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

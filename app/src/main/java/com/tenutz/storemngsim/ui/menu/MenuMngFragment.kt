@@ -30,7 +30,7 @@ class MenuMngFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnMenuMngCategory.setOnClickListener {
-            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToMainCategoriesFragment())
+            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationMainCategory())
         }
         binding.btnMenuMngMainMenu.setOnClickListener {
             findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToMainMenusFragment())

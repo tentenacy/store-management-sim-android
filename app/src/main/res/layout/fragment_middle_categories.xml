@@ -6,8 +6,14 @@
     <data>
 
         <variable
-            name="use"
+            name="args"
+            type="com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs" />
+
+        <variable
+            name="itemNotExists"
             type="Boolean" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -65,15 +71,16 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/ns_regular"
-                tools:text="빽다방"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="38dp"
+                android:fontFamily="@font/ns_regular"
+                android:text="@{args.categoryName}"
                 android:textColor="@color/rect_4474"
                 android:textSize="24sp"
-                android:layout_marginTop="38dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_middle_categories_title"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                tools:text="빽다방" />
 
             <TextView
                 android:id="@+id/text_middle_categories_main_category_code"
@@ -82,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/ns_regular"
+                android:text="@{args.categoryCode}"
                 android:textColor="@color/rect_4480"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/text_middle_categories_main_category_name"
@@ -93,15 +101,15 @@
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:enabled="@{use}"
-                android:fontFamily="@font/ns_regular"
-                android:text='@{use ? "사용" : "미사용"}'
-                android:textColor='@{use ? @color/rect_4475 : @color/rect_4480}'
-                android:textSize="12sp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="4dp"
-                app:layout_constraintTop_toBottomOf="@id/text_middle_categories_main_category_code"
+                android:layout_marginTop="10dp"
+                android:enabled="@{args.use}"
+                android:fontFamily="@font/ns_regular"
+                android:text='@{args.use ? "사용" : "미사용"}'
+                android:textColor='@{args.use ? @color/rect_4475 : @color/rect_4480}'
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/view_middle_categories_main_category_use"
+                app:layout_constraintTop_toBottomOf="@id/text_middle_categories_main_category_code"
                 tools:text="사용"
                 tools:textColor="@color/rect_4475" />
 
@@ -109,10 +117,10 @@
                 android:id="@+id/view_middle_categories_main_category_use"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="@{use ? @drawable/circle_use : @drawable/circle_use_not}"
+                android:background="@{args.use ? @drawable/circle_use : @drawable/circle_use_not}"
+                app:layout_constraintBottom_toBottomOf="@id/text_middle_categories_main_category_use"
                 app:layout_constraintStart_toStartOf="@id/text_middle_categories_main_category_name"
                 app:layout_constraintTop_toTopOf="@id/text_middle_categories_main_category_use"
-                app:layout_constraintBottom_toBottomOf="@id/text_middle_categories_main_category_use"
                 tools:background="@drawable/circle_use" />
 
             <Button
@@ -123,17 +131,17 @@
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/rect_4476"
                 android:fontFamily="@font/ns_regular"
-                android:paddingVertical="7dp"
+                android:minWidth="0dp"
                 android:paddingHorizontal="17dp"
+                android:paddingVertical="7dp"
                 android:text="상세"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:cornerRadius="8dp"
-                android:minWidth="0dp"
-                app:layout_constraintTop_toTopOf="@id/text_middle_categories_main_category_name"
                 app:layout_constraintBottom_toBottomOf="@id/text_middle_categories_main_category_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="@id/text_middle_categories_main_category_name"
                 app:layout_constraintWidth_max="200dp"
                 tools:ignore="HardcodedText" />
 
@@ -141,10 +149,10 @@
                 android:id="@+id/view_middle_categories_divider_1"
                 android:layout_width="0dp"
                 android:layout_height="8dp"
-                android:background="@color/rect_4485"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:background="@color/rect_4485"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_middle_categories_main_category_use" />
 
             <TextView
@@ -200,12 +208,13 @@
                 android:text="목록이 없습니다."
                 android:textColor="@color/rect_4481"
                 android:textSize="16sp"
-                tools:visibility="invisible"
-                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="@{itemNotExists ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view_middle_categories_divider_1"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

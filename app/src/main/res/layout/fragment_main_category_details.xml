@@ -3,11 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.category.main.MainCategoryDetailsViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="com.tenutz.storemngsim.utils.ext.TimeExtKt" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_main_category_details_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ImageView
             android:id="@+id/image_main_category_details_back"
@@ -54,8 +65,8 @@
             android:layout_height="0dp"
             android:layout_marginTop="18dp"
             app:layout_constraintBottom_toTopOf="@id/btn_main_category_details_edit"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_main_category_details_ftitle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,11 +80,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/ns_regular"
                     android:text="카테고리명(한글)"
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
-                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -97,6 +108,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_radius"
+                    android:enabled="@{vm.editMode}"
                     android:fontFamily="@font/ns_regular"
                     android:gravity="center"
                     android:hint="회사/브랜드 입력(한글만 입력가능)"
@@ -104,6 +116,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
+                    android:text="@{vm.mainCategory.categoryName}"
                     android:textColor="@color/rect_4474"
                     android:textColorHint="@color/rect_4481"
                     android:textSize="16sp"
@@ -146,6 +159,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_radius"
+                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:gravity="center"
                     android:hint="카테고리코드 입력"
@@ -153,6 +167,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
+                    android:text="@{vm.mainCategory.categoryCode}"
                     android:textColor="@color/rect_4474"
                     android:textColorHint="@color/rect_4481"
                     android:textSize="16sp"
@@ -193,10 +208,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:checkedButton="@id/radio_main_category_details_use"
+                    android:checkedButton="@{vm.mainCategory.use ? @id/radio_main_category_details_use : @id/radio_main_category_details_use_not}"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_category_details_use">
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_category_details_use"
+                    tools:checkedButton="@id/radio_main_category_details_use">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/radio_main_category_details_use"
@@ -204,6 +220,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:button="@drawable/checkbox_circle"
+                        android:enabled="@{vm.editMode}"
                         android:fontFamily="@font/ns_regular"
                         android:includeFontPadding="false"
                         android:minWidth="0dp"
@@ -221,6 +238,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/checkbox_circle"
+                        android:enabled="@{vm.editMode}"
                         android:fontFamily="@font/ns_regular"
                         android:includeFontPadding="false"
                         android:minWidth="0dp"
@@ -239,11 +257,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/ns_regular"
                     android:text="생성자"
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
-                    android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/radiogroup_main_category_details"
                     tools:ignore="HardcodedText" />
@@ -256,20 +274,21 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_radius"
+                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:gravity="center"
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
+                    android:text="@{vm.mainCategory.creator}"
                     android:textColor="@color/rect_4480"
                     android:textSize="16sp"
-                    android:enabled="false"
-                    tools:text="생성자"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_main_category_details_created_by"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    tools:text="생성자" />
 
                 <TextView
                     android:id="@+id/text_main_category_details_created_at"
@@ -277,11 +296,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/ns_regular"
                     android:text="생성일자"
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
-                    android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edit_main_category_details_created_by"
                     tools:ignore="HardcodedText" />
@@ -294,20 +313,21 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_radius"
+                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:gravity="center"
                     android:importantForAutofill="no"
                     android:inputType="date"
                     android:maxLines="1"
                     android:padding="14dp"
+                    android:text="@{TimeExtKt.toDateFormat(vm.mainCategory.createdAt)}"
                     android:textColor="@color/rect_4480"
                     android:textSize="16sp"
-                    android:enabled="false"
-                    tools:text="0000-00-00"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_main_category_details_created_at"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    tools:text="0000-00-00" />
 
                 <TextView
                     android:id="@+id/text_main_category_details_updated_by"
@@ -315,11 +335,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/ns_regular"
                     android:text="수정자"
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
-                    android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edit_main_category_details_created_at"
                     tools:ignore="HardcodedText" />
@@ -332,20 +352,21 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_radius"
+                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:gravity="center"
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
+                    android:text="@{vm.mainCategory.lastModifier}"
                     android:textColor="@color/rect_4480"
                     android:textSize="16sp"
-                    android:enabled="false"
-                    tools:text="수정자"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_main_category_details_updated_by"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    tools:text="수정자" />
 
                 <TextView
                     android:id="@+id/text_main_category_details_updated_at"
@@ -353,11 +374,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/ns_regular"
                     android:text="수정일자"
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
-                    android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edit_main_category_details_updated_by"
                     tools:ignore="HardcodedText" />
@@ -369,23 +390,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/input_radius"
+                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:gravity="center"
                     android:importantForAutofill="no"
                     android:inputType="date"
                     android:maxLines="1"
                     android:padding="14dp"
+                    android:text="@{TimeExtKt.toDateFormat(vm.mainCategory.lastModifiedAt)}"
                     android:textColor="@color/rect_4480"
                     android:textSize="16sp"
-                    android:enabled="false"
-                    tools:text="0000-00-00"
-                    android:layout_marginBottom="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_main_category_details_updated_at"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    tools:text="0000-00-00" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -397,10 +419,12 @@
             android:background="@color/rect_4476"
             android:fontFamily="@font/ns_regular"
             android:gravity="center"
+            android:onClick="@{(v) -> vm.switchToEditMode()}"
             android:padding="18dp"
             android:text="편집"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:visibility="@{vm.editMode ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -418,12 +442,13 @@
             android:text="취소"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:visibility="invisible"
-            app:layout_constraintHorizontal_weight="1"
+            android:visibility="@{vm.editMode ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_main_category_details_save"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            tools:visibility="invisible" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_main_category_details_save"
@@ -436,13 +461,14 @@
             android:text="수정"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:visibility="invisible"
-            app:layout_constraintHorizontal_weight="2"
-            app:layout_constraintStart_toEndOf="@id/btn_main_category_details_cancel"
+            android:visibility="@{vm.editMode ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@id/btn_main_category_details_cancel"
             tools:enabled="false"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            tools:visibility="invisible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
