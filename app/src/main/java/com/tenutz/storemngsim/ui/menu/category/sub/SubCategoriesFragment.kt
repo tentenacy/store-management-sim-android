@@ -5,18 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import androidx.viewbinding.ViewBindings
-import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
-import com.tenutz.storemngsim.databinding.FragmentMenuMngBinding
-import com.tenutz.storemngsim.databinding.FragmentMiddleCategoriesBinding
+import androidx.navigation.navGraphViewModels
+import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentSubCategoriesBinding
-import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesAdapter
-import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesFragmentArgs
-import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesFragmentDirections
-import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesViewModel
 import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,13 +17,15 @@ class SubCategoriesFragment: Fragment() {
     private var _binding: FragmentSubCategoriesBinding? = null
     val binding: FragmentSubCategoriesBinding get() = _binding!!
 
-    val args: SubCategoriesFragmentArgs by navArgs()
+    lateinit var args: SubCategoriesNavArgs
 
-    private val vm: SubCategoriesViewModel by viewModels()
+    private val vm: SubCategoriesViewModel by navGraphViewModels(R.id.navigation_sub_category) {
+        defaultViewModelProviderFactory
+    }
 
     private val adapter: SubCategoriesAdapter by lazy {
         SubCategoriesAdapter(
-            args.middleCategory,
+            args,
             listener = {
 
             },
@@ -48,7 +41,9 @@ class SubCategoriesFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm.subCategories(args.middleCategory.mainCategoryCode, args.middleCategory.categoryCode)
+        args = requireArguments().getParcelable("middleCategory")!!
+
+        vm.subCategories(args.mainCategoryCode, args.categoryCode)
     }
 
     override fun onCreateView(

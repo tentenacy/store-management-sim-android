@@ -28,7 +28,7 @@ interface CategoryRepository {
 
     fun deleteMainCategories(
         request: CategoriesDeleteRequest,
-    ): Completable
+    ): Single<Result<Unit>>
 
     fun changeMainCategoryPriorities(
         request: CategoryPrioritiesChangeRequest,

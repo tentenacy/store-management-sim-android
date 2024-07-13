@@ -32,10 +32,10 @@ interface CategoryApi {
         @Body request: MainCategoryUpdateRequest,
     ): Single<Unit>
 
-    @DELETE("/categories/main/{mainCateCd}")
+    @HTTP(method = "DELETE", path = "/categories/main/{mainCateCd}", hasBody = true)
     fun deleteMainCategory(
         @Path("mainCateCd") mainCateCd: String,
-    ): Single<Unit>
+    ): Completable
 
     @HTTP(method = "DELETE", path = "/categories/main", hasBody = true)
     fun deleteMainCategories(
@@ -58,10 +58,11 @@ interface CategoryApi {
         @Path("middleCateCd") middleCateCd: String,
     ): Single<MiddleCategoryResponse>
 
+    @Multipart
     @POST("/categories/main/{mainCateCd}/middle")
     fun createMiddleCategory(
         @Path("mainCateCd") mainCateCd: String,
-        @Part("image") image: MultipartBody.Part? = null,
+        @Part image: MultipartBody.Part? = null,
         @Part("categoryCode") categoryCode: String,
         @Part("categoryName") categoryName: String,
         @Part("use") use: Boolean,
@@ -72,11 +73,12 @@ interface CategoryApi {
         @Part("tid") tid: String? = null,
     ): Single<Unit>
 
+    @Multipart
     @PUT("/categories/main/{mainCateCd}/middle/{middleCateCd}")
     fun updateMiddleCategory(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
-        @Part("image") image: MultipartBody.Part? = null,
+        @Part image: MultipartBody.Part? = null,
         @Part("categoryName") categoryName: String,
         @Part("use") use: Boolean,
         @Part("businessNumber") businessNumber: String? = null,
@@ -86,17 +88,17 @@ interface CategoryApi {
         @Part("tid") tid: String? = null,
     ): Single<Unit>
 
-    @DELETE("/categories/main/{mainCateCd}/middle/{middleCateCd}")
+    @HTTP(method = "DELETE", path = "/categories/main/{mainCateCd}/middle/{middleCateCd}", hasBody = true)
     fun deleteMiddleCategory(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
-    ): Single<Unit>
+    ): Completable
 
-    @DELETE("/categories/main/{mainCateCd}/middle")
+    @HTTP(method = "DELETE", path = "/categories/main/{mainCateCd}/middle", hasBody = true)
     fun deleteMiddleCategories(
         @Path("mainCateCd") mainCateCd: String,
         @Body request: CategoriesDeleteRequest,
-    ): Single<Unit>
+    ): Completable
 
     @POST("/categories/main/{mainCateCd}/middle/priorities")
     fun changeMiddleCategoryPriorities(
@@ -132,19 +134,19 @@ interface CategoryApi {
         @Body request: SubCategoryUpdateRequest,
     ): Single<Unit>
 
-    @DELETE("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}")
+    @HTTP(method = "DELETE", path = "/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}", hasBody = true)
     fun deleteSubCategory(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
         @Path("subCateCd") subCateCd: String,
-    ): Single<Unit>
+    ): Completable
 
-    @DELETE("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub")
+    @HTTP(method = "DELETE", path = "/categories/main/{mainCateCd}/middle/{middleCateCd}/sub", hasBody = true)
     fun deleteSubCategories(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
         @Body request: CategoriesDeleteRequest,
-    ): Single<Unit>
+    ): Completable
 
     @POST("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/priorities")
     fun changeSubCategoryPriorities(

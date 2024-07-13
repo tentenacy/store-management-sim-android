@@ -1,15 +1,13 @@
-package com.tenutz.storemngsim.data.datasource.api.dto.category
+package com.tenutz.storemngsim.ui.menu.category.middle.args
 
 import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
 import java.util.*
 
-@Parcelize
-data class MiddleCategoriesResponse(
-    val middleCategories: List<MiddleCategory>
-): Parcelable {
-    @Parcelize
-    data class MiddleCategory(
+data class MiddleCategoriesEditArgs(
+    val middleCategoriesEdit: List<MiddleCategoryEdit>
+) {
+    data class MiddleCategoryEdit(
         val storeCode: String?,
         val mainCategoryCode: String?,
         val categoryCode: String?,
@@ -20,5 +18,6 @@ data class MiddleCategoriesResponse(
         val order: Int?,
         val createdAt: Date?,
         val lastModifiedAt: Date?,
-    ): Parcelable
+        var checked: Boolean = false,
+    )
 }

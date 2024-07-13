@@ -1,20 +1,7 @@
 package com.tenutz.storemngsim.data.repository.category
 
 import com.tenutz.storemngsim.data.datasource.api.SCKApi
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryUpdateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.*
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
@@ -76,6 +63,7 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override fun deleteMainCategory(mainCateCd: String): Single<Result<Unit>> =
         sckApi.deleteMainCategory(mainCateCd)
+            .toSingle {}
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -84,8 +72,16 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
                 ) { Result.failure(it) })
 
-    override fun deleteMainCategories(request: CategoriesDeleteRequest): Completable =
+    override fun deleteMainCategories(request: CategoriesDeleteRequest): Single<Result<Unit>> =
         sckApi.deleteMainCategories(request)
+            .toSingle {}
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun changeMainCategoryPriorities(request: CategoryPrioritiesChangeRequest): Single<Result<Unit>> =
         sckApi.changeMainCategoryPriorities(request)
@@ -180,6 +176,7 @@ class CategoryRepositoryImpl @Inject constructor(
             mainCateCd,
             middleCateCd,
         )
+            .toSingle { }
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -196,6 +193,7 @@ class CategoryRepositoryImpl @Inject constructor(
             mainCateCd,
             request,
         )
+            .toSingle { }
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -302,6 +300,7 @@ class CategoryRepositoryImpl @Inject constructor(
             middleCateCd,
             subCateCd,
         )
+            .toSingle { }
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -320,6 +319,7 @@ class CategoryRepositoryImpl @Inject constructor(
             middleCateCd,
             request,
         )
+            .toSingle { }
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(

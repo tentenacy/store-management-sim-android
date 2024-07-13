@@ -1,14 +1,14 @@
-package com.tenutz.storemngsim.ui.menu.category.main
+package com.tenutz.storemngsim.ui.menu.category.middle
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.ui.menu.category.main.args.MainCategoriesEditArgs
+import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class MainCategoriesEditViewModel @Inject constructor(
+class MiddleCategoriesEditViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
 ) : BaseViewModel() {
 
@@ -24,26 +24,29 @@ class MainCategoriesEditViewModel @Inject constructor(
         const val EVENT_NAVIGATE_UP = 1000
     }
 
-    private val _mainCategoriesEdit = MutableLiveData<MainCategoriesEditArgs>()
-    val mainCategoriesEdit: LiveData<MainCategoriesEditArgs> = _mainCategoriesEdit
+    private val _middleCategoriesEdit = MutableLiveData<MiddleCategoriesEditArgs>()
+    val middleCategoriesEdit: LiveData<MiddleCategoriesEditArgs> = _middleCategoriesEdit
 
     private val _checkedItemCount = MutableLiveData(0)
     val checkedItemCount: LiveData<Int> = _checkedItemCount
 
     fun updateCheckedItemCount() {
-        mainCategoriesEdit.value?.let {
-            _checkedItemCount.value = it.mainCategoriesEdit.count { it.checked }
+        middleCategoriesEdit.value?.let {
+            _checkedItemCount.value = it.middleCategoriesEdit.count { it.checked }
         }
     }
 
-    fun setMainCategoriesEdit(args: MainCategoriesResponse) {
-        _mainCategoriesEdit.value = MainCategoriesEditArgs(
-            args.mainCategories.map {
-                MainCategoriesEditArgs.MainCategoryEdit(
+    fun setMiddleCategoriesEdit(args: MiddleCategoriesResponse) {
+        _middleCategoriesEdit.value = MiddleCategoriesEditArgs(
+            args.middleCategories.map {
+                MiddleCategoriesEditArgs.MiddleCategoryEdit(
                     it.storeCode,
+                    it.mainCategoryCode,
                     it.categoryCode,
                     it.categoryName,
                     it.use,
+                    it.imageName,
+                    it.imageUrl,
                     it.order,
                     it.createdAt,
                     it.lastModifiedAt,
@@ -52,8 +55,8 @@ class MainCategoriesEditViewModel @Inject constructor(
         )
     }
 
-    fun deleteMainCategories(request: CategoriesDeleteRequest, callback: () -> Unit) {
-        categoryRepository.deleteMainCategories(request)
+    fun deleteMiddleCategories(mainCateCd: String, request: CategoriesDeleteRequest, callback: () -> Unit) {
+        categoryRepository.deleteMiddleCategories(mainCateCd, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
@@ -70,8 +73,8 @@ class MainCategoriesEditViewModel @Inject constructor(
             .addTo(compositeDisposable)
     }
 
-    fun changeMainCategoryPriorities(request: CategoryPrioritiesChangeRequest, callback: () -> Unit) {
-        categoryRepository.changeMainCategoryPriorities(request)
+    fun changeMiddleCategoryPriorities(mainCateCd: String, request: CategoryPrioritiesChangeRequest, callback: () -> Unit) {
+        categoryRepository.changeMiddleCategoryPriorities(mainCateCd, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->

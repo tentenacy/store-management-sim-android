@@ -1,26 +1,35 @@
 package com.tenutz.storemngsim.ui.menu.category.main
 
-import com.tenutz.storemngsim.ui.menu.category.main.bs.MainCategoriesBottomSheetDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
+import com.tenutz.storemngsim.NavigationMainCategoryDirections
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
+import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
+import com.tenutz.storemngsim.ui.main.MainFragmentDirections
+import com.tenutz.storemngsim.ui.menu.category.main.bs.MainCategoriesBottomSheetDialog
+import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesEditFragmentArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainCategoriesFragment : Fragment() {
 
-    private lateinit var disposable: Disposable
+    private val disposable = CompositeDisposable()
 
     private var _binding: FragmentMainCategoriesBinding? = null
     val binding: FragmentMainCategoriesBinding get() = _binding!!
@@ -36,19 +45,22 @@ class MainCategoriesFragment : Fragment() {
                     when (id) {
                         R.id.btn_bsmain_categories_middle -> {
                             it.categoryCode?.let { _ ->
-                                findNavController().navigate(
-                                    MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMiddleCategoriesFragment(
-                                        MiddleCategoriesNavArgs(
-                                            it.storeCode,
-                                            it.categoryCode,
-                                            it.categoryName,
-                                            it.use,
-                                            it.order,
-                                            it.createdAt,
-                                            it.lastModifiedAt,
-                                        )
+                                MainCategoriesFragmentDirections.actionMainCategoriesFragmentToNavigationMiddleCategory().let { action ->
+                                    findNavController().navigate(
+                                        action.actionId,
+                                        Bundle().apply { putParcelable("mainCategory",
+                                            MiddleCategoriesNavArgs(
+                                                it.storeCode,
+                                                it.categoryCode,
+                                                it.categoryName,
+                                                it.use,
+                                                it.order,
+                                                it.createdAt,
+                                                it.lastModifiedAt,
+                                            )
+                                        ) }
                                     )
-                                )
+                                }
                             }
                         }
                         R.id.btn_bsmain_categories_details -> {
@@ -96,6 +108,7 @@ class MainCategoriesFragment : Fragment() {
             .subscribe {
                 vm.mainCategories(it)
             }
+            .addTo(disposable)
     }
 
     private fun observeData() {
@@ -123,6 +136,7 @@ class MainCategoriesFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        disposable.dispose()
         super.onDestroyView()
         _binding = null
     }

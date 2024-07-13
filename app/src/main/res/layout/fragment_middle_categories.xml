@@ -6,12 +6,12 @@
     <data>
 
         <variable
-            name="args"
-            type="com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs" />
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesViewModel" />
 
         <variable
-            name="itemNotExists"
-            type="Boolean" />
+            name="args"
+            type="com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs" />
 
         <import type="android.view.View" />
     </data>
@@ -137,6 +137,7 @@
                 android:text="상세"
                 android:textColor="@color/white"
                 android:textSize="14sp"
+                android:visibility="invisible"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="@id/text_middle_categories_main_category_name"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -208,7 +209,7 @@
                 android:text="목록이 없습니다."
                 android:textColor="@color/rect_4481"
                 android:textSize="16sp"
-                android:visibility="@{itemNotExists ? View.VISIBLE : View.INVISIBLE}"
+                android:visibility="@{vm.middleCategories.middleCategories.size() > 0 ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

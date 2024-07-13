@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main_category"
+    app:startDestination="@id/mainCategoriesFragment">
+
+    <fragment
+        android:id="@+id/mainCategoryAddFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddFragment"
+        android:label="MainCategoryAddFragment"
+        tools:layout="@layout/fragment_main_category_add" />
+    <fragment
+        android:id="@+id/mainCategoryDetailsFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoryDetailsFragment"
+        android:label="MainCategoryDetailsFragment"
+        tools:layout="@layout/fragment_main_category_details">
+        <argument
+            android:name="mainCategoryCode"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainCategoriesEditFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditFragment"
+        android:label="MainCategoriesEditFragment"
+        tools:layout="@layout/fragment_main_categories_edit">
+        <argument
+            android:name="mainCategories"
+            app:argType="com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainCategoriesFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesFragment"
+        android:label="MainCategoriesFragment"
+        tools:layout="@layout/fragment_main_categories">
+        <action
+            android:id="@+id/action_mainCategoriesFragment_to_mainCategoriesEditFragment"
+            app:destination="@id/mainCategoriesEditFragment" />
+        <action
+            android:id="@+id/action_mainCategoriesFragment_to_mainCategoryAddFragment"
+            app:destination="@id/mainCategoryAddFragment" />
+        <action
+            android:id="@+id/action_mainCategoriesFragment_to_mainCategoryDetailsFragment"
+            app:destination="@id/mainCategoryDetailsFragment" />
+        <action
+            android:id="@+id/action_mainCategoriesFragment_to_navigationMiddleCategory"
+            app:destination="@id/navigation_middle_category" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_mainCategoryDetailsFragment"
+        app:destination="@id/mainCategoryDetailsFragment"
+        app:launchSingleTop="false"
+        app:popUpTo="@id/mainCategoryDetailsFragment"
+        app:popUpToInclusive="true" />
+</navigation>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_middle_category"
+    app:startDestination="@id/middleCategoriesFragment">
+    <fragment
+        android:id="@+id/middleCategoriesFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesFragment"
+        android:label="MiddleCategoriesFragment"
+        tools:layout="@layout/fragment_middle_categories">
+        <action
+            android:id="@+id/action_middleCategoriesFragment_to_middleCategoriesEditFragment"
+            app:destination="@id/middleCategoriesEditFragment" />
+        <action
+            android:id="@+id/action_middleCategoriesFragment_to_middleCategoryAddFragment"
+            app:destination="@id/middleCategoryAddFragment" />
+        <action
+            android:id="@+id/action_middleCategoriesFragment_to_middleCategoryDetailsFragment"
+            app:destination="@id/middleCategoryDetailsFragment" />
+        <action
+            android:id="@+id/action_middleCategoriesFragment_to_navigationSubCategory"
+            app:destination="@id/navigation_sub_category" />
+    </fragment>
+    <fragment
+        android:id="@+id/middleCategoriesEditFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesEditFragment"
+        android:label="MiddleCategoriesEditFragment"
+        tools:layout="@layout/fragment_middle_categories_edit">
+
+        <argument
+            android:name="mainCategory"
+            app:argType="com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs" />
+
+        <argument
+            android:name="middleCategories"
+            app:argType="com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/middleCategoryAddFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoryAddFragment"
+        android:label="MiddleCategoryAddFragment"
+        tools:layout="@layout/fragment_middle_category_add">
+
+        <argument
+            android:name="mainCategoryCode"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/middleCategoryDetailsFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoryDetailsFragment"
+        android:label="MiddleCategoryDetailsFragment"
+        tools:layout="@layout/fragment_middle_category_details">
+
+        <argument
+            android:name="mainCategoryCode"
+            app:argType="string" />
+        <argument
+            android:name="middleCategoryCode"
+            app:argType="string" />
+    </fragment>
+</navigation>

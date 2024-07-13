@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.navGraphViewModels
+import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,6 +15,10 @@ class SubCategoryDetailsFragment: Fragment() {
 
     private var _binding: FragmentSubCategoryDetailsBinding? = null
     val binding: FragmentSubCategoryDetailsBinding get() = _binding!!
+
+    private val pVm: SubCategoriesViewModel by navGraphViewModels(R.id.navigation_sub_category) {
+        defaultViewModelProviderFactory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

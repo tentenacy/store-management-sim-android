@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/constraint_bsmiddle_categories_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             tools:ignore="HardcodedText" />
 
         <Button
-            android:id="@+id/btn_bsmiddle_categories_middle"
+            android:id="@+id/btn_bsmiddle_categories_sub"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -76,11 +76,11 @@
             android:textColor="@color/rect_4475"
             android:textSize="18sp"
             app:cornerRadius="16dp"
-            app:layout_constraintBottom_toBottomOf="@id/btn_bsmiddle_categories_middle"
+            app:layout_constraintBottom_toBottomOf="@id/btn_bsmiddle_categories_sub"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/btn_bsmiddle_categories_middle"
-            app:layout_constraintTop_toTopOf="@id/btn_bsmiddle_categories_middle"
+            app:layout_constraintStart_toEndOf="@id/btn_bsmiddle_categories_sub"
+            app:layout_constraintTop_toTopOf="@id/btn_bsmiddle_categories_sub"
             app:layout_constraintWidth_max="200dp"
             tools:ignore="HardcodedText" />
 

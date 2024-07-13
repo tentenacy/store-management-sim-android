@@ -25,7 +25,7 @@ class MainCategoryDetailsFragment : Fragment() {
     val args: MainCategoryDetailsFragmentArgs by navArgs()
 
     val vm: MainCategoryDetailsViewModel by viewModels()
-    val pVm: MainCategoriesViewModel by navGraphViewModels(R.id.navigation_main_category) {
+    private val pVm: MainCategoriesViewModel by navGraphViewModels(R.id.navigation_main_category) {
         defaultViewModelProviderFactory
     }
 

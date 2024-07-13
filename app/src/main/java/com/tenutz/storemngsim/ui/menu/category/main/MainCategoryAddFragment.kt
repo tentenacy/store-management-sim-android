@@ -10,9 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
-import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
 import com.tenutz.storemngsim.databinding.FragmentMainCategoryAddBinding
-import com.tenutz.storemngsim.databinding.FragmentMenuMngBinding
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel.Companion.EVENT_NAVIGATE_UP
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,6 +40,23 @@ class MainCategoryAddFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setOnClickListeners()
+        observeData()
+    }
+
+    private fun observeData() {
+        vm.viewEvent.observe(viewLifecycleOwner) { event ->
+            event?.getContentIfNotHandled()?.let {
+                when (it.first) {
+                    EVENT_NAVIGATE_UP -> {
+                        findNavController().navigateUp()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setOnClickListeners() {
         binding.btnMainCategoryAddSave.setOnClickListener {
             vm.createMainCategory(
                 MainCategoryCreateRequest(
@@ -51,15 +66,6 @@ class MainCategoryAddFragment: Fragment() {
                 )
             ) {
                 pVm.mainCategories()
-            }
-        }
-        vm.viewEvent.observe(viewLifecycleOwner) { event ->
-            event?.getContentIfNotHandled()?.let {
-                when(it.first) {
-                    EVENT_NAVIGATE_UP -> {
-                        findNavController().navigateUp()
-                    }
-                }
             }
         }
     }

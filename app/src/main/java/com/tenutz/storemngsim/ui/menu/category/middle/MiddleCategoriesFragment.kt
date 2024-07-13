@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.navGraphViewModels
+import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentMiddleCategoriesBinding
+import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesFragmentDirections
+import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs
+import com.tenutz.storemngsim.ui.menu.category.middle.bs.MiddleCategoriesBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,37 +21,65 @@ class MiddleCategoriesFragment : Fragment() {
     private var _binding: FragmentMiddleCategoriesBinding? = null
     val binding: FragmentMiddleCategoriesBinding get() = _binding!!
 
-    val args: MiddleCategoriesFragmentArgs by navArgs()
+    private val vm: MiddleCategoriesViewModel by navGraphViewModels(R.id.navigation_middle_category) {
+        defaultViewModelProviderFactory
+    }
 
-    private val vm: MiddleCategoriesViewModel by viewModels()
+    lateinit var args: MiddleCategoriesNavArgs
 
     private val adapter: MiddleCategoriesAdapter by lazy {
         MiddleCategoriesAdapter {
-            it.categoryCode?.let { _ ->
-                findNavController().navigate(
-                    MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToSubCategoriesFragment(
-                        SubCategoriesNavArgs(
-                            it.storeCode,
-                            args.mainCategory.categoryCode,
-                            it.categoryCode,
-                            it.categoryName,
-                            it.use,
-                            it.imageName,
-                            it.imageUrl,
-                            it.order,
-                            it.createdAt,
-                            it.lastModifiedAt,
-                        )
-                    )
-                )
-            }
+            MiddleCategoriesBottomSheetDialog(
+                onClickListener = { id, _ ->
+                    when (id) {
+                        R.id.btn_bsmiddle_categories_sub -> {
+                            it.categoryCode?.let { _ ->
+                                MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToNavigationSubCategory().let { action ->
+                                    findNavController().navigate(
+                                        action.actionId,
+                                        Bundle().apply {
+                                            putParcelable(
+                                                "middleCategory",
+                                                SubCategoriesNavArgs(
+                                                    it.storeCode,
+                                                    args.categoryCode,
+                                                    it.categoryCode,
+                                                    it.categoryName,
+                                                    it.use,
+                                                    it.imageName,
+                                                    it.imageUrl,
+                                                    it.order,
+                                                    it.createdAt,
+                                                    it.lastModifiedAt,
+                                                )
+                                            )
+                                        }
+                                    )
+                                }
+                            }
+                        }
+                        R.id.btn_bsmiddle_categories_details -> {
+                            it.categoryCode?.let {
+                                findNavController().navigate(
+                                    MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToMiddleCategoryDetailsFragment(
+                                        args.categoryCode,
+                                        it,
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+            ).show(childFragmentManager, "mainCategoriesBottomSheetDialog")
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm.middleCategories(args.mainCategory.categoryCode)
+        args = requireArguments().getParcelable("mainCategory")!!
+
+        vm.middleCategories(args.categoryCode)
     }
 
     override fun onCreateView(
@@ -59,6 +90,9 @@ class MiddleCategoriesFragment : Fragment() {
 
         _binding = FragmentMiddleCategoriesBinding.inflate(inflater, container, false)
 
+        binding.vm = vm
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 
@@ -67,17 +101,40 @@ class MiddleCategoriesFragment : Fragment() {
 
         initViews()
         observeData()
+        setOnClickListeners()
     }
 
     private fun initViews() {
-        binding.args = args.mainCategory
+        binding.args = args
         binding.recyclerMiddleCategories.adapter = adapter
     }
 
     private fun observeData() {
         vm.middleCategories.observe(viewLifecycleOwner) {
             adapter.updateItems(it.middleCategories)
-            binding.itemNotExists = adapter.itemCount == 0
+            binding.recyclerMiddleCategories.scrollToPosition(0)
+        }
+        vm.viewEvent.observe(viewLifecycleOwner) { event ->
+            event?.getContentIfNotHandled()?.let {
+                when (it.first) {
+                }
+            }
+        }
+    }
+
+    private fun setOnClickListeners() {
+        binding.textMiddleCategoriesEdit.setOnClickListener {
+            vm.middleCategories.value?.let {
+                findNavController().navigate(
+                    MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToMiddleCategoriesEditFragment(
+                        args,
+                        it,
+                    )
+                )
+            }
+        }
+        binding.fabMiddleCategoriesAdd.setOnClickListener {
+            findNavController().navigate(MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToMiddleCategoryAddFragment(args.categoryCode))
         }
     }
 
