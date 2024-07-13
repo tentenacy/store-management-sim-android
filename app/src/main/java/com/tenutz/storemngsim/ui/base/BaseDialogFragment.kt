@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tenutz.storemngsim.R
 
 
-abstract class BaseBottomSheetDialogFragment<VB : ViewDataBinding>(private val layoutId: Int) :
-    BottomSheetDialogFragment() {
+abstract class BaseDialogFragment<VB : ViewDataBinding>(private val layoutId: Int) :
+    DialogFragment() {
 
     private var _binding: ViewDataBinding? = null
 
@@ -25,9 +26,6 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewDataBinding>(private val l
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate<VB>(inflater, layoutId, container, false)
-
-        binding.lifecycleOwner = this
-
         return binding.root
     }
 

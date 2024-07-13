@@ -7,7 +7,9 @@
         android:id="@+id/constraint_bsmiddle_categories_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bottom_sheet">
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="56dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <ImageView
             android:id="@+id/image_bsmiddle_categories_cancel"

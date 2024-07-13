@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/number_picker_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_16dp"
+        android:padding="20dp">
+
+        <com.shawnlin.numberpicker.NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="240dp"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toTopOf="@id/text_dlgnumber_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:np_dividerColor="@color/rect_4485"
+            app:np_dividerThickness="2dp"
+            app:np_formatter="%s"
+            app:np_height="180dp"
+            app:np_max="59"
+            app:np_min="0"
+            app:np_selectedTextColor="@color/rect_4474"
+            app:np_selectedTextSize="24sp"
+            app:np_textColor="@color/rect_4480"
+            app:np_textSize="18sp"
+            app:np_width="64dp" />
+
+        <TextView
+            android:id="@+id/text_dlgnumber_picker"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:padding="8dp"
+            android:text="선택"
+            android:textColor="@color/rect_4475"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="HardcodedText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface CategoryRepository {
 
-    fun mainCategories(cond: CommonCondition?): Single<Result<MainCategoriesResponse>>
+    fun mainCategories(cond: CommonCondition? = null): Single<Result<MainCategoriesResponse>>
 
     fun mainCategory(
         mainCateCd: String,

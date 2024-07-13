@@ -163,7 +163,8 @@
             app:layout_constraintEnd_toStartOf="@id/text_imain_menus_unit_kr_2"
             app:layout_constraintTop_toTopOf="@id/text_imain_menus_unit_kr_2"
             tools:ignore="RtlSymmetry"
-            tools:text="1,900" />
+            tools:text="1,900"
+            tools:textColor="@color/rect_4474" />
 
         <TextView
             android:id="@+id/text_imain_menus_unit_kr_2"

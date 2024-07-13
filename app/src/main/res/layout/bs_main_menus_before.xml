@@ -3,11 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.MainMenusBeforeBSDViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_bsmain_menus_before_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="56dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <ImageView
             android:id="@+id/image_bsmain_menus_before_cancel"
@@ -50,13 +59,14 @@
             android:padding="14dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="대분류 선택"
+            android:text='@{vm.mainCategoryCode != null ? vm.mainCategoryCode.second : "대분류 조회"}'
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_bsmain_menus_before_title"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            tools:text="대분류 선택" />
 
         <ImageView
             android:id="@+id/image_bsmain_menus_before_main_category"
@@ -85,13 +95,14 @@
             android:padding="14dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="중분류 선택"
+            android:text='@{vm.middleCategoryCode != null ? vm.middleCategoryCode.second : "중분류 선택"}'
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_bsmain_menus_before_main_category"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            tools:text="중분류 선택" />
 
         <ImageView
             android:id="@+id/image_bsmain_menus_before_middle_category"
@@ -120,13 +131,14 @@
             android:padding="14dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="소분류 선택"
+            android:text='@{vm.subCategoryCode != null ? vm.subCategoryCode.second : "소분류 선택"}'
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_bsmain_menus_before_middle_category"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            tools:text="소분류 선택" />
 
         <ImageView
             android:id="@+id/image_bsmain_menus_before_sub_category"
@@ -153,6 +165,7 @@
             android:text="검색"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:enabled="@{(vm.mainCategoryCode != null &amp;&amp; vm.middleCategoryCode != null &amp;&amp; vm.subCategoryCode != null)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

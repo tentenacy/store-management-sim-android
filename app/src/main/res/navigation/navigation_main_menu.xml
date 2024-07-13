@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main_menu"
+    app:startDestination="@id/mainMenusFragment">
+    <fragment
+        android:id="@+id/mainMenusFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusFragment"
+        android:label="MainMenusFragment"
+        tools:layout="@layout/fragment_main_menus">
+        <action
+            android:id="@+id/action_mainMenusFragment_to_mainMenusEditFragment"
+            app:destination="@id/mainMenusEditFragment" />
+        <action
+            android:id="@+id/action_mainMenusFragment_to_mainMenuAddFragment"
+            app:destination="@id/mainMenuAddFragment" />
+        <action
+            android:id="@+id/action_mainMenusFragment_to_mainMenuDetailsFragment"
+            app:destination="@id/mainMenuDetailsFragment" />
+        <action
+            android:id="@+id/action_mainMenusFragment_to_mmOptionGroupsFragment"
+            app:destination="@id/mmOptionGroupsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainMenusEditFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusEditFragment"
+        android:label="MainMenusEditFragment"
+        tools:layout="@layout/fragment_main_menus" />
+    <fragment
+        android:id="@+id/mainMenuAddFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuAddFragment"
+        android:label="MainMenuAddFragment"
+        tools:layout="@layout/fragment_main_menu_add" />
+    <fragment
+        android:id="@+id/mainMenuDetailsFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuDetailsFragment"
+        android:label="MainMenuDetailsFragment"
+        tools:layout="@layout/fragment_main_menu_details" />
+    <fragment
+        android:id="@+id/mmOptionGroupsFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupsFragment"
+        android:label="MmOptionGroupsFragment"
+        tools:layout="@layout/fragment_mm_option_groups">
+        <action
+            android:id="@+id/action_mmOptionGroupsFragment_to_mmOptionGroupsEditFragment"
+            app:destination="@id/mmOptionGroupsEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mmOptionGroupsEditFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupsEditFragment"
+        android:label="MmOptionGroupsEditFragment"
+        tools:layout="@layout/fragment_mm_option_groups_edit" />
+</navigation>
