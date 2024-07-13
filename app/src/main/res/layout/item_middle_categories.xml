@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:paddingHorizontal="20dp"
-        android:paddingVertical="9dp">
+        android:paddingVertical="20dp">
 
         <TextView
             android:id="@+id/text_imain_categories_name"

@@ -5,14 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
 import com.tenutz.storemngsim.databinding.FragmentSubCategoriesBinding
 import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SubCategoriesFragment: Fragment() {
+class SubCategoriesFragment : Fragment() {
 
     private var _binding: FragmentSubCategoriesBinding? = null
     val binding: FragmentSubCategoriesBinding get() = _binding!!
@@ -26,14 +28,33 @@ class SubCategoriesFragment: Fragment() {
     private val adapter: SubCategoriesAdapter by lazy {
         SubCategoriesAdapter(
             args,
-            listener = {
+            onClickListener = { id, item ->
+                when (id) {
+                    R.id.btn_sub_categories_top_details -> {
 
-            },
-            detailsOnClickListener = {
-
-            },
-            editOnClickListener = {
-
+                    }
+                    R.id.text_sub_categories_top_edit -> {
+                        vm.subCategories.value?.let {
+                            findNavController().navigate(
+                                SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoriesEditFragment(
+                                    args,
+                                    it
+                                )
+                            )
+                        }
+                    }
+                    R.id.constraint_isub_categories_container -> {
+                        (item as SubCategoriesResponse.SubCategory).categoryCode?.let {
+                            findNavController().navigate(
+                                SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoryDetailsFragment(
+                                    args.mainCategoryCode,
+                                    args.categoryCode,
+                                    it,
+                                )
+                            )
+                        }
+                    }
+                }
             },
         )
     }
@@ -61,7 +82,19 @@ class SubCategoriesFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        setOnClickListeners()
         observeData()
+    }
+
+    private fun setOnClickListeners() {
+        binding.fabSubCategoriesAdd.setOnClickListener {
+            findNavController().navigate(
+                SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoryAddFragment(
+                    args.mainCategoryCode,
+                    args.categoryCode
+                )
+            )
+        }
     }
 
     private fun initViews() {

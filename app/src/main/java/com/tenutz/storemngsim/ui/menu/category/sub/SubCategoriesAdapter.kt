@@ -22,16 +22,15 @@ sealed class SubCategoriesViewHolder(
 ): RecyclerView.ViewHolder(binding.root) {
     class SubCategoriesTopViewHolder(
         val binding: ItemSubCategoriesTopBinding,
-        private val detailsOnClickListener: () -> Unit,
-        private val editOnClickListener: () -> Unit,
+        private val onClickListener: (Int, Any?) -> Unit,
     ) : BaseViewHolder<SubCategoriesNavArgs>(binding.root) {
 
         init {
             binding.btnSubCategoriesTopDetails.setOnClickListener {
-                detailsOnClickListener()
+                onClickListener(it.id, null)
             }
             binding.textSubCategoriesTopEdit.setOnClickListener {
-                editOnClickListener()
+                onClickListener(it.id, null)
             }
         }
 
@@ -42,7 +41,7 @@ sealed class SubCategoriesViewHolder(
 
     class SubCategoryViewHolder(
         val binding: ItemSubCategoriesBinding,
-        private val listener: (SubCategoriesResponse.SubCategory) -> Unit
+        private val onClickListener: (Int, Any?) -> Unit,
     ) : BaseViewHolder<SubCategoriesResponse.SubCategory>(binding.root) {
 
         override fun bind(item: SubCategoriesResponse.SubCategory) {
@@ -50,7 +49,7 @@ sealed class SubCategoriesViewHolder(
             binding.code = item.categoryCode
             binding.use = item.use
             binding.constraintIsubCategoriesContainer.setOnClickListener {
-                listener(item)
+                onClickListener(it.id, item)
             }
         }
     }
@@ -60,9 +59,7 @@ enum class SubCategoriesType { HEADER, DATA }
 
 class SubCategoriesAdapter(
     private val args: SubCategoriesNavArgs,
-    private val listener: (SubCategoriesResponse.SubCategory) -> Unit,
-    private val detailsOnClickListener: () -> Unit,
-    private val editOnClickListener: () -> Unit,
+    private val onClickListener: (Int, Any?) -> Unit,
 ) : BaseMVHRecyclerView<SubCategoriesItem, RecyclerView.ViewHolder>() {
 
     companion object {
@@ -92,8 +89,7 @@ class SubCategoriesAdapter(
                             parent.context
                         ), parent, false
                     ),
-                    detailsOnClickListener,
-                    editOnClickListener,
+                    onClickListener,
                 )
             }
             VIEW_TYPE_DATA -> {
@@ -103,7 +99,7 @@ class SubCategoriesAdapter(
                         parent,
                         false
                     ),
-                    listener,
+                    onClickListener,
                 )
             }
             else -> {

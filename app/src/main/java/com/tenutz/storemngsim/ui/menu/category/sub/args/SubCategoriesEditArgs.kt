@@ -1,15 +1,11 @@
-package com.tenutz.storemngsim.data.datasource.api.dto.category
+package com.tenutz.storemngsim.ui.menu.category.sub.args
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 import java.util.*
 
-@Parcelize
-data class SubCategoriesResponse(
-    val subCategories: List<SubCategory>,
-): Parcelable {
-    @Parcelize
-    data class SubCategory(
+data class SubCategoriesEditArgs(
+    val subCategoriesEdit: List<SubCategoryEdit>,
+) {
+    data class SubCategoryEdit(
         val storeCode: String?,
         val mainCategoryCode: String?,
         val middleCategoryCode: String?,
@@ -19,5 +15,6 @@ data class SubCategoriesResponse(
         val order: Int?,
         val createdAt: Date?,
         val lastModifiedAt: Date?,
-    ): Parcelable
+        var checked: Boolean = false,
+    )
 }

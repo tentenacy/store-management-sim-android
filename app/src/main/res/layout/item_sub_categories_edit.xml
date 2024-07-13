@@ -6,12 +6,16 @@
     <data>
 
         <variable
-            name="use"
-            type="Boolean" />
+            name="name"
+            type="String" />
+
+        <variable
+            name="code"
+            type="String" />
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/linear_isub_categories_container"
+        android:id="@+id/linear_isub_categories_edit_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="8dp"
@@ -22,7 +26,7 @@
         app:cardCornerRadius="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_isub_categories_container"
+            android:id="@+id/constraint_isub_categories_edit_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
@@ -37,6 +41,7 @@
                 android:fontFamily="@font/ns_regular"
                 android:textColor="@color/rect_4474"
                 android:textSize="16sp"
+                android:text="@{name}"
                 app:layout_constraintStart_toEndOf="@+id/check_isub_categories_edit"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="빽다방" />
@@ -50,6 +55,7 @@
                 android:fontFamily="@font/ns_regular"
                 android:textColor="@color/rect_4480"
                 android:textSize="12sp"
+                android:text="@{code}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/text_isub_categories_edit_name"
                 app:layout_constraintTop_toBottomOf="@id/text_isub_categories_edit_name"

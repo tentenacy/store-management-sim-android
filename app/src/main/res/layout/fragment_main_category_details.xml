@@ -208,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
-                    android:checkedButton="@{vm.mainCategory.use ? @id/radio_main_category_details_use : @id/radio_main_category_details_use_not}"
+                    android:checkedButton="@{(vm.mainCategory == null || vm.mainCategory.use) ? @id/radio_main_category_details_use : @id/radio_main_category_details_use_not}"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_main_category_details_use"
