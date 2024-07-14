@@ -14,6 +14,8 @@ data class SubCategoriesNavArgs(
     val imageName: String?,
     val imageUrl: String?,
     val order: Int?,
+    val tel: String?,
+    val address: String?,
     val createdAt: Date?,
     val lastModifiedAt: Date?,
 ): Parcelable

@@ -2,7 +2,7 @@ package com.tenutz.storemngsim.utils.constant
 
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
-import com.tenutz.storemngsim.utils.toErrorResponseOrNull
+import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException

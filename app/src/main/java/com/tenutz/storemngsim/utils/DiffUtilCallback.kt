@@ -3,7 +3,10 @@ package com.tenutz.storemngsim.utils
 import androidx.recyclerview.widget.DiffUtil
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
 import com.tenutz.storemngsim.ui.menu.category.main.args.MainCategoriesEditArgs
+import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
+import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesEditItem
 import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesItem
 
 class DiffUtilCallback<out T: Any>(
@@ -24,9 +27,12 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is MainCategoriesEditArgs.MainCategoryEdit && newItem is MainCategoriesEditArgs.MainCategoryEdit -> {
                 (oldItem.categoryCode == newItem.categoryCode) &&
-                (oldItem.checked == newItem.checked)
+                        (oldItem.checked == newItem.checked)
             }
             oldItem is MiddleCategoriesResponse.MiddleCategory && newItem is MiddleCategoriesResponse.MiddleCategory -> {
+                (oldItem.categoryCode == newItem.categoryCode)
+            }
+            oldItem is MiddleCategoriesEditArgs.MiddleCategoryEdit && newItem is MiddleCategoriesEditArgs.MiddleCategoryEdit -> {
                 (oldItem.categoryCode == newItem.categoryCode)
             }
             oldItem is SubCategoriesItem.Header && newItem is SubCategoriesItem.Header -> {
@@ -34,6 +40,15 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is SubCategoriesItem.Data && newItem is SubCategoriesItem.Data -> {
                 oldItem.value.categoryCode == newItem.value.categoryCode
+            }
+            oldItem is SubCategoriesEditItem.Header && newItem is SubCategoriesEditItem.Header -> {
+                true
+            }
+            oldItem is SubCategoriesEditItem.Data && newItem is SubCategoriesEditItem.Data -> {
+                oldItem.value.categoryCode == newItem.value.categoryCode
+            }
+            oldItem is MainMenusResponse.MainMenu && newItem is MainMenusResponse.MainMenu -> {
+                oldItem.menuCode == newItem.menuCode
             }
             else -> {
                 false

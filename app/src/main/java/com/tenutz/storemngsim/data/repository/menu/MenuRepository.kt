@@ -1,5 +1,6 @@
 package com.tenutz.storemngsim.data.repository.menu
 
+import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
@@ -13,22 +14,23 @@ interface MenuRepository {
     fun mainMenus(
         mainCateCd: String,
         middleCateCd: String,
-        subCateCd: String
-    ): Single<MainMenusResponse>
+        subCateCd: String,
+        commonCond: CommonCondition? = null
+    ): Single<Result<MainMenusResponse>>
 
     fun mainMenu(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String
-    ): Single<MainMenuResponse>
+    ): Single<Result<MainMenuResponse>>
 
     fun createMainMenu(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         request: MainMenuCreateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun updateMainMenu(
         mainCateCd: String,
@@ -36,42 +38,42 @@ interface MenuRepository {
         subCateCd: String,
         mainMenuCd: String,
         request: MainMenuUpdateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteMainMenu(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteMainMenus(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         request: MenusDeleteRequest
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun changeMainMenuPriorities(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         request: MenuPrioritiesChangeRequest
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun mainMenuOptionGroups(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String
-    ): Single<MainMenuOptionGroupsResponse>
+    ): Single<Result<MainMenuOptionGroupsResponse>>
 
     fun mainMenuMappers(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String
-    ): Single<MainMenuMappersResponse>
+    ): Single<Result<MainMenuMappersResponse>>
 
     fun mapToOptionGroups(
         mainCateCd: String,
@@ -79,7 +81,7 @@ interface MenuRepository {
         subCateCd: String,
         mainMenuCd: String,
         request: OptionGroupsMappedByRequest
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun deleteMainMenuMappers(
         mainCateCd: String,
@@ -87,7 +89,7 @@ interface MenuRepository {
         subCateCd: String,
         mainMenuCd: String,
         request: OptionGroupsDeleteRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun changeMainMenuMapperPriorities(
         mainCateCd: String,
@@ -95,5 +97,5 @@ interface MenuRepository {
         subCateCd: String,
         mainMenuCd: String,
         request: OptionGroupPrioritiesChangeRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 }

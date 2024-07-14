@@ -7,7 +7,7 @@ import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
 import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.utils.toErrorResponseOrNull
+import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import com.tenutz.storemngsim.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

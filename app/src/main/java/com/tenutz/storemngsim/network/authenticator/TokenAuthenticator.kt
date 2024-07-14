@@ -7,7 +7,7 @@ import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.network.observer.TokenExpirationObserver
 import com.tenutz.storemngsim.network.subject.Subject
 import com.tenutz.storemngsim.utils.ext.toDeferred
-import com.tenutz.storemngsim.utils.toErrorResponseOrNull
+import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext

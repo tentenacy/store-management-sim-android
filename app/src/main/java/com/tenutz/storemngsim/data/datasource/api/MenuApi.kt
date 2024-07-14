@@ -4,20 +4,22 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioriti
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.*
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface MenuApi {
 
-    @GET("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}")
+    @GET("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus")
     fun mainMenus(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
-        @Path("subCateCd") subCateCd: String
+        @Path("subCateCd") subCateCd: String,
+        @Query("query") query: String? = null,
     ): Single<MainMenusResponse>
 
-    @GET("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/{mainMenuCd}")
+    @GET("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}")
     fun mainMenu(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
@@ -25,12 +27,13 @@ interface MenuApi {
         @Path("mainMenuCd") mainMenuCd: String
     ): Single<MainMenuResponse>
 
-    @POST("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}")
+    @Multipart
+    @POST("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus")
     fun createMainMenu(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
         @Path("subCateCd") subCateCd: String,
-        @Part("image") image: MultipartBody.Part? = null,
+        @Part images: MultipartBody.Part? = null,
         @Part("menuCode") menuCode: String,
         @Part("menuName") menuName: String,
         @Part("price") price: Int,
@@ -56,7 +59,7 @@ interface MenuApi {
         @Part("ingredientDetails") ingredientDetails: String? = null,
     ): Single<Unit>
 
-    @PUT("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/{mainMenuCd}")
+    @PUT("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}")
     fun updateMainMenu(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
@@ -87,23 +90,23 @@ interface MenuApi {
         @Part("ingredientDetails") ingredientDetails: String? = null,
     ): Single<Unit>
 
-    @DELETE("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/{mainMenuCd}")
+    @HTTP(method = "DELETE", path = "/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}", hasBody = true)
     fun deleteMainMenu(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
         @Path("subCateCd") subCateCd: String,
         @Path("mainMenuCd") mainMenuCd: String
-    ): Single<Unit>
+    ): Completable
 
-    @DELETE("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}")
+    @HTTP(method = "DELETE", path = "/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus", hasBody = true)
     fun deleteMainMenus(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
         @Path("subCateCd") subCateCd: String,
         @Body request: MenusDeleteRequest
-    ): Single<Unit>
+    ): Completable
 
-    @POST("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/priorities")
+    @POST("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/priorities")
     fun changeMainMenuPriorities(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
@@ -111,7 +114,7 @@ interface MenuApi {
         @Body request: MenuPrioritiesChangeRequest
     ): Single<Unit>
 
-    @GET("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/{mainMenuCd}/option-groups")
+    @GET("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}/option-groups")
     fun mainMenuOptionGroups(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
@@ -119,7 +122,7 @@ interface MenuApi {
         @Path("mainMenuCd") mainMenuCd: String
     ): Single<MainMenuOptionGroupsResponse>
 
-    @GET("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/{mainMenuCd}/mappers")
+    @GET("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}/mappers")
     fun mainMenuMappers(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
@@ -127,7 +130,7 @@ interface MenuApi {
         @Path("mainMenuCd") mainMenuCd: String
     ): Single<MainMenuMappersResponse>
 
-    @POST("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/{mainMenuCd}/mapped-by")
+    @POST("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}/mapped-by")
     fun mapToOptionGroups(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
@@ -136,16 +139,17 @@ interface MenuApi {
         @Body request: OptionGroupsMappedByRequest
     ): Single<Unit>
 
-    @DELETE("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/{mainMenuCd}/mappers")
+
+    @HTTP(method = "DELETE", path = "/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}/mappers", hasBody = true)
     fun deleteMainMenuMappers(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
         @Path("subCateCd") subCateCd: String,
         @Path("mainMenuCd") mainMenuCd: String,
         @Body request: OptionGroupsDeleteRequest,
-    ): Single<Unit>
+    ): Completable
 
-    @POST("/main-menus/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/{mainMenuCd}/mappers/priorities")
+    @POST("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}/mappers/priorities")
     fun changeMainMenuMapperPriorities(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,

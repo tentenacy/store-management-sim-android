@@ -1,10 +1,13 @@
 package com.tenutz.storemngsim.data.repository.menu
 
 import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.*
+import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
+import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
@@ -15,33 +18,49 @@ class MenuRepositoryImpl @Inject constructor(
     override fun mainMenus(
         mainCateCd: String,
         middleCateCd: String,
-        subCateCd: String
-    ): Single<MainMenusResponse> =
+        subCateCd: String,
+        commonCond: CommonCondition?
+    ): Single<Result<MainMenusResponse>> =
         sckApi.mainMenus(
             mainCateCd,
             middleCateCd,
             subCateCd,
+            commonCond?.query
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun mainMenu(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String
-    ): Single<MainMenuResponse> =
+    ): Single<Result<MainMenuResponse>> =
         sckApi.mainMenu(
             mainCateCd,
             middleCateCd,
             subCateCd,
             mainMenuCd,
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun createMainMenu(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         request: MainMenuCreateRequest
-    ): Single<Unit> =
+    ): Single<Result<Unit>> =
         sckApi.createMainMenu(
             mainCateCd,
             middleCateCd,
@@ -71,6 +90,13 @@ class MenuRepositoryImpl @Inject constructor(
             request.memoKor,
             request.ingredientDetails,
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun updateMainMenu(
         mainCateCd: String,
@@ -78,7 +104,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         mainMenuCd: String,
         request: MainMenuUpdateRequest
-    ): Single<Unit> =
+    ): Single<Result<Unit>> =
         sckApi.updateMainMenu(
             mainCateCd,
             middleCateCd,
@@ -108,71 +134,115 @@ class MenuRepositoryImpl @Inject constructor(
             request.memoKor,
             request.ingredientDetails,
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun deleteMainMenu(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String
-    ): Single<Unit> =
+    ): Single<Result<Unit>> =
         sckApi.deleteMainMenu(
             mainCateCd,
             middleCateCd,
             subCateCd,
             mainMenuCd,
         )
+            .toSingle { }
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun deleteMainMenus(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         request: MenusDeleteRequest
-    ): Single<Unit> =
+    ): Single<Result<Unit>> =
         sckApi.deleteMainMenus(
             mainCateCd,
             middleCateCd,
             subCateCd,
             request,
         )
+            .toSingle { }
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun changeMainMenuPriorities(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         request: MenuPrioritiesChangeRequest
-    ): Single<Unit> =
+    ): Single<Result<Unit>> =
         sckApi.changeMainMenuPriorities(
             mainCateCd,
             middleCateCd,
             subCateCd,
             request,
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun mainMenuOptionGroups(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String
-    ): Single<MainMenuOptionGroupsResponse> =
+    ): Single<Result<MainMenuOptionGroupsResponse>> =
         sckApi.mainMenuOptionGroups(
             mainCateCd,
             middleCateCd,
             subCateCd,
             mainMenuCd,
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun mainMenuMappers(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String
-    ): Single<MainMenuMappersResponse> =
+    ): Single<Result<MainMenuMappersResponse>> =
         sckApi.mainMenuMappers(
             mainCateCd,
             middleCateCd,
             subCateCd,
             mainMenuCd,
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun mapToOptionGroups(
         mainCateCd: String,
@@ -180,7 +250,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         mainMenuCd: String,
         request: OptionGroupsMappedByRequest
-    ): Single<Unit> =
+    ): Single<Result<Unit>> =
         sckApi.mapToOptionGroups(
             mainCateCd,
             middleCateCd,
@@ -188,6 +258,13 @@ class MenuRepositoryImpl @Inject constructor(
             mainMenuCd,
             request,
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun deleteMainMenuMappers(
         mainCateCd: String,
@@ -195,7 +272,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         mainMenuCd: String,
         request: OptionGroupsDeleteRequest
-    ): Single<Unit> =
+    ): Single<Result<Unit>> =
         sckApi.deleteMainMenuMappers(
             mainCateCd,
             middleCateCd,
@@ -203,6 +280,14 @@ class MenuRepositoryImpl @Inject constructor(
             mainMenuCd,
             request,
         )
+            .toSingle { }
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 
     override fun changeMainMenuMapperPriorities(
         mainCateCd: String,
@@ -210,7 +295,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         mainMenuCd: String,
         request: OptionGroupPrioritiesChangeRequest
-    ): Single<Unit> =
+    ): Single<Result<Unit>> =
         sckApi.changeMainMenuMapperPriorities(
             mainCateCd,
             middleCateCd,
@@ -218,4 +303,11 @@ class MenuRepositoryImpl @Inject constructor(
             mainMenuCd,
             request,
         )
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
 }

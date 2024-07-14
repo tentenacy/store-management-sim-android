@@ -49,6 +49,8 @@ class MiddleCategoriesFragment : Fragment() {
                                                     it.imageName,
                                                     it.imageUrl,
                                                     it.order,
+                                                    it.tel,
+                                                    it.address,
                                                     it.createdAt,
                                                     it.lastModifiedAt,
                                                 )

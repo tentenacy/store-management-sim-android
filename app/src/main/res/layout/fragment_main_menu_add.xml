@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuAddViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_main_menu_add_container"
@@ -87,6 +95,7 @@
                     android:src="@drawable/placeholder"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_main_menu_add_title"
+                    bind:showImage="@{vm.image}"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -260,7 +269,7 @@
                 </RadioGroup>
 
                 <TextView
-                    android:id="@+id/text_main_menu_add_biz_no"
+                    android:id="@+id/text_main_menu_add_price"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -275,18 +284,18 @@
                     tools:ignore="HardcodedText" />
 
                 <View
-                    android:id="@+id/view_main_menu_add_biz_no_required"
+                    android:id="@+id/view_main_menu_add_price_required"
                     android:layout_width="6dp"
                     android:layout_height="6dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/circle_required"
-                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_biz_no"
-                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_biz_no" />
+                    app:layout_constraintStart_toEndOf="@id/text_main_menu_add_price"
+                    app:layout_constraintTop_toTopOf="@id/text_main_menu_add_price" />
 
                 <EditText
-                    android:id="@+id/edit_main_menu_add_biz_no"
+                    android:id="@+id/edit_main_menu_add_price"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -305,7 +314,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_biz_no"
+                    app:layout_constraintTop_toBottomOf="@+id/text_main_menu_add_price"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -320,7 +329,7 @@
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_biz_no"
+                    app:layout_constraintTop_toBottomOf="@id/edit_main_menu_add_price"
                     tools:ignore="HardcodedText" />
 
                 <EditText
@@ -386,7 +395,7 @@
                     android:padding="14dp"
                     android:paddingStart="30dp"
                     android:paddingEnd="30dp"
-                    android:text="매장 포장"
+                    android:text="매장,포장"
                     android:textColor="@color/rect_4474"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -992,108 +1001,138 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_show_weekday_sun"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="일"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_show_weekday_mon"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="월"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
+                            tools:checked="true"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_show_weekday_tue"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="화"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_show_weekday_wed"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="수"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
+                            tools:checked="true"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_show_weekday_thu"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="목"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_show_weekday_fri"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="금"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_show_weekday_sat"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="토"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
@@ -1403,108 +1442,136 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_event_weekday_sun"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="일"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_event_weekday_mon"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="월"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_event_weekday_tue"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="화"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_event_weekday_wed"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="수"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_event_weekday_thu"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="목"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_event_weekday_fri"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="금"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 
-                        <TextView
+                        <CheckBox
                             android:id="@+id/text_main_menu_add_event_weekday_sat"
                             style="@style/Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/radius_8dp_f6f7f9"
+                            android:background="@drawable/radius_8dp"
+                            android:backgroundTint="@color/checkbox"
+                            android:button="@null"
                             android:fontFamily="@font/ns_regular"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="6dp"
                             android:text="토"
-                            android:textColor="@color/rect_4480"
+                            android:textColor="@color/checkbox_text"
                             android:textSize="14sp"
                             tools:ignore="HardcodedText" />
 

@@ -31,7 +31,12 @@
         android:id="@+id/mainMenuAddFragment"
         android:name="com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuAddFragment"
         android:label="MainMenuAddFragment"
-        tools:layout="@layout/fragment_main_menu_add" />
+        tools:layout="@layout/fragment_main_menu_add">
+
+        <argument android:name="mainCategoryCode" app:argType="string" />
+        <argument android:name="middleCategoryCode" app:argType="string" />
+        <argument android:name="subCategoryCode" app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/mainMenuDetailsFragment"
         android:name="com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuDetailsFragment"

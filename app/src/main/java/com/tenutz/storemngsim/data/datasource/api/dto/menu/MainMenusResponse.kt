@@ -1,5 +1,7 @@
 package com.tenutz.storemngsim.data.datasource.api.dto.menu
 
+import kotlinx.serialization.Transient
+
 data class MainMenusResponse(
     val mainMenus: List<MainMenu>,
 ) {
@@ -16,5 +18,6 @@ data class MainMenusResponse(
         val discountingPrice: Int,
         val discountedPrice: Int,
         val use: Boolean?,
+        @Transient var hideRemoval: Boolean = false,
     )
 }
