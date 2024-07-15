@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -138,6 +138,7 @@
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:nextFocusDown="@id/edit_main_menu_add_code"
                     android:padding="14dp"
                     android:textColor="@color/rect_4474"
                     android:textColorHint="@color/rect_4481"
@@ -187,6 +188,7 @@
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:nextFocusDown="@id/edit_main_menu_add_price"
                     android:padding="14dp"
                     android:textColor="@color/rect_4474"
                     android:textColorHint="@color/rect_4481"
@@ -308,6 +310,7 @@
                     android:importantForAutofill="no"
                     android:inputType="numberSigned"
                     android:maxLines="1"
+                    android:nextFocusDown="@id/edit_main_menu_add_discounted_amount"
                     android:padding="14dp"
                     android:textColor="@color/rect_4474"
                     android:textColorHint="@color/rect_4481"
@@ -346,6 +349,7 @@
                     android:importantForAutofill="no"
                     android:inputType="numberSigned"
                     android:maxLines="1"
+                    android:nextFocusDown="@id/edit_main_menu_add_packaging_amount"
                     android:padding="14dp"
                     android:textColor="@color/rect_4474"
                     android:textColorHint="@color/rect_4481"
@@ -446,6 +450,7 @@
                     android:importantForAutofill="no"
                     android:inputType="numberSigned"
                     android:maxLines="1"
+                    android:nextFocusDown="@id/edit_main_menu_add_ingredient_details"
                     android:padding="14dp"
                     android:textColor="#1d1d1b"
                     android:textColorHint="@color/rect_4481"
@@ -628,7 +633,8 @@
                     android:hint="재료/성분정보 입력"
                     android:importantForAutofill="no"
                     android:inputType="none"
-                    android:lines="4"
+                    android:minLines="4"
+                    android:nextFocusDown="@id/edit_main_menu_add_show_shour"
                     android:padding="14dp"
                     android:textColor="@color/rect_4474"
                     android:textColorHint="@color/rect_4481"
@@ -714,7 +720,7 @@
                     app:layout_constraintTop_toBottomOf="@id/text_main_menu_add_highlight"
                     tools:ignore="HardcodedText" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_main_menu_add_show_sdate"
                     style="@style/Text"
                     android:layout_width="0dp"
@@ -722,11 +728,9 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_radius"
-                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:hint="0000-00-00"
                     android:importantForAutofill="no"
-                    android:inputType="date"
                     android:maxLines="1"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="14dp"
@@ -764,18 +768,16 @@
                     app:layout_constraintTop_toTopOf="@id/edit_main_menu_add_show_sdate"
                     tools:ignore="HardcodedText" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_main_menu_add_show_edate"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/input_radius"
-                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:hint="0000-00-00"
                     android:importantForAutofill="no"
-                    android:inputType="date"
                     android:maxLines="1"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="14dp"
@@ -823,17 +825,18 @@
                         android:fontFamily="@font/ns_regular"
                         android:hint="00"
                         android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:maxLength="2"
-                        android:maxLines="1"
+                        android:inputType="time"
+                        android:nextFocusDown="@id/edit_main_menu_add_show_smin"
                         android:padding="12dp"
                         android:textColor="@color/rect_4474"
                         android:textColorHint="@color/rect_4474"
                         android:textSize="16sp"
+                        android:gravity="end"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/text_main_menu_add_show_stime_colon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        bind:timeFormat='@{"hour"}'
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -862,9 +865,9 @@
                         android:fontFamily="@font/ns_regular"
                         android:hint="00"
                         android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:maxLength="2"
+                        android:inputType="time"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edit_main_menu_add_show_ehour"
                         android:padding="12dp"
                         android:textColor="@color/rect_4474"
                         android:textColorHint="@color/rect_4474"
@@ -873,6 +876,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/text_main_menu_add_show_stime_colon"
                         app:layout_constraintTop_toTopOf="parent"
+                        bind:timeFormat='@{"minute"}'
                         tools:ignore="HardcodedText" />
 
 
@@ -895,7 +899,6 @@
                     android:id="@+id/constraint_main_menu_add_show_etime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/radius_16dp_f6f7f9"
                     android:paddingHorizontal="20dp"
@@ -914,9 +917,9 @@
                         android:fontFamily="@font/ns_regular"
                         android:hint="00"
                         android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:maxLength="2"
+                        android:inputType="time"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edit_main_menu_add_show_emin"
                         android:padding="12dp"
                         android:textColor="@color/rect_4474"
                         android:textColorHint="@color/rect_4474"
@@ -925,6 +928,7 @@
                         app:layout_constraintEnd_toStartOf="@id/text_main_menu_add_show_etime_colon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        bind:timeFormat='@{"hour"}'
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -953,9 +957,9 @@
                         android:fontFamily="@font/ns_regular"
                         android:hint="00"
                         android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:maxLength="2"
+                        android:inputType="time"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edit_main_menu_add_event_shour"
                         android:padding="12dp"
                         android:textColor="@color/rect_4474"
                         android:textColorHint="@color/rect_4474"
@@ -964,6 +968,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/text_main_menu_add_show_etime_colon"
                         app:layout_constraintTop_toTopOf="parent"
+                        bind:timeFormat='@{"minute"}'
                         tools:ignore="HardcodedText" />
 
 
@@ -977,7 +982,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/ns_regular"
-                    android:text="이벤트 표시 요일 설정"
+                    android:text="메뉴 표시 요일 설정"
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -1154,7 +1159,7 @@
                     app:layout_constraintTop_toBottomOf="@id/scroll_main_menu_add_show_weekday"
                     tools:ignore="HardcodedText" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_main_menu_add_event_sdate"
                     style="@style/Text"
                     android:layout_width="0dp"
@@ -1162,11 +1167,9 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/input_radius"
-                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:hint="0000-00-00"
                     android:importantForAutofill="no"
-                    android:inputType="date"
                     android:maxLines="1"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="14dp"
@@ -1204,18 +1207,16 @@
                     app:layout_constraintTop_toTopOf="@id/edit_main_menu_add_event_sdate"
                     tools:ignore="HardcodedText" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_main_menu_add_event_edate"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/input_radius"
-                    android:enabled="false"
                     android:fontFamily="@font/ns_regular"
                     android:hint="0000-00-00"
                     android:importantForAutofill="no"
-                    android:inputType="date"
                     android:maxLines="1"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="14dp"
@@ -1263,9 +1264,9 @@
                         android:fontFamily="@font/ns_regular"
                         android:hint="00"
                         android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:maxLength="2"
+                        android:inputType="time"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edit_main_menu_add_event_smin"
                         android:padding="12dp"
                         android:textColor="@color/rect_4474"
                         android:textColorHint="@color/rect_4474"
@@ -1274,6 +1275,7 @@
                         app:layout_constraintEnd_toStartOf="@id/text_main_menu_add_event_stime_colon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        bind:timeFormat='@{"hour"}'
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -1302,9 +1304,9 @@
                         android:fontFamily="@font/ns_regular"
                         android:hint="00"
                         android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:maxLength="2"
+                        android:inputType="time"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edit_main_menu_add_event_ehour"
                         android:padding="12dp"
                         android:textColor="@color/rect_4474"
                         android:textColorHint="@color/rect_4474"
@@ -1313,6 +1315,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/text_main_menu_add_event_stime_colon"
                         app:layout_constraintTop_toTopOf="parent"
+                        bind:timeFormat='@{"minute"}'
                         tools:ignore="HardcodedText" />
 
 
@@ -1335,7 +1338,6 @@
                     android:id="@+id/constraint_main_menu_add_event_etime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/radius_16dp_f6f7f9"
                     android:paddingHorizontal="20dp"
@@ -1354,9 +1356,9 @@
                         android:fontFamily="@font/ns_regular"
                         android:hint="00"
                         android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:maxLength="2"
+                        android:inputType="time"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edit_main_menu_add_event_emin"
                         android:padding="12dp"
                         android:textColor="@color/rect_4474"
                         android:textColorHint="@color/rect_4474"
@@ -1365,6 +1367,7 @@
                         app:layout_constraintEnd_toStartOf="@id/text_main_menu_add_event_etime_colon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        bind:timeFormat='@{"hour"}'
                         tools:ignore="HardcodedText" />
 
                     <TextView
@@ -1393,9 +1396,9 @@
                         android:fontFamily="@font/ns_regular"
                         android:hint="00"
                         android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:maxLength="2"
+                        android:inputType="time"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edit_main_menu_add_memo"
                         android:padding="12dp"
                         android:textColor="@color/rect_4474"
                         android:textColorHint="@color/rect_4474"
@@ -1404,6 +1407,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/text_main_menu_add_event_etime_colon"
                         app:layout_constraintTop_toTopOf="parent"
+                        bind:timeFormat='@{"minute"}'
                         tools:ignore="HardcodedText" />
 
 
@@ -1607,7 +1611,7 @@
                     android:hint="메모 입력"
                     android:importantForAutofill="no"
                     android:inputType="none"
-                    android:lines="4"
+                    android:minLines="4"
                     android:padding="14dp"
                     android:textColor="@color/rect_4474"
                     android:textColorHint="@color/rect_4481"

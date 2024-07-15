@@ -1,6 +1,8 @@
 package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +17,17 @@ import com.esafirm.imagepicker.features.ImagePickerLauncher
 import com.esafirm.imagepicker.features.ImagePickerMode
 import com.esafirm.imagepicker.features.registerImagePicker
 import com.esafirm.imagepicker.model.Image
+import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.ui.common.DatePickerDialog
+import com.tenutz.storemngsim.ui.common.NumberPickerDialog
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuAddViewModel.Companion.EVENT_NAVIGATE_UP
+import com.tenutz.storemngsim.utils.ext.dateFrom
+import com.tenutz.storemngsim.utils.ext.localDateFrom
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.toDateFormat
 import dagger.hilt.android.AndroidEntryPoint
 import id.zelory.compressor.Compressor
 import kotlinx.coroutines.launch
@@ -27,6 +35,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+import kotlin.math.min
 
 @AndroidEntryPoint
 class MainMenuAddFragment : Fragment() {
@@ -181,6 +190,64 @@ class MainMenuAddFragment : Fragment() {
         }
         binding.imageMainMenuAddThumbnail.setOnClickListener {
             imagePickerLauncher.launch(ImagePickerConfig { mode = ImagePickerMode.SINGLE })
+        }
+        binding.textMainMenuAddPackaging.setOnClickListener {
+            val values = listOf("매장,포장", "매장 전용", "포장 전용")
+            NumberPickerDialog(
+                values = values,
+                onClickListener = { id, value ->
+                    when(id) {
+                        R.id.text_dlgnumber_picker -> {
+                            binding.textMainMenuAddPackaging.text = values[(value as Int)]
+                        }
+                    }
+                }
+            ).show(childFragmentManager, "numberPickerDialog")
+        }
+        binding.textMainMenuAddHighlight.setOnClickListener {
+            val values = listOf("미사용", "신규", "추천", "인기", "행사")
+            NumberPickerDialog(
+                values = values,
+                onClickListener = { id, value ->
+                    when(id) {
+                        R.id.text_dlgnumber_picker -> {
+                            binding.textMainMenuAddHighlight.text = values[(value as Int)]
+                        }
+                    }
+                }
+            ).show(childFragmentManager, "numberPickerDialog")
+        }
+        binding.editMainMenuAddShowSdate.setOnClickListener {
+            DatePickerDialog(
+                localDateFrom(binding.editMainMenuAddShowSdate.text.toString()),
+                onDatePickListener = { date ->
+                    binding.editMainMenuAddShowSdate.text = date.toDateFormat()
+                }
+            ).show(childFragmentManager, "datePickerDialog")
+        }
+        binding.editMainMenuAddShowEdate.setOnClickListener {
+            DatePickerDialog(
+                localDateFrom(binding.editMainMenuAddShowEdate.text.toString()),
+                onDatePickListener = { date ->
+                    binding.editMainMenuAddShowEdate.text = date.toDateFormat()
+                }
+            ).show(childFragmentManager, "datePickerDialog")
+        }
+        binding.editMainMenuAddEventSdate.setOnClickListener {
+            DatePickerDialog(
+                localDateFrom(binding.editMainMenuAddEventSdate.text.toString()),
+                onDatePickListener = { date ->
+                    binding.editMainMenuAddEventSdate.text = date.toDateFormat()
+                }
+            ).show(childFragmentManager, "datePickerDialog")
+        }
+        binding.editMainMenuAddEventEdate.setOnClickListener {
+            DatePickerDialog(
+                localDateFrom(binding.editMainMenuAddEventEdate.text.toString()),
+                onDatePickListener = { date ->
+                    binding.editMainMenuAddEventEdate.text = date.toDateFormat()
+                }
+            ).show(childFragmentManager, "datePickerDialog")
         }
     }
 

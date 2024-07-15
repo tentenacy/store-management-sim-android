@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_mm_option_group"
+    app:startDestination="@id/mmOptionGroupsFragment">
+    <fragment
+        android:id="@+id/mmOptionGroupsFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupsFragment"
+        android:label="MmOptionGroupsFragment"
+        tools:layout="@layout/fragment_mm_option_groups">
+        <action
+            android:id="@+id/action_mmOptionGroupsFragment_to_mmOptionGroupsEditFragment"
+            app:destination="@id/mmOptionGroupsEditFragment" />
+        <action
+            android:id="@+id/action_mmOptionGroupsFragment_to_mmOptionGroupAddFragment"
+            app:destination="@id/mmOptionGroupAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mmOptionGroupsEditFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupsEditFragment"
+        android:label="MmOptionGroupsEditFragment"
+        tools:layout="@layout/fragment_mm_option_groups_edit">
+
+        <argument android:name="mainMenu" app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsNavArgs" />
+        <argument android:name="mainMenuMappers" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuMappersResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/mmOptionGroupAddFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupAddFragment"
+        android:label="MmOptionGroupAddFragment"
+        tools:layout="@layout/fragment_mm_option_group_add">
+
+        <argument android:name="mainCategoryCode" app:argType="string" />
+        <argument android:name="middleCategoryCode" app:argType="string" />
+        <argument android:name="subCategoryCode" app:argType="string" />
+        <argument android:name="mainMenuCode" app:argType="string" />
+    </fragment>
+</navigation>

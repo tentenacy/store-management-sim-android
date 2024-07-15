@@ -1,6 +1,11 @@
 package com.tenutz.storemngsim.utils.ext
 
+import android.annotation.SuppressLint
+import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.*
 
 fun yesterday(): Date {
@@ -34,28 +39,49 @@ fun sevenDaysAgo(): Date {
     return cal.time
 }
 
-fun Date?.toSimpleDateFormat(): String {
-    return this?.run { SimpleDateFormat("yy.MM.dd").format(this) } ?: ""
-}
-
+@SuppressLint("SimpleDateFormat")
 fun Date?.toDateFormat(): String {
     return this?.run { SimpleDateFormat("yyyy-MM-dd").format(this) } ?: ""
 }
 
+@SuppressLint("SimpleDateFormat")
+fun Date?.toDateFormat(pattern: String): String {
+    return this?.run { SimpleDateFormat(pattern).format(this) } ?: ""
+}
+
+@SuppressLint("SimpleDateFormat")
 fun Date?.toDateTimeFormat(): String {
     return this?.run { SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this) } ?: ""
 }
 
-fun Date?.toDateTimeFormatKr(): String {
-    return this?.run { SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss").format(this) } ?: ""
+fun LocalDate?.toDateFormat(pattern: String = "yyyy-MM-dd"): String {
+    return this?.run { DateTimeFormatter.ofPattern(pattern).format(this) } ?: ""
 }
 
-fun dateFromDateTime(dateText: String): Date {
-    return SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateText)
+@SuppressLint("SimpleDateFormat")
+fun dateFrom(dateText: String, pattern: String = "yyyy-MM-dd"): Date? {
+    return try {
+        SimpleDateFormat(pattern).parse(dateText)
+    } catch (e: ParseException) {
+        null
+    }
 }
 
-fun dateFrom(dateText: String): Date {
-    return SimpleDateFormat("yyyy-MM-dd").parse(dateText)
+fun localDateFrom(dateText: String, pattern: String = "yyyy-MM-dd"): LocalDate? {
+    return try {
+        LocalDate.parse(dateText, DateTimeFormatter.ofPattern(pattern))
+    } catch (e: DateTimeParseException) {
+        null
+    }
+}
+
+@SuppressLint("SimpleDateFormat")
+fun timeFrom(timeText: String? = "HHmm"): Date? {
+    return try {
+        SimpleDateFormat(timeText).parse(timeText)
+    } catch (e: ParseException) {
+        null
+    }
 }
 
 fun Date.start(): Date {

@@ -1,16 +1,16 @@
-package com.tenutz.storemngsim.data.datasource.api.dto.menu
+package com.tenutz.storemngsim.ui.menu.mainmenu.args
 
 import android.os.Parcelable
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Transient
+import java.util.*
 
 @Parcelize
-data class MainMenusResponse(
-    val mainMenus: List<MainMenu>,
+data class MainMenusEditArgs(
+    val mainMenusEdit: List<MainMenuEdit>
 ): Parcelable {
-
     @Parcelize
-    data class MainMenu(
+    data class MainMenuEdit(
         val storeCode: String?,
         val mainCategoryCode: String?,
         val middleCategoryCode: String?,
@@ -23,5 +23,6 @@ data class MainMenusResponse(
         val discountingPrice: Int,
         val discountedPrice: Int,
         val use: Boolean?,
+        var checked: Boolean = false,
     ): Parcelable
 }

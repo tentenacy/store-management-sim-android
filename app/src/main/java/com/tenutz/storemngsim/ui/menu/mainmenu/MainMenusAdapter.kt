@@ -1,5 +1,6 @@
 package com.tenutz.storemngsim.ui.menu.mainmenu
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
@@ -33,5 +34,9 @@ class MainMenusAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainMenusViewHolder {
         return MainMenusViewHolder(ItemMainMenusBinding.inflate(LayoutInflater.from(parent.context), parent, false), onClickListener)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return items[position].menuCode.hashCode().toLong()
     }
 }

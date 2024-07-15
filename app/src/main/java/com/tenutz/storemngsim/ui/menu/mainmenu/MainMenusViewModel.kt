@@ -18,10 +18,29 @@ class MainMenusViewModel @Inject constructor(
     private val menuRepository: MenuRepository,
 ): BaseViewModel() {
 
+    companion object {
+
+        const val EVENT_HIDE_REMOVAL = 1000
+        const val EVENT_SHOW_REMOVAL = 1001
+    }
+
     private val query = MutableLiveData("")
 
     private val _mainMenus = MutableLiveData<MainMenusResponse>()
     val mainMenus: LiveData<MainMenusResponse> = _mainMenus
+
+    private val _hideRemoval = MutableLiveData(false)
+    val hideRemoval: LiveData<Boolean> = _hideRemoval
+
+    fun showRemoval() {
+        _hideRemoval.value = false
+        viewEvent(Pair(EVENT_SHOW_REMOVAL, Unit))
+    }
+
+    fun hideRemoval() {
+        _hideRemoval.value = true
+        viewEvent(Pair(EVENT_HIDE_REMOVAL, Unit))
+    }
 
     fun mainMenus(mainCateCd: String, middleCateCd: String, subCateCd: String, searchText: String? = null) {
 

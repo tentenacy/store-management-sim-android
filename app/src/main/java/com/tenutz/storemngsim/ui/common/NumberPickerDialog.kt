@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NumberPickerDialog(
-    private val values: List<Pair<String?, String?>>,
+    private val values: List<String?>,
     private val pickedValue: Int = 1,
     private val onClickListener: (Int, Any?) -> Unit,
 ) : BaseDialogFragment<DlgNumberPickerBinding>(R.layout.dlg_number_picker) {
@@ -22,7 +22,7 @@ class NumberPickerDialog(
         binding.numberPicker.minValue = 1
         binding.numberPicker.maxValue = values.size
 
-        binding.numberPicker.displayedValues = values.map { it.second }.toTypedArray()
+        binding.numberPicker.displayedValues = values.map { it }.toTypedArray()
         binding.numberPicker.value = pickedValue
 
         binding.textDlgnumberPicker.setOnClickListener {

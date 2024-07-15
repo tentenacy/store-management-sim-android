@@ -59,13 +59,14 @@ interface MenuApi {
         @Part("ingredientDetails") ingredientDetails: String? = null,
     ): Single<Unit>
 
+    @Multipart
     @PUT("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}")
     fun updateMainMenu(
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
         @Path("subCateCd") subCateCd: String,
         @Path("mainMenuCd") mainMenuCd: String,
-        @Part("image") image: MultipartBody.Part? = null,
+        @Part image: MultipartBody.Part? = null,
         @Part("menuName") menuName: String,
         @Part("price") price: Int,
         @Part("discountedPrice") discountedPrice: Int?,

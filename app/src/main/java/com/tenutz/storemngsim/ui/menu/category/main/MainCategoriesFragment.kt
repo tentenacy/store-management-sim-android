@@ -76,8 +76,6 @@ class MainCategoriesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.lifecycleOwner = this
-
         vm.mainCategories()
     }
 
@@ -138,7 +136,6 @@ class MainCategoriesFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        disposable.dispose()
         super.onDestroyView()
         _binding = null
     }

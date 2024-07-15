@@ -3,11 +3,14 @@ package com.tenutz.storemngsim.utils
 import androidx.recyclerview.widget.DiffUtil
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuOptionGroupsResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
 import com.tenutz.storemngsim.ui.menu.category.main.args.MainCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesEditItem
 import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesItem
+import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusEditArgs
 
 class DiffUtilCallback<out T: Any>(
     private val oldList: List<T>,
@@ -33,7 +36,8 @@ class DiffUtilCallback<out T: Any>(
                 (oldItem.categoryCode == newItem.categoryCode)
             }
             oldItem is MiddleCategoriesEditArgs.MiddleCategoryEdit && newItem is MiddleCategoriesEditArgs.MiddleCategoryEdit -> {
-                (oldItem.categoryCode == newItem.categoryCode)
+                (oldItem.categoryCode == newItem.categoryCode) &&
+                        (oldItem.checked == newItem.checked)
             }
             oldItem is SubCategoriesItem.Header && newItem is SubCategoriesItem.Header -> {
                 true
@@ -45,10 +49,21 @@ class DiffUtilCallback<out T: Any>(
                 true
             }
             oldItem is SubCategoriesEditItem.Data && newItem is SubCategoriesEditItem.Data -> {
-                oldItem.value.categoryCode == newItem.value.categoryCode
+                (oldItem.value.categoryCode == newItem.value.categoryCode) &&
+                        (oldItem.value.checked == newItem.value.checked)
             }
             oldItem is MainMenusResponse.MainMenu && newItem is MainMenusResponse.MainMenu -> {
                 oldItem.menuCode == newItem.menuCode
+            }
+            oldItem is MainMenusEditArgs.MainMenuEdit && newItem is MainMenusEditArgs.MainMenuEdit -> {
+                (oldItem.menuCode == newItem.menuCode) &&
+                        (oldItem.checked == newItem.checked)
+            }
+            oldItem is MainMenuMappersResponse.MainMenuMapper && newItem is MainMenuMappersResponse.MainMenuMapper -> {
+                oldItem.optionGroupCode == newItem.optionGroupCode
+            }
+            oldItem is MainMenuOptionGroupsResponse.MainMenuOptionGroup && newItem is MainMenuOptionGroupsResponse.MainMenuOptionGroup -> {
+                oldItem.optionGroupCode == newItem.optionGroupCode
             }
             else -> {
                 false

@@ -76,7 +76,7 @@ class MainMenusBeforeBottomSheetDialog(
     private fun showPicker(map: Map<String?, String?>, currentCode: Pair<String?, String?>?, onPickedListener: (Pair<String?, String?>) -> Unit) {
         map.toList().takeIf { it.isNotEmpty() }?.let { values ->
             NumberPickerDialog(
-                values = values,
+                values = values.map { it.second },
                 pickedValue = currentCode?.let { code -> values.indexOfFirst { it.first == code.first } + 1 } ?: 1,
                 onClickListener = { id, value ->
                     when (id) {

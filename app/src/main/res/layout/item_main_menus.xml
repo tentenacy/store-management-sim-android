@@ -11,6 +11,7 @@
             type="com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse.MainMenu" />
 
         <import type="android.view.View" />
+        <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -117,7 +118,7 @@
             android:fontFamily="@font/ns_bold"
             android:foreground="@drawable/striking_text"
             android:paddingStart="1dp"
-            android:text="@{String.valueOf(args.price)}"
+            android:text="@{TextExtKt.getToCurrency(args.price)}"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
             android:visibility="@{args.discountingPrice != 0 ? View.VISIBLE : View.INVISIBLE}"
@@ -154,7 +155,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_bold"
             android:paddingStart="1dp"
-            android:text="@{String.valueOf(args.discountedPrice)}"
+            android:text="@{TextExtKt.getToCurrency(args.discountedPrice)}"
             android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
             android:textSize="16sp"
             android:visibility="@{args.discountingPrice != 0 ? View.VISIBLE : View.INVISIBLE}"
@@ -190,7 +191,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_bold"
             android:paddingStart="1dp"
-            android:text="@{String.valueOf(args.price)}"
+            android:text="@{TextExtKt.getToCurrency(args.price)}"
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
             android:visibility="@{args.discountingPrice != 0 ? View.INVISIBLE : View.VISIBLE}"

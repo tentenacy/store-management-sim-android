@@ -14,7 +14,7 @@ abstract class BaseRecyclerView<T: Any, VH: BaseViewHolder<T>>: RecyclerView.Ada
 
     val items = arrayListOf<T>()
 
-    fun updateItems(items: List<T>?) {
+    open fun updateItems(items: List<T>?) {
         items?.let {
             val diffCallback = DiffUtilCallback(this.items, items)
             val diffResult = DiffUtil.calculateDiff(diffCallback)

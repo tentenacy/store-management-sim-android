@@ -1,5 +1,7 @@
 package com.tenutz.storemngsim.data.datasource.api.dto.menu
 
+import java.util.*
+
 data class MainMenuResponse(
     val storeCode: String?,
     val mainCategoryCode: String?,
@@ -18,13 +20,13 @@ data class MainMenuResponse(
     val imageUrl: String?,
     val mainMenuNameKor: String?,
     val highlightType: String?,
-    val showDateFrom: String?,
-    val showDateTo: String?,
+    val showDateFrom: Date?,
+    val showDateTo: Date?,
     val showTimeFrom: String?,
     val showTimeTo: String?,
     val showDayOfWeek: String?,
-    val eventDateFrom: String?,
-    val eventDateTo: String?,
+    val eventDateFrom: Date?,
+    val eventDateTo: Date?,
     val eventTimeFrom: String?,
     val eventTimeTo: String?,
     val eventDayOfWeek: String?,

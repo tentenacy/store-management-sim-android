@@ -13,15 +13,15 @@ open class BaseViewModel : ViewModel() {
 
     protected val compositeDisposable = CompositeDisposable()
 
-    private val _viewEvent = MutableLiveData<Event<Pair<Int, Any>>>()
-    val viewEvent: LiveData<Event<Pair<Int, Any>>>
+    private val _viewEvent = MutableLiveData<Event<Pair<Int, Any?>>>()
+    val viewEvent: LiveData<Event<Pair<Int, Any?>>>
         get() = _viewEvent
 
     private val _loadingEvent = MutableLiveData<Event<Boolean>>()
     val loadingEvent: LiveData<Event<Boolean>>
         get() = _loadingEvent
 
-    fun viewEvent(content: Pair<Int, Any>) {
+    fun viewEvent(content: Pair<Int, Any?>) {
         _viewEvent.postValue(Event(content))
     }
 
