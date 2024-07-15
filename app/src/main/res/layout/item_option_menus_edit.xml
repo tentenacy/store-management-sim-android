@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="use"
-            type="Boolean" />
-
-        <variable
-            name="outOfStock"
-            type="Boolean" />
+            name="args"
+            type="com.tenutz.storemngsim.ui.menu.optionmenu.args.OptionMenusEditArgs.OptionEdit" />
 
         <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_ioption_menus_edit_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -30,6 +28,7 @@
             android:contentDescription="메뉴 썸네일"
             app:layout_constraintStart_toEndOf="@+id/check_imain_categories_edit"
             app:layout_constraintTop_toTopOf="parent"
+            bind:showImage="@{args.imageUrl}"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -41,7 +40,8 @@
             android:ellipsize="end"
             android:fontFamily="@font/ns_regular"
             android:maxLines="1"
-            android:textColor="@{outOfStock ? @color/rect_4480 : @color/rect_4474}"
+            android:text="@{args.optionName}"
+            android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/image_imain_menus_thumbnail"
             app:layout_constraintTop_toTopOf="@id/image_imain_menus_thumbnail"
@@ -60,7 +60,7 @@
             android:text="품절"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:visibility="@{outOfStock ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{args.outOfStock ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/text_imain_menus_name"
             app:layout_constraintStart_toEndOf="@id/text_imain_menus_name"
             app:layout_constraintTop_toTopOf="@id/text_imain_menus_name"
@@ -74,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/ns_regular"
+            android:text="@{args.optionCode}"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@id/text_imain_menus_name"
@@ -89,8 +90,8 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="17dp"
             android:fontFamily="@font/ns_regular"
-            android:text='@{use != null ? (use ? "사용" : "미사용") : "삭제됨"}'
-            android:textColor='@{use != null ? (use ? @color/rect_4475 : @color/rect_4480) : @color/rect_4480}'
+            android:text='@{args.use != null ? (args.use ? "사용" : "미사용") : "삭제됨"}'
+            android:textColor='@{args.use != null ? (args.use ? @color/rect_4475 : @color/rect_4480) : @color/rect_4480}'
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/view_imain_categories_use"
@@ -102,23 +103,11 @@
             android:id="@+id/view_imain_categories_use"
             android:layout_width="8dp"
             android:layout_height="8dp"
-            android:background="@{use != null ? (use ? @drawable/circle_use : @drawable/circle_use_not) : @drawable/rect_deleted}"
+            android:background="@{args.use != null ? (args.use ? @drawable/circle_use : @drawable/circle_use_not) : @drawable/rect_deleted}"
             app:layout_constraintBottom_toBottomOf="@id/text_imain_categories_use"
             app:layout_constraintStart_toStartOf="@id/text_imain_menus_code"
             app:layout_constraintTop_toTopOf="@id/text_imain_categories_use"
             tools:background="@drawable/circle_use" />
-
-        <ImageView
-            android:id="@+id/image_imain_categories_edit_list"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="대분류 순서 변경"
-            android:src="@drawable/ic_grey_list"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
 
 
         <CheckBox

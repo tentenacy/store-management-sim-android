@@ -6,11 +6,16 @@ import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesR
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuMappersResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuOptionGroupsResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionOptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
 import com.tenutz.storemngsim.ui.menu.category.main.args.MainCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesEditItem
 import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesItem
 import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusEditArgs
+import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsEditArgs
+import com.tenutz.storemngsim.ui.menu.optionmenu.args.OptionMenusEditArgs
+import com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsEditArgs
 
 class DiffUtilCallback<out T: Any>(
     private val oldList: List<T>,
@@ -63,6 +68,25 @@ class DiffUtilCallback<out T: Any>(
                 oldItem.optionGroupCode == newItem.optionGroupCode
             }
             oldItem is MainMenuOptionGroupsResponse.MainMenuOptionGroup && newItem is MainMenuOptionGroupsResponse.MainMenuOptionGroup -> {
+                oldItem.optionGroupCode == newItem.optionGroupCode
+            }
+            oldItem is MmOptionGroupsEditArgs.MainMenuOptionGroup && newItem is MmOptionGroupsEditArgs.MainMenuOptionGroup -> {
+                oldItem.optionGroupCode == newItem.optionGroupCode
+            }
+            oldItem is OptionsResponse.Option && newItem is OptionsResponse.Option -> {
+                oldItem.optionCode == newItem.optionCode
+            }
+            oldItem is OptionMenusEditArgs.OptionEdit && newItem is OptionMenusEditArgs.OptionEdit -> {
+                (oldItem.optionCode == newItem.optionCode) &&
+                        (oldItem.checked == newItem.checked)
+            }
+//            oldItem is OptionMenuMappersResponse.OptionMenuMapper && newItem is OptionMenuMappersResponse.OptionMenuMapper -> {
+//                oldItem.optionGroupCode == newItem.optionGroupCode
+//            }
+            oldItem is OptionOptionGroupsResponse.OptionOptionGroup && newItem is OptionOptionGroupsResponse.OptionOptionGroup -> {
+                oldItem.optionGroupCode == newItem.optionGroupCode
+            }
+            oldItem is OmOptionGroupsEditArgs.OptionMapper && newItem is OmOptionGroupsEditArgs.OptionMapper -> {
                 oldItem.optionGroupCode == newItem.optionGroupCode
             }
             else -> {

@@ -59,9 +59,6 @@
         android:label="MenuMngFragment"
         tools:layout="@layout/fragment_menu_mng">
         <action
-            android:id="@+id/action_menuMngFragment_to_optionMenusFragment"
-            app:destination="@id/optionMenusFragment" />
-        <action
             android:id="@+id/action_menuMngFragment_to_optionGroupsFragment"
             app:destination="@id/optionGroupsFragment" />
         <action
@@ -70,54 +67,10 @@
         <action
             android:id="@+id/action_menuMngFragment_to_navigation_main_menu"
             app:destination="@id/navigation_main_menu" />
+        <action
+            android:id="@+id/action_menuMngFragment_to_navigation_option_menu"
+            app:destination="@id/navigation_option_menu" />
     </fragment>
-    <fragment
-        android:id="@+id/optionMenusFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenusFragment"
-        android:label="OptionMenusFragment"
-        tools:layout="@layout/fragment_option_menus">
-        <action
-            android:id="@+id/action_optionMenusFragment_to_optionMenusEditFragment"
-            app:destination="@id/optionMenusEditFragment" />
-        <action
-            android:id="@+id/action_optionMenusFragment_to_optionMenuAddFragment"
-            app:destination="@id/optionMenuAddFragment" />
-        <action
-            android:id="@+id/action_optionMenusFragment_to_optionMenuDetailsFragment"
-            app:destination="@id/optionMenuDetailsFragment" />
-        <action
-            android:id="@+id/action_optionMenusFragment_to_omOptionGroupsFragment"
-            app:destination="@id/omOptionGroupsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/optionMenusEditFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenusEditFragment"
-        android:label="OptionMenusEditFragment"
-        tools:layout="@layout/fragment_option_menus_edit" />
-    <fragment
-        android:id="@+id/optionMenuAddFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenuAddFragment"
-        android:label="OptionMenuAddFragment"
-        tools:layout="@layout/fragment_option_menu_add" />
-    <fragment
-        android:id="@+id/optionMenuDetailsFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenuDetailsFragment"
-        android:label="OptionMenuDetailsFragment"
-        tools:layout="@layout/fragment_option_menu_details" />
-    <fragment
-        android:id="@+id/omOptionGroupsFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.OmOptionGroupsFragment"
-        android:label="OmOptionGroupsFragment"
-        tools:layout="@layout/fragment_om_option_groups">
-        <action
-            android:id="@+id/action_omOptionGroupsFragment_to_omOptionGroupsEditFragment"
-            app:destination="@id/omOptionGroupsEditFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/omOptionGroupsEditFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.OmOptionGroupsEditFragment"
-        android:label="OmOptionGroupsEditFragment"
-        tools:layout="@layout/fragment_om_option_groups_edit" />
     <fragment
         android:id="@+id/optionGroupsFragment"
         android:name="com.tenutz.storemngsim.ui.menu.optiongroup.OptionGroupsFragment"
@@ -225,4 +178,5 @@
     <include app:graph="@navigation/navigation_middle_category" />
     <include app:graph="@navigation/navigation_sub_category" />
     <include app:graph="@navigation/navigation_main_menu" />
+    <include app:graph="@navigation/navigation_option_menu" />
 </navigation>

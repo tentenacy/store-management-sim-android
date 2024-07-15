@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/omOptionGroupsFragment"
+    android:id="@+id/navigation_om_option_group">
+
+    <fragment
+        android:id="@+id/omOptionGroupsFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.OmOptionGroupsFragment"
+        android:label="OmOptionGroupsFragment"
+        tools:layout="@layout/fragment_om_option_groups">
+        <action
+            android:id="@+id/action_omOptionGroupsFragment_to_omOptionGroupsEditFragment"
+            app:destination="@id/omOptionGroupsEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/omOptionGroupsEditFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.OmOptionGroupsEditFragment"
+        android:label="OmOptionGroupsEditFragment"
+        tools:layout="@layout/fragment_om_option_groups_edit">
+
+        <argument android:name="option" app:argType="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsNavArgs" />
+        <argument android:name="omOptionGroups" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersResponse" />
+    </fragment>
+
+</navigation>

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenusEditViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_option_menus_edit_container"
         android:layout_width="match_parent"
@@ -54,32 +61,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="38dp"
             android:fontFamily="@font/ns_bold"
             android:text="옵션메뉴 목록"
             android:textColor="@color/rect_4474"
             android:textSize="18sp"
-            android:layout_marginTop="38dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_option_menus_edit_title"
             tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/text_option_menus_edit_show_hide_removal"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="삭제메뉴 숨기기"
-            style="@style/Text"
+            android:layout_marginStart="10dp"
             android:background="@drawable/radius_8dp_edf4f9"
             android:fontFamily="@font/ns_regular"
-            android:paddingVertical="6dp"
             android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:text="삭제메뉴 숨기기"
             android:textColor="@color/rect_4475"
             android:textSize="14sp"
-            android:layout_marginStart="10dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/text_option_menus_edit_label_main_category"
             app:layout_constraintStart_toEndOf="@id/text_option_menus_edit_label_main_category"
             app:layout_constraintTop_toTopOf="@id/text_option_menus_edit_label_main_category"
-            app:layout_constraintBottom_toBottomOf="@id/text_option_menus_edit_label_main_category"
-            tools:ignore="HardcodedText"/>
+            tools:ignore="HardcodedText" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_option_menus_edit_all_container"
@@ -120,56 +128,40 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/text_option_menus_edit"
+            android:id="@+id/recycler_option_menus_edit"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/constraint_option_menus_edit_bottom_container"
+            app:layout_constraintBottom_toTopOf="@id/btn_option_menus_edit_bottom_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_option_menus_edit_label_main_category"
             tools:listitem="@layout/item_option_menus_edit" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_option_menus_edit_bottom_container"
+        <Button
+            android:id="@+id/btn_option_menus_edit_bottom_container"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/rect_4481"
+            android:backgroundTint="@color/bottom_button"
+            android:enabled="@{vm.checkedItemCount > 0}"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
             android:padding="16dp"
+            android:text="삭제"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:cornerRadius="0dp"
+            app:icon="@drawable/delete"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:id="@+id/image_option_menus_edit_bottom"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/ic_white_delete"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/text_option_menus_edit_bottom"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/text_option_menus_edit_bottom"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ns_regular"
-                android:text="삭제"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image_option_menus_edit_bottom"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            tools:enabled="true"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,6 +4,7 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioriti
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.option.*
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -11,14 +12,15 @@ import retrofit2.http.*
 interface OptionApi {
 
     @GET("/options")
-    fun options(): Single<OptionsResponse>
+    fun options(@Query("query") query: String? = null): Single<OptionsResponse>
 
     @GET("/options/{optionCd}")
     fun option(@Path("optionCd") optionCd: String): Single<OptionResponse>
 
+    @Multipart
     @POST("/options")
     fun createOption(
-        @Part("image") image: MultipartBody.Part? = null,
+        @Part image: MultipartBody.Part? = null,
         @Part("optionCode") optionCode: String,
         @Part("optionName") optionName: String,
         @Part("price") price: Int,
@@ -40,10 +42,11 @@ interface OptionApi {
         @Part("eventDayOfWeek") eventDayOfWeek: String? = null,
     ): Single<Unit>
 
+    @Multipart
     @PUT("/options/{optionCd}")
     fun updateOption(
         @Path("optionCd") optionCd: String,
-        @Part("image") image: MultipartBody.Part? = null,
+        @Part image: MultipartBody.Part? = null,
         @Part("optionName") optionName: String,
         @Part("price") price: Int,
         @Part("discountedPrice") discountedPrice: Int? = null,
@@ -64,11 +67,11 @@ interface OptionApi {
         @Part("eventDayOfWeek") eventDayOfWeek: String? = null,
     ): Single<Unit>
 
-    @DELETE("/options/{optionCd}")
-    fun deleteOption(@Path("optionCd") optionCd: String): Single<Unit>
+    @HTTP(method = "DELETE", path = "/options/{optionCd}", hasBody = true)
+    fun deleteOption(@Path("optionCd") optionCd: String): Completable
 
-    @DELETE("/options")
-    fun deleteOptions(@Body request: OptionsDeleteRequest): Single<Unit>
+    @HTTP(method = "DELETE", path = "/options", hasBody = true)
+    fun deleteOptions(@Body request: OptionsDeleteRequest): Completable
 
     @GET("/options/{optionCd}/option-groups")
     fun optionOptionGroups(@Path("optionCd") optionCd: String): Single<OptionOptionGroupsResponse>
@@ -82,11 +85,11 @@ interface OptionApi {
         @Body request: OptionGroupsMappedByRequest
     ): Single<Unit>
 
-    @DELETE("/options/{optionCd}/mappers")
+    @HTTP(method = "DELETE", path = "/options/{optionCd}/mappers", hasBody = true)
     fun deleteOptionMappers(
         @Path("optionCd") optionCd: String,
         @Body request: OptionGroupsDeleteRequest
-    ): Single<Unit>
+    ): Completable
 
     @POST("/options/{optionCd}/mappers/priorities")
     fun changeOptionMapperPriorities(

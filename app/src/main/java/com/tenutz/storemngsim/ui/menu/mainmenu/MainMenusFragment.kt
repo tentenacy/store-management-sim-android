@@ -1,4 +1,4 @@
-package com.tenutz.storemngsim.ui.menu.mainmenu
+ package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -48,9 +48,9 @@ class MainMenusFragment: Fragment() {
                                     R.id.btn_bsmain_menus_option_group -> {
                                         (item as MainMenusResponse.MainMenu).takeIf {
                                             !it.mainCategoryCode.isNullOrBlank() &&
-                                                    !it.middleCategoryCode.isNullOrBlank() &&
-                                                    !it.subCategoryCode.isNullOrBlank() &&
-                                                    !it.menuCode.isNullOrBlank()
+                                            !it.middleCategoryCode.isNullOrBlank() &&
+                                            !it.subCategoryCode.isNullOrBlank() &&
+                                            !it.menuCode.isNullOrBlank()
                                         }?.let {
                                             MainMenusFragmentDirections.actionMainMenusFragmentToMmOptionGroupsFragment().let { action ->
                                                 findNavController().navigate(
@@ -178,7 +178,7 @@ class MainMenusFragment: Fragment() {
     private fun setOnClickListeners() {
         binding.textMainMenusEdit.setOnClickListener {
             vm.mainMenus.value?.let {
-                findNavController().navigate(MainMenusFragmentDirections.actionMainMenusFragmentToMainMenusEditFragment(args, it))
+                findNavController().navigate(MainMenusFragmentDirections.actionMainMenusFragmentToMainMenusEditFragment(args, MainMenusResponse(it.mainMenus.filter { it.use != null })))
             }
         }
         binding.fabMainMenusAdd.setOnClickListener {

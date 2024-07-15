@@ -106,7 +106,7 @@ object CommonBindingAdapter {
     fun weekDayIn(checkBox: CheckBox, weekDaysText: String?) {
         weekDaysText?.split(",")?.takeIf { it.isNotEmpty() }?.let { weekDays ->
             checkBox.isChecked = weekDays.any { it == checkBox.text.toString() }
-        }
+        } ?: kotlin.run { checkBox.isChecked = false }
     }
 
     @JvmStatic

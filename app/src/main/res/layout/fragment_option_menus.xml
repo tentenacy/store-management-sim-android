@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenusViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_option_menus_container"
         android:layout_width="match_parent"
@@ -106,24 +113,25 @@
 
             <TextView
                 android:id="@+id/text_option_menus_show_hide_removal"
+                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="삭제메뉴 숨기기"
-                style="@style/Text"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/radius_8dp_edf4f9"
                 android:fontFamily="@font/ns_regular"
-                android:paddingVertical="6dp"
                 android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text='@{vm.hideRemoval ? "삭제메뉴 표시" : "삭제메뉴 숨기기"}'
                 android:textColor="@color/rect_4475"
                 android:textSize="14sp"
-                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/text_option_menus_label_main_category"
                 app:layout_constraintStart_toEndOf="@id/text_option_menus_label_main_category"
                 app:layout_constraintTop_toTopOf="@id/text_option_menus_label_main_category"
-                app:layout_constraintBottom_toBottomOf="@id/text_option_menus_label_main_category"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText"
+                tools:text="삭제메뉴 숨기기" />
 
 
-           <TextView
+            <TextView
                 android:id="@+id/text_option_menus_edit"
                 style="@style/Text"
                 android:layout_width="wrap_content"
