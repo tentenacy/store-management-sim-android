@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_omOptionGroupsFragment_to_omOptionGroupsEditFragment"
             app:destination="@id/omOptionGroupsEditFragment" />
+        <action
+            android:id="@+id/action_omOptionGroupsFragment_to_omOptionGroupAddFragment"
+            app:destination="@id/omOptionGroupAddFragment" />
     </fragment>
     <fragment
         android:id="@+id/omOptionGroupsEditFragment"
@@ -21,7 +24,15 @@
         tools:layout="@layout/fragment_om_option_groups_edit">
 
         <argument android:name="option" app:argType="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsNavArgs" />
-        <argument android:name="omOptionGroups" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersResponse" />
+        <argument android:name="optionMappers" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/omOptionGroupAddFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.OmOptionGroupAddFragment"
+        android:label="OmOptionGroupAddFragment"
+        tools:layout="@layout/fragment_om_option_group_add">
+
+        <argument android:name="optionMenuCode" app:argType="string" />
     </fragment>
 
 </navigation>

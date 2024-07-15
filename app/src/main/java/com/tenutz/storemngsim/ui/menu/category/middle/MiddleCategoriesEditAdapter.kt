@@ -44,7 +44,6 @@ class MiddleCategoriesEditViewHolder(
 
 class MiddleCategoriesEditAdapter(
     private val onCheckedChangeListener: () -> Unit,
-    private val onChangePrioritiesListener: (CategoryPrioritiesChangeRequest) -> Unit,
     private val onDragListener: OnDragListener<MiddleCategoriesEditViewHolder>,
 ) : BaseRecyclerView<MiddleCategoriesEditArgs.MiddleCategoryEdit, MiddleCategoriesEditViewHolder>(), ItemTouchHelperCallback.OnItemMoveListener {
 

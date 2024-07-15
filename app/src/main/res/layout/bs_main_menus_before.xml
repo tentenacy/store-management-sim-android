@@ -59,7 +59,7 @@
             android:padding="14dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text='@{vm.mainCategoryCode != null ? vm.mainCategoryCode.second : "대분류 조회"}'
+            android:text='@{vm.mainCategoryCode != null ? vm.mainCategoryCode.second : "대분류 선택"}'
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"

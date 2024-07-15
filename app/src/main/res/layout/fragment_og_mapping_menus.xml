@@ -6,8 +6,12 @@
     <data>
 
         <variable
-            name="use"
-            type="Boolean" />
+            name="args"
+            type="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs" />
+        
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -70,6 +74,7 @@
                 android:fontFamily="@font/ns_regular"
                 android:textColor="@color/rect_4474"
                 android:textSize="24sp"
+                android:text="@{args.optionGroupName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_og_mapping_menus_title"
                 tools:ignore="HardcodedText"
@@ -84,36 +89,10 @@
                 android:fontFamily="@font/ns_regular"
                 android:textColor="@color/rect_4480"
                 android:textSize="12sp"
+                android:text="@{args.optionGroupCode}"
                 app:layout_constraintStart_toStartOf="@id/text_og_mapping_menus_main_category_name"
                 app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_main_category_name"
                 tools:text="0000000000" />
-
-            <TextView
-                android:id="@+id/text_og_mapping_menus_main_category_use"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="10dp"
-                android:enabled="@{use}"
-                android:fontFamily="@font/ns_regular"
-                android:text='@{use ? "사용" : "미사용"}'
-                android:textColor='@{use ? @color/rect_4475 : @color/rect_4480}'
-                android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@id/view_og_mapping_menus_main_category_use"
-                app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_main_category_code"
-                tools:text="사용"
-                tools:textColor="@color/rect_4475" />
-
-            <View
-                android:id="@+id/view_og_mapping_menus_main_category_use"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="@{use ? @drawable/circle_use : @drawable/circle_use_not}"
-                app:layout_constraintBottom_toBottomOf="@id/text_og_mapping_menus_main_category_use"
-                app:layout_constraintStart_toStartOf="@id/text_og_mapping_menus_main_category_name"
-                app:layout_constraintTop_toTopOf="@id/text_og_mapping_menus_main_category_use"
-                tools:background="@drawable/circle_use" />
 
             <Button
                 android:id="@+id/btn_og_mapping_menus_main_category_details"
@@ -128,6 +107,7 @@
                 android:text="상세"
                 android:textColor="@color/white"
                 android:textSize="14sp"
+                android:visibility="invisible"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="@id/text_og_mapping_menus_main_category_name"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -140,11 +120,11 @@
                 android:id="@+id/view_og_mapping_menus_divider_1"
                 android:layout_width="0dp"
                 android:layout_height="8dp"
-                android:layout_marginTop="20dp"
                 android:background="@color/rect_4485"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_og_mapping_menus_main_category_use" />
+                app:layout_constraintTop_toBottomOf="@+id/text_og_mapping_menus_main_category_code" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_og_mapping_menus"

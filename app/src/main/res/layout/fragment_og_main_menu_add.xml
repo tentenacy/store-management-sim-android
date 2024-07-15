@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenuAddViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -73,7 +80,7 @@
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_og_mapping_menus_edit_show_hide_removal"
+            android:id="@+id/text_og_mapping_menus_edit_expand_contract_all"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +89,8 @@
             android:fontFamily="@font/ns_regular"
             android:paddingHorizontal="10dp"
             android:paddingVertical="6dp"
-            android:text="대/중/소분류 정보 숨기기"
+            tools:text="대/중/소분류 정보 펼치기"
+            android:text='@{vm.expandedItemCount == vm.ogMainMenusAdd.ogMainMenus.size() ? "대/중/소분류 정보 숨기기" : "대/중/소분류 정보 펼치기"}'
             android:textColor="@color/rect_4475"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/text_og_main_menu_add_label_main_category"

@@ -1,9 +1,9 @@
 package com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args
 
 data class OmOptionGroupsEditArgs(
-    val optionMappers: List<OptionMapper>,
+    val omOptionGroupsEdit: List<OptionOptionGroupEdit>,
 ) {
-    data class OptionMapper(
+    data class OptionOptionGroupEdit(
         val optionGroupCode: String?,
         val optionName: String?,
         val priority: Int?,

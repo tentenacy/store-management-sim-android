@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.optiongroup.OptionGroupsEditViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_option_groups_edit_container"
         android:layout_width="match_parent"
@@ -80,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ns_regular"
                 android:text="전체"
-                android:textColor="@color/rect_4480"
+                tools:textColor="@color/rect_4480"
+                android:textColor="@{vm.checkedItemCount == vm.optionGroupsEdit.optionGroupsEdit.size() ? @color/rect_4475 : @color/rect_4480}"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +101,8 @@
                 android:layout_height="7.5dp"
                 android:layout_marginEnd="5.83dp"
                 android:contentDescription="전체 선택 이미지"
-                android:src="@drawable/ic_check_all"
+                tools:src="@drawable/ic_check_all"
+                android:src="@{vm.checkedItemCount == vm.optionGroupsEdit.optionGroupsEdit.size() ? @drawable/ic_check_all_checked : @drawable/ic_check_all}"
                 app:layout_constraintBottom_toBottomOf="@id/text_option_groups_edit_all"
                 app:layout_constraintEnd_toStartOf="@id/text_option_groups_edit_all"
                 app:layout_constraintTop_toTopOf="@id/text_option_groups_edit_all"
@@ -106,51 +115,35 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/constraint_option_groups_edit_bottom_container"
+            app:layout_constraintBottom_toTopOf="@+id/btn_option_groups_edit_bottom_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_option_groups_edit_label_main_category"
             tools:listitem="@layout/item_option_groups_edit" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_option_groups_edit_bottom_container"
+        <Button
+            android:id="@+id/btn_option_groups_edit_bottom_container"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/rect_4481"
+            android:backgroundTint="@color/bottom_button"
+            android:enabled="@{vm.checkedItemCount > 0}"
+            android:fontFamily="@font/ns_regular"
+            android:gravity="center"
             android:padding="16dp"
+            android:text="삭제"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:cornerRadius="0dp"
+            app:icon="@drawable/delete"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:id="@+id/image_option_groups_edit_bottom"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/ic_white_delete"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/text_option_groups_edit_bottom"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/text_option_groups_edit_bottom"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ns_regular"
-                android:text="삭제"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image_option_groups_edit_bottom"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            tools:enabled="true"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

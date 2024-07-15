@@ -6,14 +6,21 @@ import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesR
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuMappersResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuOptionGroupsResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionOptionGroupsResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.*
 import com.tenutz.storemngsim.ui.menu.category.main.args.MainCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesEditItem
 import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesItem
 import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusEditArgs
 import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsEditArgs
+import com.tenutz.storemngsim.ui.menu.optiongroup.args.OptionGroupsEditArgs
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMainMenuAddArgs
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMainMenusEditArgs
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgOptionMenuAddArgs
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgOptionMenusEditArgs
 import com.tenutz.storemngsim.ui.menu.optionmenu.args.OptionMenusEditArgs
 import com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsEditArgs
 
@@ -80,14 +87,61 @@ class DiffUtilCallback<out T: Any>(
                 (oldItem.optionCode == newItem.optionCode) &&
                         (oldItem.checked == newItem.checked)
             }
-//            oldItem is OptionMenuMappersResponse.OptionMenuMapper && newItem is OptionMenuMappersResponse.OptionMenuMapper -> {
-//                oldItem.optionGroupCode == newItem.optionGroupCode
-//            }
+            oldItem is OptionMappersResponse.OptionMapper && newItem is OptionMappersResponse.OptionMapper -> {
+                oldItem.optionGroupCode == newItem.optionGroupCode
+            }
             oldItem is OptionOptionGroupsResponse.OptionOptionGroup && newItem is OptionOptionGroupsResponse.OptionOptionGroup -> {
                 oldItem.optionGroupCode == newItem.optionGroupCode
             }
-            oldItem is OmOptionGroupsEditArgs.OptionMapper && newItem is OmOptionGroupsEditArgs.OptionMapper -> {
+            oldItem is OmOptionGroupsEditArgs.OptionOptionGroupEdit && newItem is OmOptionGroupsEditArgs.OptionOptionGroupEdit -> {
                 oldItem.optionGroupCode == newItem.optionGroupCode
+            }
+            oldItem is OptionGroupsResponse.OptionGroup && newItem is OptionGroupsResponse.OptionGroup -> {
+                oldItem.optionGroupCode == newItem.optionGroupCode
+            }
+            oldItem is OptionGroupsEditArgs.OptionGroup && newItem is OptionGroupsEditArgs.OptionGroup -> {
+                (oldItem.optionGroupCode == newItem.optionGroupCode) &&
+                        (oldItem.checked == newItem.checked)
+            }
+            oldItem is OptionGroupMainMenuMappersResponse.OptionGroupMainMenuMapper && newItem is OptionGroupMainMenuMappersResponse.OptionGroupMainMenuMapper -> {
+                oldItem.mainCategoryCode == newItem.mainCategoryCode &&
+                        oldItem.middleCategoryCode == newItem.middleCategoryCode &&
+                        oldItem.subCategoryCode == newItem.subCategoryCode &&
+                        oldItem.menuCode == newItem.menuCode
+            }
+            oldItem is OgMainMenusEditArgs.OptionGroupMainMenuMapper && newItem is OgMainMenusEditArgs.OptionGroupMainMenuMapper -> {
+                oldItem.mainCategoryCode == newItem.mainCategoryCode &&
+                        oldItem.middleCategoryCode == newItem.middleCategoryCode &&
+                        oldItem.subCategoryCode == newItem.subCategoryCode &&
+                        oldItem.menuCode == newItem.menuCode &&
+                        oldItem.checked == newItem.checked
+            }
+            oldItem is OptionGroupMainMenusResponse.OptionGroupMainMenu && newItem is OptionGroupMainMenusResponse.OptionGroupMainMenu -> {
+                oldItem.mainCategoryCode == newItem.mainCategoryCode &&
+                        oldItem.middleCategoryCode == newItem.middleCategoryCode &&
+                        oldItem.subCategoryCode == newItem.subCategoryCode &&
+                        oldItem.menuCode == newItem.menuCode
+            }
+            oldItem is OgMainMenuAddArgs.OptionGroupMainMenus && newItem is OgMainMenuAddArgs.OptionGroupMainMenus -> {
+                oldItem.mainCategoryCode == newItem.mainCategoryCode &&
+                        oldItem.middleCategoryCode == newItem.middleCategoryCode &&
+                        oldItem.subCategoryCode == newItem.subCategoryCode &&
+                        oldItem.menuCode == newItem.menuCode &&
+                        oldItem.expanded == newItem.expanded
+            }
+
+            oldItem is OptionGroupOptionMappersResponse.OptionGroupOptionMapper && newItem is OptionGroupOptionMappersResponse.OptionGroupOptionMapper -> {
+                oldItem.optionCode == newItem.optionCode
+            }
+            oldItem is OgOptionMenusEditArgs.OptionGroupOptionMenuMapper && newItem is OgOptionMenusEditArgs.OptionGroupOptionMenuMapper -> {
+                oldItem.optionCode == newItem.optionCode &&
+                        oldItem.checked == newItem.checked
+            }
+            oldItem is OptionGroupOptionsResponse.OptionGroupOption && newItem is OptionGroupOptionsResponse.OptionGroupOption -> {
+                oldItem.optionCode == newItem.optionCode
+            }
+            oldItem is OgOptionMenuAddArgs.OptionGroupOptionMenus && newItem is OgOptionMenuAddArgs.OptionGroupOptionMenus -> {
+                oldItem.optionCode == newItem.optionCode
             }
             else -> {
                 false

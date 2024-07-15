@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenusViewModel" />
+    </data>
+    
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -28,7 +35,8 @@
             android:id="@+id/text_tog_main_menus_show_hide_removal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="삭제메뉴 숨기기"
+            android:text='@{vm.hideRemoval ? "삭제메뉴 표시" : "삭제메뉴 숨기기"}'
+            tools:text="삭제메뉴 숨기기"
             style="@style/Text"
             android:background="@drawable/radius_8dp_edf4f9"
             android:fontFamily="@font/ns_regular"
@@ -66,6 +74,7 @@
             android:layout_marginTop="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:clipToPadding="false"
+            android:paddingBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

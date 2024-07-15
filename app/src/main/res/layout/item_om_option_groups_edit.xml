@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="checked"
-            type="Boolean" />
+            name="args"
+            type="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsEditArgs.OptionOptionGroupEdit" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +27,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
+            android:text="@{args.optionName}"
             app:layout_constraintStart_toEndOf="@+id/check_iom_option_groups_edit"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="그룹1" />
@@ -40,6 +41,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
+            android:text="@{args.optionGroupCode}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_iom_option_groups_edit_name"
             app:layout_constraintTop_toBottomOf="@id/text_iom_option_groups_edit_name"

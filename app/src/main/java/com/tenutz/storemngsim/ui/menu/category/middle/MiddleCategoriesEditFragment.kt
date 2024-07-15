@@ -39,9 +39,6 @@ class MiddleCategoriesEditFragment: Fragment(), OnDragListener<MiddleCategoriesE
             onCheckedChangeListener = {
                 vm.updateCheckedItemCount()
             },
-            onChangePrioritiesListener = {
-
-            },
             onDragListener = this@MiddleCategoriesEditFragment,
         ).apply {
             setHasStableIds(true)

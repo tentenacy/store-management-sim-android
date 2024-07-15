@@ -126,8 +126,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/ns_regular"
-                android:text='@{!StringsKt.isBlank(args.address) ? args.address : "주소가 등록되지 않음"}'
-                android:textColor="@{!StringsKt.isBlank(args.address) ? @color/rect_4474 : @color/rect_4480}"
+                android:text='@{!(args.address == null || StringsKt.isBlank(args.address)) ? args.address : "주소가 등록되지 않음"}'
+                android:textColor="@{!(args.address == null || StringsKt.isBlank(args.address)) ? @color/rect_4474 : @color/rect_4480}"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -143,8 +143,8 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/ns_regular"
-                android:text='@{!StringsKt.isBlank(args.tel) ? args.tel : "번호가 등록되지 않음"}'
-                android:textColor="@{!StringsKt.isBlank(args.tel) ? @color/rect_4475 : @color/rect_4480}"
+                android:text='@{!(args.tel == null || StringsKt.isBlank(args.tel)) ? args.tel : "번호가 등록되지 않음"}'
+                android:textColor="@{!(args.tel == null || StringsKt.isBlank(args.tel)) ? @color/rect_4475 : @color/rect_4480}"
                 tools:textColor="@color/rect_4475"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"

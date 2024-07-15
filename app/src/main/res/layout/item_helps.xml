@@ -74,17 +74,28 @@
             app:layout_constraintTop_toBottomOf="@id/constraint_ihelps_expandable_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-            
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_ihelps_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="image_ihelps_content" />
+
             <ImageView
                 android:id="@+id/image_ihelps_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:src="@color/rect_4482"
+                android:visibility="visible"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:contentDescription="도움말 이미지"
+                app:layout_constraintBottom_toTopOf="@id/barrier_ihelps_2"
+                app:layout_constraintVertical_bias="1"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -92,14 +103,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
-                android:layout_marginTop="10dp"
                 style="@style/Text"
                 android:fontFamily="@font/ns_regular"
                 android:textSize="16sp"
                 android:textColor="@color/rect_4474"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_ihelps_content"
+                app:layout_constraintTop_toBottomOf="@id/barrier_ihelps_2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

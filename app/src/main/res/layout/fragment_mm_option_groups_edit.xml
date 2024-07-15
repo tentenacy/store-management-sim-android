@@ -114,8 +114,8 @@
             android:layout_marginTop="10dp"
             android:enabled="@{args.use}"
             android:fontFamily="@font/ns_regular"
-            android:text='@{args.use ? "사용" : "미사용"}'
-            android:textColor='@{args.use ? @color/rect_4475 : @color/rect_4480}'
+            android:text='@{args.use != null ? (args.use ? "사용" : "미사용") : "삭제됨"}'
+            android:textColor='@{args.use != null ? (args.use ? @color/rect_4475 : @color/rect_4480) : @color/rect_4480}'
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@id/view_mm_option_groups_edit_main_category_use"
             app:layout_constraintTop_toBottomOf="@id/text_mm_option_groups_edit_main_category_code"
@@ -126,7 +126,7 @@
             android:id="@+id/view_mm_option_groups_edit_main_category_use"
             android:layout_width="8dp"
             android:layout_height="8dp"
-            android:background="@{args.use ? @drawable/circle_use : @drawable/circle_use_not}"
+            android:background="@{args.use != null ? (args.use ? @drawable/circle_use : @drawable/circle_use_not) : @drawable/rect_deleted}"
             app:layout_constraintBottom_toBottomOf="@id/text_mm_option_groups_edit_main_category_use"
             app:layout_constraintStart_toStartOf="@id/text_mm_option_groups_edit_main_category_name"
             app:layout_constraintTop_toTopOf="@id/text_mm_option_groups_edit_main_category_use"
@@ -174,9 +174,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ns_regular"
                 android:text="전체"
-                android:textColor="@color/rect_4480"
+                tools:textColor="@color/rect_4480"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@{vm.checkedItemCount == vm.mmOptionGroupsEdit.mmOptionGroupsEdit.size() ? @color/rect_4475 : @color/rect_4480}"                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -187,7 +187,8 @@
                 android:layout_height="7.5dp"
                 android:layout_marginEnd="5.83dp"
                 android:contentDescription="전체 선택 이미지"
-                android:src="@drawable/ic_check_all"
+                tools:src="@drawable/ic_check_all"
+                android:src="@{vm.checkedItemCount == vm.mmOptionGroupsEdit.mmOptionGroupsEdit.size() ? @drawable/ic_check_all_checked : @drawable/ic_check_all}"
                 app:layout_constraintBottom_toBottomOf="@id/text_mm_option_groups_edit_edit_all"
                 app:layout_constraintEnd_toStartOf="@id/text_mm_option_groups_edit_edit_all"
                 app:layout_constraintTop_toTopOf="@id/text_mm_option_groups_edit_edit_all"

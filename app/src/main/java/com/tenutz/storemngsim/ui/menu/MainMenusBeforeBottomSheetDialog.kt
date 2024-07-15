@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainMenusBeforeBottomSheetDialog(
     private val onClickListener: (Int, Any?) -> Unit,
 ) : BaseBottomSheetDialogFragment<BsMainMenusBeforeBinding>(R.layout.bs_main_menus_before) {
-
     val vm: MainMenusBeforeBSDViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,4 +87,5 @@ class MainMenusBeforeBottomSheetDialog(
             ).show(childFragmentManager, "numberPickerDialog")
         }
     }
+
 }

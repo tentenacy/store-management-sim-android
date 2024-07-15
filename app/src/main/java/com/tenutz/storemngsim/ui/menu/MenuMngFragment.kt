@@ -41,15 +41,15 @@ class MenuMngFragment: Fragment() {
                         R.id.btn_bsmain_menus_before_search -> {
                             (item as Triple<String?, String?, String?>).takeIf { it.first?.isNotBlank() == true && it.second?.isNotBlank() == true && it.third?.isNotBlank() == true }?.let {
                                 MenuMngFragmentDirections.actionMenuMngFragmentToNavigationMainMenu().let { action ->
-                                    findNavController().navigate(
-                                        action.actionId,
-                                        Bundle().apply {
-                                            putString("mainCategoryCode", it.first)
-                                            putString("middleCategoryCode", it.second)
-                                            putString("subCategoryCode", it.third)
-                                        }
-                                    )
-                                }
+                                        findNavController().navigate(
+                                            action.actionId,
+                                            Bundle().apply {
+                                                putString("mainCategoryCode", it.first)
+                                                putString("middleCategoryCode", it.second)
+                                                putString("subCategoryCode", it.third)
+                                            }
+                                        )
+                                    }
                             }
                         }
                     }
@@ -60,7 +60,7 @@ class MenuMngFragment: Fragment() {
             findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationOptionMenu())
         }
         binding.btnMenuMngOptionGroup.setOnClickListener {
-            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToOptionGroupsFragment())
+            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationOptionGroup())
         }
     }
 

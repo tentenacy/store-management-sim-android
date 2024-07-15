@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
     <data>
 
         <variable
-            name="use"
-            type="Boolean" />
+            name="name"
+            type="String" />
+
+        <variable
+            name="code"
+            type="String" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/constraint_ioption_groups"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +31,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
+            android:text="@{name}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="그룹1" />
@@ -39,6 +45,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
+            android:text="@{code}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_ioption_groups_name"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_option_group"
+    app:startDestination="@id/optionGroupsFragment">
+    <fragment
+        android:id="@+id/optionGroupsFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.optiongroup.OptionGroupsFragment"
+        android:label="OptionGroupsFragment"
+        tools:layout="@layout/fragment_option_groups">
+        <action
+            android:id="@+id/action_optionGroupsFragment_to_optionGroupsEditFragment"
+            app:destination="@id/optionGroupsEditFragment" />
+        <action
+            android:id="@+id/action_optionGroupsFragment_to_optionGroupAddFragment"
+            app:destination="@id/optionGroupAddFragment" />
+        <action
+            android:id="@+id/action_optionGroupsFragment_to_optionGroupDetailsFragment"
+            app:destination="@id/optionGroupDetailsFragment" />
+        <action
+            android:id="@+id/action_optionGroupsFragment_to_navigation_og_mapping_menu"
+            app:destination="@id/navigation_og_mapping_menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/optionGroupsEditFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.optiongroup.OptionGroupsEditFragment"
+        android:label="OptionGroupsEditFragment"
+        tools:layout="@layout/fragment_option_groups_edit">
+
+        <argument android:name="optionGroups" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupsResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/optionGroupAddFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.optiongroup.OptionGroupAddFragment"
+        android:label="OptionGroupAddFragment"
+        tools:layout="@layout/fragment_option_group_add" />
+    <fragment
+        android:id="@+id/optionGroupDetailsFragment"
+        android:name="com.tenutz.storemngsim.ui.menu.optiongroup.OptionGroupDetailsFragment"
+        android:label="OptionGroupDetailsFragment"
+        tools:layout="@layout/fragment_option_group_details">
+
+        <argument android:name="optionGroupCode" app:argType="string" />
+    </fragment>
+    <include app:graph="@navigation/navigation_og_mapping_menu" />
+</navigation>

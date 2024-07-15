@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.bs.OgMainMenuAddBeforeBSDViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_bsog_main_menu_add_before_container"
         android:layout_width="match_parent"
@@ -52,9 +59,10 @@
             android:padding="14dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="대분류 선택"
+            tools:text="대분류 선택"
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
+            android:text='@{vm.mainCategoryCode != null ? vm.mainCategoryCode.second : "대분류 선택"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_bsog_main_menu_add_before_title"
@@ -87,9 +95,10 @@
             android:padding="14dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="중분류 선택"
+            tools:text="중분류 선택"
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
+            android:text='@{vm.middleCategoryCode != null ? vm.middleCategoryCode.second : "중분류 선택"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_bsog_main_menu_add_before_main_category"
@@ -122,9 +131,10 @@
             android:padding="14dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="소분류 선택"
+            tools:text="소분류 선택"
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
+            android:text='@{vm.subCategoryCode != null ? vm.subCategoryCode.second : "소분류 선택"}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_bsog_main_menu_add_before_middle_category"
@@ -155,6 +165,7 @@
             android:text="검색"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:enabled="@{(vm.mainCategoryCode != null &amp;&amp; vm.middleCategoryCode != null &amp;&amp; vm.subCategoryCode != null)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
