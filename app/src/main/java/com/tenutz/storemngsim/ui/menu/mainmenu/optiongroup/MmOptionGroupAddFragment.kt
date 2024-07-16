@@ -13,6 +13,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.databinding.FragmentMmOptionGroupAddBinding
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel
+import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -68,6 +69,18 @@ class MmOptionGroupAddFragment: Fragment() {
             args.subCategoryCode,
             args.mainMenuCode,
         )
+        editTextObservable(binding.editMmOptionGroupAddSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.mmOptionGroups(
+                    args.mainCategoryCode,
+                    args.middleCategoryCode,
+                    args.subCategoryCode,
+                    args.mainMenuCode,
+                )
+            }
+            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -108,22 +121,11 @@ class MmOptionGroupAddFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerMmOptionGroupAdd.adapter = adapter
-        editTextObservable(binding.editMmOptionGroupAddSearch)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.mmOptionGroups(
-                    args.mainCategoryCode,
-                    args.middleCategoryCode,
-                    args.subCategoryCode,
-                    args.mainMenuCode,
-                )
-            }
-            .addTo(disposable)
     }
 
 
     override fun onDestroyView() {
+        disposable.clear()
         super.onDestroyView()
         _binding = null
     }

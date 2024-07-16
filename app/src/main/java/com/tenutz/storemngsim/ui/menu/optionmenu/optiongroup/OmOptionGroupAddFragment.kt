@@ -12,6 +12,7 @@ import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.databinding.FragmentOmOptionGroupAddBinding
+import com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenusViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -56,6 +57,13 @@ class OmOptionGroupAddFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.omOptionGroups(args.optionMenuCode)
+        editTextObservable(binding.editOmOptionGroupAddSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.omOptionGroups(args.optionMenuCode)
+            }
+            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -96,17 +104,11 @@ class OmOptionGroupAddFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOmOptionGroupAdd.adapter = adapter
-        editTextObservable(binding.editOmOptionGroupAddSearch)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.omOptionGroups(args.optionMenuCode)
-            }
-            .addTo(disposable)
     }
 
 
     override fun onDestroyView() {
+        disposable.clear()
         super.onDestroyView()
         _binding = null
     }

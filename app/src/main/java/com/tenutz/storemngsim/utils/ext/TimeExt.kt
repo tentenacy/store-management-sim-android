@@ -45,6 +45,11 @@ fun Date?.toDateFormat(): String {
 }
 
 @SuppressLint("SimpleDateFormat")
+fun Date?.toDateFormatKr(): String {
+    return this?.run { SimpleDateFormat("yyyy.MM.dd(E)").format(this) } ?: ""
+}
+
+@SuppressLint("SimpleDateFormat")
 fun Date?.toDateFormat(pattern: String): String {
     return this?.run { SimpleDateFormat(pattern).format(this) } ?: ""
 }

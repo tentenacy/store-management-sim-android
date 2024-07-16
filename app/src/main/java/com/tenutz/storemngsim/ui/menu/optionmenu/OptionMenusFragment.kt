@@ -12,6 +12,7 @@ import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenuAddViewModel
 import com.tenutz.storemngsim.ui.menu.optionmenu.bs.OptionMenusBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsNavArgs
 import com.tenutz.storemngsim.utils.ext.editTextObservable
@@ -91,6 +92,13 @@ class OptionMenusFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.optionMenus()
+        editTextObservable(binding.editOptionMenusSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.optionMenus(it)
+            }
+            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -141,13 +149,6 @@ class OptionMenusFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOptionMenus.adapter = adapter
-        editTextObservable(binding.editOptionMenusSearch)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.optionMenus(it)
-            }
-            .addTo(disposable)
     }
 
     private fun setOnClickListeners() {
@@ -169,6 +170,7 @@ class OptionMenusFragment: Fragment() {
     }
 
     override fun onDestroyView() {
+        disposable.clear()
         super.onDestroyView()
         _binding = null
     }

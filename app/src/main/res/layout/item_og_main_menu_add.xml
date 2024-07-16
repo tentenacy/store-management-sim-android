@@ -74,7 +74,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4475"
             android:textSize="12sp"
-            android:text="@{TextExtKt.getToCurrency(args.price)}"
+            android:text='@{TextExtKt.getToCurrency(args.price)+"원"}'
             app:layout_constraintStart_toStartOf="@+id/text_iog_main_menu_add_name"
             app:layout_constraintTop_toBottomOf="@id/text_iog_main_menu_add_name"
             tools:text="1,000원" />

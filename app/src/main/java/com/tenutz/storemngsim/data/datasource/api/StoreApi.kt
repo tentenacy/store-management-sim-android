@@ -2,6 +2,7 @@ package com.tenutz.storemngsim.data.datasource.api
 
 import com.tenutz.storemngsim.data.datasource.api.dto.common.PageResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.store.*
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 import java.util.*
@@ -115,8 +116,8 @@ interface StoreApi {
         @Body request: ReviewReplyUpdateRequest
     ): Single<Unit>
 
-    @DELETE("/stores/reviews/replies/{replySeq}")
-    fun deleteStoreReviewReply(@Path("replySeq") replySeq: Long): Single<Unit>
+    @HTTP(method = "DELETE", path = "/stores/reviews/replies/{replySeq}", hasBody = true)
+    fun deleteStoreReviewReply(@Path("replySeq") replySeq: Long): Completable
 
     @GET("/stores/menus/reviews")
     fun menuReviews(
@@ -141,6 +142,6 @@ interface StoreApi {
         @Body request: ReviewReplyUpdateRequest
     ): Single<Unit>
 
-    @DELETE("/stores/menus/reviews/replies/{replySeq}")
-    fun deleteMenuReviewReply(@Path("replySeq") replySeq: Long): Single<Unit>
+    @HTTP(method = "DELETE", path = "/stores/menus/reviews/replies/{replySeq}", hasBody = true)
+    fun deleteMenuReviewReply(@Path("replySeq") replySeq: Long): Completable
 }

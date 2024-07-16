@@ -6,16 +6,17 @@
     <data>
 
         <variable
-            name="replyExists"
-            type="Boolean" />
+            name="args"
+            type="com.tenutz.storemngsim.data.datasource.paging.entity.MenuReviews.MenuReview" />
 
         <import type="android.view.View" />
+        <import type="com.tenutz.storemngsim.utils.ext.TimeExtKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_itmenu_reviews_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/text_itmenu_reviews_created_by"
@@ -27,6 +28,7 @@
             android:fontFamily="@font/ns_bold"
             android:textColor="@color/rect_4474"
             android:textSize="14sp"
+            android:text="@{args.createdBy}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="김길동" />
@@ -40,6 +42,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
+            android:text="@{TimeExtKt.toDateFormatKr(args.createdAt)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_itmenu_reviews_created_by"
             tools:text="2022.08.30(화)" />
@@ -59,6 +62,7 @@
             android:paddingEnd="10dp"
             android:textColor="@color/rect_4474"
             android:textSize="15sp"
+            android:text="@{args.menuName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_itmenu_reviews_created_at"
@@ -86,6 +90,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4474"
             android:textSize="14sp"
+            android:text="@{args.content}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_itmenu_reviews_menu_name"
@@ -100,9 +105,11 @@
             android:layout_height="13.21dp"
             android:layout_marginStart="20dp"
             android:src="@drawable/ic_cobalt_reply"
+            android:contentDescription="리뷰 답글 화살표"
             app:layout_constraintBottom_toBottomOf="@id/text_itmenu_reviews_reply_post"
             app:layout_constraintStart_toStartOf="@id/text_itmenu_reviews_content"
-            app:layout_constraintTop_toTopOf="@id/text_itmenu_reviews_reply_post" />
+            app:layout_constraintTop_toTopOf="@id/text_itmenu_reviews_reply_post"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/text_itmenu_reviews_reply_post"
@@ -116,12 +123,13 @@
             android:text="답변 작성하기"
             android:textColor="@color/rect_4475"
             android:textSize="14sp"
-            android:visibility="@{replyExists ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{args.menuReviewReply != null ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/barrier_itmenu_reviews_1"
             app:layout_constraintStart_toEndOf="@id/image_itmenu_reviews_reply"
             app:layout_constraintTop_toBottomOf="@id/text_itmenu_reviews_content"
             app:layout_constraintVertical_bias="0"
-            tools:visibility="invisible" />
+            tools:visibility="invisible"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/text_itmenu_reviews_reply_content"
@@ -134,10 +142,12 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4474"
             android:textSize="14sp"
-            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            android:text='@{args.menuReviewReply != null ? args.menuReviewReply.content : ""}'
+            android:visibility="@{args.menuReviewReply != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_itmenu_reviews_reply"
             app:layout_constraintTop_toBottomOf="@id/text_itmenu_reviews_content"
+            app:readMoreColor="@color/rect_4480"
             tools:text="안녕하세요, 빽다방 000점 매니저입니다.😄 커피 향이 좋고 깔끔한 맛이라고 말씀해주시니 너무 뿌듯합니다.^^ 저희 카페는 뒷맛이 순식간에 사라지는 깔끔한 맛을 내기 위해 정통드립방식으로 커피를 추출하고 있습니다. 저희 카페에 방문해주셔서 감사드리며, 다음에 또 방문해주세요~^^"
             tools:visibility="visible" />
 
@@ -153,11 +163,12 @@
             android:paddingVertical="7dp"
             android:text="답변수정"
             android:textColor="@color/rect_4475"
-            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            android:visibility="@{args.menuReviewReply != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/barrier_itmenu_reviews_1"
             app:layout_constraintStart_toStartOf="@id/text_itmenu_reviews_reply_content"
             app:layout_constraintTop_toBottomOf="@id/text_itmenu_reviews_reply_content"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/text_itmenu_reviews_reply_delete"
@@ -171,10 +182,11 @@
             android:paddingVertical="7dp"
             android:text="삭제"
             android:textColor="@color/rect_4480"
-            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            android:visibility="@{args.menuReviewReply != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toEndOf="@id/text_itmenu_reviews_reply_edit"
             app:layout_constraintTop_toBottomOf="@id/text_itmenu_reviews_reply_content"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            tools:ignore="HardcodedText" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier_itmenu_reviews_1"

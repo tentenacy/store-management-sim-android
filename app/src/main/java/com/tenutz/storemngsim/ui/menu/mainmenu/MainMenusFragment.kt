@@ -1,4 +1,4 @@
- package com.tenutz.storemngsim.ui.menu.mainmenu
+package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,12 +10,12 @@ import androidx.navigation.navGraphViewModels
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
-import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.databinding.FragmentMainMenusBinding
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusViewModel.Companion.EVENT_HIDE_REMOVAL
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusViewModel.Companion.EVENT_SHOW_REMOVAL
 import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs
-import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsNavArgs
 import com.tenutz.storemngsim.ui.menu.mainmenu.bs.MainMenusBottomSheetDialog
+import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsNavArgs
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -48,9 +48,9 @@ class MainMenusFragment: Fragment() {
                                     R.id.btn_bsmain_menus_option_group -> {
                                         (item as MainMenusResponse.MainMenu).takeIf {
                                             !it.mainCategoryCode.isNullOrBlank() &&
-                                            !it.middleCategoryCode.isNullOrBlank() &&
-                                            !it.subCategoryCode.isNullOrBlank() &&
-                                            !it.menuCode.isNullOrBlank()
+                                                    !it.middleCategoryCode.isNullOrBlank() &&
+                                                    !it.subCategoryCode.isNullOrBlank() &&
+                                                    !it.menuCode.isNullOrBlank()
                                         }?.let {
                                             MainMenusFragmentDirections.actionMainMenusFragmentToMmOptionGroupsFragment().let { action ->
                                                 findNavController().navigate(
@@ -116,6 +116,13 @@ class MainMenusFragment: Fragment() {
         Logger.i(args.toString())
 
         vm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode)
+        editTextObservable(binding.editMainMenusSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode, it)
+            }
+            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -160,19 +167,11 @@ class MainMenusFragment: Fragment() {
                     }
                 }
             }
-
         }
     }
 
     private fun initViews() {
         binding.recyclerMainMenus.adapter = adapter
-        editTextObservable(binding.editMainMenusSearch)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode, it)
-            }
-            .addTo(disposable)
     }
 
     private fun setOnClickListeners() {
@@ -194,6 +193,7 @@ class MainMenusFragment: Fragment() {
     }
 
     override fun onDestroyView() {
+        disposable.clear()
         super.onDestroyView()
         _binding = null
     }

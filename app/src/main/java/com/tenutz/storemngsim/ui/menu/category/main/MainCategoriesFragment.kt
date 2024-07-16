@@ -18,6 +18,7 @@ import com.tenutz.storemngsim.ui.main.MainFragmentDirections
 import com.tenutz.storemngsim.ui.menu.category.main.bs.MainCategoriesBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesEditFragmentArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs
+import com.tenutz.storemngsim.ui.review.menu.MenuReviewsViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -77,6 +78,13 @@ class MainCategoriesFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.mainCategories()
+        editTextObservable(binding.editMainCategoriesSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.mainCategories(it)
+            }
+            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -102,13 +110,6 @@ class MainCategoriesFragment : Fragment() {
 
     private fun initViews() {
         binding.recyclerMainCategories.adapter = adapter
-        editTextObservable(binding.editMainCategoriesSearch)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.mainCategories(it)
-            }
-            .addTo(disposable)
     }
 
     private fun observeData() {
@@ -136,6 +137,7 @@ class MainCategoriesFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        disposable.clear()
         super.onDestroyView()
         _binding = null
     }

@@ -6,51 +6,51 @@ import io.reactivex.rxjava3.core.Single
 
 interface StoreRepository {
 
-    fun equipments(): Single<EquipmentsResponse>
+    fun equipments(): Single<Result<EquipmentsResponse>>
 
     fun salesTotal(
         commonCond: CommonCondition,
         request: SalesRequest,
-    ): Single<SalesTotalResponse>
+    ): Single<Result<SalesTotalResponse>>
 
     fun statisticsSalesTotalByMenu(
         commonCond: CommonCondition,
         request: StatisticsSaleByMenusRequest,
-    ): Single<StatisticsSalesTotalByMenusResponse>
+    ): Single<Result<StatisticsSalesTotalByMenusResponse>>
 
     fun statisticsSalesByCreditCard(
         commonCond: CommonCondition,
-    ): Single<StatisticsSalesByCreditCardResponse>
+    ): Single<Result<StatisticsSalesByCreditCardResponse>>
 
     fun statisticsSalesTotalByCreditCard(
         commonCond: CommonCondition,
-    ): Single<StatisticsSalesTotalByCreditCardResponse>
+    ): Single<Result<StatisticsSalesTotalByCreditCardResponse>>
 
     fun statisticsSalesTotalByTime(
         commonCond: CommonCondition,
-    ): Single<StatisticsSalesTotalByTimeResponse>
+    ): Single<Result<StatisticsSalesTotalByTimeResponse>>
 
     fun createStoreReviewReply(
         reviewSeq: Long,
         request: ReviewReplyCreateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun updateStoreReviewReply(
         replySeq: Long,
         request: ReviewReplyUpdateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
-    fun deleteStoreReviewReply(replySeq: Long): Single<Unit>
+    fun deleteStoreReviewReply(replySeq: Long): Single<Result<Unit>>
 
     fun createMenuReviewReply(
         reviewSeq: Long,
         request: ReviewReplyCreateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
     fun updateMenuReviewReply(
         replySeq: Long,
         request: ReviewReplyUpdateRequest,
-    ): Single<Unit>
+    ): Single<Result<Unit>>
 
-    fun deleteMenuReviewReply(replySeq: Long): Single<Unit>
+    fun deleteMenuReviewReply(replySeq: Long): Single<Result<Unit>>
 }

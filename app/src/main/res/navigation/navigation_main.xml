@@ -44,14 +44,14 @@
             android:id="@+id/action_mainFragment_to_menuMngFragment"
             app:destination="@id/menuMngFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_reviewsFragment"
-            app:destination="@id/reviewsFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_helpsFragment"
             app:destination="@id/helpsFragment" />
         <action
             android:id="@+id/action_mainFragment_to_statisticsFragment"
             app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_navigation_review"
+            app:destination="@id/navigation_review" />
     </fragment>
     <fragment
         android:id="@+id/menuMngFragment"
@@ -72,28 +72,6 @@
             app:destination="@id/navigation_option_group" />
     </fragment>
     <fragment
-        android:id="@+id/reviewsFragment"
-        android:name="com.tenutz.storemngsim.ui.review.ReviewsFragment"
-        android:label="ReviewsFragment"
-        tools:layout="@layout/fragment_reviews">
-        <action
-            android:id="@+id/action_reviewsFragment_to_storeReplyPostFragment"
-            app:destination="@id/storeReplyPostFragment" />
-        <action
-            android:id="@+id/action_reviewsFragment_to_menuReplyPostFragment"
-            app:destination="@id/menuReplyPostFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/storeReplyPostFragment"
-        android:name="com.tenutz.storemngsim.ui.review.store.StoreReplyPostFragment"
-        android:label="StoreReplyPostFragment"
-        tools:layout="@layout/fragment_store_reply_post" />
-    <fragment
-        android:id="@+id/menuReplyPostFragment"
-        android:name="com.tenutz.storemngsim.ui.review.menu.MenuReplyPostFragment"
-        android:label="MenuReplyPostFragment"
-        tools:layout="@layout/fragment_menu_reply_post" />
-    <fragment
         android:id="@+id/helpsFragment"
         android:name="com.tenutz.storemngsim.ui.help.HelpsFragment"
         android:label="HelpsFragment"
@@ -109,4 +87,5 @@
     <include app:graph="@navigation/navigation_main_menu" />
     <include app:graph="@navigation/navigation_option_menu" />
     <include app:graph="@navigation/navigation_option_group" />
+    <include app:graph="@navigation/navigation_review" />
 </navigation>

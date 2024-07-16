@@ -11,13 +11,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.common.MainMenuSearchRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.MainMenusMappedByRequest
-import com.tenutz.storemngsim.databinding.*
-import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs
-import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupAddAdapter
-import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupAddViewModel
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMainMenuAddNavArgs
+import com.tenutz.storemngsim.databinding.FragmentOgMainMenuAddBinding
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenuAddViewModel.Companion.EVENT_NAVIGATE_UP
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -49,9 +45,9 @@ class OgMainMenuAddFragment: Fragment() {
         ) {
             it.takeIf {
                 !it.mainCategoryCode.isNullOrBlank() &&
-                !it.middleCategoryCode.isNullOrBlank() &&
-                !it.subCategoryCode.isNullOrBlank() &&
-                !it.menuCode.isNullOrBlank()
+                        !it.middleCategoryCode.isNullOrBlank() &&
+                        !it.subCategoryCode.isNullOrBlank() &&
+                        !it.menuCode.isNullOrBlank()
             }?.let {
                 vm.mapToMainMenus(
                     args.optionGroupCode,
@@ -85,6 +81,20 @@ class OgMainMenuAddFragment: Fragment() {
                 args.subCategoryCode,
             )
         )
+        editTextObservable(binding.editOgMainMenuAddSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.ogMainMenusAdd(
+                    args.optionGroupCode,
+                    MainMenuSearchRequest(
+                        args.mainCategoryCode,
+                        args.middleCategoryCode,
+                        args.subCategoryCode,
+                    )
+                )
+            }
+            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -122,7 +132,7 @@ class OgMainMenuAddFragment: Fragment() {
         vm.viewEvent.observe(viewLifecycleOwner) { event ->
             event?.getContentIfNotHandled()?.let {
                 when (it.first) {
-                    MmOptionGroupAddViewModel.EVENT_NAVIGATE_UP -> {
+                    EVENT_NAVIGATE_UP -> {
                         findNavController().navigateUp()
                     }
                 }
@@ -132,23 +142,10 @@ class OgMainMenuAddFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOgMainMenuAdd.adapter = adapter
-        editTextObservable(binding.editOgMainMenuAddSearch)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.ogMainMenusAdd(
-                    args.optionGroupCode,
-                    MainMenuSearchRequest(
-                        args.mainCategoryCode,
-                        args.middleCategoryCode,
-                        args.subCategoryCode,
-                    )
-                )
-            }
-            .addTo(disposable)
     }
 
     override fun onDestroyView() {
+        disposable.clear()
         super.onDestroyView()
         _binding = null
     }

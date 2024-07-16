@@ -37,7 +37,7 @@ class MainFragment: Fragment() {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToStatisticsFragment())
         }
         binding.btnMainReviewMng.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToReviewsFragment())
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToNavigationReview())
         }
         binding.btnMainHelp.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToHelpsFragment())

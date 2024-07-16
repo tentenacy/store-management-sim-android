@@ -1,5 +1,9 @@
 package com.tenutz.storemngsim.di.module
 
+import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepository
+import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepositoryImpl
+import com.tenutz.storemngsim.data.datasource.paging.source.mapper.ReviewsMapper
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.data.repository.category.CategoryRepositoryImpl
 import com.tenutz.storemngsim.data.repository.menu.MenuRepository
@@ -14,12 +18,26 @@ import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.data.repository.user.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class RepositoryModule {
+
+    companion object {
+
+        @Singleton
+        @Provides
+        fun provideReviewPagingRepository(
+            sckApi: SCKApi,
+            mapper: ReviewsMapper,
+        ): ReviewPagingRepository {
+            return ReviewPagingRepositoryImpl(sckApi, mapper)
+        }
+    }
 
     @Binds
     abstract fun provideCategoryRepository(

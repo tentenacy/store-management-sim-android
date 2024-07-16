@@ -7,6 +7,7 @@ data class StoreReviewsResponse(
     val siteCode: String?,
     val storeCode: String?,
     val middleCategoryCode: String?,
+    val middleCategoryName: String?,
     val createdBy: String?,
     val createdAt: Date?,
     val content: String?,

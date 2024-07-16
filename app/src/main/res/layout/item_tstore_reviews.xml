@@ -6,16 +6,17 @@
     <data>
 
         <variable
-            name="replyExists"
-            type="Boolean" />
+            name="args"
+            type="com.tenutz.storemngsim.data.datasource.paging.entity.StoreReviews.StoreReview" />
 
         <import type="android.view.View" />
+        <import type="com.tenutz.storemngsim.utils.ext.TimeExtKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_itstore_reviews_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/text_itstore_reviews_created_by"
@@ -27,6 +28,7 @@
             android:fontFamily="@font/ns_bold"
             android:textColor="@color/rect_4474"
             android:textSize="14sp"
+            android:text="@{args.createdBy}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="김길동" />
@@ -40,6 +42,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
+            android:text="@{TimeExtKt.toDateFormatKr(args.createdAt)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_created_by"
             tools:text="2022.08.30(화)" />
@@ -59,6 +62,7 @@
             android:paddingEnd="10dp"
             android:textColor="@color/rect_4474"
             android:textSize="15sp"
+            android:text="@{args.middleCategoryName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_created_at"
@@ -86,6 +90,7 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4474"
             android:textSize="14sp"
+            android:text="@{args.content}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_store_name"
@@ -116,7 +121,7 @@
             android:text="답변 작성하기"
             android:textColor="@color/rect_4475"
             android:textSize="14sp"
-            android:visibility="@{replyExists ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{args.storeReviewReply != null ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/barrier_itstore_reviews_1"
             app:layout_constraintStart_toEndOf="@id/image_itstore_reviews_reply"
             app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_content"
@@ -134,7 +139,8 @@
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4474"
             android:textSize="14sp"
-            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            android:text='@{args.storeReviewReply != null ? args.storeReviewReply.content : ""}'
+            android:visibility="@{args.storeReviewReply != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_itstore_reviews_reply"
             app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_content"
@@ -153,7 +159,7 @@
             android:paddingVertical="7dp"
             android:text="답변수정"
             android:textColor="@color/rect_4475"
-            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            android:visibility="@{args.storeReviewReply != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/barrier_itstore_reviews_1"
             app:layout_constraintStart_toStartOf="@id/text_itstore_reviews_reply_content"
             app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_reply_content"
@@ -171,7 +177,7 @@
             android:paddingVertical="7dp"
             android:text="삭제"
             android:textColor="@color/rect_4480"
-            android:visibility="@{replyExists ? View.VISIBLE : View.GONE}"
+            android:visibility="@{args.storeReviewReply != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toEndOf="@id/text_itstore_reviews_reply_edit"
             app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_reply_content"
             tools:visibility="visible" />

@@ -11,6 +11,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentOptionGroupsBinding
 import com.tenutz.storemngsim.ui.menu.optiongroup.bs.OptionGroupsBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu.OgOptionMenuAddViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -67,6 +68,13 @@ class OptionGroupsFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.optionGroups()
+        editTextObservable(binding.editOptionGroupsSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.optionGroups(it)
+            }
+            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -92,13 +100,6 @@ class OptionGroupsFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOptionGroups.adapter = adapter
-        editTextObservable(binding.editOptionGroupsSearch)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.optionGroups(it)
-            }
-            .addTo(disposable)
     }
 
     private fun observeData() {
@@ -109,7 +110,6 @@ class OptionGroupsFragment: Fragment() {
         vm.viewEvent.observe(viewLifecycleOwner) { event ->
             event?.getContentIfNotHandled()?.let {
                 when(it.first) {
-
                 }
             }
         }
@@ -127,6 +127,7 @@ class OptionGroupsFragment: Fragment() {
     }
 
     override fun onDestroyView() {
+        disposable.clear()
         super.onDestroyView()
         _binding = null
     }

@@ -10,6 +10,7 @@ data class MenuReviewsResponse(
     val middleCategoryCode: String?,
     val subCategoryCode: String?,
     val menuCode: String?,
+    val menuName: String?,
     val createdBy: String?,
     val createdAt: Date?,
     val content: String?,

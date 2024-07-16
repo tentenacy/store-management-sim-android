@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.review.menu.MenuReviewsViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_tmenu_reviews_container"
         android:layout_width="match_parent"
@@ -62,9 +69,9 @@
             android:id="@+id/radiogroup_tmenu_reviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:checkedButton="@id/radio_tmenu_reviews_all"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
+            tools:checkedButton="@id/radio_tmenu_reviews_all"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/constraint_tmenu_reviews_search_container">
@@ -103,7 +110,7 @@
                 android:minHeight="0dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="7dp"
-                android:text="제목"
+                android:text="메뉴"
                 android:textColor="@color/radio_text"
                 tools:ignore="HardcodedText" />
 

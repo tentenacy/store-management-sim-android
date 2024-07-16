@@ -60,6 +60,13 @@ class OgOptionMenuAddFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.ogOptionMenusAdd(args.optionGroupCode)
+        editTextObservable(binding.editOgOptionMenuAddSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.ogOptionMenusAdd(args.optionGroupCode)
+            }
+            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -100,16 +107,10 @@ class OgOptionMenuAddFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOgOptionMenuAdd.adapter = adapter
-        editTextObservable(binding.editOgOptionMenuAddSearch)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.ogOptionMenusAdd(args.optionGroupCode)
-            }
-            .addTo(disposable)
     }
 
     override fun onDestroyView() {
+        disposable.clear()
         super.onDestroyView()
         _binding = null
     }

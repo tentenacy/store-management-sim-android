@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.review.store.StoreReviewsViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_tstore_reviews_container"
         android:layout_width="match_parent"
@@ -103,7 +110,7 @@
                 android:minHeight="0dp"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="7dp"
-                android:text="제목"
+                android:text="가맹점"
                 android:textColor="@color/radio_text"
                 tools:ignore="HardcodedText" />
 

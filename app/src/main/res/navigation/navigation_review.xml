@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_review"
+    app:startDestination="@id/reviewsFragment">
+
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.tenutz.storemngsim.ui.review.ReviewsFragment"
+        android:label="ReviewsFragment"
+        tools:layout="@layout/fragment_reviews">
+        <action
+            android:id="@+id/action_reviewsFragment_to_storeReplyPostFragment"
+            app:destination="@id/storeReplyPostFragment" />
+        <action
+            android:id="@+id/action_reviewsFragment_to_menuReplyPostFragment"
+            app:destination="@id/menuReplyPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/storeReplyPostFragment"
+        android:name="com.tenutz.storemngsim.ui.review.store.StoreReplyPostFragment"
+        android:label="StoreReplyPostFragment"
+        tools:layout="@layout/fragment_store_reply_post">
+
+        <argument android:name="storeReview" app:argType="com.tenutz.storemngsim.ui.review.store.args.StoreReplyPostNavArgs" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuReplyPostFragment"
+        android:name="com.tenutz.storemngsim.ui.review.menu.MenuReplyPostFragment"
+        android:label="MenuReplyPostFragment"
+        tools:layout="@layout/fragment_menu_reply_post">
+
+        <argument android:name="menuReview" app:argType="com.tenutz.storemngsim.ui.review.menu.args.MenuReplyPostNavArgs" />
+    </fragment>
+</navigation>
