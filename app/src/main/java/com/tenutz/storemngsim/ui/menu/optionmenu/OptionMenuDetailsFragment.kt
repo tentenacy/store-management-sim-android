@@ -80,7 +80,7 @@ class OptionMenuDetailsFragment: Fragment() {
 
     private fun observeData() {
         vm.image.observe(viewLifecycleOwner) {
-            CommonBindingAdapter.showImage(binding.imageOptionMenuDetailsThumbnail, it)
+            CommonBindingAdapter.showImage(binding.imageOptionMenuDetailsThumbnail, it, null)
         }
     }
 

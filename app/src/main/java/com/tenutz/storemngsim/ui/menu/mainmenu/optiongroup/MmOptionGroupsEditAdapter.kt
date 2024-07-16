@@ -28,7 +28,7 @@ class MmOptionGroupsEditViewHolder(
         }
     }
 
-    override fun bind(item: MmOptionGroupsEditArgs.MainMenuOptionGroup) {
+    override fun bind(position: Int, item: MmOptionGroupsEditArgs.MainMenuOptionGroup) {
         binding.name = item.optionName
         binding.code = item.optionGroupCode
         binding.checkImmOptionGroupsEdit.setOnCheckedChangeListener(null)

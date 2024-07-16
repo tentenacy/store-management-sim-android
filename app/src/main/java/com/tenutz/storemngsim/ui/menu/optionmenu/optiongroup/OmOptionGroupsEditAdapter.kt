@@ -25,7 +25,7 @@ class OmOptionGroupsEditViewHolder(
         }
     }
 
-    override fun bind(item: OmOptionGroupsEditArgs.OptionOptionGroupEdit) {
+    override fun bind(position: Int, item: OmOptionGroupsEditArgs.OptionOptionGroupEdit) {
         binding.args = item
         binding.checkIomOptionGroupsEdit.setOnCheckedChangeListener(null)
         if(item.checked != binding.checkIomOptionGroupsEdit.isChecked) {

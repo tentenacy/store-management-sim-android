@@ -48,7 +48,7 @@ sealed class SubCategoriesEditViewHolder(
             }
         }
 
-        override fun bind(args: SubCategoriesNavArgs) {
+        override fun bind(position: Int, args: SubCategoriesNavArgs) {
             binding.args = args
         }
     }
@@ -65,7 +65,7 @@ sealed class SubCategoriesEditViewHolder(
             }
         }
 
-        override fun bind(item: SubCategoriesEditArgs.SubCategoryEdit) {
+        override fun bind(position: Int, item: SubCategoriesEditArgs.SubCategoryEdit) {
             binding.name = item.categoryName
             binding.code = item.categoryCode
             binding.checkIsubCategoriesEdit.setOnCheckedChangeListener(null)
@@ -111,10 +111,10 @@ class SubCategoriesEditAdapter(
         items.getOrNull(position)?.let {
             when (holder) {
                 is SubCategoriesEditViewHolder.SubCategoriesEditTopViewHolder -> {
-                    holder.bind(args)
+                    holder.bind(position, args)
                 }
                 is SubCategoriesEditViewHolder.SubCategoryEditViewHolder -> {
-                    holder.bind((it as SubCategoriesEditItem.Data).value)
+                    holder.bind(position, (it as SubCategoriesEditItem.Data).value)
 
                     holder.binding.imageIsubCategoriesEditList.setOnTouchListener { v: View?, event: MotionEvent? ->
                         if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {

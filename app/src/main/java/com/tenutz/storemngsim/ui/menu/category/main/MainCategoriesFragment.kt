@@ -78,13 +78,6 @@ class MainCategoriesFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.mainCategories()
-        editTextObservable(binding.editMainCategoriesSearch)
-            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.mainCategories(it)
-            }
-            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -110,6 +103,13 @@ class MainCategoriesFragment : Fragment() {
 
     private fun initViews() {
         binding.recyclerMainCategories.adapter = adapter
+        editTextObservable(binding.editMainCategoriesSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.mainCategories(it)
+            }
+            .addTo(disposable)
     }
 
     private fun observeData() {

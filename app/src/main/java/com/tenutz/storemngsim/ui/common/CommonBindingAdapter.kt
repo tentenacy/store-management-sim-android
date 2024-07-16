@@ -24,16 +24,22 @@ import kotlin.math.min
 object CommonBindingAdapter {
 
     @JvmStatic
-    @BindingAdapter("bind:showImage")
-    fun showImage(imageView: ImageView, imageUrl: String?) {
+    @BindingAdapter("bind:showImage", "bind:imageRadius", requireAll = false)
+    fun showImage(imageView: ImageView, imageUrl: String?, radius: Int?) {
         Glide.with(imageView.context)
             .asBitmap()
             .load(imageUrl)
             .apply(
                 RequestOptions.bitmapTransform(
                     MultiTransformation(
-                        CenterCrop(),
-                        RoundedCorners(8.toPx.toInt()),
+                        *listOfNotNull(
+                            CenterCrop(),
+                            radius?.let {
+                                it.takeIf { it > 0 }?.let {
+                                    RoundedCorners(it.toPx.toInt())
+                                }
+                            } ?: RoundedCorners(8.toPx.toInt()),
+                        ).toTypedArray()
                     )
                 )
             )
@@ -42,16 +48,22 @@ object CommonBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("bind:showImage")
-    fun showImage(imageView: ImageView, image: Image?) {
+    @BindingAdapter("bind:showImage", "bind:imageRadius", requireAll = false)
+    fun showImage(imageView: ImageView, image: Image?, radius: Int?) {
         Glide.with(imageView.context)
             .asBitmap()
             .load(image?.uri)
             .apply(
                 RequestOptions.bitmapTransform(
                     MultiTransformation(
-                        CenterCrop(),
-                        RoundedCorners(16.toPx.toInt()),
+                        *listOfNotNull(
+                            CenterCrop(),
+                            radius?.let {
+                                it.takeIf { it > 0 }?.let {
+                                    RoundedCorners(it.toPx.toInt())
+                                }
+                            } ?: RoundedCorners(16.toPx.toInt()),
+                        ).toTypedArray()
                     )
                 )
             )

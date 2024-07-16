@@ -68,13 +68,6 @@ class OptionGroupsFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.optionGroups()
-        editTextObservable(binding.editOptionGroupsSearch)
-            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.optionGroups(it)
-            }
-            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -100,6 +93,13 @@ class OptionGroupsFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOptionGroups.adapter = adapter
+        editTextObservable(binding.editOptionGroupsSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.optionGroups(it)
+            }
+            .addTo(disposable)
     }
 
     private fun observeData() {

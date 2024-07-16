@@ -69,18 +69,6 @@ class MmOptionGroupAddFragment: Fragment() {
             args.subCategoryCode,
             args.mainMenuCode,
         )
-        editTextObservable(binding.editMmOptionGroupAddSearch)
-            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.mmOptionGroups(
-                    args.mainCategoryCode,
-                    args.middleCategoryCode,
-                    args.subCategoryCode,
-                    args.mainMenuCode,
-                )
-            }
-            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -121,6 +109,18 @@ class MmOptionGroupAddFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerMmOptionGroupAdd.adapter = adapter
+        editTextObservable(binding.editMmOptionGroupAddSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.mmOptionGroups(
+                    args.mainCategoryCode,
+                    args.middleCategoryCode,
+                    args.subCategoryCode,
+                    args.mainMenuCode,
+                )
+            }
+            .addTo(disposable)
     }
 
 

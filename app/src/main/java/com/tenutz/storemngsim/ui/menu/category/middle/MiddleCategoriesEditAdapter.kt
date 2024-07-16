@@ -27,7 +27,7 @@ class MiddleCategoriesEditViewHolder(
         }
     }
 
-    override fun bind(item: MiddleCategoriesEditArgs.MiddleCategoryEdit) {
+    override fun bind(position: Int, item: MiddleCategoriesEditArgs.MiddleCategoryEdit) {
         binding.name = item.categoryName
         binding.code = item.categoryCode
         binding.checkImiddleCategoriesEdit.setOnCheckedChangeListener(null)

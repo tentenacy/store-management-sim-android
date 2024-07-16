@@ -45,9 +45,9 @@ class OgMainMenuAddFragment: Fragment() {
         ) {
             it.takeIf {
                 !it.mainCategoryCode.isNullOrBlank() &&
-                        !it.middleCategoryCode.isNullOrBlank() &&
-                        !it.subCategoryCode.isNullOrBlank() &&
-                        !it.menuCode.isNullOrBlank()
+                !it.middleCategoryCode.isNullOrBlank() &&
+                !it.subCategoryCode.isNullOrBlank() &&
+                !it.menuCode.isNullOrBlank()
             }?.let {
                 vm.mapToMainMenus(
                     args.optionGroupCode,
@@ -81,20 +81,6 @@ class OgMainMenuAddFragment: Fragment() {
                 args.subCategoryCode,
             )
         )
-        editTextObservable(binding.editOgMainMenuAddSearch)
-            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.ogMainMenusAdd(
-                    args.optionGroupCode,
-                    MainMenuSearchRequest(
-                        args.mainCategoryCode,
-                        args.middleCategoryCode,
-                        args.subCategoryCode,
-                    )
-                )
-            }
-            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -142,6 +128,20 @@ class OgMainMenuAddFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOgMainMenuAdd.adapter = adapter
+        editTextObservable(binding.editOgMainMenuAddSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.ogMainMenusAdd(
+                    args.optionGroupCode,
+                    MainMenuSearchRequest(
+                        args.mainCategoryCode,
+                        args.middleCategoryCode,
+                        args.subCategoryCode,
+                    )
+                )
+            }
+            .addTo(disposable)
     }
 
     override fun onDestroyView() {

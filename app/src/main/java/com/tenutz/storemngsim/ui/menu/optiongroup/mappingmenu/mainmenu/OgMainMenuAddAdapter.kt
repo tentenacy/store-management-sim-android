@@ -24,7 +24,7 @@ class OgMainMenuAddViewHolder(
         binding.constraintIogMainMenuAddCategoriesContainer.tag = binding.constraintIogMainMenuAddCategoriesContainer.visibility
     }
 
-    override fun bind(item: OgMainMenuAddArgs.OptionGroupMainMenus) {
+    override fun bind(position: Int, item: OgMainMenuAddArgs.OptionGroupMainMenus) {
         binding.args = item
         if(item.expanded != binding.constraintIogMainMenuAddCategoriesContainer.isVisible) {
             onExpandedChangeListener(item)

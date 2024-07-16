@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.data.repository.category
 
-import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.api.dto.category.*
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class CategoryRepositoryImpl @Inject constructor(
-    private val sckApi: SCKApi,
+    private val sckApi: SMSApi,
 ) : CategoryRepository {
 
     override fun mainCategories(cond: CommonCondition?): Single<Result<MainCategoriesResponse>> =

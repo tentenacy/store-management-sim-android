@@ -11,7 +11,7 @@ import com.tenutz.storemngsim.ui.base.BaseViewHolder
 
 class MiddleCategoriesViewHolder(val binding: ItemMiddleCategoriesBinding, private val listener: (MiddleCategoriesResponse.MiddleCategory) -> Unit): BaseViewHolder<MiddleCategoriesResponse.MiddleCategory>(binding.root) {
 
-    override fun bind(item: MiddleCategoriesResponse.MiddleCategory) {
+    override fun bind(position: Int, item: MiddleCategoriesResponse.MiddleCategory) {
         binding.name = item.categoryName
         binding.code = item.categoryCode
         binding.use = item.use

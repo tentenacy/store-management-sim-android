@@ -15,7 +15,7 @@ class OgOptionMenuAddViewHolder(
     private val listener: (OgOptionMenuAddArgs.OptionGroupOptionMenus) -> Unit
 ): BaseViewHolder<OgOptionMenuAddArgs.OptionGroupOptionMenus>(binding.root) {
 
-    override fun bind(item: OgOptionMenuAddArgs.OptionGroupOptionMenus) {
+    override fun bind(position: Int, item: OgOptionMenuAddArgs.OptionGroupOptionMenus) {
         binding.args = item
         binding.textIogOptionMenuAdd.setOnClickListener {
             listener(item)

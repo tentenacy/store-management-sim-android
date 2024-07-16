@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.data.repository.store
 
-import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.store.*
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class StoreRepositoryImpl @Inject constructor(
-    private val sckApi: SCKApi,
+    private val sckApi: SMSApi,
 ) : StoreRepository {
     override fun equipments(): Single<Result<EquipmentsResponse>> =
         sckApi.equipments()

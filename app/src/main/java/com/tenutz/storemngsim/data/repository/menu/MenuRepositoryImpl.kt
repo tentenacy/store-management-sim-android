@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.data.repository.menu
 
-import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class MenuRepositoryImpl @Inject constructor(
-    private val sckApi: SCKApi,
+    private val sckApi: SMSApi,
 ) : MenuRepository {
 
     override fun mainMenus(

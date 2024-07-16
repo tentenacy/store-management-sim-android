@@ -25,7 +25,7 @@ class OgOptionMenusEditViewHolder(
         }
     }
 
-    override fun bind(item: OgOptionMenusEditArgs.OptionGroupOptionMenuMapper) {
+    override fun bind(position: Int, item: OgOptionMenusEditArgs.OptionGroupOptionMenuMapper) {
         binding.args = item
         binding.checkImainCategoriesEdit.setOnCheckedChangeListener(null)
         if(item.checked != binding.checkImainCategoriesEdit.isChecked) {

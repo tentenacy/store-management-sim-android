@@ -92,13 +92,6 @@ class OptionMenusFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.optionMenus()
-        editTextObservable(binding.editOptionMenusSearch)
-            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.optionMenus(it)
-            }
-            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -149,6 +142,13 @@ class OptionMenusFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOptionMenus.adapter = adapter
+        editTextObservable(binding.editOptionMenusSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.optionMenus(it)
+            }
+            .addTo(disposable)
     }
 
     private fun setOnClickListeners() {

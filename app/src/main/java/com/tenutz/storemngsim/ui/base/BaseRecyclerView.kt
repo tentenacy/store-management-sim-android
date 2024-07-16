@@ -29,7 +29,7 @@ abstract class BaseRecyclerView<T: Any, VH: BaseViewHolder<T>>: RecyclerView.Ada
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         items.getOrNull(position)?.let {
-            holder.bind(it)
+            holder.bind(position, it)
         }
     }
 

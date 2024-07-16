@@ -1,4 +1,4 @@
-package com.tenutz.storemngsim.ui.menu.mainmenu
+ package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +23,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
-@AndroidEntryPoint
+ @AndroidEntryPoint
 class MainMenusFragment: Fragment() {
 
     private val disposable = CompositeDisposable()
@@ -48,9 +48,9 @@ class MainMenusFragment: Fragment() {
                                     R.id.btn_bsmain_menus_option_group -> {
                                         (item as MainMenusResponse.MainMenu).takeIf {
                                             !it.mainCategoryCode.isNullOrBlank() &&
-                                                    !it.middleCategoryCode.isNullOrBlank() &&
-                                                    !it.subCategoryCode.isNullOrBlank() &&
-                                                    !it.menuCode.isNullOrBlank()
+                                            !it.middleCategoryCode.isNullOrBlank() &&
+                                            !it.subCategoryCode.isNullOrBlank() &&
+                                            !it.menuCode.isNullOrBlank()
                                         }?.let {
                                             MainMenusFragmentDirections.actionMainMenusFragmentToMmOptionGroupsFragment().let { action ->
                                                 findNavController().navigate(
@@ -116,13 +116,6 @@ class MainMenusFragment: Fragment() {
         Logger.i(args.toString())
 
         vm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode)
-        editTextObservable(binding.editMainMenusSearch)
-            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode, it)
-            }
-            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -172,6 +165,13 @@ class MainMenusFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerMainMenus.adapter = adapter
+        editTextObservable(binding.editMainMenusSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode, it)
+            }
+            .addTo(disposable)
     }
 
     private fun setOnClickListeners() {

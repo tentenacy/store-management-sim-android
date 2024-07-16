@@ -19,7 +19,7 @@ class OptionMenusEditViewHolder(
         }
     }
 
-    override fun bind(item: OptionMenusEditArgs.OptionEdit) {
+    override fun bind(position: Int, item: OptionMenusEditArgs.OptionEdit) {
         binding.args = item
         binding.checkImainCategoriesEdit.setOnCheckedChangeListener(null)
         if(item.checked != binding.checkImainCategoriesEdit.isChecked) {

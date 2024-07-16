@@ -1,11 +1,13 @@
 package com.tenutz.storemngsim.di.module
 
-import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepository
 import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepositoryImpl
 import com.tenutz.storemngsim.data.datasource.paging.source.mapper.ReviewsMapper
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.data.repository.category.CategoryRepositoryImpl
+import com.tenutz.storemngsim.data.repository.help.HelpRepository
+import com.tenutz.storemngsim.data.repository.help.HelpRepositoryImpl
 import com.tenutz.storemngsim.data.repository.menu.MenuRepository
 import com.tenutz.storemngsim.data.repository.menu.MenuRepositoryImpl
 import com.tenutz.storemngsim.data.repository.option.OptionRepository
@@ -32,10 +34,10 @@ abstract class RepositoryModule {
         @Singleton
         @Provides
         fun provideReviewPagingRepository(
-            sckApi: SCKApi,
+            SMSApi: SMSApi,
             mapper: ReviewsMapper,
         ): ReviewPagingRepository {
-            return ReviewPagingRepositoryImpl(sckApi, mapper)
+            return ReviewPagingRepositoryImpl(SMSApi, mapper)
         }
     }
 
@@ -68,4 +70,9 @@ abstract class RepositoryModule {
     abstract fun provideUserRepository(
         repository: UserRepositoryImpl
     ): UserRepository
+
+    @Binds
+    abstract fun provideHelpRepository(
+        repository: HelpRepositoryImpl
+    ): HelpRepository
 }

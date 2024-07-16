@@ -9,7 +9,7 @@ import com.tenutz.storemngsim.ui.base.BaseViewHolder
 
 class MainCategoriesViewHolder(val binding: ItemMainCategoriesBinding, private val listener: (MainCategoriesResponse.MainCategory) -> Unit): BaseViewHolder<MainCategoriesResponse.MainCategory>(binding.root) {
 
-    override fun bind(item: MainCategoriesResponse.MainCategory) {
+    override fun bind(position: Int, item: MainCategoriesResponse.MainCategory) {
         binding.name = item.categoryName
         binding.code = item.categoryCode
         binding.use = item.use

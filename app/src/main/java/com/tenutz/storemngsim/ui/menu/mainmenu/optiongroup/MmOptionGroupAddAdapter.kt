@@ -10,7 +10,7 @@ import com.tenutz.storemngsim.ui.base.BaseViewHolder
 
 class MmOptionGroupAddViewHolder(val binding: ItemMmOptionGroupAddBinding, private val listener: (MainMenuOptionGroupsResponse.MainMenuOptionGroup) -> Unit): BaseViewHolder<MainMenuOptionGroupsResponse.MainMenuOptionGroup>(binding.root) {
 
-    override fun bind(item: MainMenuOptionGroupsResponse.MainMenuOptionGroup) {
+    override fun bind(position: Int, item: MainMenuOptionGroupsResponse.MainMenuOptionGroup) {
         binding.name = item.optionName
         binding.code = item.optionGroupCode
         binding.textImmOptionGroupAdd.setOnClickListener {

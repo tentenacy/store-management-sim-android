@@ -57,13 +57,6 @@ class OmOptionGroupAddFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         vm.omOptionGroups(args.optionMenuCode)
-        editTextObservable(binding.editOmOptionGroupAddSearch)
-            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                vm.omOptionGroups(args.optionMenuCode)
-            }
-            .addTo(disposable)
     }
 
     override fun onCreateView(
@@ -104,6 +97,13 @@ class OmOptionGroupAddFragment: Fragment() {
 
     private fun initViews() {
         binding.recyclerOmOptionGroupAdd.adapter = adapter
+        editTextObservable(binding.editOmOptionGroupAddSearch)
+            .debounce(500, TimeUnit.MILLISECONDS).skip(1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                vm.omOptionGroups(args.optionMenuCode)
+            }
+            .addTo(disposable)
     }
 
 

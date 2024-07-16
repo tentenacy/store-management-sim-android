@@ -34,7 +34,7 @@ sealed class SubCategoriesViewHolder(
             }
         }
 
-        override fun bind(args: SubCategoriesNavArgs) {
+        override fun bind(position: Int, args: SubCategoriesNavArgs) {
             binding.args = args
         }
     }
@@ -44,7 +44,7 @@ sealed class SubCategoriesViewHolder(
         private val onClickListener: (Int, Any?) -> Unit,
     ) : BaseViewHolder<SubCategoriesResponse.SubCategory>(binding.root) {
 
-        override fun bind(item: SubCategoriesResponse.SubCategory) {
+        override fun bind(position: Int, item: SubCategoriesResponse.SubCategory) {
             binding.name = item.categoryName
             binding.code = item.categoryCode
             binding.use = item.use
@@ -71,10 +71,10 @@ class SubCategoriesAdapter(
         items.getOrNull(position)?.let {
             when(holder) {
                 is SubCategoriesViewHolder.SubCategoriesTopViewHolder -> {
-                    holder.bind(args)
+                    holder.bind(position, args)
                 }
                 is SubCategoriesViewHolder.SubCategoryViewHolder -> {
-                    holder.bind((it as SubCategoriesItem.Data).value)
+                    holder.bind(position, (it as SubCategoriesItem.Data).value)
                 }
             }
         }

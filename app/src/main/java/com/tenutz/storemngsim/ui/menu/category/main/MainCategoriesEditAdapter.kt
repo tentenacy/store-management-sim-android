@@ -26,7 +26,7 @@ class MainCategoriesEditViewHolder(
         }
     }
 
-    override fun bind(item: MainCategoriesEditArgs.MainCategoryEdit) {
+    override fun bind(position: Int, item: MainCategoriesEditArgs.MainCategoryEdit) {
         binding.name = item.categoryName
         binding.code = item.categoryCode
         binding.checkImainCategoriesEdit.setOnCheckedChangeListener(null)

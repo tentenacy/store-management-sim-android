@@ -3,7 +3,7 @@ package com.tenutz.storemngsim.di.module
 import android.content.Context
 import com.google.gson.GsonBuilder
 import com.tenutz.storemngsim.BuildConfig
-import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.api.UserApi
 import com.tenutz.storemngsim.network.authenticator.TokenAuthenticator
 import com.tenutz.storemngsim.network.interceptor.TokenInterceptor
@@ -97,7 +97,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOMSApi(retrofitBuilder: Retrofit.Builder): SCKApi {
+    fun provideOMSApi(retrofitBuilder: Retrofit.Builder): SMSApi {
         return retrofitBuilder
             .baseUrl(BuildConfig.API_URL_BASE)
             .build()

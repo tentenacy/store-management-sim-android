@@ -13,7 +13,7 @@ class StoreReviewViewHolder(
     private val onClickListener: (Int, Any?) -> Unit,
 ): BaseViewHolder<StoreReviews.StoreReview>(binding.root) {
 
-    override fun bind(item: StoreReviews.StoreReview) {
+    override fun bind(position: Int, item: StoreReviews.StoreReview) {
         binding.args = item
         binding.textItstoreReviewsReplyPost.setOnClickListener { view ->
             onClickListener(view.id, item)
@@ -37,7 +37,7 @@ class StoreReviewsAdapter(private val onClickListener: (Int, Any?) -> Unit): Pag
 
     override fun onBindViewHolder(holder: StoreReviewViewHolder, position: Int) {
         getItem(position)?.let {
-            holder.bind(it)
+            holder.bind(position, it)
         }
     }
 

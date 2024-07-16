@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.data.repository.optiongroup
 
-import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.MainMenuSearchRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class OptionGroupRepositoryImpl @Inject constructor(
-    private val sckApi: SCKApi,
+    private val sckApi: SMSApi,
 ) : OptionGroupRepository {
     override fun optionGroups(commonCond: CommonCondition?): Single<Result<OptionGroupsResponse>> =
         sckApi.optionGroups(commonCond?.query)

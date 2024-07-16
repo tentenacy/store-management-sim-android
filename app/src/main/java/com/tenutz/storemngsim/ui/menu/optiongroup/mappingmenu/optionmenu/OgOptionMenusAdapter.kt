@@ -9,7 +9,7 @@ import com.tenutz.storemngsim.ui.base.BaseViewHolder
 
 class OgOptionMenusViewHolder(val binding: ItemTogOptionMenusBinding, private val listener: (OptionGroupOptionMappersResponse.OptionGroupOptionMapper) -> Unit): BaseViewHolder<OptionGroupOptionMappersResponse.OptionGroupOptionMapper>(binding.root) {
 
-    override fun bind(item: OptionGroupOptionMappersResponse.OptionGroupOptionMapper) {
+    override fun bind(position: Int, item: OptionGroupOptionMappersResponse.OptionGroupOptionMapper) {
         binding.args = item
         binding.constraintItogOptionMenusContainer.setOnClickListener {
             listener(item)

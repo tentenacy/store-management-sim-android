@@ -19,7 +19,7 @@ class OptionGroupsEditViewHolder(
         }
     }
 
-    override fun bind(item: OptionGroupsEditArgs.OptionGroup) {
+    override fun bind(position: Int, item: OptionGroupsEditArgs.OptionGroup) {
         binding.args = item
         binding.checkIoptionGroupsEdit.setOnCheckedChangeListener(null)
         if(item.checked != binding.checkIoptionGroupsEdit.isChecked) {

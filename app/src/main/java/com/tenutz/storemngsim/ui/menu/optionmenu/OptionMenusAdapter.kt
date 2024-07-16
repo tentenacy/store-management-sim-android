@@ -21,7 +21,7 @@ class OptionMenusViewHolder(
         }
     }
 
-    override fun bind(item: OptionsResponse.Option) {
+    override fun bind(position: Int, item: OptionsResponse.Option) {
         _item = item
         binding.args = item
     }

@@ -10,6 +10,7 @@ import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersRespon
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionOptionGroupsResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.*
+import com.tenutz.storemngsim.ui.help.args.HelpsArgs
 import com.tenutz.storemngsim.ui.menu.category.main.args.MainCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoriesEditItem
@@ -142,6 +143,10 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is OgOptionMenuAddArgs.OptionGroupOptionMenus && newItem is OgOptionMenuAddArgs.OptionGroupOptionMenus -> {
                 oldItem.optionCode == newItem.optionCode
+            }
+            oldItem is HelpsArgs.Help && newItem is HelpsArgs.Help -> {
+                oldItem.seq == newItem.seq &&
+                        oldItem.expanded == newItem.expanded
             }
             else -> {
                 false

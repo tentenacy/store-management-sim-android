@@ -2,7 +2,7 @@ package com.tenutz.storemngsim.data.datasource.paging.source
 
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
-import com.tenutz.storemngsim.data.datasource.api.SCKApi
+import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.paging.entity.StoreReviews
 import com.tenutz.storemngsim.data.datasource.paging.source.mapper.ReviewsMapper
@@ -13,7 +13,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class StoreReviewsPagingSource @Inject constructor(
-    private val sckApi: SCKApi,
+    private val sckApi: SMSApi,
     private val mapper: ReviewsMapper,
     private val commonCond: CommonCondition,
 ): RxPagingSource<Int, StoreReviews.StoreReview>() {

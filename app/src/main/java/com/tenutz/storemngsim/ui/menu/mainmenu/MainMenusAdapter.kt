@@ -22,7 +22,7 @@ class MainMenusViewHolder(
         }
     }
 
-    override fun bind(item: MainMenusResponse.MainMenu) {
+    override fun bind(position: Int, item: MainMenusResponse.MainMenu) {
         _item = item
         binding.args = item
     }
