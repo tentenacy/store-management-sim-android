@@ -51,7 +51,7 @@ data class StoreReviews(
     @Parcelize
     @Entity(tableName = "store_review_remote_keys")
     data class StoreReviewRemoteKeys(
-        @PrimaryKey val seq: Long,
+        @PrimaryKey(autoGenerate = true) val id: Long,
         val prevKey: Int?,
         val nextKey: Int,
     ): Parcelable

@@ -168,5 +168,22 @@
             tools:listitem="@layout/overview_item_tmenu_reviews"
             tools:itemCount="1" />
 
+        <TextView
+            android:id="@+id/text_tmenu_reviews_empty"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:text="목록이 없습니다."
+            android:textColor="@color/rect_4481"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_tmenu_reviews"
+            app:layout_constraintEnd_toEndOf="@id/recycler_tmenu_reviews"
+            app:layout_constraintStart_toStartOf="@id/recycler_tmenu_reviews"
+            app:layout_constraintTop_toTopOf="@id/recycler_tmenu_reviews"
+            tools:ignore="HardcodedText"
+            tools:visibility="invisible" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

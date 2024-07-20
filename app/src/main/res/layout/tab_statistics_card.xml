@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.statistics.card.StatisticsCardViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_tstatistics_card_container"
         android:layout_width="match_parent"
@@ -35,6 +44,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_tstatistics_card_title" />
+
+        <TextView
+            android:id="@+id/text_tstatistics_card_empty"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:text="목록이 없습니다."
+            android:textColor="@color/rect_4481"
+            android:textSize="16sp"
+            android:visibility="@{vm.cardSalesList.contents.size() > 0 ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_tstatistics_card"
+            app:layout_constraintEnd_toEndOf="@id/recycler_tstatistics_card"
+            app:layout_constraintStart_toStartOf="@id/recycler_tstatistics_card"
+            app:layout_constraintTop_toTopOf="@id/recycler_tstatistics_card"
+            tools:ignore="HardcodedText"
+            tools:visibility="invisible" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

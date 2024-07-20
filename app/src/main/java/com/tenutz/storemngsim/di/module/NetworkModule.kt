@@ -1,6 +1,5 @@
 package com.tenutz.storemngsim.di.module
 
-import android.content.Context
 import com.google.gson.GsonBuilder
 import com.tenutz.storemngsim.BuildConfig
 import com.tenutz.storemngsim.data.datasource.api.SMSApi
@@ -11,7 +10,6 @@ import com.tenutz.storemngsim.utils.converter.DateDeserializer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.statistics.time.StatisticsTimeViewModel" />
+    </data>
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_tstatistics_time_container"
         android:layout_width="match_parent"
@@ -28,7 +35,8 @@
             android:id="@+id/radiogroup_tstatistics_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:checkedButton="@id/radio_tstatistics_time_all"
+            tools:checkedButton="@id/radio_tstatistics_time_all"
+            android:checkedButton="@{vm.timeButton != null ? vm.timeButton : @id/radio_tstatistics_time_all}"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +56,7 @@
                 android:gravity="center"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
+                android:onClick="@{(v) -> vm.setTimeButton(v)}"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="7dp"
                 android:text="전체"
@@ -67,6 +76,7 @@
                 android:gravity="center"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
+                android:onClick="@{(v) -> vm.setTimeButton(v)}"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="7dp"
                 android:text="카드"
@@ -86,6 +96,7 @@
                 android:gravity="center"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
+                android:onClick="@{(v) -> vm.setTimeButton(v)}"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="7dp"
                 android:text="현금"
@@ -95,15 +106,16 @@
 
         <TextView
             android:id="@+id/text_tstatistics_time_chart_unit"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/ns_regular"
             android:text="(만원)"
             android:textColor="@color/rect_4480"
-            android:fontFamily="@font/ns_regular"
-            style="@style/Text"
             android:textSize="10sp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@id/text_tstatistics_time_title"
+            android:layout_marginStart="19dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/radiogroup_tstatistics_time"
             tools:ignore="HardcodedText,SmallSp" />
 
@@ -184,10 +196,11 @@
         <com.github.mikephil.charting.charts.CombinedChart
             android:id="@+id/chart_tstatistics_time"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:orientation="horizontal"
-            android:paddingHorizontal="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_tstatistics_time_chart_unit" />

@@ -38,4 +38,16 @@
         <item name="android:background">@drawable/bottom_sheet</item>
     </style>
 
+    <style name="PointerCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlayPointerCardView</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlayPointerCardView" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomRight">6dp</item>
+        <item name="cornerSizeBottomLeft">6dp</item>
+    </style>
+
 </resources>

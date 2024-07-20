@@ -17,8 +17,8 @@ interface StoreApi {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("sort") sort: String? = null,
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
         @Query("paymentType") paymentType: String? = null,
@@ -28,8 +28,8 @@ interface StoreApi {
 
     @GET("/stores/sales/total")
     fun salesTotal(
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
         @Query("paymentType") paymentType: String? = null,
@@ -42,8 +42,8 @@ interface StoreApi {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("sort") sort: String? = null,
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
         @Query("mainCategoryCode") mainCategoryCode: String? = null,
@@ -51,8 +51,8 @@ interface StoreApi {
 
     @GET("/stores/statistics/sales-by-menu/total")
     fun statisticsSalesTotalByMenu(
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
         @Query("mainCategoryCode") mainCategoryCode: String? = null,
@@ -60,16 +60,16 @@ interface StoreApi {
 
     @GET("/stores/statistics/sales-by-card")
     fun statisticsSalesByCreditCard(
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
     ): Single<StatisticsSalesByCreditCardResponse>
 
     @GET("/stores/statistics/sales-by-card/total")
     fun statisticsSalesTotalByCreditCard(
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
     ): Single<StatisticsSalesTotalByCreditCardResponse>
@@ -79,16 +79,16 @@ interface StoreApi {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("sort") sort: String? = null,
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
-    ): Single<PageResponse<StatisticsSalesByTimeResponse>>
+    ): Single<StatisticsSalesByTimeResponse>
 
     @GET("/stores/statistics/sales-by-time/total")
     fun statisticsSalesTotalByTime(
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
     ): Single<StatisticsSalesTotalByTimeResponse>
@@ -98,8 +98,8 @@ interface StoreApi {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("sort") sort: String? = null,
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
     ): Single<PageResponse<StoreReviewsResponse>>
@@ -124,8 +124,8 @@ interface StoreApi {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("sort") sort: String? = null,
-        @Query("dateFrom") dateFrom: Date? = null,
-        @Query("dateTo") dateTo: Date? = null,
+        @Query("dateFrom") dateFrom: String? = null,
+        @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
         @Query("queryType") queryType: String? = null,
     ): Single<PageResponse<MenuReviewsResponse>>

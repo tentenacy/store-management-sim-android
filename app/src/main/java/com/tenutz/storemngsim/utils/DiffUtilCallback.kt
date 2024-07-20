@@ -10,6 +10,7 @@ import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersRespon
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionOptionGroupsResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.*
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByCreditCardResponse
 import com.tenutz.storemngsim.ui.help.args.HelpsArgs
 import com.tenutz.storemngsim.ui.menu.category.main.args.MainCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
@@ -43,14 +44,14 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is MainCategoriesEditArgs.MainCategoryEdit && newItem is MainCategoriesEditArgs.MainCategoryEdit -> {
                 (oldItem.categoryCode == newItem.categoryCode) &&
-                        (oldItem.checked == newItem.checked)
+                (oldItem.checked == newItem.checked)
             }
             oldItem is MiddleCategoriesResponse.MiddleCategory && newItem is MiddleCategoriesResponse.MiddleCategory -> {
                 (oldItem.categoryCode == newItem.categoryCode)
             }
             oldItem is MiddleCategoriesEditArgs.MiddleCategoryEdit && newItem is MiddleCategoriesEditArgs.MiddleCategoryEdit -> {
                 (oldItem.categoryCode == newItem.categoryCode) &&
-                        (oldItem.checked == newItem.checked)
+                (oldItem.checked == newItem.checked)
             }
             oldItem is SubCategoriesItem.Header && newItem is SubCategoriesItem.Header -> {
                 true
@@ -63,14 +64,14 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is SubCategoriesEditItem.Data && newItem is SubCategoriesEditItem.Data -> {
                 (oldItem.value.categoryCode == newItem.value.categoryCode) &&
-                        (oldItem.value.checked == newItem.value.checked)
+                (oldItem.value.checked == newItem.value.checked)
             }
             oldItem is MainMenusResponse.MainMenu && newItem is MainMenusResponse.MainMenu -> {
                 oldItem.menuCode == newItem.menuCode
             }
             oldItem is MainMenusEditArgs.MainMenuEdit && newItem is MainMenusEditArgs.MainMenuEdit -> {
                 (oldItem.menuCode == newItem.menuCode) &&
-                        (oldItem.checked == newItem.checked)
+                (oldItem.checked == newItem.checked)
             }
             oldItem is MainMenuMappersResponse.MainMenuMapper && newItem is MainMenuMappersResponse.MainMenuMapper -> {
                 oldItem.optionGroupCode == newItem.optionGroupCode
@@ -106,9 +107,9 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is OptionGroupMainMenuMappersResponse.OptionGroupMainMenuMapper && newItem is OptionGroupMainMenuMappersResponse.OptionGroupMainMenuMapper -> {
                 oldItem.mainCategoryCode == newItem.mainCategoryCode &&
-                        oldItem.middleCategoryCode == newItem.middleCategoryCode &&
-                        oldItem.subCategoryCode == newItem.subCategoryCode &&
-                        oldItem.menuCode == newItem.menuCode
+                oldItem.middleCategoryCode == newItem.middleCategoryCode &&
+                oldItem.subCategoryCode == newItem.subCategoryCode &&
+                oldItem.menuCode == newItem.menuCode
             }
             oldItem is OgMainMenusEditArgs.OptionGroupMainMenuMapper && newItem is OgMainMenusEditArgs.OptionGroupMainMenuMapper -> {
                 oldItem.mainCategoryCode == newItem.mainCategoryCode &&
@@ -119,9 +120,9 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is OptionGroupMainMenusResponse.OptionGroupMainMenu && newItem is OptionGroupMainMenusResponse.OptionGroupMainMenu -> {
                 oldItem.mainCategoryCode == newItem.mainCategoryCode &&
-                        oldItem.middleCategoryCode == newItem.middleCategoryCode &&
-                        oldItem.subCategoryCode == newItem.subCategoryCode &&
-                        oldItem.menuCode == newItem.menuCode
+                oldItem.middleCategoryCode == newItem.middleCategoryCode &&
+                oldItem.subCategoryCode == newItem.subCategoryCode &&
+                oldItem.menuCode == newItem.menuCode
             }
             oldItem is OgMainMenuAddArgs.OptionGroupMainMenus && newItem is OgMainMenuAddArgs.OptionGroupMainMenus -> {
                 oldItem.mainCategoryCode == newItem.mainCategoryCode &&
@@ -146,7 +147,11 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is HelpsArgs.Help && newItem is HelpsArgs.Help -> {
                 oldItem.seq == newItem.seq &&
-                        oldItem.expanded == newItem.expanded
+                oldItem.expanded == newItem.expanded
+            }
+            oldItem is StatisticsSalesByCreditCardResponse.StatisticsSalesByCreditCard && newItem is StatisticsSalesByCreditCardResponse.StatisticsSalesByCreditCard -> {
+                oldItem.date == newItem.date &&
+                oldItem.creditCardCompany == newItem.creditCardCompany
             }
             else -> {
                 false

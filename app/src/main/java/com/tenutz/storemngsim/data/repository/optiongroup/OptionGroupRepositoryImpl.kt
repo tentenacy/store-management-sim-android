@@ -11,10 +11,10 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class OptionGroupRepositoryImpl @Inject constructor(
-    private val sckApi: SMSApi,
+    private val SMSApi: SMSApi,
 ) : OptionGroupRepository {
     override fun optionGroups(commonCond: CommonCondition?): Single<Result<OptionGroupsResponse>> =
-        sckApi.optionGroups(commonCond?.query)
+        SMSApi.optionGroups(commonCond?.query)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -24,7 +24,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun optionGroup(optionGroupCd: String): Single<Result<OptionGroupResponse>> =
-        sckApi.optionGroup(optionGroupCd)
+        SMSApi.optionGroup(optionGroupCd)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -34,7 +34,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun createOptionGroup(request: OptionGroupCreateRequest): Single<Result<Unit>> =
-        sckApi.createOptionGroup(request)
+        SMSApi.createOptionGroup(request)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -44,7 +44,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun updateOptionGroup(optionGroupCd: String, request: OptionGroupUpdateRequest): Single<Result<Unit>> =
-        sckApi.updateOptionGroup(
+        SMSApi.updateOptionGroup(
             optionGroupCd,
             request
         )
@@ -57,7 +57,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteOptionGroup(optionGroupCd: String): Single<Result<Unit>> =
-        sckApi.deleteOptionGroup(optionGroupCd)
+        SMSApi.deleteOptionGroup(optionGroupCd)
             .toSingle { }
             .map { Result.success(it) }
             .compose(
@@ -68,7 +68,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteOptionGroups(request: OptionGroupsDeleteRequest): Single<Result<Unit>> =
-        sckApi.deleteOptionGroups(request)
+        SMSApi.deleteOptionGroups(request)
             .toSingle { }
             .map { Result.success(it) }
             .compose(
@@ -79,7 +79,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun optionGroupOptions(optionGroupCd: String, commonCond: CommonCondition?): Single<Result<OptionGroupOptionsResponse>> =
-        sckApi.optionGroupOptions(optionGroupCd, commonCond?.query)
+        SMSApi.optionGroupOptions(optionGroupCd, commonCond?.query)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -89,7 +89,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun optionGroupOptionMappers(optionGroupCd: String): Single<Result<OptionGroupOptionMappersResponse>> =
-        sckApi.optionGroupOptionMappers(optionGroupCd)
+        SMSApi.optionGroupOptionMappers(optionGroupCd)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -99,7 +99,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun mapToOptions(optionGroupCd: String, request: OptionsMappedByRequest): Single<Result<Unit>> =
-        sckApi.mapToOptions(
+        SMSApi.mapToOptions(
             optionGroupCd,
             request,
         )
@@ -115,7 +115,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
         optionGroupCd: String,
         request: OptionGroupOptionMapperPrioritiesChangeRequest
     ): Single<Result<Unit>> =
-        sckApi.changeOptionGroupOptionMapperPriorities(
+        SMSApi.changeOptionGroupOptionMapperPriorities(
             optionGroupCd,
             request,
         )
@@ -131,7 +131,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
         optionGroupCd: String,
         request: OptionGroupOptionMappersDeleteRequest
     ): Single<Result<Unit>> =
-        sckApi.deleteOptionGroupOptionMappers(
+        SMSApi.deleteOptionGroupOptionMappers(
             optionGroupCd,
             request,
         )
@@ -149,7 +149,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
         request: MainMenuSearchRequest,
         commonCond: CommonCondition?,
     ): Single<Result<OptionGroupMainMenusResponse>> =
-        sckApi.optionGroupMainMenus(
+        SMSApi.optionGroupMainMenus(
             optionGroupCd,
             commonCond?.query,
             request.mainCateCd,
@@ -165,7 +165,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun optionGroupMainMenuMappers(optionGroupCd: String): Single<Result<OptionGroupMainMenuMappersResponse>> =
-        sckApi.optionGroupMainMenuMappers(optionGroupCd)
+        SMSApi.optionGroupMainMenuMappers(optionGroupCd)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -175,7 +175,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun mapToMainMenus(optionGroupCd: String, request: MainMenusMappedByRequest): Single<Result<Unit>> =
-        sckApi.mapToMainMenus(
+        SMSApi.mapToMainMenus(
             optionGroupCd,
             request,
         )
@@ -191,7 +191,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
         optionGroupCd: String,
         request: OptionGroupMainMenuMapperPrioritiesChangeRequest
     ): Single<Result<Unit>> =
-        sckApi.changeOptionGroupMainMenuMapperPriorities(
+        SMSApi.changeOptionGroupMainMenuMapperPriorities(
             optionGroupCd,
             request,
         )
@@ -207,7 +207,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
         optionGroupCd: String,
         request: OptionGroupMainMenuMappersDeleteRequest
     ): Single<Result<Unit>> =
-        sckApi.deleteOptionGroupMainMenuMappers(
+        SMSApi.deleteOptionGroupMainMenuMappers(
             optionGroupCd,
             request,
         )

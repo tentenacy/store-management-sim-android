@@ -3,6 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.statistics.StatisticsViewModel" />
+
+        <import type="com.tenutz.storemngsim.utils.ext.TimeExtKt" />
+        <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
+        <import type="android.view.View" />
+        <import type="java.util.Date" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_statistics_container"
         android:layout_width="match_parent"
@@ -104,7 +116,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/expandable_bottom"
             android:elevation="6dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tab_statistics">
@@ -113,7 +125,8 @@
                 android:id="@+id/constraint_statistics_menu_main_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                tools:visibility="visible"
+                android:visibility="@{vm.menuExpanded ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -157,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/ns_bold"
-                        android:text="2022-09-01"
+                        android:text="@{TimeExtKt.toDateFormat(vm.menuDateFrom)}"
                         android:textColor="@color/rect_4475"
                         android:textSize="16sp"
                         tools:text="2022-09-01" />
@@ -208,7 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/ns_bold"
-                        android:text="2022-09-01"
+                        android:text="@{TimeExtKt.toDateFormat(vm.menuDateTo)}"
                         android:textColor="@color/rect_4475"
                         android:textSize="16sp"
                         tools:text="2022-09-01" />
@@ -231,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/radio_group_radius_8dp"
                     android:backgroundTint="@color/rect_4483"
-                    android:checkedButton="@id/radio_statistics_menu_main_today"
+                    android:checkedButton="@{vm.menuButton}"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -248,6 +261,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setMenuButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="오늘"
@@ -267,6 +281,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setMenuButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="일주일"
@@ -285,6 +300,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setMenuButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="한 달"
@@ -307,7 +323,7 @@
                     android:fontFamily="@font/ns_regular"
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="2dp"
-                    android:text="0건"
+                    android:text='@{vm.menuTotalCount+"건"}'
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -322,7 +338,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/ns_bold"
-                    android:text="0"
+                    android:text="@{TextExtKt.getToCurrency(vm.menuTotalAmount)}"
                     android:textColor="@color/rect_4474"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toStartOf="@id/text_statistics_menu_main_total_unit_kr"
@@ -371,6 +387,7 @@
                 android:id="@+id/constraint_statistics_menu_expandable_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> vm.toggleMenuExpanded()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier_statistics_1">
@@ -381,7 +398,8 @@
                     android:layout_height="20dp"
                     android:layout_marginBottom="10dp"
                     android:contentDescription="메뉴 상단 펼치기/접기"
-                    android:rotation="90"
+                    tools:rotation="90"
+                    android:rotation="@{vm.menuExpanded ? 90 : -90}"
                     android:src="@drawable/ic_grey_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -398,7 +416,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/expandable_bottom"
             android:elevation="6dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tab_statistics">
@@ -407,6 +425,8 @@
                 android:id="@+id/constraint_statistics_time_main_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                tools:visibility="visible"
+                android:visibility="@{vm.timeExpanded ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -458,6 +478,7 @@
                         android:fontFamily="@font/ns_bold"
                         android:textColor="@color/rect_4475"
                         android:textSize="16sp"
+                        android:text="@{TimeExtKt.toDateFormat(vm.timeDateFrom)}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/image_statistics_time_main_date"
                         app:layout_constraintHorizontal_chainStyle="packed"
@@ -487,7 +508,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/radius_8dp"
                     android:backgroundTint="@color/rect_4483"
-                    android:checkedButton="@id/radio_statistics_time_main_morning"
+                    android:checkedButton="@{vm.timeButton}"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -504,6 +525,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setTimeButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="오전"
@@ -522,6 +544,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setTimeButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="오후"
@@ -540,6 +563,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setTimeButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="하루"
@@ -563,6 +587,7 @@
                     android:paddingVertical="2dp"
                     android:textColor="@color/white"
                     android:textSize="12sp"
+                    android:text='@{vm.timeTotalCount+"건"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/radiogroup_statistics_time_main"
                     tools:text="1,200건" />
@@ -577,6 +602,7 @@
                     android:fontFamily="@font/ns_bold"
                     android:textColor="@color/rect_4474"
                     android:textSize="24sp"
+                    android:text="@{TextExtKt.getToCurrency(vm.timeTotalAmount)}"
                     app:layout_constraintEnd_toStartOf="@id/text_statistics_time_main_total_unit_kr"
                     app:layout_constraintTop_toTopOf="@id/text_statistics_time_main_total_count"
                     tools:text="14,000,000" />
@@ -624,19 +650,26 @@
                 android:id="@+id/constraint_statistics_time_expandable_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> vm.toggleTimeExpanded()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier_statistics_3">
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="9dp"
+                <ImageView
+                    android:id="@+id/image_statistics_time_expandable"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="메뉴 상단 펼치기/접기"
+                    tools:rotation="90"
+                    android:rotation="@{vm.timeExpanded ? 90 : -90}"
+                    android:src="@drawable/ic_grey_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -657,7 +690,8 @@
                 android:id="@+id/constraint_statistics_card_main_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                tools:visibility="visible"
+                android:visibility="@{vm.cardExpanded ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -703,6 +737,7 @@
                         android:fontFamily="@font/ns_bold"
                         android:textColor="@color/rect_4475"
                         android:textSize="16sp"
+                        android:text="@{TimeExtKt.toDateFormat(vm.cardDateFrom)}"
                         tools:text="2022-09-01" />
 
                     <ImageView
@@ -753,6 +788,7 @@
                         android:fontFamily="@font/ns_bold"
                         android:textColor="@color/rect_4475"
                         android:textSize="16sp"
+                        android:text="@{TimeExtKt.toDateFormat(vm.cardDateTo)}"
                         tools:text="2022-09-01" />
 
                     <ImageView
@@ -773,7 +809,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/radio_group_radius_8dp"
                     android:backgroundTint="@color/rect_4483"
-                    android:checkedButton="@id/radio_statistics_card_main_today"
+                    android:checkedButton="@{vm.cardButton}"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -790,6 +826,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setCardButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="오늘"
@@ -809,6 +846,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setCardButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="일주일"
@@ -827,6 +865,7 @@
                         android:gravity="center"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
+                        android:onClick="@{(v) -> vm.setCardButton(v)}"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="8dp"
                         android:text="한 달"
@@ -851,6 +890,7 @@
                     android:paddingVertical="2dp"
                     android:textColor="@color/white"
                     android:textSize="12sp"
+                    android:text='@{vm.cardTotalCount+"건"}'
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/radiogroup_statistics_card_main"
                     tools:text="2,400건" />
@@ -865,6 +905,7 @@
                     android:fontFamily="@font/ns_bold"
                     android:textColor="@color/rect_4474"
                     android:textSize="24sp"
+                    android:text="@{TextExtKt.getToCurrency(vm.cardTotalAmount)}"
                     app:layout_constraintEnd_toStartOf="@id/text_statistics_card_main_total_unit_kr"
                     app:layout_constraintTop_toTopOf="@id/text_statistics_card_main_total_count"
                     tools:text="28,000,000" />
@@ -911,20 +952,26 @@
                 android:id="@+id/constraint_statistics_card_expandable_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> vm.toggleCardExpanded()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barrier_statistics_4">
 
-                <View
+                <ImageView
                     android:id="@+id/image_statistics_card_expandable"
-                    android:layout_width="1dp"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="9dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="메뉴 상단 펼치기/접기"
+                    tools:rotation="90"
+                    android:rotation="@{vm.cardExpanded ? 90 : -90}"
+                    android:src="@drawable/ic_grey_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

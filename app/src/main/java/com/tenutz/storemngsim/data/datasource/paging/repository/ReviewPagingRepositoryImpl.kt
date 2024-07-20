@@ -14,7 +14,7 @@ import com.tenutz.storemngsim.data.datasource.paging.source.mapper.ReviewsMapper
 import io.reactivex.rxjava3.core.Flowable
 
 class ReviewPagingRepositoryImpl(
-    private val sckApi: SMSApi,
+    private val SMSApi: SMSApi,
     private val mapper: ReviewsMapper,
 ): ReviewPagingRepository {
 
@@ -26,7 +26,7 @@ class ReviewPagingRepositoryImpl(
                 prefetchDistance = 5,
                 initialLoadSize = 20,
             ),
-            pagingSourceFactory = { StoreReviewsPagingSource(sckApi, mapper, commonCond) }
+            pagingSourceFactory = { StoreReviewsPagingSource(SMSApi, mapper, commonCond) }
         ).flowable
     }
 
@@ -38,7 +38,7 @@ class ReviewPagingRepositoryImpl(
                 prefetchDistance = 5,
                 initialLoadSize = 20,
             ),
-            pagingSourceFactory = { MenuReviewsPagingSource(sckApi, mapper, commonCond) }
+            pagingSourceFactory = { MenuReviewsPagingSource(SMSApi, mapper, commonCond) }
         ).flowable
     }
 }

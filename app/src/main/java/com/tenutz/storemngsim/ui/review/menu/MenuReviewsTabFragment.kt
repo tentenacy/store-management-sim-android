@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tenutz.storemngsim.R
@@ -101,6 +103,11 @@ class MenuReviewsTabFragment: Fragment() {
                         }
                     }.show(childFragmentManager, "reviewsBottomSheetDialog")
                 }
+            }
+        }.apply {
+            addLoadStateListener { loadState ->
+                binding.textTmenuReviewsEmpty.isVisible =
+                    loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1
             }
         }
     }

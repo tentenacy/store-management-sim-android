@@ -12,10 +12,10 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class OptionRepositoryImpl @Inject constructor(
-    private val sckApi: SMSApi,
+    private val SMSApi: SMSApi,
 ) : OptionRepository {
     override fun options(commonCond: CommonCondition?): Single<Result<OptionsResponse>> =
-        sckApi.options(commonCond?.query)
+        SMSApi.options(commonCond?.query)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -25,7 +25,7 @@ class OptionRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun option(optionCd: String): Single<Result<OptionResponse>> =
-        sckApi.option(optionCd)
+        SMSApi.option(optionCd)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -35,7 +35,7 @@ class OptionRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun createOption(request: OptionCreateRequest): Single<Result<Unit>> =
-        sckApi.createOption(
+        SMSApi.createOption(
             request.image,
             request.optionCode,
             request.optionName,
@@ -66,7 +66,7 @@ class OptionRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun updateOption(optionCd: String, request: OptionUpdateRequest): Single<Result<Unit>> =
-        sckApi.updateOption(
+        SMSApi.updateOption(
             optionCd,
             request.image,
             request.optionName,
@@ -97,7 +97,7 @@ class OptionRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteOption(optionCd: String): Single<Result<Unit>> =
-        sckApi.deleteOption(optionCd)
+        SMSApi.deleteOption(optionCd)
             .toSingle { }
             .map { Result.success(it) }
             .compose(
@@ -108,7 +108,7 @@ class OptionRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteOptions(request: OptionsDeleteRequest): Single<Result<Unit>> =
-        sckApi.deleteOptions(request)
+        SMSApi.deleteOptions(request)
             .toSingle { }
             .map { Result.success(it) }
             .compose(
@@ -119,7 +119,7 @@ class OptionRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun optionOptionGroups(optionCd: String): Single<Result<OptionOptionGroupsResponse>> =
-        sckApi.optionOptionGroups(optionCd)
+        SMSApi.optionOptionGroups(optionCd)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -129,7 +129,7 @@ class OptionRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun optionMappers(optionCd: String): Single<Result<OptionMappersResponse>> =
-        sckApi.optionMappers(optionCd)
+        SMSApi.optionMappers(optionCd)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -142,7 +142,7 @@ class OptionRepositoryImpl @Inject constructor(
         optionCd: String,
         request: OptionGroupsMappedByRequest
     ): Single<Result<Unit>> =
-        sckApi.mapToOptionGroups(
+        SMSApi.mapToOptionGroups(
             optionCd,
             request,
         )
@@ -158,7 +158,7 @@ class OptionRepositoryImpl @Inject constructor(
         optionCd: String,
         request: OptionGroupsDeleteRequest
     ): Single<Result<Unit>> =
-        sckApi.deleteOptionMappers(
+        SMSApi.deleteOptionMappers(
             optionCd,
             request,
         )
@@ -175,7 +175,7 @@ class OptionRepositoryImpl @Inject constructor(
         optionCd: String,
         request: OptionGroupPrioritiesChangeRequest
     ): Single<Result<Unit>> =
-        sckApi.changeOptionMapperPriorities(
+        SMSApi.changeOptionMapperPriorities(
             optionCd,
             request,
         )

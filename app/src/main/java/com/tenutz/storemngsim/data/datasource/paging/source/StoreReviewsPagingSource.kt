@@ -8,12 +8,12 @@ import com.tenutz.storemngsim.data.datasource.paging.entity.StoreReviews
 import com.tenutz.storemngsim.data.datasource.paging.source.mapper.ReviewsMapper
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
+import com.tenutz.storemngsim.utils.ext.toDateTimeFormat
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import javax.inject.Inject
 
-class StoreReviewsPagingSource @Inject constructor(
-    private val sckApi: SMSApi,
+class StoreReviewsPagingSource(
+    private val SMSApi: SMSApi,
     private val mapper: ReviewsMapper,
     private val commonCond: CommonCondition,
 ): RxPagingSource<Int, StoreReviews.StoreReview>() {
@@ -27,11 +27,11 @@ class StoreReviewsPagingSource @Inject constructor(
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, StoreReviews.StoreReview>> {
         val position = params.key ?: 0
-        return sckApi.storeReviews(
+        return SMSApi.storeReviews(
             page = position,
             size = params.loadSize,
-            dateFrom = commonCond.dateFrom,
-            dateTo = commonCond.dateTo,
+            dateFrom = commonCond.dateFrom.toDateTimeFormat(),
+            dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
             queryType = commonCond.queryType,
         )

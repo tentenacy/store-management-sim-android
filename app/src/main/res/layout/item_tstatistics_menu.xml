@@ -6,49 +6,10 @@
     <data>
 
         <variable
-            name="menuName"
-            type="String" />
+            name="args"
+            type="com.tenutz.storemngsim.data.datasource.paging.entity.MenuSalesList.MenuSales" />
 
-        <variable
-            name="cardAmount"
-            type="Integer" />
-
-        <variable
-            name="cardCount"
-            type="Integer" />
-
-        <variable
-            name="cardCancelAmount"
-            type="Integer" />
-
-        <variable
-            name="cardCancelCount"
-            type="Integer" />
-
-        <variable
-            name="cashAmount"
-            type="Integer" />
-
-        <variable
-            name="cashCount"
-            type="Integer" />
-
-        <variable
-            name="cashCancelAmount"
-            type="Integer" />
-
-        <variable
-            name="cashCancelCount"
-            type="Integer" />
-
-        <variable
-            name="salesAmount"
-            type="Integer" />
-
-        <variable
-            name="salesCount"
-            type="Integer" />
-
+        <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
         <import type="android.view.View" />
 
     </data>
@@ -66,7 +27,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/ns_medium"
-            android:text="@{menuName}"
+            android:text="@{args.menuName}"
             android:textColor="@color/rect_4474"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,13 +45,13 @@
             android:fontFamily="@font/ns_medium"
             android:paddingHorizontal="6dp"
             android:paddingVertical="2dp"
-            android:text="@{salesCount}"
+            android:text="@{String.valueOf(args.cAuthCount)}"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_menu_name"
             app:layout_constraintStart_toEndOf="@id/text_itstatistics_menu_menu_name"
             app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_menu_name"
-            tools:text="20" />
+            tools:text="17" />
 
         <TextView
             android:id="@+id/text_itstatistics_menu_card_count"
@@ -104,7 +65,7 @@
             android:fontFamily="@font/ns_medium"
             android:paddingHorizontal="6dp"
             android:paddingVertical="2dp"
-            android:text="@{cardCount}"
+            android:text="@{String.valueOf(args.authCount)}"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:fontFamily="@font/ns_regular"
-            android:text="@{cardAmount}"
+            android:text='@{TextExtKt.getToCurrency(args.authAmount)+"원"}'
             android:textColor="@color/rect_4474"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_card_count"
@@ -137,6 +98,10 @@
             app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_card_amount"
             tools:ignore="HardcodedText" />
 
+        <!--
+        android:visibility="@{args.authCCount > 0 ? View.VISIBLE : View.GONE}"
+        -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_itstatistics_menu_card_cancel_count_container"
             android:layout_width="wrap_content"
@@ -144,7 +109,6 @@
             android:layout_marginTop="4dp"
             android:background="@drawable/radius_8dp"
             android:backgroundTint="@color/rect_4482"
-            android:visibility="@{cardCancelAmount > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="@id/text_itstatistics_menu_card_count"
             app:layout_constraintTop_toBottomOf="@id/text_itstatistics_menu_card_count">
 
@@ -159,7 +123,7 @@
                 android:fontFamily="@font/ns_medium"
                 android:foreground="@drawable/striking_text"
                 android:paddingHorizontal="1dp"
-                android:text="@{cardCancelCount}"
+                android:text="@{String.valueOf(args.authCCount)}"
                 android:textColor="@color/rect_4480"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +142,7 @@
             android:fontFamily="@font/ns_regular"
             android:foreground="@drawable/striking_text"
             android:paddingHorizontal="1dp"
-            android:text="@{cardCancelAmount}"
+            android:text='@{TextExtKt.getToCurrency(args.authCAmount)+"원"}'
             android:textColor="@color/rect_4480"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/constraint_itstatistics_menu_card_cancel_count_container"
@@ -198,7 +162,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_regular"
-            android:text="카드"
+            android:text="승인"
             android:textColor="@color/rect_4474"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_card_amount"
@@ -207,120 +171,16 @@
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_itstatistics_menu_cash_count"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/radius_8dp"
-            android:backgroundTint="@color/rect_4482"
-            android:fontFamily="@font/ns_medium"
-            android:paddingHorizontal="6dp"
-            android:paddingVertical="2dp"
-            android:text="@{cashCount}"
-            android:textColor="@color/rect_4480"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/barrier_itstatistics_1"
-            tools:text="1" />
-
-        <TextView
-            android:id="@+id/text_itstatistics_menu_cash_amount"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
             android:fontFamily="@font/ns_regular"
-            android:text="@{cashAmount}"
-            android:textColor="@color/rect_4474"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_cash_count"
-            app:layout_constraintEnd_toStartOf="@id/text_itstatistics_menu_cash_count"
-            app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_cash_count"
-            tools:text="5,000원" />
-
-        <ImageView
-            android:id="@+id/image_itstatistics_menu_cash_amount_sign"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:contentDescription="이미지 수익"
-            android:src="@drawable/ic_black_plus"
-            app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_cash_amount"
-            app:layout_constraintEnd_toStartOf="@id/text_itstatistics_menu_cash_amount"
-            app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_cash_amount"
-            tools:ignore="HardcodedText" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_itstatistics_menu_cash_cancel_count_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/radius_8dp"
-            android:backgroundTint="@color/rect_4482"
-            android:visibility="@{cashCancelAmount > 0 ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="@id/text_itstatistics_menu_cash_count"
-            app:layout_constraintTop_toBottomOf="@id/text_itstatistics_menu_cash_count"
-            tools:visibility="gone">
-
-            <TextView
-                android:id="@+id/text_itstatistics_menu_cash_cancel_count"
-                style="@style/Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginVertical="2dp"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/ns_medium"
-                android:foreground="@drawable/striking_text"
-                android:paddingHorizontal="1dp"
-                android:text="@{cashCancelCount}"
-                android:textColor="@color/rect_4480"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="2" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/text_itstatistics_menu_cash_cancel_amount"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:fontFamily="@font/ns_regular"
-            android:foreground="@drawable/striking_text"
-            android:paddingHorizontal="1dp"
-            android:text="@{cashCancelAmount}"
+            android:text="취소"
             android:textColor="@color/rect_4480"
             android:textSize="14sp"
-            android:visibility="@{cashCancelAmount > 0 ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@id/constraint_itstatistics_menu_cash_cancel_count_container"
-            app:layout_constraintEnd_toStartOf="@id/constraint_itstatistics_menu_cash_cancel_count_container"
-            app:layout_constraintTop_toTopOf="@id/constraint_itstatistics_menu_cash_cancel_count_container"
-            tools:text="10,000원"
-            tools:visibility="gone" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_itstatistics_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="constraint_itstatistics_menu_cash_cancel_count_container,text_itstatistics_menu_cash_count" />
-
-        <TextView
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/ns_regular"
-            android:text="현금"
-            android:textColor="@color/rect_4474"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_cash_amount"
+            app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_card_cancel_amount"
             app:layout_constraintStart_toStartOf="@id/text_itstatistics_menu_menu_name"
-            app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_cash_amount"
+            app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_card_cancel_amount"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -336,13 +196,13 @@
             android:fontFamily="@font/ns_medium"
             android:paddingHorizontal="6dp"
             android:paddingVertical="2dp"
-            android:text="@{salesCount}"
+            android:text="@{String.valueOf(args.cAuthCount)}"
             android:textColor="@color/rect_4475"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/barrier_itstatistics_2"
-            tools:text="20" />
+            app:layout_constraintTop_toTopOf="@id/barrier_itstatistics_1"
+            tools:text="17" />
 
         <TextView
             android:id="@+id/text_itstatistics_menu_total_amount"
@@ -351,13 +211,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:fontFamily="@font/ns_regular"
-            android:text="@{salesAmount}"
+            android:text='@{TextExtKt.getToCurrency(args.cAuthAmount)+"원"}'
             android:textColor="@color/rect_4475"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_total_count"
             app:layout_constraintEnd_toStartOf="@id/text_itstatistics_menu_total_count"
             app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_total_count"
-            tools:text="215,000원" />
+            tools:text="200,000원" />
 
         <TextView
             style="@style/Text"
@@ -371,7 +231,6 @@
             app:layout_constraintStart_toStartOf="@id/text_itstatistics_menu_menu_name"
             app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_total_count"
             tools:ignore="HardcodedText" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

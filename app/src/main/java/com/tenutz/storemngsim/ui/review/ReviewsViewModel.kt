@@ -10,4 +10,5 @@ class ReviewsViewModel @Inject constructor(
     private val reviewPagingRepository: ReviewPagingRepository,
 ): BaseViewModel() {
 
+
 }

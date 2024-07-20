@@ -15,7 +15,7 @@ interface StoreRepository {
 
     fun statisticsSalesTotalByMenu(
         commonCond: CommonCondition,
-        request: StatisticsSaleByMenusRequest,
+        request: StatisticsSaleByMenusRequest? = null,
     ): Single<Result<StatisticsSalesTotalByMenusResponse>>
 
     fun statisticsSalesByCreditCard(
@@ -25,6 +25,10 @@ interface StoreRepository {
     fun statisticsSalesTotalByCreditCard(
         commonCond: CommonCondition,
     ): Single<Result<StatisticsSalesTotalByCreditCardResponse>>
+
+    fun statisticsSalesByTime(
+        commonCond: CommonCondition,
+    ): Single<Result<StatisticsSalesByTimeResponse>>
 
     fun statisticsSalesTotalByTime(
         commonCond: CommonCondition,

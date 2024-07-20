@@ -13,7 +13,7 @@ interface StoreReviewRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(messages: List<StoreReviews.StoreReviewRemoteKeys>)
 
-    @Query("SELECT * FROM store_review_remote_keys ORDER BY seq ASC")
+    @Query("SELECT * FROM store_review_remote_keys ORDER BY id ASC")
     fun selectAll(): PagingSource<Int, StoreReviews.StoreReviewRemoteKeys>
 
     @Query("DELETE FROM store_review_remote_keys")

@@ -3,6 +3,9 @@ package com.tenutz.storemngsim.di.module
 import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepository
 import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepositoryImpl
+import com.tenutz.storemngsim.data.datasource.paging.repository.SalesPagingRepository
+import com.tenutz.storemngsim.data.datasource.paging.repository.SalesPagingRepositoryImpl
+import com.tenutz.storemngsim.data.datasource.paging.source.mapper.SalesMapper
 import com.tenutz.storemngsim.data.datasource.paging.source.mapper.ReviewsMapper
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.data.repository.category.CategoryRepositoryImpl
@@ -38,6 +41,15 @@ abstract class RepositoryModule {
             mapper: ReviewsMapper,
         ): ReviewPagingRepository {
             return ReviewPagingRepositoryImpl(SMSApi, mapper)
+        }
+
+        @Singleton
+        @Provides
+        fun provideSalesPagingRepository(
+            SMSApi: SMSApi,
+            mapper: SalesMapper,
+        ): SalesPagingRepository {
+            return SalesPagingRepositoryImpl(SMSApi, mapper)
         }
     }
 

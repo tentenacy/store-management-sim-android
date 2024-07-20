@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.util.*
@@ -18,10 +19,10 @@ fun yesterday(): Date {
 fun today(): Date {
     val cal = Calendar.getInstance()
     cal.time = Date()
-    cal.set(Calendar.HOUR_OF_DAY, 0);
-    cal.set(Calendar.MINUTE, 0);
-    cal.set(Calendar.SECOND, 0);
-    cal.set(Calendar.MILLISECOND, 0);
+    cal.set(Calendar.HOUR_OF_DAY, 0)
+    cal.set(Calendar.MINUTE, 0)
+    cal.set(Calendar.SECOND, 0)
+    cal.set(Calendar.MILLISECOND, 0)
     return cal.time
 }
 
@@ -63,6 +64,10 @@ fun LocalDate?.toDateFormat(pattern: String = "yyyy-MM-dd"): String {
     return this?.run { DateTimeFormatter.ofPattern(pattern).format(this) } ?: ""
 }
 
+fun LocalDate?.toDate(): Date? {
+    return this?.run { Date.from(this.atStartOfDay(ZoneId.systemDefault()).toInstant()) }
+}
+
 @SuppressLint("SimpleDateFormat")
 fun dateFrom(dateText: String, pattern: String = "yyyy-MM-dd"): Date? {
     return try {
@@ -99,6 +104,33 @@ fun Date.start(): Date {
     return cal.time
 }
 
+fun Date.end(): Date {
+    val cal = Calendar.getInstance()
+    cal.time = this
+    cal.set(Calendar.HOUR_OF_DAY, 23)
+    cal.set(Calendar.MINUTE, 59)
+    cal.set(Calendar.SECOND, 59)
+    cal.set(Calendar.MILLISECOND, 999)
+    return cal.time
+}
+
+fun Date.noon(): Date {
+    val cal = Calendar.getInstance()
+    cal.time = this
+    cal.set(Calendar.HOUR_OF_DAY, 12)
+    cal.set(Calendar.MINUTE, 0)
+    cal.set(Calendar.SECOND, 0)
+    cal.set(Calendar.MILLISECOND, 0)
+    return cal.time
+}
+
+fun Date.yesterday(): Date {
+    val cal = Calendar.getInstance()
+    cal.time = this
+    cal.add(Calendar.DAY_OF_MONTH, -1)
+    return cal.time
+}
+
 fun Date.tomorrow(): Date {
     val cal = Calendar.getInstance()
     cal.time = this
@@ -122,6 +154,24 @@ fun Date.day(): Int {
     val cal = Calendar.getInstance()
     cal.time = this
     return cal.get(Calendar.DAY_OF_MONTH)
+}
+
+fun Date.hour(): Int {
+    val cal = Calendar.getInstance()
+    cal.time = this
+    return cal.get(Calendar.HOUR_OF_DAY)
+}
+
+fun Date.minute(): Int {
+    val cal = Calendar.getInstance()
+    cal.time = this
+    return cal.get(Calendar.MINUTE) + 1
+}
+
+fun Date.second(): Int {
+    val cal = Calendar.getInstance()
+    cal.time = this
+    return cal.get(Calendar.SECOND)
 }
 
 fun Date.minusDay(day: Int): Date {

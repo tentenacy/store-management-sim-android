@@ -36,5 +36,22 @@
             app:layout_constraintTop_toBottomOf="@+id/text_tstatistics_menu_title"
             tools:listitem="@layout/item_tstatistics_menu" />
 
+        <TextView
+            android:id="@+id/text_tstatistics_menu_empty"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:text="목록이 없습니다."
+            android:textColor="@color/rect_4481"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_tstatistics_menu"
+            app:layout_constraintEnd_toEndOf="@id/recycler_tstatistics_menu"
+            app:layout_constraintStart_toStartOf="@id/recycler_tstatistics_menu"
+            app:layout_constraintTop_toTopOf="@id/recycler_tstatistics_menu"
+            tools:ignore="HardcodedText"
+            tools:visibility="invisible" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

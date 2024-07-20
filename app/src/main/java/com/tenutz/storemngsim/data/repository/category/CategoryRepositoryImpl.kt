@@ -5,18 +5,17 @@ import com.tenutz.storemngsim.data.datasource.api.dto.category.*
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class CategoryRepositoryImpl @Inject constructor(
-    private val sckApi: SMSApi,
+    private val SMSApi: SMSApi,
 ) : CategoryRepository {
 
     override fun mainCategories(cond: CommonCondition?): Single<Result<MainCategoriesResponse>> =
-        sckApi.mainCategories(cond?.query)
+        SMSApi.mainCategories(cond?.query)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -26,7 +25,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun mainCategory(mainCateCd: String): Single<Result<MainCategoryResponse>> =
-        sckApi.mainCategory(mainCateCd)
+        SMSApi.mainCategory(mainCateCd)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -36,7 +35,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun createMainCategory(request: MainCategoryCreateRequest): Single<Result<Unit>> =
-        sckApi.createMainCategory(request)
+        SMSApi.createMainCategory(request)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -49,7 +48,7 @@ class CategoryRepositoryImpl @Inject constructor(
         mainCateCd: String,
         request: MainCategoryUpdateRequest
     ): Single<Result<Unit>> =
-        sckApi.updateMainCategory(
+        SMSApi.updateMainCategory(
             mainCateCd,
             request,
         )
@@ -62,7 +61,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteMainCategory(mainCateCd: String): Single<Result<Unit>> =
-        sckApi.deleteMainCategory(mainCateCd)
+        SMSApi.deleteMainCategory(mainCateCd)
             .toSingle {}
             .map { Result.success(it) }
             .compose(
@@ -73,7 +72,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteMainCategories(request: CategoriesDeleteRequest): Single<Result<Unit>> =
-        sckApi.deleteMainCategories(request)
+        SMSApi.deleteMainCategories(request)
             .toSingle {}
             .map { Result.success(it) }
             .compose(
@@ -84,7 +83,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun changeMainCategoryPriorities(request: CategoryPrioritiesChangeRequest): Single<Result<Unit>> =
-        sckApi.changeMainCategoryPriorities(request)
+        SMSApi.changeMainCategoryPriorities(request)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -94,7 +93,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun middleCategories(mainCateCd: String): Single<Result<MiddleCategoriesResponse>> =
-        sckApi.middleCategories(mainCateCd)
+        SMSApi.middleCategories(mainCateCd)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -107,7 +106,7 @@ class CategoryRepositoryImpl @Inject constructor(
         mainCateCd: String,
         middleCateCd: String
     ): Single<Result<MiddleCategoryResponse>> =
-        sckApi.middleCategory(
+        SMSApi.middleCategory(
             mainCateCd,
             middleCateCd,
         )
@@ -123,7 +122,7 @@ class CategoryRepositoryImpl @Inject constructor(
         mainCateCd: String,
         request: MiddleCategoryCreateRequest
     ): Single<Result<Unit>> =
-        sckApi.createMiddleCategory(
+        SMSApi.createMiddleCategory(
             mainCateCd,
             request.image,
             request.categoryCode,
@@ -148,7 +147,7 @@ class CategoryRepositoryImpl @Inject constructor(
         middleCateCd: String,
         request: MiddleCategoryUpdateRequest
     ): Single<Result<Unit>> =
-        sckApi.updateMiddleCategory(
+        SMSApi.updateMiddleCategory(
             mainCateCd,
             middleCateCd,
             request.image,
@@ -172,7 +171,7 @@ class CategoryRepositoryImpl @Inject constructor(
         mainCateCd: String,
         middleCateCd: String
     ): Single<Result<Unit>> =
-        sckApi.deleteMiddleCategory(
+        SMSApi.deleteMiddleCategory(
             mainCateCd,
             middleCateCd,
         )
@@ -189,7 +188,7 @@ class CategoryRepositoryImpl @Inject constructor(
         mainCateCd: String,
         request: CategoriesDeleteRequest
     ): Single<Result<Unit>> =
-        sckApi.deleteMiddleCategories(
+        SMSApi.deleteMiddleCategories(
             mainCateCd,
             request,
         )
@@ -206,7 +205,7 @@ class CategoryRepositoryImpl @Inject constructor(
         mainCateCd: String,
         request: CategoryPrioritiesChangeRequest
     ): Single<Result<Unit>> =
-        sckApi.changeMiddleCategoryPriorities(
+        SMSApi.changeMiddleCategoryPriorities(
             mainCateCd,
             request,
         )
@@ -222,7 +221,7 @@ class CategoryRepositoryImpl @Inject constructor(
         mainCateCd: String,
         middleCateCd: String
     ): Single<Result<SubCategoriesResponse>> =
-        sckApi.subCategories(
+        SMSApi.subCategories(
             mainCateCd,
             middleCateCd,
         )
@@ -239,7 +238,7 @@ class CategoryRepositoryImpl @Inject constructor(
         middleCateCd: String,
         subCateCd: String
     ): Single<Result<SubCategoryResponse>> =
-        sckApi.subCategory(
+        SMSApi.subCategory(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -257,7 +256,7 @@ class CategoryRepositoryImpl @Inject constructor(
         middleCateCd: String,
         request: SubCategoryCreateRequest
     ): Single<Result<Unit>> =
-        sckApi.createSubCategory(
+        SMSApi.createSubCategory(
             mainCateCd,
             middleCateCd,
             request,
@@ -276,7 +275,7 @@ class CategoryRepositoryImpl @Inject constructor(
         subCateCd: String,
         request: SubCategoryUpdateRequest
     ): Single<Result<Unit>> =
-        sckApi.updateSubCategory(
+        SMSApi.updateSubCategory(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -295,7 +294,7 @@ class CategoryRepositoryImpl @Inject constructor(
         middleCateCd: String,
         subCateCd: String
     ): Single<Result<Unit>> =
-        sckApi.deleteSubCategory(
+        SMSApi.deleteSubCategory(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -314,7 +313,7 @@ class CategoryRepositoryImpl @Inject constructor(
         middleCateCd: String,
         request: CategoriesDeleteRequest
     ): Single<Result<Unit>> =
-        sckApi.deleteSubCategories(
+        SMSApi.deleteSubCategories(
             mainCateCd,
             middleCateCd,
             request,
@@ -333,7 +332,7 @@ class CategoryRepositoryImpl @Inject constructor(
         middleCateCd: String,
         request: CategoryPrioritiesChangeRequest
     ): Single<Result<Unit>> =
-        sckApi.changeSubCategoryPriorities(
+        SMSApi.changeSubCategoryPriorities(
             mainCateCd,
             middleCateCd,
             request,

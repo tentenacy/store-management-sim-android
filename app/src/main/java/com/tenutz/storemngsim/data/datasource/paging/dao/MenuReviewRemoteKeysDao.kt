@@ -14,7 +14,7 @@ interface MenuReviewRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(messages: List<MenuReviews.MenuReviewRemoteKeys>)
 
-    @Query("SELECT * FROM menu_review_remote_keys ORDER BY seq ASC")
+    @Query("SELECT * FROM menu_review_remote_keys ORDER BY id ASC")
     fun selectAll(): PagingSource<Int, MenuReviews.MenuReviewRemoteKeys>
 
     @Query("DELETE FROM menu_review_remote_keys")

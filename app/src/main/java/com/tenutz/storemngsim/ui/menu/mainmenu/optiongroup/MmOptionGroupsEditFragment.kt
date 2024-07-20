@@ -80,7 +80,6 @@ class MmOptionGroupsEditFragment: Fragment(), OnDragListener<MmOptionGroupsEditV
     }
 
     private fun initViews() {
-        binding.args = args.mainMenu
         binding.recyclerMmOptionGroupsEdit.adapter = adapter
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
         itemTouchHelper.attachToRecyclerView(binding.recyclerMmOptionGroupsEdit)

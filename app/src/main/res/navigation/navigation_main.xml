@@ -47,11 +47,11 @@
             android:id="@+id/action_mainFragment_to_helpsFragment"
             app:destination="@id/helpsFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_statisticsFragment"
-            app:destination="@id/statisticsFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_navigation_review"
             app:destination="@id/navigation_review" />
+        <action
+            android:id="@+id/action_mainFragment_to_navigation_statistics"
+            app:destination="@id/navigation_statistics" />
     </fragment>
     <fragment
         android:id="@+id/menuMngFragment"
@@ -76,11 +76,6 @@
         android:name="com.tenutz.storemngsim.ui.help.HelpsFragment"
         android:label="HelpsFragment"
         tools:layout="@layout/fragment_helps" />
-    <fragment
-        android:id="@+id/statisticsFragment"
-        android:name="com.tenutz.storemngsim.ui.statistics.StatisticsFragment"
-        android:label="StatisticsFragment"
-        tools:layout="@layout/fragment_statistics" />
     <include app:graph="@navigation/navigation_main_category" />
     <include app:graph="@navigation/navigation_middle_category" />
     <include app:graph="@navigation/navigation_sub_category" />
@@ -88,4 +83,5 @@
     <include app:graph="@navigation/navigation_option_menu" />
     <include app:graph="@navigation/navigation_option_group" />
     <include app:graph="@navigation/navigation_review" />
+    <include app:graph="@navigation/navigation_statistics" />
 </navigation>

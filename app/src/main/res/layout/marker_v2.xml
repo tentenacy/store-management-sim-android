@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linear_marker_v2_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_marker_v2_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="95.5dp"
+            android:background="@drawable/marker">
+
+            <TextView
+                android:id="@+id/text_marker_v2_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="21시"
+                android:fontFamily="@font/ns_bold"
+                android:textColor="@color/rect_4474"
+                android:textSize="10sp"
+                style="@style/Text"
+                android:layout_marginTop="9dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_marker_v2_label_sales_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="승인"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="@color/rect_4475"
+                android:textSize="10sp"
+                style="@style/Text"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@id/text_marker_v2_hour"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_marker_v2_sales_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2,100,000원"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="@color/rect_4475"
+                android:textSize="10sp"
+                style="@style/Text"
+                app:layout_constraintHorizontal_bias="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_marker_v2_label_sales_amount"
+                app:layout_constraintTop_toTopOf="@id/text_marker_v2_label_sales_amount"
+                app:layout_constraintBottom_toBottomOf="@id/text_marker_v2_label_sales_amount" />
+
+            <TextView
+                android:id="@+id/text_marker_v2_label_sales_cancel_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="취소"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="@color/rect_4480"
+                android:textSize="10sp"
+                style="@style/Text"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintTop_toBottomOf="@id/text_marker_v2_label_sales_amount"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_marker_v2_sales_cancel_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="10,000원"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="@color/rect_4480"
+                android:textSize="10sp"
+                style="@style/Text"
+                app:layout_constraintHorizontal_bias="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/text_marker_v2_label_sales_cancel_amount"
+                app:layout_constraintTop_toTopOf="@id/text_marker_v2_label_sales_cancel_amount"
+                app:layout_constraintBottom_toBottomOf="@id/text_marker_v2_label_sales_cancel_amount" />
+
+            <TextView
+                android:id="@+id/text_marker_v2_label_sales_amount_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="총"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="@color/rect_4474"
+                android:textSize="10sp"
+                style="@style/Text"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_marker_v2_label_sales_cancel_amount"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_marker_v2_sales_amount_total"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/ns_regular"
+                android:textColor="@color/rect_4474"
+                android:textSize="10sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/text_marker_v2_label_sales_amount_total"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@+id/text_marker_v2_label_sales_cancel_amount"
+                app:layout_constraintTop_toTopOf="@id/text_marker_v2_label_sales_amount_total"
+                tools:text="2,090,000원" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/image_marker_v2_container"
+            android:layout_width="9dp"
+            android:layout_height="6dp"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tvContentHead" />
+    </LinearLayout>
+</layout>

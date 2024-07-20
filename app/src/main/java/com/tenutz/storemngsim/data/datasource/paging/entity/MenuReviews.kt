@@ -57,7 +57,7 @@ data class MenuReviews(
     @Parcelize
     @Entity(tableName = "menu_review_remote_keys")
     data class MenuReviewRemoteKeys(
-        @PrimaryKey val seq: Long,
+        @PrimaryKey(autoGenerate = true) val id: Long,
         val prevKey: Int?,
         val nextKey: Int,
     ): Parcelable

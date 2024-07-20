@@ -12,10 +12,10 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
-    private val sckApi: SMSApi,
+    private val SMSApi: SMSApi,
 ) : UserRepository {
     override fun socialSignup(socialType: SocialType, request: SocialSignupRequest): Single<Unit> =
-        sckApi.socialSignup(
+        SMSApi.socialSignup(
             socialType.name,
             request,
         )
@@ -23,14 +23,14 @@ class UserRepositoryImpl @Inject constructor(
     override fun socialLogin(
         socialType: SocialType,
     ): Single<TokenResponse> =
-        sckApi.socialLogin(
+        SMSApi.socialLogin(
             socialType.name,
             SocialLoginRequest(OAuthToken.accessToken),
         )
 
     override fun reissue(request: TokenRequest): Single<TokenResponse> =
-        sckApi.reissue(request)
+        SMSApi.reissue(request)
 
     override fun userDetails(): Single<UserDetailsResponse> =
-        sckApi.userDetails()
+        SMSApi.userDetails()
 }

@@ -1,13 +1,20 @@
 package com.tenutz.storemngsim.application
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.RequiresApi
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.core.result.ActivityResultFactory
 import dagger.hilt.android.AndroidEntryPoint
+import java.security.MessageDigest
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint

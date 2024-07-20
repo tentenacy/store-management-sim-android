@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_marker_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/marker"
+        android:minWidth="95.5dp">
+
+        <TextView
+            android:id="@+id/text_marker_hour"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:fontFamily="@font/ns_bold"
+            android:textColor="@color/rect_4474"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="21시" />
+
+        <TextView
+            android:id="@+id/text_marker_label_sales_amount_total"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/ns_regular"
+            android:text="총"
+            android:textColor="@color/rect_4474"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_marker_hour" />
+
+        <TextView
+            android:id="@+id/text_marker_sales_amount_total"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/rect_4474"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_marker_label_sales_amount_total"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/text_marker_label_sales_amount_total"
+            app:layout_constraintTop_toTopOf="@id/text_marker_label_sales_amount_total"
+            tools:text="2,090,000원" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

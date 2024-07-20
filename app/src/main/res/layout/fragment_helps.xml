@@ -8,6 +8,8 @@
         <variable
             name="vm"
             type="com.tenutz.storemngsim.ui.help.HelpsViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -107,6 +109,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edit_helps_search"
                 tools:listitem="@layout/item_helps" />
+
+            <TextView
+                android:id="@+id/text_helps_empty"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ns_regular"
+                android:text="목록이 없습니다."
+                android:textColor="@color/rect_4481"
+                android:textSize="16sp"
+                android:visibility="@{vm.helps.helps.size() > 0 ? View.INVISIBLE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/recycler_helps"
+                app:layout_constraintEnd_toEndOf="@id/recycler_helps"
+                app:layout_constraintStart_toStartOf="@id/recycler_helps"
+                app:layout_constraintTop_toTopOf="@id/recycler_helps"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

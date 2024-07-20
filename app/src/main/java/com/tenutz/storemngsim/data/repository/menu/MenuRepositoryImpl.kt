@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class MenuRepositoryImpl @Inject constructor(
-    private val sckApi: SMSApi,
+    private val SMSApi: SMSApi,
 ) : MenuRepository {
 
     override fun mainMenus(
@@ -21,7 +21,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         commonCond: CommonCondition?
     ): Single<Result<MainMenusResponse>> =
-        sckApi.mainMenus(
+        SMSApi.mainMenus(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -41,7 +41,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         mainMenuCd: String
     ): Single<Result<MainMenuResponse>> =
-        sckApi.mainMenu(
+        SMSApi.mainMenu(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -61,7 +61,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         request: MainMenuCreateRequest
     ): Single<Result<Unit>> =
-        sckApi.createMainMenu(
+        SMSApi.createMainMenu(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -105,7 +105,7 @@ class MenuRepositoryImpl @Inject constructor(
         mainMenuCd: String,
         request: MainMenuUpdateRequest
     ): Single<Result<Unit>> =
-        sckApi.updateMainMenu(
+        SMSApi.updateMainMenu(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -148,7 +148,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         mainMenuCd: String
     ): Single<Result<Unit>> =
-        sckApi.deleteMainMenu(
+        SMSApi.deleteMainMenu(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -169,7 +169,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         request: MenusDeleteRequest
     ): Single<Result<Unit>> =
-        sckApi.deleteMainMenus(
+        SMSApi.deleteMainMenus(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -190,7 +190,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         request: MenuPrioritiesChangeRequest
     ): Single<Result<Unit>> =
-        sckApi.changeMainMenuPriorities(
+        SMSApi.changeMainMenuPriorities(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -210,7 +210,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         mainMenuCd: String
     ): Single<Result<MainMenuOptionGroupsResponse>> =
-        sckApi.mainMenuOptionGroups(
+        SMSApi.mainMenuOptionGroups(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -230,7 +230,7 @@ class MenuRepositoryImpl @Inject constructor(
         subCateCd: String,
         mainMenuCd: String
     ): Single<Result<MainMenuMappersResponse>> =
-        sckApi.mainMenuMappers(
+        SMSApi.mainMenuMappers(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -251,7 +251,7 @@ class MenuRepositoryImpl @Inject constructor(
         mainMenuCd: String,
         request: OptionGroupsMappedByRequest
     ): Single<Result<Unit>> =
-        sckApi.mapToOptionGroups(
+        SMSApi.mapToOptionGroups(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -273,7 +273,7 @@ class MenuRepositoryImpl @Inject constructor(
         mainMenuCd: String,
         request: OptionGroupsDeleteRequest
     ): Single<Result<Unit>> =
-        sckApi.deleteMainMenuMappers(
+        SMSApi.deleteMainMenuMappers(
             mainCateCd,
             middleCateCd,
             subCateCd,
@@ -296,7 +296,7 @@ class MenuRepositoryImpl @Inject constructor(
         mainMenuCd: String,
         request: OptionGroupPrioritiesChangeRequest
     ): Single<Result<Unit>> =
-        sckApi.changeMainMenuMapperPriorities(
+        SMSApi.changeMainMenuMapperPriorities(
             mainCateCd,
             middleCateCd,
             subCateCd,

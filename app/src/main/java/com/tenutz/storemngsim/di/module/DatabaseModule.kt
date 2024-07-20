@@ -2,10 +2,7 @@ package com.tenutz.storemngsim.di.module
 
 import android.content.Context
 import com.tenutz.storemngsim.data.datasource.database.AppDatabase
-import com.tenutz.storemngsim.data.datasource.paging.dao.MenuReviewDao
-import com.tenutz.storemngsim.data.datasource.paging.dao.MenuReviewRemoteKeysDao
-import com.tenutz.storemngsim.data.datasource.paging.dao.StoreReviewDao
-import com.tenutz.storemngsim.data.datasource.paging.dao.StoreReviewRemoteKeysDao
+import com.tenutz.storemngsim.data.datasource.paging.dao.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,4 +33,12 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun provideMenuReviewRemoteKeysDao(appDatabase: AppDatabase): MenuReviewRemoteKeysDao = appDatabase.menuReviewRemoteKeysDao()
+
+    @Singleton
+    @Provides
+    fun provideMenuSalesDao(appDatabase: AppDatabase): MenuSalesDao = appDatabase.menuSalesDao()
+
+    @Singleton
+    @Provides
+    fun provideMenuSalesRemoteKeysDao(appDatabase: AppDatabase): MenuSalesRemoteKeysDao = appDatabase.menuSalesRemoteKeysDao()
 }
