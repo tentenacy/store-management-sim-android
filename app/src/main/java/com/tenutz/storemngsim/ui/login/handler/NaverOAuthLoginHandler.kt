@@ -6,7 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
+import com.tenutz.storemngsim.ui.base.Loginable
+import com.tenutz.storemngsim.ui.login.LoginFragment
 import com.tenutz.storemngsim.ui.login.LoginViewModel
+import com.tenutz.storemngsim.ui.signup.SignupFormViewModel
 import com.tenutz.storemngsim.utils.type.SocialType
 
 class NaverOAuthLoginHandler(
@@ -14,8 +17,13 @@ class NaverOAuthLoginHandler(
     private val naverLoginManager: OAuthLogin
 ) : OAuthLoginHandler() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(fragment).get(LoginViewModel::class.java)
+    private val viewModel: Loginable by lazy {
+        ViewModelProvider(fragment).get(
+            when(fragment) {
+                is LoginFragment -> LoginViewModel::class.java
+                else -> SignupFormViewModel::class.java
+            }
+        )
     }
 
     override fun run(success: Boolean): Unit = fragment.requireContext().run {
@@ -38,11 +46,11 @@ class NaverOAuthLoginHandler(
             socialType = SocialType.NAVER.name,
         )
 
-        viewModel.socialLogin(SocialType.NAVER)
+        viewModel.socialLogin(naverLoginManager.getAccessToken(this), SocialType.NAVER)
     }
 
     private fun onError() = fragment.requireContext().run {
-        Toast.makeText(
+        /*Toast.makeText(
             this,
             "errorCode: ${
                 naverLoginManager.getLastErrorCode(
@@ -52,7 +60,7 @@ class NaverOAuthLoginHandler(
                 naverLoginManager.getLastErrorDesc(this)
             }",
             Toast.LENGTH_SHORT
-        ).show()
+        ).show()*/
     }
 
     private fun onCancel() {

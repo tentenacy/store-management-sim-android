@@ -13,13 +13,16 @@ import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
+import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.databinding.FragmentLoginBinding
+import com.tenutz.storemngsim.databinding.FragmentLoginBindingImpl
 import com.tenutz.storemngsim.ui.login.handler.FacebookOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.GoogleOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.KakaoOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.NaverOAuthLoginHandler
 import com.tenutz.storemngsim.utils.constant.SocialScopeConstant
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -107,6 +110,10 @@ class LoginFragment: Fragment() {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        if(Token.accessToken.isNotBlank()) {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+        }
+
         return binding.root
     }
 
@@ -125,7 +132,8 @@ class LoginFragment: Fragment() {
                         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
                     }
                     LoginViewModel.EVENT_NAVIGATE_TO_SIGNUP -> {
-                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFormFragment())
+                        val (accessToken, socialType) = it.second as Pair<String, String>
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFormFragment(accessToken, socialType))
                     }
                 }
             }

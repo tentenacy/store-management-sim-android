@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -75,6 +76,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="메뉴 썸네일 이미지"
             android:src="@drawable/placeholder_logo"
+            bind:showImage="@{args.imageUrl}"
             app:layout_constraintBottom_toBottomOf="@id/text_itmenu_reviews_menu_name"
             app:layout_constraintStart_toStartOf="@id/text_itmenu_reviews_menu_name"
             app:layout_constraintTop_toTopOf="@id/text_itmenu_reviews_menu_name"

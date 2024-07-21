@@ -153,8 +153,8 @@ class OptionGroupRepositoryImpl @Inject constructor(
             optionGroupCd,
             commonCond?.query,
             request.mainCateCd,
-            request.middleCateCd,
-            request.subCateCd,
+            request.middleCateCd ?: "0000",
+            request.subCateCd ?: "0000",
         )
             .map { Result.success(it) }
             .compose(

@@ -11,7 +11,7 @@ data class OptionResponse(
     val additionalPackagingPrice: Int,
     val packaging: String?,
     val outOfStock: Boolean,
-    val use: Boolean,
+    val use: Boolean?,
     val imageName: String?,
     val imageUrl: String?,
     val optionNameKor: String?,

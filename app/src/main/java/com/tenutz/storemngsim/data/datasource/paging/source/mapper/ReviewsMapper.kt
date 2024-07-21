@@ -63,6 +63,7 @@ class ReviewsMapper @Inject constructor(
                         subCategoryCode = it.subCategoryCode,
                         menuCode = it.menuCode,
                         menuName = it.menuName,
+                        imageUrl = it.imageUrl,
                         createdBy = it.createdBy,
                         createdAt = it.createdAt,
                         content = it.content,

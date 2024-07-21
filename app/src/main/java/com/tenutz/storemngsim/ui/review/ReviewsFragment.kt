@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -68,6 +69,17 @@ class ReviewsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.vpagerReviews.registerOnPageChangeCallback(onPageChangeCallback)
+
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageReviewsBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageReviewsHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
     }
 
     override fun onDestroyView() {

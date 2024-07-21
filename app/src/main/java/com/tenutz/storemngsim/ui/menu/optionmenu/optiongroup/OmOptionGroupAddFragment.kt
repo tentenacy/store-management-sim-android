@@ -77,7 +77,17 @@ class OmOptionGroupAddFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        setOnClickListeners()
         observeData()
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageOmOptionGroupAddBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOmOptionGroupAddHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
     }
 
     private fun observeData() {
@@ -101,7 +111,7 @@ class OmOptionGroupAddFragment: Fragment() {
             .debounce(500, TimeUnit.MILLISECONDS).skip(1)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                vm.omOptionGroups(args.optionMenuCode)
+                vm.omOptionGroups(args.optionMenuCode, it)
             }
             .addTo(disposable)
     }

@@ -29,6 +29,7 @@ data class MenuReviews(
         val subCategoryCode: String?,
         val menuCode: String?,
         val menuName: String?,
+        val imageUrl: String?,
         val createdBy: String?,
         val createdAt: Date?,
         val content: String?,

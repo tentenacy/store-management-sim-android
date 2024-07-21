@@ -46,7 +46,11 @@ class OgMainMenusEditViewModel @Inject constructor(
                     it.subCategoryCode,
                     it.menuCode,
                     it.menuName,
+                    it.imageUrl,
+                    it.outOfStock,
                     it.price,
+                    it.discountingPrice,
+                    it.discountedPrice,
                     it.use,
                     it.priority,
                 )

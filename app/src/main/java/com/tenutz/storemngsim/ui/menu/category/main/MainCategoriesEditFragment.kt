@@ -84,6 +84,12 @@ class MainCategoriesEditFragment: Fragment(), OnDragListener<MainCategoriesEditV
     }
 
     private fun setOnClickListeners() {
+        binding.imageMainCategoriesEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMainCategoriesEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnMainCategoriesEditBottomContainer.setOnClickListener {
             vm.deleteMainCategories(
                 CategoriesDeleteRequest(

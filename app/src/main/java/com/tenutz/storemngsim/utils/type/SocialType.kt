@@ -12,4 +12,17 @@ sealed class SocialType {
         is NAVER -> "naver"
         is FACEBOOK -> "facebook"
     }
+
+    companion object {
+
+        fun of(name: String): SocialType? {
+            return when(name) {
+                "kakao" -> KAKAO
+                "google" -> GOOGLE
+                "naver" -> NAVER
+                "facebook" -> FACEBOOK
+                else -> null
+            }
+        }
+    }
 }

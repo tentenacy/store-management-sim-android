@@ -79,6 +79,12 @@ class OptionMenusEditFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageOptionMenusEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOptionMenusEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnOptionMenusEditBottomContainer.setOnClickListener {
             vm.deleteOptionMenus(
                 OptionsDeleteRequest(

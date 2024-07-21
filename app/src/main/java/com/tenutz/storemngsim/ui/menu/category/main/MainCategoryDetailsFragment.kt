@@ -8,12 +8,16 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
 import com.tenutz.storemngsim.databinding.FragmentMainCategoryDetailsBinding
+import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,20 +60,36 @@ class MainCategoryDetailsFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageMainCategoryDetailsBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMainCategoryDetailsHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnMainCategoryDetailsCancel.setOnClickListener {
             binding.vm = vm
             vm.switchToReadMode()
         }
         binding.btnMainCategoryDetailsSave.setOnClickListener {
-            vm.updateMainCategory(
-                args.mainCategoryCode,
-                MainCategoryUpdateRequest(
-                    binding.editMainCategoryDetailsCategoryName.text.toString(),
-                    binding.radiogroupMainCategoryDetails.checkedRadioButtonId == R.id.radio_main_category_details_use
-                )
-            ) {
-                pVm.mainCategories()
-            }
+            Validator.validate(
+                onValidation = {
+                    Validator.validateCategoryName(binding.editMainCategoryDetailsCategoryName.text.toString(), true)
+                },
+                onSuccess = {
+                    vm.updateMainCategory(
+                        args.mainCategoryCode,
+                        MainCategoryUpdateRequest(
+                            binding.editMainCategoryDetailsCategoryName.text.toString(),
+                            binding.radiogroupMainCategoryDetails.checkedRadioButtonId == R.id.radio_main_category_details_use
+                        )
+                    ) {
+                        pVm.mainCategories()
+                    }
+                },
+                onFailure = { e ->
+                    MyToast.create(mainActivity(), e.errorCode.message, 80)?.show()
+                },
+            )
         }
     }
 

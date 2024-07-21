@@ -15,6 +15,8 @@ data class OptionMenusEditArgs(
         val imageUrl: String?,
         val outOfStock: Boolean,
         val price: Int,
+        val discountingPrice: Int,
+        val discountedPrice: Int,
         val use: Boolean?,
         var checked: Boolean = false,
     ): Parcelable

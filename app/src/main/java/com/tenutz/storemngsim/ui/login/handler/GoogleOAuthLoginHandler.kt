@@ -10,14 +10,22 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
+import com.tenutz.storemngsim.ui.base.Loginable
+import com.tenutz.storemngsim.ui.login.LoginFragment
 import com.tenutz.storemngsim.ui.login.LoginViewModel
+import com.tenutz.storemngsim.ui.signup.SignupFormViewModel
 import com.tenutz.storemngsim.utils.type.SocialType
 import java.lang.Exception
 
 class GoogleOAuthLoginHandler(private val fragment: Fragment): (ActivityResult) -> Unit {
 
-    private val viewModel by lazy {
-        ViewModelProvider(fragment).get(LoginViewModel::class.java)
+    private val viewModel: Loginable by lazy {
+        ViewModelProvider(fragment).get(
+            when(fragment) {
+                is LoginFragment -> LoginViewModel::class.java
+                else -> SignupFormViewModel::class.java
+            }
+        )
     }
 
     override fun invoke(result: ActivityResult) {
@@ -39,7 +47,7 @@ class GoogleOAuthLoginHandler(private val fragment: Fragment): (ActivityResult) 
             socialType = SocialType.GOOGLE.name,
         )
 
-        viewModel.socialLogin(SocialType.GOOGLE)
+        viewModel.socialLogin(accessToken = account.idToken!!, SocialType.GOOGLE)
     }
 
     private fun onCancel() {

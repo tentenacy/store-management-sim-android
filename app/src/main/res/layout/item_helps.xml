@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="position"
+            name="index"
             type="Integer" />
 
         <variable
@@ -42,7 +42,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/rect_4474"
                 android:layout_marginStart="20dp"
-                android:text='@{String.format("%02d", position + 1) + ". "}'
+                android:text='@{String.format("%02d", index) + ". "}'
                 app:layout_constraintTop_toTopOf="@id/text_ihelps_expandable"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="01. " />

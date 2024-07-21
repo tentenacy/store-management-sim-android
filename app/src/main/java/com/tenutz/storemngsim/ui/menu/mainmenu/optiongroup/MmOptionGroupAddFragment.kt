@@ -89,7 +89,17 @@ class MmOptionGroupAddFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        setOnClickListeners()
         observeData()
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageMmOptionGroupAddBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMmOptionGroupAddHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
     }
 
     private fun observeData() {

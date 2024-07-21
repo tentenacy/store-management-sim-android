@@ -11,6 +11,8 @@ data class OptionMappersResponse(
     data class OptionMapper(
         val optionGroupCode: String?,
         val optionName: String?,
+        val toggleSelect: Boolean,
+        val required: Boolean,
         val priority: Int?,
     ): Parcelable
 }

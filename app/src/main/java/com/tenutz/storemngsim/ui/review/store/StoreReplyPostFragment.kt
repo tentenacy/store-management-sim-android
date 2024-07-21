@@ -16,6 +16,9 @@ import com.tenutz.storemngsim.databinding.*
 import com.tenutz.storemngsim.ui.review.store.StoreReplyPostFragmentArgs
 import com.tenutz.storemngsim.ui.review.store.StoreReplyPostViewModel
 import com.tenutz.storemngsim.ui.review.store.StoreReviewsViewModel
+import com.tenutz.storemngsim.utils.MyToast
+import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -72,22 +75,35 @@ class StoreReplyPostFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageStoreReplyPostCancel.setOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.btnStoreReplyPostSave.setOnClickListener {
-            args.storeReview.storeReviewReply?.let {
-                vm.updateStoreReviewReply(
-                    it.seq,
-                    ReviewReplyUpdateRequest(binding.editStoreReplyPostContent.text.toString()),
-                ) {
-                    pVm.storeReviews()
-                }
-            } ?: kotlin.run {
-                vm.createStoreReviewReply(
-                    args.storeReview.seq,
-                    ReviewReplyCreateRequest(binding.editStoreReplyPostContent.text.toString())
-                ) {
-                    pVm.storeReviews()
-                }
-            }
+            Validator.validate(
+                onValidation = {
+                    Validator.validateReviewReplyContent(binding.editStoreReplyPostContent.text.toString(), true)
+                },
+                onSuccess = {
+                    args.storeReview.storeReviewReply?.let {
+                        vm.updateStoreReviewReply(
+                            it.seq,
+                            ReviewReplyUpdateRequest(binding.editStoreReplyPostContent.text.toString()),
+                        ) {
+                            pVm.storeReviews()
+                        }
+                    } ?: kotlin.run {
+                        vm.createStoreReviewReply(
+                            args.storeReview.seq,
+                            ReviewReplyCreateRequest(binding.editStoreReplyPostContent.text.toString())
+                        ) {
+                            pVm.storeReviews()
+                        }
+                    }
+                },
+                onFailure = { e ->
+                    MyToast.create(mainActivity(), e.errorCode.message, 80)?.show()
+                },
+            )
         }
     }
 

@@ -7,6 +7,7 @@ data class StatisticsSalesByCreditCardResponse(
 ) {
     data class StatisticsSalesByCreditCard(
         val date: Date?,
+        val creditCardCode: String?,
         val creditCardCompany: String?,
         val salesAmount: Int,
         val salesCount: Int,

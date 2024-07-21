@@ -152,6 +152,12 @@ class OptionMenusFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageOptionMenusBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOptionMenusHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.textOptionMenusEdit.setOnClickListener {
             vm.optionMenus.value?.let {
                 findNavController().navigate(OptionMenusFragmentDirections.actionOptionMenusFragmentToOptionMenusEditFragment(OptionsResponse(it.options.filter { it.use != null })))

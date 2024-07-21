@@ -125,6 +125,12 @@ class MiddleCategoriesFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageMiddleCategoriesBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMiddleCategoriesHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.textMiddleCategoriesEdit.setOnClickListener {
             vm.middleCategories.value?.let {
                 findNavController().navigate(

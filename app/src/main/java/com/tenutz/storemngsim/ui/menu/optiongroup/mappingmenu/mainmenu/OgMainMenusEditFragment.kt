@@ -12,11 +12,8 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMapperPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenusResponse
 import com.tenutz.storemngsim.databinding.*
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditViewModel
 import com.tenutz.storemngsim.ui.menu.category.middle.*
@@ -87,6 +84,12 @@ class OgMainMenusEditFragment: Fragment(), OnDragListener<OgMainMenusEditViewHol
     }
 
     private fun setOnClickListeners() {
+        binding.imageOgMainMenusEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOgMainMenusEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnOgMainMenusEditBottomContainer.setOnClickListener {
             vm.deleteOgMainMenus(
                 args.optionGroup.optionGroupCode,

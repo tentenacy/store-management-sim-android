@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.tenutz.storemngsim.databinding.FragmentMainBinding
 import com.tenutz.storemngsim.databinding.FragmentSignupFormBinding
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,8 +40,14 @@ class MainFragment: Fragment() {
         binding.btnMainReviewMng.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToNavigationReview())
         }
+        binding.btnMainSales.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToSalesFragment())
+        }
         binding.btnMainHelp.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToHelpsFragment())
+        }
+        binding.btnMainLogoutForTest.setOnClickListener {
+            mainActivity().vm.logout()
         }
     }
 

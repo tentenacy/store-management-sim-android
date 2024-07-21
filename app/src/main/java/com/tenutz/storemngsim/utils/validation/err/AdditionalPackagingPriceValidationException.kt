@@ -1,0 +1,6 @@
+package com.tenutz.storemngsim.utils.validation.err
+
+import com.tenutz.storemngsim.utils.validation.err.base.ValidationErrorCode
+import com.tenutz.storemngsim.utils.validation.err.base.ValidationException
+
+class AdditionalPackagingPriceValidationException: ValidationException(ValidationErrorCode.INVALID_ADDITIONAL_PACKAGING_PRICE)

@@ -208,13 +208,15 @@ class MenuRepositoryImpl @Inject constructor(
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
-        mainMenuCd: String
+        mainMenuCd: String,
+        commonCond: CommonCondition?
     ): Single<Result<MainMenuOptionGroupsResponse>> =
         SMSApi.mainMenuOptionGroups(
             mainCateCd,
             middleCateCd,
             subCateCd,
             mainMenuCd,
+            commonCond?.query
         )
             .map { Result.success(it) }
             .compose(

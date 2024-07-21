@@ -80,7 +80,14 @@ class OgOptionMenuAddFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        setOnClickListeners()
         observeData()
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageOgOptionMenuAddBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun observeData() {
@@ -104,7 +111,7 @@ class OgOptionMenuAddFragment: Fragment() {
             .debounce(500, TimeUnit.MILLISECONDS).skip(1)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                vm.ogOptionMenusAdd(args.optionGroupCode)
+                vm.ogOptionMenusAdd(args.optionGroupCode, it)
             }
             .addTo(disposable)
     }

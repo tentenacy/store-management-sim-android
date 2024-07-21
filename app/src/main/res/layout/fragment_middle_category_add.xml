@@ -283,7 +283,7 @@
                     android:background="@drawable/input_radius"
                     android:fontFamily="@font/ns_regular"
                     android:gravity="center"
-                    android:hint="사업자번호 입력"
+                    android:hint="'-'없이 숫자만 입력"
                     android:importantForAutofill="no"
                     android:inputType="numberSigned"
                     android:maxLines="1"
@@ -373,7 +373,7 @@
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/text_middle_category_add_address"
+                    android:id="@+id/text_middle_category_add_label_address"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -387,8 +387,8 @@
                     app:layout_constraintTop_toBottomOf="@id/edit_middle_category_add_phone"
                     tools:ignore="HardcodedText" />
 
-                <EditText
-                    android:id="@+id/edit_middle_category_add_address"
+                <TextView
+                    android:id="@+id/text_middle_category_add_address"
                     style="@style/Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -399,9 +399,6 @@
                     android:fontFamily="@font/ns_regular"
                     android:gravity="center"
                     android:hint="도로명/지번/건물명"
-                    android:importantForAutofill="no"
-                    android:enabled="false"
-                    android:inputType="text"
                     android:maxLines="1"
                     android:padding="14dp"
                     android:textColor="#1d1d1b"
@@ -409,7 +406,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@id/btn_middle_category_add_search"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_address"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_label_address"
                     tools:ignore="HardcodedText" />
 
                 <Button
@@ -432,9 +429,9 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:cornerRadius="16dp"
-                    app:layout_constraintBottom_toBottomOf="@id/edit_middle_category_add_address"
+                    app:layout_constraintBottom_toBottomOf="@id/text_middle_category_add_address"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edit_middle_category_add_address"
+                    app:layout_constraintTop_toTopOf="@id/text_middle_category_add_address"
                     app:layout_constraintWidth_max="200dp"
                     tools:ignore="HardcodedText" />
 
@@ -459,7 +456,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_middle_category_add_address"
+                    app:layout_constraintTop_toBottomOf="@+id/text_middle_category_add_address"
                     tools:ignore="HardcodedText" />
 
                 <TextView

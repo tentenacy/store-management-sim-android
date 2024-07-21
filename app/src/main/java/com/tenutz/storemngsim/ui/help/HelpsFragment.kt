@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.common.MainMenuSearchRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.MainMenusMappedByRequest
 import com.tenutz.storemngsim.databinding.FragmentHelpsBinding
@@ -35,7 +36,7 @@ class HelpsFragment: Fragment() {
     private val adapter: HelpsAdapter by lazy {
         HelpsAdapter(
             onExpandedChangeListener = {
-                vm.updateExpandedItemCount(it)
+                vm.updateExpandedItemCount()
             },
         ).apply {
             setHasStableIds(true)
@@ -67,11 +68,21 @@ class HelpsFragment: Fragment() {
 
         initViews()
         observeData()
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageHelpsBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageHelpsHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
     }
 
     private fun observeData() {
         vm.helps.observe(viewLifecycleOwner) {
-            adapter.updateItems(it.helps)
+            adapter.updateAllItems(it.helps)
         }
     }
 

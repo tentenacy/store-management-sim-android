@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/constraint_terms_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_terms_ftitle"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:fontFamily="@font/ns_bold"
+            android:text="개인정보 처리방침(필수)"
+            android:textColor="@color/rect_4474"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/image_terms_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:contentDescription="닫기"
+            android:src="@drawable/ic_black_x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="18dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_terms_agree"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_terms_ftitle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_terms_main_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_terms_main_content"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc scelerisque elit id libero egestas sodales. Pellentesque iaculis elit aliquam, porttitor tortor quis, mollis nisl. Curabitur porta pharetra urna, sit amet finibus nunc sagittis ut. Nam non posuere ante. In hac habitasse platea dictumst. Nulla id sem interdum, bibendum massa eget, molestie nisl. Cras tempus dolor quis orci lobortis, eget maximus ipsum molestie. In accumsan sollicitudin lacus, eu tempor purus fringilla suscipit.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fringilla iaculis nisi auctor feugiat. Aliquam fermentum bibendum ligula, finibus aliquam nibh semper in. Suspendisse et nisl in metus aliquet iaculis. Donec tellus eros, tincidunt at pellentesque eget, semper eget mauris. Nulla in felis sit amet arcu iaculis aliquet. Sed porttitor vehicula eros, id rhoncus orci fringilla ut. Vestibulum ultricies iaculis libero.
+
+Proin sit amet scelerisque tellus. Mauris iaculis justo rutrum turpis facilisis, sit amet fermentum quam convallis. Donec hendrerit erat et sodales feugiat. Donec quis ex at est congue iaculis. Vestibulum dictum viverra tortor, vitae tincidunt arcu lacinia eget. Pellentesque at orci vehicula, consectetur est ut, blandit ipsum. Curabitur placerat, ex id vestibulum cursus, orci odio laoreet ipsum, non facilisis dolor tellus eget dui. Nam tellus felis, imperdiet sit amet nisl eget, pellentesque maximus velit. Integer finibus pulvinar dui, ac iaculis velit dictum in. Fusce sed dapibus mi, et viverra nibh. Cras sit amet turpis nunc. Maecenas rutrum at ante id pellentesque.
+
+Curabitur vitae maximus elit. Nulla faucibus tellus cursus, euismod lorem ut, tempor quam. Donec auctor nisl in nulla imperdiet, ut aliquam dui scelerisque. Nullam id quam fringilla, lacinia dui non, venenatis lacus. Nunc laoreet ante sed velit placerat auctor. Nullam sit amet augue sit amet mi sodales malesuada at a quam. Cras varius sed purus a feugiat. Nunc aliquet eleifend ornare.
+
+Nulla ultricies placerat nisi at dapibus. Sed nulla eros, gravida quis sapien non, hendrerit ultrices metus. Aenean lectus urna, consequat quis lectus nec, lacinia posuere enim. Pellentesque quis gravida orci. Proin hendrerit risus ac mauris cursus, vitae finibus magna venenatis. Suspendisse ante tortor, sollicitudin non imperdiet nec, tristique nec leo. Fusce viverra semper porta. Pellentesque ut turpis vel est blandit blandit. Praesent eget condimentum risus, nec tempor odio. Vestibulum ut risus arcu. Proin pharetra, nunc nec maximus pulvinar, nulla dui mollis velit, sed lobortis magna neque imperdiet enim. Curabitur laoreet augue id lectus volutpat maximus. Etiam placerat placerat metus, ac accumsan mauris faucibus id. Quisque condimentum, lacus ut commodo facilisis, arcu metus pharetra libero, vel malesuada erat eros euismod leo. Aenean finibus sapien consectetur, venenatis libero et, imperdiet eros. Aenean viverra leo mauris, nec dapibus enim scelerisque ut." />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btn_terms_agree"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/rect_4476"
+            android:fontFamily="@font/ns_regular"
+            android:padding="18dp"
+            android:text="동의"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:cornerRadius="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -84,6 +85,12 @@ class StatisticsFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageStatisticsBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageStatisticsHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.linearStatisticsMenuMainSdateContainer.setOnClickListener {
             DatePickerDialog(localDateFrom(binding.textStatisticsMenuMainSdate.text.toString())) {
                 vm.setMenuDate(dateFrom = it?.toDate()?.start())

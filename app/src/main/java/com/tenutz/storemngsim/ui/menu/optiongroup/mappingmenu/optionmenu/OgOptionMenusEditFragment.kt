@@ -84,6 +84,12 @@ class OgOptionMenusEditFragment: Fragment(), OnDragListener<OgOptionMenusEditVie
     }
 
     private fun setOnClickListeners() {
+        binding.imageOgOptionMenusEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOgOptionMenusEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnOgOptionMenusEditBottomContainer.setOnClickListener {
             vm.deleteOgOptionMenus(
                 args.optionGroup.optionGroupCode,

@@ -15,7 +15,11 @@ data class OptionGroupMainMenuMappersResponse(
         val subCategoryCode: String?,
         val menuCode: String?,
         val menuName: String?,
+        val imageUrl: String?,
+        val outOfStock: Boolean,
         val price: Int?,
+        val discountingPrice: Int,
+        val discountedPrice: Int,
         val use: Boolean?,
         val priority: Int?,
     ): Parcelable

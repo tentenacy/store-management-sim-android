@@ -131,7 +131,6 @@ class DiffUtilCallback<out T: Any>(
                         oldItem.menuCode == newItem.menuCode &&
                         oldItem.expanded == newItem.expanded
             }
-
             oldItem is OptionGroupOptionMappersResponse.OptionGroupOptionMapper && newItem is OptionGroupOptionMappersResponse.OptionGroupOptionMapper -> {
                 oldItem.optionCode == newItem.optionCode
             }
@@ -151,7 +150,7 @@ class DiffUtilCallback<out T: Any>(
             }
             oldItem is StatisticsSalesByCreditCardResponse.StatisticsSalesByCreditCard && newItem is StatisticsSalesByCreditCardResponse.StatisticsSalesByCreditCard -> {
                 oldItem.date == newItem.date &&
-                oldItem.creditCardCompany == newItem.creditCardCompany
+                oldItem.creditCardCode == newItem.creditCardCode
             }
             else -> {
                 false

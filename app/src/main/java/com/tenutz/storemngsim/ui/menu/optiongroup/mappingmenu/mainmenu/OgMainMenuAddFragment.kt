@@ -40,7 +40,7 @@ class OgMainMenuAddFragment: Fragment() {
     private val adapter: OgMainMenuAddAdapter by lazy {
         OgMainMenuAddAdapter(
             onExpandedChangeListener = {
-                vm.updateExpandedItemCount(it)
+                vm.updateExpandedItemCount()
             },
         ) {
             it.takeIf {
@@ -106,6 +106,9 @@ class OgMainMenuAddFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageOgMainMenuAddBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.textOgMappingMenusEditExpandContractAll.setOnClickListener {
             adapter.expandOrContractAll()
         }
@@ -138,7 +141,8 @@ class OgMainMenuAddFragment: Fragment() {
                         args.mainCategoryCode,
                         args.middleCategoryCode,
                         args.subCategoryCode,
-                    )
+                    ),
+                    it,
                 )
             }
             .addTo(disposable)

@@ -84,6 +84,12 @@ class OmOptionGroupsEditFragment: Fragment(), OnDragListener<OmOptionGroupsEditV
     }
 
     private fun setOnClickListeners() {
+        binding.imageOmOptionGroupsEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOmOptionGroupsEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnOmOptionGroupsEditBottomContainer.setOnClickListener {
             vm.deleteOptionMenuMappers(
                 args.option.optionCode,

@@ -57,13 +57,13 @@ class OgMappingMenusFragment: Fragment() {
                             onClickListener = { id, item ->
                                 when (id) {
                                     R.id.btn_bsog_main_menu_add_before_search -> {
-                                        (item as Triple<String?, String?, String?>).takeIf { it.first?.isNotBlank() == true && it.second?.isNotBlank() == true && it.third?.isNotBlank() == true }?.let {
+                                        (item as Triple<String?, String?, String?>).takeIf { it.first?.isNotBlank() == true }?.let {
                                             findNavController().navigate(
                                                 OgMappingMenusFragmentDirections.actionOgMappingMenusFragmentToOgMainMenuAddFragment(
                                                     args.optionGroupCode,
                                                     it.first!!,
-                                                    it.second!!,
-                                                    it.third!!,
+                                                    it.second,
+                                                    it.third,
                                                 )
                                             )
                                         }
@@ -115,6 +115,17 @@ class OgMappingMenusFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.vpagerOgMappingMenus.registerOnPageChangeCallback(onPageChangeCallback)
+
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageOgMappingMenusBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOgMappingMenusHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
     }
 
     override fun onDestroyView() {

@@ -6,6 +6,8 @@ data class OmOptionGroupsEditArgs(
     data class OptionOptionGroupEdit(
         val optionGroupCode: String?,
         val optionName: String?,
+        val toggleSelect: Boolean,
+        val required: Boolean,
         val priority: Int?,
         var checked: Boolean = false,
     )

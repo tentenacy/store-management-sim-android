@@ -10,10 +10,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
 import com.tenutz.storemngsim.databinding.*
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel
+import com.tenutz.storemngsim.utils.MyToast
+import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,8 +61,11 @@ class SubCategoryAddFragment: Fragment() {
         vm.viewEvent.observe(viewLifecycleOwner) { event ->
             event?.getContentIfNotHandled()?.let {
                 when (it.first) {
-                    MainCategoryAddViewModel.EVENT_NAVIGATE_UP -> {
+                    SubCategoryAddViewModel.EVENT_NAVIGATE_UP -> {
                         findNavController().navigateUp()
+                    }
+                    SubCategoryAddViewModel.EVENT_TOAST -> {
+                        MyToast.create(mainActivity(), it.second as String, 80)?.show()
                     }
                 }
             }
@@ -66,18 +73,35 @@ class SubCategoryAddFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageSubCategoryAddBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageSubCategoryAddHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnSubCategoryAddSave.setOnClickListener {
-            vm.createSubCategory(
-                args.mainCategoryCode,
-                args.middleCategoryCode,
-                SubCategoryCreateRequest(
-                    categoryCode = binding.editSubCategoryAddCategoryCode.text.toString(),
-                    categoryName = binding.editSubCategoryAddCategoryName.text.toString(),
-                    use = binding.radiogroupSubCategoryAdd.checkedRadioButtonId == R.id.radio_sub_category_add_use,
-                )
-            ) {
-                pVm.subCategories(args.mainCategoryCode, args.middleCategoryCode)
-            }
+            Validator.validate(
+                onValidation = {
+                    Validator.validateCategoryName(binding.editSubCategoryAddCategoryCode.text.toString(), true)
+                    Validator.validateCategoryCode(binding.editSubCategoryAddCategoryCode.text.toString(), true)
+                },
+                onSuccess = {
+                    vm.createSubCategory(
+                        args.mainCategoryCode,
+                        args.middleCategoryCode,
+                        SubCategoryCreateRequest(
+                            categoryCode = binding.editSubCategoryAddCategoryCode.text.toString(),
+                            categoryName = binding.editSubCategoryAddCategoryName.text.toString(),
+                            use = binding.radiogroupSubCategoryAdd.checkedRadioButtonId == R.id.radio_sub_category_add_use,
+                        )
+                    ) {
+                        pVm.subCategories(args.mainCategoryCode, args.middleCategoryCode)
+                    }
+                },
+                onFailure = { e ->
+                    MyToast.create(mainActivity(), e.errorCode.message, 80)?.show()
+                },
+            )
         }
     }
 }

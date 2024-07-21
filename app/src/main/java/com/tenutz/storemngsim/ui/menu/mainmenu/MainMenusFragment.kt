@@ -175,6 +175,12 @@ class MainMenusFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageMainMenusBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMainMenusHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.textMainMenusEdit.setOnClickListener {
             vm.mainMenus.value?.let {
                 findNavController().navigate(MainMenusFragmentDirections.actionMainMenusFragmentToMainMenusEditFragment(args, MainMenusResponse(it.mainMenus.filter { it.use != null })))

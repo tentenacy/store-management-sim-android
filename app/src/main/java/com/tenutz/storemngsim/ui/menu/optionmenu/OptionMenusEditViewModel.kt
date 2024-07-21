@@ -45,6 +45,8 @@ class OptionMenusEditViewModel @Inject constructor(
                     it.imageUrl,
                     it.outOfStock,
                     it.price,
+                    it.discountingPrice,
+                    it.discountedPrice,
                     it.use,
                 )
             }

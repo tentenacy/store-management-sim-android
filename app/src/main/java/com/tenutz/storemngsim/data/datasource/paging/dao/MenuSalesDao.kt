@@ -13,7 +13,7 @@ interface MenuSalesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(messages: List<MenuSalesList.MenuSales>)
 
-    @Query("SELECT * FROM menu_sales ORDER BY mainCategoryCode ASC, middleCategoryCode ASC, subCategoryCode ASC, menuName ASC")
+    @Query("SELECT * FROM menu_sales ORDER BY id")
     fun selectAll(): PagingSource<Int, MenuSalesList.MenuSales>
 
     @Query("DELETE FROM menu_sales")

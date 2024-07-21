@@ -26,6 +26,9 @@ class OptionGroupsBottomSheetDialog(
     }
 
     private fun setOnClickListeners() {
+        binding.imageBsoptionGroupsCancel.setOnClickListener {
+            dismiss()
+        }
         binding.btnBsoptionGroupsMappingMenus.setOnClickListener {
             onClickListener(it.id, null)
             dismiss()

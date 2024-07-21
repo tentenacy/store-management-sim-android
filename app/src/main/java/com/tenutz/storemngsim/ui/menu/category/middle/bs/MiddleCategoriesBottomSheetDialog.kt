@@ -24,6 +24,9 @@ class MiddleCategoriesBottomSheetDialog(
     }
 
     private fun setOnClickListeners() {
+        binding.imageBsmiddleCategoriesCancel.setOnClickListener {
+            dismiss()
+        }
         binding.btnBsmiddleCategoriesSub.setOnClickListener {
             onClickListener(it.id, null)
             dismiss()

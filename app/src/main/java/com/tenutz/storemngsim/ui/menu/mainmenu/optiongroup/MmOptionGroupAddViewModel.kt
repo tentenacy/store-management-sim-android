@@ -3,6 +3,7 @@ package com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
+import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuOptionGroupsResponse
 import com.tenutz.storemngsim.data.repository.menu.MenuRepository
@@ -22,6 +23,8 @@ class MmOptionGroupAddViewModel @Inject constructor(
         const val EVENT_NAVIGATE_UP = 1000
     }
 
+    private val query = MutableLiveData("")
+
     private val _mmOptionGroups = MutableLiveData<MainMenuOptionGroupsResponse>()
     val mmOptionGroups: LiveData<MainMenuOptionGroupsResponse> = _mmOptionGroups
 
@@ -30,8 +33,10 @@ class MmOptionGroupAddViewModel @Inject constructor(
         middleCateCd: String,
         subCateCd: String,
         mainMenuCd: String,
+        searchText: String? = null,
     ) {
-        mainMenuRepository.mainMenuOptionGroups(mainCateCd, middleCateCd, subCateCd, mainMenuCd)
+        searchText?.let { query.value = it }
+        mainMenuRepository.mainMenuOptionGroups(mainCateCd, middleCateCd, subCateCd, mainMenuCd, CommonCondition(query = query.value))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->

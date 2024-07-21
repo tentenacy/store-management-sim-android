@@ -65,7 +65,8 @@ interface MenuRepository {
         mainCateCd: String,
         middleCateCd: String,
         subCateCd: String,
-        mainMenuCd: String
+        mainMenuCd: String,
+        commonCond: CommonCondition? = null,
     ): Single<Result<MainMenuOptionGroupsResponse>>
 
     fun mainMenuMappers(

@@ -32,16 +32,8 @@ class OgMainMenuAddViewModel @Inject constructor(
     private val _expandedItemCount = MutableLiveData(0)
     val expandedItemCount: LiveData<Int> = _expandedItemCount
 
-    fun updateExpandedItemCount(item: OgMainMenuAddArgs.OptionGroupMainMenus) {
+    fun updateExpandedItemCount() {
         _ogMainMenusAdd.value?.let {
-            it.ogMainMenus.find {
-                it.mainCategoryCode == item.mainCategoryCode &&
-                it.middleCategoryCode == item.middleCategoryCode &&
-                it.subCategoryCode == item.subCategoryCode &&
-                it.menuCode == item.menuCode
-            }?.apply {
-                expanded = item.expanded
-            }
             _expandedItemCount.value = it.ogMainMenus.count { it.expanded }
         }
     }
@@ -64,18 +56,15 @@ class OgMainMenuAddViewModel @Inject constructor(
                                     it.storeCode,
                                     it.menuCode,
                                     it.menuName,
+                                    it.imageUrl,
+                                    it.outOfStock,
                                     it.price,
+                                    it.discountingPrice,
+                                    it.discountedPrice,
+                                    it.use,
                                     it.mainCategoryCode,
                                     it.middleCategoryCode,
                                     it.subCategoryCode,
-                                    _ogMainMenusAdd.value?.let { ogMainMenusAddArgs ->
-                                        ogMainMenusAddArgs.ogMainMenus.find { ogMainMenusAdd ->
-                                            ogMainMenusAdd.mainCategoryCode == it.mainCategoryCode &&
-                                            ogMainMenusAdd.middleCategoryCode == it.middleCategoryCode &&
-                                            ogMainMenusAdd.subCategoryCode == it.subCategoryCode &&
-                                            ogMainMenusAdd.menuCode == it.menuCode
-                                        }?.expanded
-                                    } ?: false
                                 )
                             }
                         )

@@ -6,8 +6,11 @@ import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
+import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel
+import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -21,6 +24,7 @@ class MiddleCategoryAddViewModel @Inject constructor(
 
     companion object {
         const val EVENT_NAVIGATE_UP = 1000
+        const val EVENT_TOAST = 1001
     }
 
     fun createMiddleCategory(mainCateCd: String, request: MiddleCategoryCreateRequest, callback: () -> Unit) {
@@ -35,6 +39,14 @@ class MiddleCategoryAddViewModel @Inject constructor(
                     },
                     onFailure = {
                         Logger.e("$it")
+
+                        it.toErrorResponseOrNull()?.let {
+                            when(it.code) {
+                                ErrorCode.ALREADY_CATEGORY_CREATED.code -> {
+                                    viewEvent(Pair(EVENT_TOAST, "중복된 카테고리 코드입니다."))
+                                }
+                            }
+                        }
                     },
                 )
             }.addTo(compositeDisposable)

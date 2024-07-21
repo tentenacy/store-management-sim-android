@@ -42,6 +42,8 @@ class OmOptionGroupsEditViewModel @Inject constructor(
                 OmOptionGroupsEditArgs.OptionOptionGroupEdit(
                     it.optionGroupCode,
                     it.optionName,
+                    it.toggleSelect,
+                    it.required,
                     it.priority,
                 )
             }

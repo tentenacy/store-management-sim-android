@@ -25,6 +25,9 @@ class MainMenusBottomSheetDialog(
     }
 
     private fun setOnClickListeners() {
+        binding.imageBsmainMenusCancel.setOnClickListener {
+            dismiss()
+        }
         binding.btnBsmainMenusOptionGroup.setOnClickListener {
             onClickListener(it.id, null)
             dismiss()

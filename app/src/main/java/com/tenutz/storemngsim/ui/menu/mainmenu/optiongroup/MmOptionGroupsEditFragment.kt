@@ -86,6 +86,12 @@ class MmOptionGroupsEditFragment: Fragment(), OnDragListener<MmOptionGroupsEditV
     }
 
     private fun setOnClickListeners() {
+        binding.imageMmOptionGroupsEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMmOptionGroupsEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnMmOptionGroupsEditBottomContainer.setOnClickListener {
             vm.deleteMainMenuMappers(
                 args.mainMenu.mainCategoryCode,

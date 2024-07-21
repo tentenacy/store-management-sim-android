@@ -28,7 +28,7 @@ interface OptionRepository {
 
     fun deleteOptions(request: OptionsDeleteRequest): Single<Result<Unit>>
 
-    fun optionOptionGroups(optionCd: String): Single<Result<OptionOptionGroupsResponse>>
+    fun optionOptionGroups(optionCd: String, commonCond: CommonCondition? = null): Single<Result<OptionOptionGroupsResponse>>
 
     fun optionMappers(optionCd: String): Single<Result<OptionMappersResponse>>
 

@@ -1,6 +1,7 @@
 package com.tenutz.storemngsim.ui.menu.category.sub
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import androidx.core.view.MotionEventCompat
 import androidx.core.view.doOnAttach
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.tenutz.storemngsim.databinding.ItemSubCategoriesEditBinding
@@ -18,7 +21,7 @@ import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
-import java.util.Collections
+import java.util.*
 
 sealed class SubCategoriesEditItem(val type: SubCategoriesEditType) {
     object Header : SubCategoriesEditItem(SubCategoriesEditType.HEADER)

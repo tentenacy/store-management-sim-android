@@ -116,6 +116,12 @@ class OptionGroupsFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageOptionGroupsBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOptionGroupsHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.textOptionGroupsEdit.setOnClickListener {
             vm.optionGroups.value?.let {
                 findNavController().navigate(OptionGroupsFragmentDirections.actionOptionGroupsFragmentToOptionGroupsEditFragment(it))

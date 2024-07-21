@@ -19,15 +19,19 @@ import com.esafirm.imagepicker.features.registerImagePicker
 import com.esafirm.imagepicker.model.Image
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
 import com.tenutz.storemngsim.databinding.*
 import com.tenutz.storemngsim.ui.common.DatePickerDialog
 import com.tenutz.storemngsim.ui.common.NumberPickerDialog
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuAddViewModel.Companion.EVENT_NAVIGATE_UP
+import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuAddViewModel.Companion.EVENT_TOAST
+import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.dateFrom
 import com.tenutz.storemngsim.utils.ext.localDateFrom
 import com.tenutz.storemngsim.utils.ext.mainActivity
 import com.tenutz.storemngsim.utils.ext.toDateFormat
+import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 import id.zelory.compressor.Compressor
 import kotlinx.coroutines.launch
@@ -89,104 +93,135 @@ class MainMenuAddFragment : Fragment() {
                     EVENT_NAVIGATE_UP -> {
                         findNavController().navigateUp()
                     }
+                    EVENT_TOAST -> {
+                        MyToast.create(mainActivity(), it.second as String, 80)?.show()
+                    }
                 }
             }
         }
     }
 
     private fun setOnClickListeners() {
+        binding.imageMainMenuAddBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMainMenuAddHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnMainMenuAddSave.setOnClickListener {
-            lifecycleScope.launch {
-                vm.createMainMenu(
-                    args.mainCategoryCode,
-                    args.middleCategoryCode,
-                    args.subCategoryCode,
-                    MainMenuCreateRequest(
-                        image = vm.image.value?.let {
-                            val createFormData = MultipartBody.Part.createFormData(
-                                "image",
-                                it.name,
-                                Compressor.compress(mainActivity(), File(it.path)).asRequestBody("image/jpeg".toMediaTypeOrNull())
+            Validator.validate(
+                onValidation = {
+                    Validator.validateMenuName(binding.editMainMenuAddName.text.toString(), true)
+                    Validator.validateMenuCode( binding.editMainMenuAddCode.text.toString(), true)
+                    Validator.validatePrice(binding.editMainMenuAddPrice.text.toString(), true)
+                    Validator.validateDiscountingPrice(binding.editMainMenuAddDiscountedAmount.text.toString())
+                    Validator.validateAdditionalPackagingPrice(binding.editMainMenuAddPackagingAmount.text.toString())
+                    Validator.validateIngredientDetails(binding.editMainMenuAddIngredientDetails.text.toString())
+                    Validator.validateShowDate(binding.editMainMenuAddShowSdate.text.toString(), binding.editMainMenuAddShowEdate.text.toString())
+                    Validator.validateNumberData(binding.editMainMenuAddShowShour.text.toString())
+                    Validator.validateNumberData(binding.editMainMenuAddShowSmin.text.toString())
+                    Validator.validateEventDate(binding.editMainMenuAddEventSdate.text.toString(), binding.editMainMenuAddEventEdate.text.toString())
+                    Validator.validateNumberData(binding.editMainMenuAddEventShour.text.toString())
+                    Validator.validateNumberData(binding.editMainMenuAddEventSmin.text.toString())
+                    Validator.validateMemo(binding.editMainMenuAddMemo.text.toString())
+                },
+                onSuccess = {
+                    lifecycleScope.launch {
+                        vm.createMainMenu(
+                            args.mainCategoryCode,
+                            args.middleCategoryCode,
+                            args.subCategoryCode,
+                            MainMenuCreateRequest(
+                                image = vm.image.value?.let {
+                                    val createFormData = MultipartBody.Part.createFormData(
+                                        "image",
+                                        it.name,
+                                        Compressor.compress(mainActivity(), File(it.path)).asRequestBody("image/jpeg".toMediaTypeOrNull())
+                                    )
+                                    createFormData
+                                },
+                                menuCode = binding.editMainMenuAddCode.text.toString(),
+                                menuName = binding.editMainMenuAddName.text.toString(),
+                                price = binding.editMainMenuAddPrice.text.toString().toInt(),
+                                discountedPrice = binding.editMainMenuAddDiscountedAmount.text.toString()
+                                    .toIntOrNull() ?: 0,
+                                additionalPackagingPrice = binding.editMainMenuAddPackagingAmount.text.toString()
+                                    .toIntOrNull() ?: 0,
+                                packaging = binding.textMainMenuAddPackaging.text.toString().let {
+                                    when (it) {
+                                        "매장 전용" -> {
+                                            "02"
+                                        }
+                                        "포장 전용" -> {
+                                            "03"
+                                        }
+                                        else -> {
+                                            "01"
+                                        }
+                                    }
+                                },
+                                outOfStock = binding.radiogroupMainMenuAddOos.checkedRadioButtonId != R.id.radio_main_menu_add_oos_not,
+                                use = binding.radiogroupMainMenuAdd.checkedRadioButtonId == R.id.radio_main_menu_add_use,
+                                ingredientDisplay = binding.radiogroupMainMenuAddIngredient.checkedRadioButtonId == R.id.radio_main_menu_add_show_ingredient,
+                                mainMenuNameKor = binding.editMainMenuAddName.text.toString(),
+                                highlightType = binding.textMainMenuAddHighlight.text.toString().let {
+                                    when (it) {
+                                        "신규" -> {
+                                            "01"
+                                        }
+                                        "추천" -> {
+                                            "02"
+                                        }
+                                        "인기" -> {
+                                            "03"
+                                        }
+                                        "행사" -> {
+                                            "04"
+                                        }
+                                        else -> {
+                                            "00"
+                                        }
+                                    }
+                                },
+                                showDateFrom = binding.editMainMenuAddShowSdate.text.toString().replace("-", ""),
+                                showDateTo = binding.editMainMenuAddShowEdate.text.toString().replace("-", ""),
+                                showTimeFrom = "${binding.editMainMenuAddShowShour.text}${binding.editMainMenuAddShowSmin.text}00",
+                                showTimeTo = "${binding.editMainMenuAddShowEhour.text}${binding.editMainMenuAddShowEmin.text}00",
+                                showDayOfWeek = listOfNotNull(
+                                    binding.textMainMenuAddShowWeekdayMon.text.toString().takeIf { binding.textMainMenuAddShowWeekdayMon.isChecked },
+                                    binding.textMainMenuAddShowWeekdayTue.text.toString().takeIf { binding.textMainMenuAddShowWeekdayTue.isChecked },
+                                    binding.textMainMenuAddShowWeekdayWed.text.toString().takeIf { binding.textMainMenuAddShowWeekdayWed.isChecked },
+                                    binding.textMainMenuAddShowWeekdayThu.text.toString().takeIf { binding.textMainMenuAddShowWeekdayThu.isChecked },
+                                    binding.textMainMenuAddShowWeekdayFri.text.toString().takeIf { binding.textMainMenuAddShowWeekdayFri.isChecked },
+                                    binding.textMainMenuAddShowWeekdaySat.text.toString().takeIf { binding.textMainMenuAddShowWeekdaySat.isChecked },
+                                    binding.textMainMenuAddShowWeekdaySun.text.toString().takeIf { binding.textMainMenuAddShowWeekdaySun.isChecked },
+                                ).joinToString(","),
+                                eventDateFrom = binding.editMainMenuAddEventSdate.text.toString().replace("-", ""),
+                                eventDateTo = binding.editMainMenuAddEventEdate.text.toString().replace("-", ""),
+                                eventTimeFrom = "${binding.editMainMenuAddEventShour.text}${binding.editMainMenuAddEventSmin.text}00",
+                                eventTimeTo = "${binding.editMainMenuAddEventEhour.text}${binding.editMainMenuAddEventEmin.text}00",
+                                eventDayOfWeek = listOfNotNull(
+                                    binding.textMainMenuAddEventWeekdayMon.text.toString().takeIf { binding.textMainMenuAddEventWeekdayMon.isChecked },
+                                    binding.textMainMenuAddEventWeekdayTue.text.toString().takeIf { binding.textMainMenuAddEventWeekdayTue.isChecked },
+                                    binding.textMainMenuAddEventWeekdayWed.text.toString().takeIf { binding.textMainMenuAddEventWeekdayWed.isChecked },
+                                    binding.textMainMenuAddEventWeekdayThu.text.toString().takeIf { binding.textMainMenuAddEventWeekdayThu.isChecked },
+                                    binding.textMainMenuAddEventWeekdayFri.text.toString().takeIf { binding.textMainMenuAddEventWeekdayFri.isChecked },
+                                    binding.textMainMenuAddEventWeekdaySat.text.toString().takeIf { binding.textMainMenuAddEventWeekdaySat.isChecked },
+                                    binding.textMainMenuAddEventWeekdaySun.text.toString().takeIf { binding.textMainMenuAddEventWeekdaySun.isChecked },
+                                ).joinToString(","),
+                                memoKor = binding.editMainMenuAddMemo.text.toString(),
+                                ingredientDetails = binding.editMainMenuAddIngredientDetails.text.toString(),
                             )
-                            createFormData
-                        },
-                        menuCode = binding.editMainMenuAddCode.text.toString(),
-                        menuName = binding.editMainMenuAddName.text.toString(),
-                        price = binding.editMainMenuAddPrice.text.toString().toInt(),
-                        discountedPrice = binding.editMainMenuAddDiscountedAmount.text.toString()
-                            .toIntOrNull() ?: 0,
-                        additionalPackagingPrice = binding.editMainMenuAddPackagingAmount.text.toString()
-                            .toIntOrNull() ?: 0,
-                        packaging = binding.textMainMenuAddPackaging.text.toString().let {
-                            when (it) {
-                                "매장 전용" -> {
-                                    "02"
-                                }
-                                "포장 전용" -> {
-                                    "03"
-                                }
-                                else -> {
-                                    "01"
-                                }
-                            }
-                        },
-                        outOfStock = binding.radiogroupMainMenuAddOos.checkedRadioButtonId != R.id.radio_main_menu_add_oos_not,
-                        use = binding.radiogroupMainMenuAdd.checkedRadioButtonId == R.id.radio_main_menu_add_use,
-                        ingredientDisplay = binding.radiogroupMainMenuAddIngredient.checkedRadioButtonId == R.id.radio_main_menu_add_show_ingredient,
-                        mainMenuNameKor = binding.editMainMenuAddName.text.toString(),
-                        highlightType = binding.textMainMenuAddHighlight.text.toString().let {
-                            when (it) {
-                                "신규" -> {
-                                    "01"
-                                }
-                                "추천" -> {
-                                    "02"
-                                }
-                                "인기" -> {
-                                    "03"
-                                }
-                                "행사" -> {
-                                    "04"
-                                }
-                                else -> {
-                                    "00"
-                                }
-                            }
-                        },
-                        showDateFrom = binding.editMainMenuAddShowSdate.text.toString().replace("-", ""),
-                        showDateTo = binding.editMainMenuAddShowEdate.text.toString().replace("-", ""),
-                        showTimeFrom = "${binding.editMainMenuAddShowShour.text}${binding.editMainMenuAddShowSmin.text}00",
-                        showTimeTo = "${binding.editMainMenuAddShowEhour.text}${binding.editMainMenuAddShowEmin.text}00",
-                        showDayOfWeek = listOfNotNull(
-                            binding.textMainMenuAddShowWeekdayMon.text.toString().takeIf { binding.textMainMenuAddShowWeekdayMon.isChecked },
-                            binding.textMainMenuAddShowWeekdayTue.text.toString().takeIf { binding.textMainMenuAddShowWeekdayTue.isChecked },
-                            binding.textMainMenuAddShowWeekdayWed.text.toString().takeIf { binding.textMainMenuAddShowWeekdayWed.isChecked },
-                            binding.textMainMenuAddShowWeekdayThu.text.toString().takeIf { binding.textMainMenuAddShowWeekdayThu.isChecked },
-                            binding.textMainMenuAddShowWeekdayFri.text.toString().takeIf { binding.textMainMenuAddShowWeekdayFri.isChecked },
-                            binding.textMainMenuAddShowWeekdaySat.text.toString().takeIf { binding.textMainMenuAddShowWeekdaySat.isChecked },
-                            binding.textMainMenuAddShowWeekdaySun.text.toString().takeIf { binding.textMainMenuAddShowWeekdaySun.isChecked },
-                        ).joinToString(","),
-                        eventDateFrom = binding.editMainMenuAddEventSdate.text.toString().replace("-", ""),
-                        eventDateTo = binding.editMainMenuAddEventEdate.text.toString().replace("-", ""),
-                        eventTimeFrom = "${binding.editMainMenuAddEventShour.text}${binding.editMainMenuAddEventSmin.text}00",
-                        eventTimeTo = "${binding.editMainMenuAddEventEhour.text}${binding.editMainMenuAddEventEmin.text}00",
-                        eventDayOfWeek = listOfNotNull(
-                            binding.textMainMenuAddEventWeekdayMon.text.toString().takeIf { binding.textMainMenuAddEventWeekdayMon.isChecked },
-                            binding.textMainMenuAddEventWeekdayTue.text.toString().takeIf { binding.textMainMenuAddEventWeekdayTue.isChecked },
-                            binding.textMainMenuAddEventWeekdayWed.text.toString().takeIf { binding.textMainMenuAddEventWeekdayWed.isChecked },
-                            binding.textMainMenuAddEventWeekdayThu.text.toString().takeIf { binding.textMainMenuAddEventWeekdayThu.isChecked },
-                            binding.textMainMenuAddEventWeekdayFri.text.toString().takeIf { binding.textMainMenuAddEventWeekdayFri.isChecked },
-                            binding.textMainMenuAddEventWeekdaySat.text.toString().takeIf { binding.textMainMenuAddEventWeekdaySat.isChecked },
-                            binding.textMainMenuAddEventWeekdaySun.text.toString().takeIf { binding.textMainMenuAddEventWeekdaySun.isChecked },
-                        ).joinToString(","),
-                        memoKor = binding.editMainMenuAddMemo.text.toString(),
-                        ingredientDetails = binding.editMainMenuAddIngredientDetails.text.toString(),
-                    )
-                ) {
-                    pVm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode)
-                }
+                        ) {
+                            pVm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode)
+                        }
 
-            }
+                    }
+                },
+                onFailure = { e ->
+                    MyToast.create(mainActivity(), e.errorCode.message, 80)?.show()
+                },
+            )
         }
         binding.imageMainMenuAddThumbnail.setOnClickListener {
             imagePickerLauncher.launch(ImagePickerConfig { mode = ImagePickerMode.SINGLE })

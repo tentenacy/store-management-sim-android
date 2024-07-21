@@ -53,7 +53,7 @@ interface OptionApi {
         @Part("additionalPackagingPrice") additionalPackagingPrice: Int? = null,
         @Part("packaging") packaging: String,
         @Part("outOfStock") outOfStock: Boolean,
-        @Part("use") use: Boolean,
+        @Part("use") use: Boolean?,
         @Part("optionNameKor") optionNameKor: String? = null,
         @Part("showDateFrom") showDateFrom: String? = null,
         @Part("showDateTo") showDateTo: String? = null,
@@ -74,7 +74,7 @@ interface OptionApi {
     fun deleteOptions(@Body request: OptionsDeleteRequest): Completable
 
     @GET("/options/{optionCd}/option-groups")
-    fun optionOptionGroups(@Path("optionCd") optionCd: String): Single<OptionOptionGroupsResponse>
+    fun optionOptionGroups(@Path("optionCd") optionCd: String, @Query("query") query: String? = null): Single<OptionOptionGroupsResponse>
 
     @GET("/options/{optionCd}/mappers")
     fun optionMappers(@Path("optionCd") optionCd: String): Single<OptionMappersResponse>

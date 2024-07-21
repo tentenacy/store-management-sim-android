@@ -73,7 +73,7 @@ interface MenuApi {
         @Part("additionalPackagingPrice") additionalPackagingPrice: Int?,
         @Part("packaging") packaging: String,
         @Part("outOfStock") outOfStock: Boolean,
-        @Part("use") use: Boolean,
+        @Part("use") use: Boolean?,
         @Part("ingredientDisplay") ingredientDisplay: Boolean,
         @Part("mainMenuNameKor") mainMenuNameKor: String? = null,
         @Part("highlightType") highlightType: String,
@@ -120,7 +120,8 @@ interface MenuApi {
         @Path("mainCateCd") mainCateCd: String,
         @Path("middleCateCd") middleCateCd: String,
         @Path("subCateCd") subCateCd: String,
-        @Path("mainMenuCd") mainMenuCd: String
+        @Path("mainMenuCd") mainMenuCd: String,
+        @Query("query") query: String? = null,
     ): Single<MainMenuOptionGroupsResponse>
 
     @GET("/categories/main/{mainCateCd}/middle/{middleCateCd}/sub/{subCateCd}/main-menus/{mainMenuCd}/mappers")

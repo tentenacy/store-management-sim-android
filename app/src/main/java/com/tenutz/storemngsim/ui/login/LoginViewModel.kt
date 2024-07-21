@@ -7,6 +7,7 @@ import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
 import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
+import com.tenutz.storemngsim.ui.base.Loginable
 import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import com.tenutz.storemngsim.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
-): BaseViewModel() {
+): BaseViewModel(), Loginable {
 
     companion object {
 
@@ -27,7 +28,7 @@ class LoginViewModel @Inject constructor(
         const val EVENT_NAVIGATE_TO_SIGNUP = 1001
     }
 
-    fun socialLogin(socialType: SocialType) {
+    override fun socialLogin(accessToken: String, socialType: SocialType) {
         userRepository.socialLogin(socialType)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -45,18 +46,22 @@ class LoginViewModel @Inject constructor(
                 Logger.e("${t}")
 
                 t.toErrorResponseOrNull()?.let {
-                    when(it.code) {
+                    return@let when(it.code) {
                         ErrorCode.USER_NOT_FOUND.code -> {
-                            viewEvent(Pair(EVENT_NAVIGATE_TO_SIGNUP, Unit))
+                            viewEvent(Pair(EVENT_NAVIGATE_TO_SIGNUP, Pair(accessToken, socialType.name)))
+                            return@let false
+                        }
+                        else -> {
+                            true
                         }
                     }
+                }?.takeIf { it }?.run {
+                    logout()
                 }
-
-                logout()
             }.addTo(compositeDisposable)
     }
 
-    private fun logout() {
+    override fun logout() {
         oauthLoginManagerMap[OAuthToken.socialType]?.logout()
         OAuthToken.clear()
         Token.clear()

@@ -6,6 +6,8 @@ data class MmOptionGroupsEditArgs(
     data class MainMenuOptionGroup(
         val optionGroupCode: String?,
         val optionName: String?,
+        val toggleSelect: Boolean,
+        val required: Boolean,
         val priority: Int?,
         var checked: Boolean = false,
     )

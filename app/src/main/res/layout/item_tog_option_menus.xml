@@ -40,9 +40,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
 
-            <!--
-            android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
-            -->
             <TextView
                 android:id="@+id/text_itog_option_menus_name"
                 style="@style/Text"
@@ -54,16 +51,13 @@
                 android:fontFamily="@font/ns_regular"
                 android:maxLines="1"
                 android:textSize="16sp"
-                android:textColor="@color/rect_4474"
+                android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
                 android:text="@{args.optionName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/image_itog_option_menus_thumbnail"
                 tools:text="옵션메뉴1"
                 tools:textColor="@color/rect_4474" />
 
-            <!--
-            android:visibility="@{args.outOfStock ? View.VISIBLE : View.INVISIBLE}"
-            -->
             <TextView
                 style="@style/Text"
                 android:layout_width="wrap_content"
@@ -76,7 +70,7 @@
                 android:text="품절"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-                android:visibility="invisible"
+                android:visibility="@{args.outOfStock ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@id/text_itog_option_menus_name"
                 app:layout_constraintStart_toEndOf="@id/text_itog_option_menus_name"
                 app:layout_constraintTop_toTopOf="@id/text_itog_option_menus_name"
@@ -132,7 +126,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ns_bold"
                 android:paddingStart="1dp"
-                android:textColor="@color/rect_4474"
+                tools:textColor="@color/rect_4474"
+                android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
                 android:textSize="16sp"
                 android:text="@{TextExtKt.getToCurrency(args.price)}"
                 app:layout_constraintBottom_toBottomOf="@id/text_itog_option_menus_not_discounted_unit_kr"
@@ -141,9 +136,6 @@
                 tools:ignore="RtlSymmetry"
                 tools:text="1,000" />
 
-            <!--
-            android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
-            -->
             <TextView
                 android:id="@+id/text_itog_option_menus_not_discounted_unit_kr"
                 style="@style/Text"
@@ -154,7 +146,8 @@
                 android:fontFamily="@font/ns_regular"
                 android:paddingEnd="1dp"
                 android:text="원"
-                android:textColor="@color/rect_4474"
+                tools:textColor="@color/rect_4474"
+                android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

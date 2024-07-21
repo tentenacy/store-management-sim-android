@@ -71,8 +71,8 @@ class OgMainMenuAddBeforeBottomSheetDialog(
             vm.subCategoryPickerEvent()
         }
         binding.btnBsogMainMenuAddBeforeSearch.setOnClickListener { view ->
-            listOf(vm.mainCategoryCode.value, vm.middleCategoryCode.value, vm.subCategoryCode.value).takeIf { it.all { it?.first != null } }?.filterNotNull()?.let {
-                onClickListener(view.id, Triple(it[0].first, it[1].first, it[2].first))
+            vm.mainCategoryCode.value?.first?.let {
+                onClickListener(view.id, Triple(it, vm.middleCategoryCode.value?.first, vm.subCategoryCode.value?.first))
                 dismiss()
             }
         }

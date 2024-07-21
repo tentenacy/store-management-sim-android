@@ -10,9 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyUpdateRequest
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.utils.MyToast
+import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,22 +73,36 @@ class MenuReplyPostFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageMenuReplyPostCancel.setOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.btnMenuReplyPostSave.setOnClickListener {
-            args.menuReview.menuReviewReply?.let {
-                vm.updateMenuReviewReply(
-                    it.seq,
-                    ReviewReplyUpdateRequest(binding.editMenuReplyPostContent.text.toString()),
-                ) {
-                    pVm.menuReviews()
-                }
-            } ?: kotlin.run {
-                vm.createMenuReviewReply(
-                    args.menuReview.seq,
-                    ReviewReplyCreateRequest(binding.editMenuReplyPostContent.text.toString())
-                ) {
-                    pVm.menuReviews()
-                }
-            }
+
+            Validator.validate(
+                onValidation = {
+                    Validator.validateReviewReplyContent(binding.editMenuReplyPostContent.text.toString(), true)
+                },
+                onSuccess = {
+                    args.menuReview.menuReviewReply?.let {
+                        vm.updateMenuReviewReply(
+                            it.seq,
+                            ReviewReplyUpdateRequest(binding.editMenuReplyPostContent.text.toString()),
+                        ) {
+                            pVm.menuReviews()
+                        }
+                    } ?: kotlin.run {
+                        vm.createMenuReviewReply(
+                            args.menuReview.seq,
+                            ReviewReplyCreateRequest(binding.editMenuReplyPostContent.text.toString())
+                        ) {
+                            pVm.menuReviews()
+                        }
+                    }
+                },
+                onFailure = { e ->
+                    MyToast.create(mainActivity(), e.errorCode.message, 80)?.show()
+                },
+            )
         }
     }
 

@@ -72,7 +72,7 @@ class StatisticsCardTabFragment: Fragment() {
             pVm.setCardTotal(it.salesAmountTotal, it.salesCountTotal)
         }
         vm.cardSalesList.observe(viewLifecycleOwner) {
-            adapter.updateItems(it.contents)
+            adapter.updateAllItems(it.contents)
         }
         vm.viewEvent.observe(viewLifecycleOwner) { event ->
             event?.getContentIfNotHandled()?.let {

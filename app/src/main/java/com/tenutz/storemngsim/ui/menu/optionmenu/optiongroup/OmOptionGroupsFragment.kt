@@ -79,6 +79,12 @@ class OmOptionGroupsFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageOmOptionGroupsBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOmOptionGroupsHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.textOmOptionGroupsEdit.setOnClickListener {
             vm.optionMenuMappers.value?.let {
                 findNavController().navigate(

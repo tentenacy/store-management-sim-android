@@ -3,6 +3,7 @@ package com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
+import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionOptionGroupsResponse
 import com.tenutz.storemngsim.data.repository.option.OptionRepository
@@ -22,13 +23,17 @@ class OmOptionGroupAddViewModel @Inject constructor(
         const val EVENT_NAVIGATE_UP = 1000
     }
 
+    private val query = MutableLiveData("")
+
     private val _omOptionGroups = MutableLiveData<OptionOptionGroupsResponse>()
     val omOptionGroups: LiveData<OptionOptionGroupsResponse> = _omOptionGroups
 
     fun omOptionGroups(
         optionCd: String,
+        searchText: String? = null,
     ) {
-        optionRepository.optionOptionGroups(optionCd)
+        searchText?.let { query.value = it }
+        optionRepository.optionOptionGroups(optionCd, CommonCondition(query = query.value))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->

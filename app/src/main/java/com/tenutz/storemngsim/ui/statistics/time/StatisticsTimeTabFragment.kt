@@ -18,6 +18,8 @@ import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByTim
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByTimeResponse
 import com.tenutz.storemngsim.databinding.TabStatisticsTimeBinding
 import com.tenutz.storemngsim.ui.common.ChartMarker
+import com.tenutz.storemngsim.ui.common.ChartMarkerV2
+import com.tenutz.storemngsim.ui.common.args.ChartMakerV2Data
 import com.tenutz.storemngsim.ui.statistics.StatisticsViewModel
 import com.tenutz.storemngsim.utils.ext.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -131,11 +133,11 @@ class StatisticsTimeTabFragment : Fragment() {
                 maxY + (50 - (maxY % 51)),
             )
 
-            val combinedData = CombinedData()
-
-            combinedData.setData(createLineData(StatisticsSalesByTimeResponse(contents)))
-            combinedData.setData(createBarData(StatisticsSalesByTimeResponse(contents)))
-            prepareChartData(combinedData, binding.chartTstatisticsTime)
+//            val combinedData = CombinedData()
+//
+//            combinedData.setData(createBarData(StatisticsSalesByTimeResponse(contents)))
+//            combinedData.setData(createLineData(StatisticsSalesByTimeResponse(contents)))
+            prepareChartData(createCombinedData(StatisticsSalesByTimeResponse(contents)), binding.chartTstatisticsTime)
 
             pVm.setTimeTotal(contents.sumOf { it.salesAmount }, contents.sumOf { it.salesCount })
         }
@@ -232,7 +234,7 @@ class StatisticsTimeTabFragment : Fragment() {
             }
         }
 
-        combinedChart.marker = ChartMarker(mainActivity(), R.layout.marker)
+        combinedChart.marker = ChartMarkerV2(mainActivity(), R.layout.marker_v2)
     }
 
     private fun updateXAxis(
@@ -262,6 +264,73 @@ class StatisticsTimeTabFragment : Fragment() {
         val yAxis = combinedChart.axisRight
         yAxis.axisMinimum = yMin // 최솟값
         yAxis.axisMaximum = yMax // 최댓값
+    }
+
+    private fun createCombinedData(item: StatisticsSalesByTimeResponse): CombinedData {
+
+        val combinedData = CombinedData()
+
+        val entry1: ArrayList<Entry> = ArrayList()
+        val entry2: ArrayList<BarEntry> = ArrayList()
+        val entry3: ArrayList<BarEntry> = ArrayList()
+        val lineData = LineData()
+        val barData = BarData()
+
+        (0..23).forEach { index ->
+            if(item.contents.none { it.dateHour?.hour() == index }) {
+                entry2.add(BarEntry(index.toFloat(), 0f))
+                entry3.add(BarEntry(index.toFloat(), 0f))
+                entry1.add(Entry(index.toFloat(), 0f, ChartMakerV2Data(0f, 0f, 0f)))
+            } else {
+                item.contents.find { it.dateHour?.hour() == index }?.let {
+                    val salesAmount = (it.cashSalesAmount + it.creditCardSalesAmount).div(10000f)
+                    val cancelAmount =
+                        -(it.cashSalesCancelAmount + it.creditCardSalesCancelAmount).div(10000f)
+                    val salesAmountTotal = it.salesAmount / 10000f
+                    entry2.add(
+                        BarEntry(
+                            it.dateHour?.hour()?.toFloat() ?: 0f,
+                            salesAmount
+                        )
+                    )
+                    entry3.add(
+                        BarEntry(
+                            it.dateHour?.hour()?.toFloat() ?: 0f,
+                            cancelAmount
+                        )
+                    )
+                    entry1.add(Entry(it.dateHour?.hour()?.toFloat() ?: 0f, salesAmountTotal, ChartMakerV2Data(salesAmount, cancelAmount, salesAmountTotal)))
+                }
+            }
+        }
+
+        val dataSet1 = LineDataSet(entry1, "총계")
+        lineData.addDataSet(dataSet1)
+        dataSet1.lineWidth = 2f
+        dataSet1.circleRadius = 5.5f
+        dataSet1.circleHoleRadius = 2.5f
+        dataSet1.setDrawValues(false)
+        dataSet1.setDrawCircleHole(true)
+        dataSet1.setDrawCircles(true)
+        dataSet1.setDrawHorizontalHighlightIndicator(false)
+        dataSet1.setDrawHighlightIndicators(false)
+        dataSet1.color = ContextCompat.getColor(mainActivity(), R.color.rect_4476)
+        dataSet1.setCircleColor(ContextCompat.getColor(mainActivity(), R.color.rect_4476))
+
+        val dataSet2 = BarDataSet(entry2, "승인")
+        barData.addDataSet(dataSet2)
+        dataSet2.setDrawValues(false)
+        dataSet2.color = ContextCompat.getColor(mainActivity(), R.color.rect_4475)
+
+        val dataSet3 = BarDataSet(entry3, "취소")
+        barData.addDataSet(dataSet3)
+        dataSet3.setDrawValues(false)
+        dataSet3.color = ContextCompat.getColor(mainActivity(), R.color.rect_4481)
+
+        combinedData.setData(lineData)
+        combinedData.setData(barData)
+
+        return combinedData
     }
 
     private fun createLineData(item: StatisticsSalesByTimeResponse): LineData {

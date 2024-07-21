@@ -1,5 +1,6 @@
 package com.tenutz.storemngsim.ui.base
 
+import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.MotionEventCompat
@@ -23,6 +24,17 @@ abstract class BaseRecyclerView<T: Any, VH: BaseViewHolder<T>>: RecyclerView.Ada
                 clear()
                 addAll(items)
                 diffResult.dispatchUpdatesTo(this@BaseRecyclerView)
+            }
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    open fun updateAllItems(items: List<T>?) {
+        items?.let {
+            this.items.run {
+                clear()
+                addAll(it)
+                notifyDataSetChanged()
             }
         }
     }

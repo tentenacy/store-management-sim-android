@@ -4,13 +4,21 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.kakao.sdk.auth.model.OAuthToken
+import com.tenutz.storemngsim.ui.base.Loginable
+import com.tenutz.storemngsim.ui.login.LoginFragment
 import com.tenutz.storemngsim.ui.login.LoginViewModel
+import com.tenutz.storemngsim.ui.signup.SignupFormViewModel
 import com.tenutz.storemngsim.utils.type.SocialType
 
 class KakaoOAuthLoginHandler(private val fragment: Fragment): (OAuthToken?, Throwable?) -> Unit {
 
-    private val viewModel by lazy {
-        ViewModelProvider(fragment).get(LoginViewModel::class.java)
+    private val viewModel: Loginable by lazy {
+        ViewModelProvider(fragment).get(
+            when(fragment) {
+                is LoginFragment -> LoginViewModel::class.java
+                else -> SignupFormViewModel::class.java
+            }
+        )
     }
 
     override fun invoke(token: OAuthToken?, error: Throwable?) {
@@ -29,7 +37,7 @@ class KakaoOAuthLoginHandler(private val fragment: Fragment): (OAuthToken?, Thro
             refreshToken = token.refreshToken,
             socialType = SocialType.KAKAO.name,
         )
-        viewModel.socialLogin(SocialType.KAKAO)
+        viewModel.socialLogin(accessToken = token.accessToken, SocialType.KAKAO)
     }
 
     private fun onCancel() {

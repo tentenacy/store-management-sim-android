@@ -12,38 +12,27 @@ import com.tenutz.storemngsim.ui.help.args.HelpsArgs
 
 class HelpsViewHolder(
     val binding: ItemHelpsBinding,
-    private val onExpandedChangeListener: (HelpsArgs.Help) -> Unit,
+    private val onExpandedChangeListener: () -> Unit,
 ): BaseViewHolder<HelpsArgs.Help>(binding.root) {
 
-    init {
-        binding.constraintIhelpsExpandableContainer.setOnClickListener {
-            binding.constraintIhelpsContentContainer.visibility =
-                if(binding.constraintIhelpsContentContainer.visibility == View.VISIBLE) View.GONE else View.VISIBLE
-        }
-        binding.constraintIhelpsContentContainer.tag = binding.constraintIhelpsContentContainer.visibility
-    }
-
     override fun bind(position: Int, item: HelpsArgs.Help) {
-        binding.position = position
+        binding.index = position + 1
         binding.args = item
         if(item.expanded != binding.constraintIhelpsContentContainer.isVisible) {
-            onExpandedChangeListener(item)
+            onExpandedChangeListener()
             binding.constraintIhelpsContentContainer.visibility = if(item.expanded) View.VISIBLE else View.GONE
         }
-        binding.constraintIhelpsContentContainer.viewTreeObserver.addOnGlobalLayoutListener {
-            if(binding.constraintIhelpsContentContainer.tag as Int != binding.constraintIhelpsContentContainer.visibility) {
-                binding.constraintIhelpsContentContainer.tag = binding.constraintIhelpsContentContainer.visibility
-                //visibility has changed
-                item.expanded = binding.constraintIhelpsContentContainer.visibility == View.VISIBLE
-                binding.args = item
-                onExpandedChangeListener(item)
-            }
+        binding.constraintIhelpsExpandableContainer.setOnClickListener {
+            item.expanded = !item.expanded
+            binding.args = item
+            onExpandedChangeListener()
+            binding.constraintIhelpsContentContainer.visibility = if(item.expanded) View.VISIBLE else View.GONE
         }
     }
 }
 
 class HelpsAdapter(
-    private val onExpandedChangeListener: (HelpsArgs.Help) -> Unit,
+    private val onExpandedChangeListener: () -> Unit,
 ): BaseRecyclerView<HelpsArgs.Help, HelpsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HelpsViewHolder {

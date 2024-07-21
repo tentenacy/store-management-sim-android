@@ -87,6 +87,12 @@ class SubCategoriesFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageSubCategoriesBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageSubCategoriesHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.fabSubCategoriesAdd.setOnClickListener {
             findNavController().navigate(
                 SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoryAddFragment(

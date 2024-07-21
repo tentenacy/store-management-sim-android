@@ -84,6 +84,12 @@ class MainMenusEditFragment: Fragment(), OnDragListener<MainMenusEditViewHolder>
     }
 
     private fun setOnClickListeners() {
+        binding.imageMainMenusEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMainMenusEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnMainMenusEditBottomContainer.setOnClickListener {
             vm.deleteMainMenus(
                 args.subCategory.mainCategoryCode,

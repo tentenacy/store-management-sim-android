@@ -79,6 +79,12 @@ class OptionGroupsEditFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageOptionGroupsEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageOptionGroupsEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnOptionGroupsEditBottomContainer.setOnClickListener {
             vm.deleteOptionGroups(
                 OptionGroupsDeleteRequest(

@@ -27,9 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--
-            bind:showImage="@{args.imageUrl}"
-            -->
             <ImageView
                 android:id="@+id/image_itog_option_menus_edit_thumbnail"
                 android:layout_width="50dp"
@@ -38,14 +35,11 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/placeholder_logo"
                 android:contentDescription="메뉴 썸네일"
-                android:visibility="invisible"
+                bind:showImage="@{args.imageUrl}"
                 app:layout_constraintStart_toEndOf="@+id/check_imain_categories_edit"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
 
-            <!--
-            android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
-            -->
             <TextView
                 android:id="@+id/text_itog_option_menus_edit_name"
                 style="@style/Text"
@@ -56,16 +50,13 @@
                 android:fontFamily="@font/ns_regular"
                 android:maxLines="1"
                 android:textSize="16sp"
-                android:textColor="@color/rect_4474"
+                android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
                 android:text="@{args.optionName}"
-                app:layout_constraintStart_toEndOf="@+id/check_imain_categories_edit"
+                app:layout_constraintStart_toEndOf="@+id/image_itog_option_menus_edit_thumbnail"
                 app:layout_constraintTop_toTopOf="@id/image_itog_option_menus_edit_thumbnail"
                 tools:text="옵션메뉴1"
                 tools:textColor="@color/rect_4474" />
 
-            <!--
-            android:visibility="@{args.outOfStock ? View.VISIBLE : View.INVISIBLE}"
-            -->
             <TextView
                 style="@style/Text"
                 android:layout_width="wrap_content"
@@ -78,7 +69,7 @@
                 android:text="품절"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-                android:visibility="invisible"
+                android:visibility="@{args.outOfStock ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@id/text_itog_option_menus_edit_name"
                 app:layout_constraintStart_toEndOf="@id/text_itog_option_menus_edit_name"
                 app:layout_constraintTop_toTopOf="@id/text_itog_option_menus_edit_name"

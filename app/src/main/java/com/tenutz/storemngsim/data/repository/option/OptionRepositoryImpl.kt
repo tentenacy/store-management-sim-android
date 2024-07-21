@@ -118,8 +118,8 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
                 ) { Result.failure(it) })
 
-    override fun optionOptionGroups(optionCd: String): Single<Result<OptionOptionGroupsResponse>> =
-        SMSApi.optionOptionGroups(optionCd)
+    override fun optionOptionGroups(optionCd: String, commonCond: CommonCondition?): Single<Result<OptionOptionGroupsResponse>> =
+        SMSApi.optionOptionGroups(optionCd, commonCond?.query)
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(

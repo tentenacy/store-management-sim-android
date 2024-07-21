@@ -2,7 +2,9 @@ package com.tenutz.storemngsim.ui.statistics.menu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.rxjava3.cachedIn
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByMenusResponse
@@ -57,7 +59,7 @@ class StatisticsMenuViewModel @Inject constructor(
                 result.fold(
                     onSuccess = { total ->
                         salesPagingRepository.menuSalesList(commonCond)
-                            .subscribeOn(Schedulers.io())
+                            .cachedIn(viewModelScope)
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
                                 viewEvent(Pair(EVENT_REFRESH_MENU_SALES_LIST, Pair(total, it)))

@@ -14,9 +14,9 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val SMSApi: SMSApi,
 ) : UserRepository {
-    override fun socialSignup(socialType: SocialType, request: SocialSignupRequest): Single<Unit> =
+    override fun socialSignup(socialType: String, request: SocialSignupRequest): Single<Unit> =
         SMSApi.socialSignup(
-            socialType.name,
+            socialType,
             request,
         )
 

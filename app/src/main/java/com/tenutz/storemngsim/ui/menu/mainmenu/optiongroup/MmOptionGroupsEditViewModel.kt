@@ -47,6 +47,8 @@ class MmOptionGroupsEditViewModel @Inject constructor(
                 MmOptionGroupsEditArgs.MainMenuOptionGroup(
                     it.optionGroupCode,
                     it.optionName,
+                    it.toggleSelect,
+                    it.required,
                     it.priority,
                 )
             }

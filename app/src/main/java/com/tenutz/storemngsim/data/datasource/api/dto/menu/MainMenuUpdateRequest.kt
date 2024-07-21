@@ -10,7 +10,7 @@ data class MainMenuUpdateRequest(
     val additionalPackagingPrice: Int? = null,
     val packaging: String,
     val outOfStock: Boolean,
-    val use: Boolean,
+    val use: Boolean?,
     val ingredientDisplay: Boolean,
     val mainMenuNameKor: String? = null,
     val highlightType: String,

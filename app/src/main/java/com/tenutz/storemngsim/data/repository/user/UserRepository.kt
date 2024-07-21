@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Single
 interface UserRepository {
 
     fun socialSignup(
-        socialType: SocialType,
+        socialType: String,
         request: SocialSignupRequest
     ): Single<Unit>
 

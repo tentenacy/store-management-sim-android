@@ -56,7 +56,7 @@
 
         <argument android:name="optionGroupCode" app:argType="string" />
         <argument android:name="mainCategoryCode" app:argType="string" />
-        <argument android:name="middleCategoryCode" app:argType="string" />
-        <argument android:name="subCategoryCode" app:argType="string" />
+        <argument android:name="middleCategoryCode" app:argType="string" app:nullable="true" />
+        <argument android:name="subCategoryCode" app:argType="string" app:nullable="true" />
     </fragment>
 </navigation>

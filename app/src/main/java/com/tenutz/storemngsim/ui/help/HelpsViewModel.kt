@@ -29,13 +29,8 @@ class HelpsViewModel @Inject constructor(
     private val _expandedItemCount = MutableLiveData(0)
     val expandedItemCount: LiveData<Int> = _expandedItemCount
 
-    fun updateExpandedItemCount(item: HelpsArgs.Help) {
+    fun updateExpandedItemCount() {
         _helps.value?.let {
-            it.helps.find {
-                it.seq == item.seq
-            }?.apply {
-                expanded = item.expanded
-            }
             _expandedItemCount.value = it.helps.count { it.expanded }
         }
     }
@@ -62,11 +57,6 @@ class HelpsViewModel @Inject constructor(
                                     updatedAt = it.updatedAt,
                                     updatedBy = it.updatedBy,
                                     updatedIp = it.updatedIp,
-                                    expanded = _helps.value?.let { helpsArgs ->
-                                        helpsArgs.helps.find { helps ->
-                                            helps.seq == it.seq
-                                        }?.expanded
-                                    } ?: false
                                 )
                             }
                         )

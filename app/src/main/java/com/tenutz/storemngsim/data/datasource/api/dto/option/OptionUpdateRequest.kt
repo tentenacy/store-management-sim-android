@@ -10,7 +10,7 @@ data class OptionUpdateRequest(
     val additionalPackagingPrice: Int? = null,
     val packaging: String,
     val outOfStock: Boolean,
-    val use: Boolean,
+    val use: Boolean?,
     val optionNameKor: String? = null,
     val showDateFrom: String? = null,
     val showDateTo: String? = null,

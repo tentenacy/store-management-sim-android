@@ -12,41 +12,30 @@ import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMa
 
 class OgMainMenuAddViewHolder(
     val binding: ItemOgMainMenuAddBinding,
-    private val onExpandedChangeListener: (OgMainMenuAddArgs.OptionGroupMainMenus) -> Unit,
+    private val onExpandedChangeListener: () -> Unit,
     private val listener: (OgMainMenuAddArgs.OptionGroupMainMenus) -> Unit
 ): BaseViewHolder<OgMainMenuAddArgs.OptionGroupMainMenus>(binding.root) {
-
-    init {
-        binding.constraintIogMainMenuAddExpandableContainer.setOnClickListener {
-            binding.constraintIogMainMenuAddCategoriesContainer.visibility =
-                if(binding.constraintIogMainMenuAddCategoriesContainer.visibility == View.VISIBLE) View.GONE else View.VISIBLE
-        }
-        binding.constraintIogMainMenuAddCategoriesContainer.tag = binding.constraintIogMainMenuAddCategoriesContainer.visibility
-    }
 
     override fun bind(position: Int, item: OgMainMenuAddArgs.OptionGroupMainMenus) {
         binding.args = item
         if(item.expanded != binding.constraintIogMainMenuAddCategoriesContainer.isVisible) {
-            onExpandedChangeListener(item)
+            onExpandedChangeListener()
             binding.constraintIogMainMenuAddCategoriesContainer.visibility = if(item.expanded) View.VISIBLE else View.GONE
-        }
-        binding.constraintIogMainMenuAddCategoriesContainer.viewTreeObserver.addOnGlobalLayoutListener {
-            if(binding.constraintIogMainMenuAddCategoriesContainer.tag as Int != binding.constraintIogMainMenuAddCategoriesContainer.visibility) {
-                binding.constraintIogMainMenuAddCategoriesContainer.tag = binding.constraintIogMainMenuAddCategoriesContainer.visibility
-                //visibility has changed
-                item.expanded = binding.constraintIogMainMenuAddCategoriesContainer.visibility == View.VISIBLE
-                binding.args = item
-                onExpandedChangeListener(item)
-            }
         }
         binding.textIogMainMenuAdd.setOnClickListener {
             listener(item)
+        }
+        binding.constraintIogMainMenuAddExpandableContainer.setOnClickListener {
+            item.expanded = !item.expanded
+            binding.args = item
+            onExpandedChangeListener()
+            binding.constraintIogMainMenuAddCategoriesContainer.visibility = if(item.expanded) View.VISIBLE else View.GONE
         }
     }
 }
 
 class OgMainMenuAddAdapter(
-    private val onExpandedChangeListener: (OgMainMenuAddArgs.OptionGroupMainMenus) -> Unit,
+    private val onExpandedChangeListener: () -> Unit,
     private val listener: (OgMainMenuAddArgs.OptionGroupMainMenus) -> Unit
 ): BaseRecyclerView<OgMainMenuAddArgs.OptionGroupMainMenus, OgMainMenuAddViewHolder>() {
 

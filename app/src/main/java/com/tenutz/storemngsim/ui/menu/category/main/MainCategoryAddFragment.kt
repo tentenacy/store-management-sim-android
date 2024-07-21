@@ -12,6 +12,11 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.databinding.FragmentMainCategoryAddBinding
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel.Companion.EVENT_NAVIGATE_UP
+import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel.Companion.EVENT_TOAST
+import com.tenutz.storemngsim.utils.MyToast
+import com.tenutz.storemngsim.utils.validation.Validator
+import com.tenutz.storemngsim.utils.validation.err.base.ValidationException
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,22 +56,43 @@ class MainCategoryAddFragment: Fragment() {
                     EVENT_NAVIGATE_UP -> {
                         findNavController().navigateUp()
                     }
+                    EVENT_TOAST -> {
+                        MyToast.create(mainActivity(), it.second as String, 80)?.show()
+                    }
                 }
             }
         }
     }
 
     private fun setOnClickListeners() {
+        binding.imageMainCategoryAddBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMainCategoryAddHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnMainCategoryAddSave.setOnClickListener {
-            vm.createMainCategory(
-                MainCategoryCreateRequest(
-                    binding.editMainCategoryAddCategoryCode.text.toString(),
-                    binding.editMainCategoryAddCategoryName.text.toString(),
-                    binding.radiogroupMainCategoryAdd.checkedRadioButtonId == R.id.radio_main_category_add_use
-                )
-            ) {
-                pVm.mainCategories()
-            }
+
+            Validator.validate(
+                onValidation = {
+                    Validator.validateCategoryName(binding.editMainCategoryAddCategoryName.text.toString(), true)
+                    Validator.validateCategoryCode(binding.editMainCategoryAddCategoryCode.text.toString(), true)
+                },
+                onSuccess = {
+                    vm.createMainCategory(
+                        MainCategoryCreateRequest(
+                            binding.editMainCategoryAddCategoryCode.text.toString(),
+                            binding.editMainCategoryAddCategoryName.text.toString(),
+                            binding.radiogroupMainCategoryAdd.checkedRadioButtonId == R.id.radio_main_category_add_use
+                        )
+                    ) {
+                        pVm.mainCategories()
+                    }
+                },
+                onFailure = { e ->
+                    MyToast.create(mainActivity(), e.errorCode.message, 80)?.show()
+                },
+            )
         }
     }
 

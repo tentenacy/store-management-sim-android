@@ -95,6 +95,12 @@ class SubCategoriesEditFragment: Fragment(), OnDragListener<SubCategoriesEditVie
     }
 
     private fun setOnClickListeners() {
+        binding.imageSubCategoriesEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageSubCategoriesEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnSubCategoriesEditBottomContainer.setOnClickListener {
             vm.deleteSubCategories(
                 args.middleCategory.mainCategoryCode,

@@ -19,6 +19,8 @@ import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepository
 import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepositoryImpl
 import com.tenutz.storemngsim.data.repository.store.StoreRepository
 import com.tenutz.storemngsim.data.repository.store.StoreRepositoryImpl
+import com.tenutz.storemngsim.data.repository.terms.TermsRepository
+import com.tenutz.storemngsim.data.repository.terms.TermsRepositoryImpl
 import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.data.repository.user.UserRepositoryImpl
 import dagger.Binds
@@ -87,4 +89,9 @@ abstract class RepositoryModule {
     abstract fun provideHelpRepository(
         repository: HelpRepositoryImpl
     ): HelpRepository
+
+    @Binds
+    abstract fun provideTermsRepository(
+        repository: TermsRepositoryImpl
+    ): TermsRepository
 }

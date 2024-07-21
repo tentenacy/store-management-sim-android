@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tenutz.storemngsim.R
@@ -23,6 +24,9 @@ class MainCategoriesBottomSheetDialog(
     }
 
     private fun setOnClickListeners() {
+        binding.imageBsmainCategoriesCancel.setOnClickListener {
+            dismiss()
+        }
         binding.btnBsmainCategoriesMiddle.setOnClickListener {
             onClickListener(it.id, null)
             dismiss()

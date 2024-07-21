@@ -14,7 +14,7 @@ data class MainMenuResponse(
     val additionalPackagingPrice: Int,
     val packaging: String?,
     val outOfStock: Boolean,
-    val use: Boolean,
+    val use: Boolean?,
     val ingredientDisplay: Boolean,
     val imageName: String?,
     val imageUrl: String?,

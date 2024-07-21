@@ -83,6 +83,12 @@ class MiddleCategoriesEditFragment: Fragment(), OnDragListener<MiddleCategoriesE
     }
 
     private fun setOnClickListeners() {
+        binding.imageMiddleCategoriesEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMiddleCategoriesEditHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.btnMiddleCategoriesEditBottomContainer.setOnClickListener {
             vm.deleteMiddleCategories(
                 args.mainCategory.categoryCode,

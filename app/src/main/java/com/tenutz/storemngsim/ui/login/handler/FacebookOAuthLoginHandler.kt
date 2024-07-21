@@ -7,13 +7,21 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
+import com.tenutz.storemngsim.ui.base.Loginable
+import com.tenutz.storemngsim.ui.login.LoginFragment
 import com.tenutz.storemngsim.ui.login.LoginViewModel
+import com.tenutz.storemngsim.ui.signup.SignupFormViewModel
 import com.tenutz.storemngsim.utils.type.SocialType
 
 class FacebookOAuthLoginHandler(private val fragment: Fragment) : FacebookCallback<LoginResult> {
 
-    private val viewModel by lazy {
-        ViewModelProvider(fragment).get(LoginViewModel::class.java)
+    private val viewModel: Loginable by lazy {
+        ViewModelProvider(fragment).get(
+            when(fragment) {
+                is LoginFragment -> LoginViewModel::class.java
+                else -> SignupFormViewModel::class.java
+            }
+        )
     }
 
     //로그인에 성공하면 LoginResult 매개변수에 새로운 AccessToken과 최근에 부여되거나 거부된 권한이 포함됩니다.
@@ -26,7 +34,7 @@ class FacebookOAuthLoginHandler(private val fragment: Fragment) : FacebookCallba
                 socialType = SocialType.FACEBOOK.name,
             )
 
-            viewModel.socialLogin(SocialType.FACEBOOK)
+            viewModel.socialLogin(accessToken = it.accessToken.token, SocialType.FACEBOOK)
         }
     }
 

@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.esafirm.imagepicker.model.Image
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
 import com.tenutz.storemngsim.data.repository.menu.MenuRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
+import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoryAddViewModel
+import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -23,6 +26,7 @@ class MainMenuAddViewModel @Inject constructor(
 
     companion object {
         const val EVENT_NAVIGATE_UP = 1000
+        const val EVENT_TOAST = 1001
     }
 
     fun setImage(image: Image) {
@@ -41,6 +45,14 @@ class MainMenuAddViewModel @Inject constructor(
                     },
                     onFailure = {
                         Logger.e("$it")
+
+                        it.toErrorResponseOrNull()?.let {
+                            when(it.code) {
+                                ErrorCode.ALREADY_MAIN_MENU_CREATED.code -> {
+                                    viewEvent(Pair(EVENT_TOAST, "중복된 메뉴 코드입니다."))
+                                }
+                            }
+                        }
                     },
                 )
             }.addTo(compositeDisposable)

@@ -126,6 +126,12 @@ class MainCategoriesFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.imageMainCategoriesBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageMainCategoriesHome.setOnClickListener {
+            findNavController().navigate(R.id.action_global_mainFragment)
+        }
         binding.textMainCategoriesEdit.setOnClickListener {
             vm.mainCategories.value?.let {
                 findNavController().navigate(MainCategoriesFragmentDirections.actionMainCategoriesFragmentToMainCategoriesEditFragment(it))

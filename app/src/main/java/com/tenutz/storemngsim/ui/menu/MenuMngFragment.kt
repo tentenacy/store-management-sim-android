@@ -31,26 +31,35 @@ class MenuMngFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageMenuMngBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
         binding.btnMenuMngCategory.setOnClickListener {
             findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationMainCategory())
         }
         binding.btnMenuMngMainMenu.setOnClickListener {
             MainMenusBeforeBottomSheetDialog(
                 onClickListener = { id, item ->
-                    when(id) {
+                    when (id) {
                         R.id.btn_bsmain_menus_before_search -> {
-                            (item as Triple<String?, String?, String?>).takeIf { it.first?.isNotBlank() == true && it.second?.isNotBlank() == true && it.third?.isNotBlank() == true }?.let {
-                                MenuMngFragmentDirections.actionMenuMngFragmentToNavigationMainMenu().let { action ->
-                                        findNavController().navigate(
-                                            action.actionId,
-                                            Bundle().apply {
-                                                putString("mainCategoryCode", it.first)
-                                                putString("middleCategoryCode", it.second)
-                                                putString("subCategoryCode", it.third)
-                                            }
-                                        )
-                                    }
-                            }
+                            (item as Triple<String?, String?, String?>).takeIf { it.first?.isNotBlank() == true && it.second?.isNotBlank() == true && it.third?.isNotBlank() == true }
+                                ?.let {
+                                    MenuMngFragmentDirections.actionMenuMngFragmentToNavigationMainMenu()
+                                        .let { action ->
+                                            findNavController().navigate(
+                                                action.actionId,
+                                                Bundle().apply {
+                                                    putString("mainCategoryCode", it.first)
+                                                    putString("middleCategoryCode", it.second)
+                                                    putString("subCategoryCode", it.third)
+                                                }
+                                            )
+                                        }
+                                }
                         }
                     }
                 }
