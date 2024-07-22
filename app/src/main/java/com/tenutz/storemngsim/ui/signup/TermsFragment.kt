@@ -10,13 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tenutz.storemngsim.databinding.FragmentTermsBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.mainActivity
 import com.tenutz.storemngsim.utils.ext.setNavigationResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TermsFragment: Fragment() {
+class TermsFragment: BaseFragment() {
 
     private var _binding: FragmentTermsBinding? = null
     val binding: FragmentTermsBinding get() = _binding!!
@@ -53,6 +54,7 @@ class TermsFragment: Fragment() {
 
     private fun initViews() {
         binding.textTermsFtitle.text = args.title
+        binding.btnTermsAgree.visibility = if(args.readOnly) View.GONE else View.VISIBLE
     }
 
     private fun observeData() {

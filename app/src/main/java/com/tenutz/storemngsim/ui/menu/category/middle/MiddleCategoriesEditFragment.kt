@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,13 +16,15 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
 import com.tenutz.storemngsim.databinding.FragmentMiddleCategoriesEditBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditViewModel
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MiddleCategoriesEditFragment: Fragment(), OnDragListener<MiddleCategoriesEditViewHolder> {
+class MiddleCategoriesEditFragment: BaseFragment(), OnDragListener<MiddleCategoriesEditViewHolder> {
 
     private var _binding: FragmentMiddleCategoriesEditBinding? = null
     val binding: FragmentMiddleCategoriesEditBinding get() = _binding!!
@@ -88,6 +91,9 @@ class MiddleCategoriesEditFragment: Fragment(), OnDragListener<MiddleCategoriesE
         }
         binding.imageMiddleCategoriesEditHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageMiddleCategoriesEditHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnMiddleCategoriesEditBottomContainer.setOnClickListener {
             vm.deleteMiddleCategories(

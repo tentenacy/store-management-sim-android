@@ -1,10 +1,8 @@
 package com.tenutz.storemngsim.di.module
 
 import com.tenutz.storemngsim.data.datasource.api.SMSApi
-import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepository
-import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepositoryImpl
-import com.tenutz.storemngsim.data.datasource.paging.repository.SalesPagingRepository
-import com.tenutz.storemngsim.data.datasource.paging.repository.SalesPagingRepositoryImpl
+import com.tenutz.storemngsim.data.datasource.paging.repository.*
+import com.tenutz.storemngsim.data.datasource.paging.source.mapper.PushAlarmsMapper
 import com.tenutz.storemngsim.data.datasource.paging.source.mapper.SalesMapper
 import com.tenutz.storemngsim.data.datasource.paging.source.mapper.ReviewsMapper
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
@@ -52,6 +50,15 @@ abstract class RepositoryModule {
             mapper: SalesMapper,
         ): SalesPagingRepository {
             return SalesPagingRepositoryImpl(SMSApi, mapper)
+        }
+
+        @Singleton
+        @Provides
+        fun providePushAlarmPagingRepository(
+            SMSApi: SMSApi,
+            mapper: PushAlarmsMapper,
+        ): PushAlarmPagingRepository {
+            return PushAlarmPagingRepositoryImpl(SMSApi, mapper)
         }
     }
 

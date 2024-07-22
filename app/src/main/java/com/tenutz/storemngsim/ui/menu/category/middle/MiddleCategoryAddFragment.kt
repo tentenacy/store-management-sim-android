@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +22,7 @@ import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
 import com.tenutz.storemngsim.databinding.FragmentMenuMngBinding
 import com.tenutz.storemngsim.databinding.FragmentMiddleCategoriesBinding
 import com.tenutz.storemngsim.databinding.FragmentMiddleCategoryAddBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.mainActivity
@@ -28,7 +30,7 @@ import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MiddleCategoryAddFragment: Fragment() {
+class MiddleCategoryAddFragment: BaseFragment() {
 
     private var _binding: FragmentMiddleCategoryAddBinding? = null
     val binding: FragmentMiddleCategoryAddBinding get() = _binding!!
@@ -95,6 +97,9 @@ class MiddleCategoryAddFragment: Fragment() {
         }
         binding.imageMiddleCategoryAddHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageMiddleCategoryAddHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnMiddleCategoryAddSearch.setOnClickListener {
             startAddressSearchActivity.launch(

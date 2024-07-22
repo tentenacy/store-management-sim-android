@@ -16,7 +16,7 @@ interface StoreApi {
     fun sales(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("sort") sort: String? = null,
+        @Query("sort") sort: String? = "saleDt,desc",
         @Query("dateFrom") dateFrom: String? = null,
         @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
@@ -58,6 +58,9 @@ interface StoreApi {
         @Query("mainCategoryCode") mainCategoryCode: String? = null,
     ): Single<StatisticsSalesTotalByMenusResponse>
 
+    @GET("/stores/statistics/sales-by-menu/today")
+    fun statisticsSalesByMenuToday(): Single<StatisticsSalesByMenusTodayResponse>
+
     @GET("/stores/statistics/sales-by-card")
     fun statisticsSalesByCreditCard(
         @Query("dateFrom") dateFrom: String? = null,
@@ -97,7 +100,7 @@ interface StoreApi {
     fun storeReviews(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("sort") sort: String? = null,
+        @Query("sort") sort: String? = "createdDttm,desc",
         @Query("dateFrom") dateFrom: String? = null,
         @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,
@@ -123,7 +126,7 @@ interface StoreApi {
     fun menuReviews(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("sort") sort: String? = null,
+        @Query("sort") sort: String? = "createdDttm,desc",
         @Query("dateFrom") dateFrom: String? = null,
         @Query("dateTo") dateTo: String? = null,
         @Query("query") query: String? = null,

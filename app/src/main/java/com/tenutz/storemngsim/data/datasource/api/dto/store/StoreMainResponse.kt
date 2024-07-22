@@ -6,4 +6,6 @@ data class StoreMainResponse(
     val storeName: String?,
     val storeManagerName: String?,
     val todaySalesAmountTotal: Int?,
+    val yesterdaySalesAmountTotal: Int?,
+    val thisMonthSalesAmountTotal: Int?,
 )

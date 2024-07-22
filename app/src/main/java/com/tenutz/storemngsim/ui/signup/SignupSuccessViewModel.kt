@@ -5,7 +5,6 @@ import com.tenutz.storemngsim.data.repository.store.StoreRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -31,6 +30,6 @@ class SignupSuccessViewModel @Inject constructor(
                         Logger.e("$it")
                     },
                 )
-            }.addTo(compositeDisposable)
+            }
     }
 }

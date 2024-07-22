@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupCreateRequest
 import com.tenutz.storemngsim.databinding.FragmentOptionGroupAddBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesViewModel
 import com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenuAddViewModel
 import com.tenutz.storemngsim.utils.MyToast
@@ -20,7 +22,7 @@ import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OptionGroupAddFragment: Fragment() {
+class OptionGroupAddFragment: BaseFragment() {
 
     private var _binding: FragmentOptionGroupAddBinding? = null
     val binding: FragmentOptionGroupAddBinding get() = _binding!!
@@ -70,6 +72,9 @@ class OptionGroupAddFragment: Fragment() {
         }
         binding.imageOptionGroupAddHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageOptionGroupAddHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnOptionGroupAddSave.setOnClickListener {
             Validator.validate(

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentOmOptionGroupsBinding
 import com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsNavArgs
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -84,6 +86,9 @@ class OmOptionGroupsFragment: Fragment() {
         }
         binding.imageOmOptionGroupsHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageOmOptionGroupsHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.textOmOptionGroupsEdit.setOnClickListener {
             vm.optionMenuMappers.value?.let {

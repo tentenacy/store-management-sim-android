@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -11,12 +12,14 @@ import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
 import com.tenutz.storemngsim.databinding.FragmentMainMenusBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusViewModel.Companion.EVENT_HIDE_REMOVAL
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusViewModel.Companion.EVENT_SHOW_REMOVAL
 import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs
 import com.tenutz.storemngsim.ui.menu.mainmenu.bs.MainMenusBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsNavArgs
 import com.tenutz.storemngsim.utils.ext.editTextObservable
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -24,7 +27,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
  @AndroidEntryPoint
-class MainMenusFragment: Fragment() {
+class MainMenusFragment: BaseFragment() {
 
     private val disposable = CompositeDisposable()
 
@@ -180,6 +183,9 @@ class MainMenusFragment: Fragment() {
         }
         binding.imageMainMenusHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageMainMenusHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.textMainMenusEdit.setOnClickListener {
             vm.mainMenus.value?.let {

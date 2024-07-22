@@ -22,6 +22,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.common.DatePickerDialog
 import com.tenutz.storemngsim.ui.common.NumberPickerDialog
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenuAddViewModel.Companion.EVENT_NAVIGATE_UP
@@ -42,7 +43,7 @@ import java.io.File
 import kotlin.math.min
 
 @AndroidEntryPoint
-class MainMenuAddFragment : Fragment() {
+class MainMenuAddFragment : BaseFragment() {
 
     private var _binding: FragmentMainMenuAddBinding? = null
     val binding: FragmentMainMenuAddBinding get() = _binding!!

@@ -105,7 +105,7 @@ class SignupFormViewModel @Inject constructor(
                         }
                     }
                 }
-            )
+            ).addTo(compositeDisposable)
     }
 
     override fun socialLogin(accessToken: String, socialType: SocialType) {

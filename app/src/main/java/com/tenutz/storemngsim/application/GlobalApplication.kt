@@ -16,6 +16,7 @@ import io.reactivex.rxjava3.plugins.RxJavaPlugins
 class GlobalApplication : Application() {
 
     override fun onCreate() {
+
         super.onCreate()
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

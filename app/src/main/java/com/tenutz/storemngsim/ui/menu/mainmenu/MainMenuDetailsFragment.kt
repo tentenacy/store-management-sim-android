@@ -19,6 +19,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuUpdateRequest
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.common.CommonBindingAdapter
 import com.tenutz.storemngsim.ui.common.DatePickerDialog
 import com.tenutz.storemngsim.ui.common.NumberPickerDialog
@@ -36,7 +37,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 @AndroidEntryPoint
-class MainMenuDetailsFragment: Fragment() {
+class MainMenuDetailsFragment: BaseFragment() {
 
     private var _binding: FragmentMainMenuDetailsBinding? = null
     val binding: FragmentMainMenuDetailsBinding get() = _binding!!

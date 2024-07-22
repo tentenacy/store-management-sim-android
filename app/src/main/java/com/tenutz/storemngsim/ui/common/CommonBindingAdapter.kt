@@ -6,6 +6,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
@@ -131,6 +132,18 @@ object CommonBindingAdapter {
             "minute" -> {
                 editText.addTextChangedListener(MinuteTextWatcher(editText))
             }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:rating")
+    fun setRating(imageView: ImageView, rating: Int?) {
+        when(rating) {
+            1 -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_star_1))
+            2 -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_star_2))
+            3 -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_star_3))
+            4 -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_star_4))
+            5 -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_star_5))
         }
     }
 }

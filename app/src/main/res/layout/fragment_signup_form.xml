@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/ns_regular"
-                    android:text="점주님의\n정보를 입력해주세요."
+                    android:text="관리자님의\n정보를 입력해주세요."
                     android:textColor="@color/rect_4474"
                     android:textSize="24sp"
                     android:layout_marginTop="197.76dp"

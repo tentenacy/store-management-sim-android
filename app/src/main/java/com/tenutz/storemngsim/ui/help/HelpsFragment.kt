@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,9 +15,11 @@ import com.tenutz.storemngsim.databinding.FragmentHelpsBinding
 import com.tenutz.storemngsim.databinding.FragmentMainBinding
 import com.tenutz.storemngsim.databinding.FragmentReviewsBinding
 import com.tenutz.storemngsim.databinding.FragmentSignupFormBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenuAddAdapter
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenuAddViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -24,7 +27,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class HelpsFragment: Fragment() {
+class HelpsFragment: BaseFragment() {
 
     private val disposable = CompositeDisposable()
 
@@ -77,6 +80,9 @@ class HelpsFragment: Fragment() {
         }
         binding.imageHelpsHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageHelpsHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
     }
 

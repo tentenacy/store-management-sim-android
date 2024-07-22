@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="username"
+            type="String" />
+
+        <variable
+            name="storeName"
+            type="String" />
+
+        <import type="kotlin.text.StringsKt" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_drawermenu_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_drawermenu_1_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/rect_4476"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_drawer_1_username"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/ns_bold"
+                android:text='@{(username == null || StringsKt.isBlank(username)) ? "담당자" : username}'
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText"
+                tools:text="홍길동" />
+
+            <TextView
+                android:id="@+id/text_drawer_1_mng"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/radius_4dp"
+                android:backgroundTint="#33FFFFFF"
+                android:fontFamily="@font/ns_bold"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="3dp"
+                android:text="담당자"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/text_drawer_1_username"
+                app:layout_constraintStart_toEndOf="@id/text_drawer_1_username"
+                app:layout_constraintTop_toTopOf="@id/text_drawer_1_username"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/text_drawer_1_store_name"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/ns_regular"
+                android:text="@{storeName}"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_drawer_1_username"
+                tools:ignore="HardcodedText"
+                tools:text="메가커피 신촌점" />
+
+            <ImageView
+                android:id="@+id/image_drawer_1_logout"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="로그아웃"
+                android:src="@drawable/ic_off_white"
+                app:layout_constraintBottom_toBottomOf="@id/text_drawer_1_username"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_drawer_1_username"
+                tools:ignore="HardcodedText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/scroll_drawermenu_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_drawermenu_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraint_drawermenu_1_container">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_drawermenu_2_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_1"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="카테고리 관리"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_2"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="메인메뉴 관리"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_drawermenu_2_menu_1"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_3"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="옵션메뉴 관리"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_drawermenu_2_menu_2"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_4"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="옵션그룹 관리"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_drawermenu_2_menu_3"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_5"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="매출 통계"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_drawermenu_2_menu_4"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_6"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="매출 조회"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_drawermenu_2_menu_5"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_7"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="평가 관리"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_drawermenu_2_menu_6"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_8"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="도움말"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_drawermenu_2_menu_7"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_drawermenu_2_menu_9_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_drawermenu_2_menu_8">
+
+                    <TextView
+                        android:id="@+id/text_drawermenu_2_menu_9"
+                        style="@style/Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="14dp"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/ns_regular"
+                        android:text="알림내역"
+                        android:textColor="@color/rect_4474"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:id="@+id/view_drawermenu_2_menu_9"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/radius_30dp"
+                        android:backgroundTint="@color/rect_4475"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toEndOf="@id/text_drawermenu_2_menu_9"
+                        app:layout_constraintTop_toTopOf="@id/text_drawermenu_2_menu_9"
+                        tools:visibility="visible" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/text_drawermenu_2_menu_10"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/ns_regular"
+                    android:gravity="start|center"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="14dp"
+                    android:text="환경설정"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraint_drawermenu_2_menu_9_container"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btn_drawermenu_close"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/rect_4483"
+            android:fontFamily="@font/ns_regular"
+            android:paddingVertical="14dp"
+            android:stateListAnimator="@null"
+            android:text="닫기"
+            android:textColor="@color/rect_4475"
+            android:textSize="16sp"
+            app:cornerRadius="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -15,12 +15,13 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByMenusResponse
 import com.tenutz.storemngsim.data.datasource.paging.entity.MenuSalesList
 import com.tenutz.storemngsim.databinding.TabStatisticsMenuBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.statistics.StatisticsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class StatisticsMenuTabFragment: Fragment() {
+class StatisticsMenuTabFragment: BaseFragment() {
 
     private var _binding: TabStatisticsMenuBinding? = null
     val binding: TabStatisticsMenuBinding get() = _binding!!

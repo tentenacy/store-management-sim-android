@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuUpdateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionUpdateRequest
 import com.tenutz.storemngsim.databinding.FragmentOptionMenuDetailsBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.common.CommonBindingAdapter
 import com.tenutz.storemngsim.ui.common.DatePickerDialog
 import com.tenutz.storemngsim.ui.common.NumberPickerDialog
@@ -36,7 +38,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 @AndroidEntryPoint
-class OptionMenuDetailsFragment : Fragment() {
+class OptionMenuDetailsFragment : BaseFragment() {
 
     private var _binding: FragmentOptionMenuDetailsBinding? = null
     val binding: FragmentOptionMenuDetailsBinding get() = _binding!!
@@ -94,6 +96,9 @@ class OptionMenuDetailsFragment : Fragment() {
         }
         binding.imageOptionMenuDetailsHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageOptionMenuDetailsHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnOptionMenuDetailsCancel.setOnClickListener {
             binding.vm = vm

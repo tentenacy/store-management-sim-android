@@ -49,14 +49,26 @@
             android:id="@+id/image_om_option_group_add_home"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="4dp"
             android:contentDescription="메인으로 이동"
             android:src="@drawable/ic_black_home"
+            app:layout_constraintEnd_toStartOf="@id/image_om_option_group_add_hamburger"
             app:layout_constraintBottom_toBottomOf="@+id/image_om_option_group_add_back"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/image_om_option_group_add_back"
             tools:ignore="HardcodedText" />
 
+        <ImageView
+            android:id="@+id/image_om_option_group_add_hamburger"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="햄버거 열기"
+            android:src="@drawable/ic_black_hamburger"
+            app:layout_constraintBottom_toBottomOf="@id/image_om_option_group_add_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image_om_option_group_add_back"
+            tools:ignore="HardcodedText" />
+        
         <EditText
             android:id="@+id/edit_om_option_group_add_search"
             style="@style/Text"

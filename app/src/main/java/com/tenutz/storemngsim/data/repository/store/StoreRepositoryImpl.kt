@@ -5,16 +5,15 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.store.*
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
-import com.tenutz.storemngsim.utils.ext.toDateFormat
 import com.tenutz.storemngsim.utils.ext.toDateTimeFormat
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class StoreRepositoryImpl @Inject constructor(
-    private val sckApi: SMSApi,
+    private val SMSApi: SMSApi,
 ) : StoreRepository {
     override fun equipments(): Single<Result<EquipmentsResponse>> =
-        sckApi.equipments()
+        SMSApi.equipments()
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -27,7 +26,7 @@ class StoreRepositoryImpl @Inject constructor(
         commonCond: CommonCondition,
         request: SalesRequest
     ): Single<Result<SalesTotalResponse>> =
-        sckApi.salesTotal(
+        SMSApi.salesTotal(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -48,7 +47,7 @@ class StoreRepositoryImpl @Inject constructor(
         commonCond: CommonCondition,
         request: StatisticsSaleByMenusRequest?,
     ): Single<Result<StatisticsSalesTotalByMenusResponse>> =
-        sckApi.statisticsSalesTotalByMenu(
+        SMSApi.statisticsSalesTotalByMenu(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -63,8 +62,18 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
                 ) { Result.failure(it) })
 
+    override fun statisticsSalesByMenuToday(): Single<Result<StatisticsSalesByMenusTodayResponse>> =
+        SMSApi.statisticsSalesByMenuToday()
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                ) { Result.failure(it) })
+
     override fun statisticsSalesByCreditCard(commonCond: CommonCondition): Single<Result<StatisticsSalesByCreditCardResponse>> =
-        sckApi.statisticsSalesByCreditCard(
+        SMSApi.statisticsSalesByCreditCard(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -79,7 +88,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun statisticsSalesTotalByCreditCard(commonCond: CommonCondition): Single<Result<StatisticsSalesTotalByCreditCardResponse>> =
-        sckApi.statisticsSalesTotalByCreditCard(
+        SMSApi.statisticsSalesTotalByCreditCard(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -94,7 +103,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun statisticsSalesByTime(commonCond: CommonCondition): Single<Result<StatisticsSalesByTimeResponse>> =
-        sckApi.statisticsSalesByTime(
+        SMSApi.statisticsSalesByTime(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -109,7 +118,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun statisticsSalesTotalByTime(commonCond: CommonCondition): Single<Result<StatisticsSalesTotalByTimeResponse>> =
-        sckApi.statisticsSalesTotalByTime(
+        SMSApi.statisticsSalesTotalByTime(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -127,7 +136,7 @@ class StoreRepositoryImpl @Inject constructor(
         reviewSeq: Long,
         request: ReviewReplyCreateRequest
     ): Single<Result<Unit>> =
-        sckApi.createStoreReviewReply(
+        SMSApi.createStoreReviewReply(
             reviewSeq,
             request,
         )
@@ -143,7 +152,7 @@ class StoreRepositoryImpl @Inject constructor(
         replySeq: Long,
         request: ReviewReplyUpdateRequest
     ): Single<Result<Unit>> =
-        sckApi.updateStoreReviewReply(
+        SMSApi.updateStoreReviewReply(
             replySeq,
             request,
         )
@@ -156,7 +165,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteStoreReviewReply(replySeq: Long): Single<Result<Unit>> =
-        sckApi.deleteStoreReviewReply(replySeq)
+        SMSApi.deleteStoreReviewReply(replySeq)
             .toSingle {  }
             .map { Result.success(it) }
             .compose(
@@ -170,7 +179,7 @@ class StoreRepositoryImpl @Inject constructor(
         reviewSeq: Long,
         request: ReviewReplyCreateRequest
     ): Single<Result<Unit>> =
-        sckApi.createMenuReviewReply(
+        SMSApi.createMenuReviewReply(
             reviewSeq,
             request,
         )
@@ -186,7 +195,7 @@ class StoreRepositoryImpl @Inject constructor(
         replySeq: Long,
         request: ReviewReplyUpdateRequest
     ): Single<Result<Unit>> =
-        sckApi.updateMenuReviewReply(
+        SMSApi.updateMenuReviewReply(
             replySeq,
             request,
         )
@@ -199,7 +208,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteMenuReviewReply(replySeq: Long): Single<Result<Unit>> =
-        sckApi.deleteMenuReviewReply(replySeq)
+        SMSApi.deleteMenuReviewReply(replySeq)
             .toSingle {  }
             .map { Result.success(it) }
             .compose(
@@ -209,7 +218,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
                 ) { Result.failure(it) })
 
-    override fun storeMain(): Single<Result<StoreMainResponse>> = sckApi.storeMain()
+    override fun storeMain(): Single<Result<StoreMainResponse>> = SMSApi.storeMain()
         .map { Result.success(it) }
         .compose(
             applyRetryPolicy(

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -46,6 +47,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_itstore_reviews_created_by"
             tools:text="2022.08.30(화)" />
+
+        <ImageView
+            android:id="@+id/image_itstore_reviews_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/ic_star_5"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="별점"
+            bind:rating="@{args.rating}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_itstore_reviews_created_by"
+            app:layout_constraintBottom_toBottomOf="@id/text_itstore_reviews_created_at"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/text_itstore_reviews_store_name"

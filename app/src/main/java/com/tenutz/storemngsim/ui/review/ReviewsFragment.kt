@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -14,11 +15,13 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentMainBinding
 import com.tenutz.storemngsim.databinding.FragmentReviewsBinding
 import com.tenutz.storemngsim.databinding.FragmentSignupFormBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusPagerAdapter
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReviewsFragment: Fragment() {
+class ReviewsFragment: BaseFragment() {
 
     private var _binding: FragmentReviewsBinding? = null
     val binding: FragmentReviewsBinding get() = _binding!!
@@ -79,6 +82,9 @@ class ReviewsFragment: Fragment() {
         }
         binding.imageReviewsHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageReviewsHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
     }
 

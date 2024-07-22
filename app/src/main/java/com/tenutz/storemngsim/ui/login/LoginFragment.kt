@@ -2,6 +2,7 @@ package com.tenutz.storemngsim.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,17 @@ import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
+import com.orhanobut.logger.Logger
+import com.tenutz.storemngsim.data.datasource.sharedpref.Settings
 import com.tenutz.storemngsim.data.datasource.sharedpref.Token
+import com.tenutz.storemngsim.data.datasource.sharedpref.User
 import com.tenutz.storemngsim.databinding.FragmentLoginBinding
 import com.tenutz.storemngsim.databinding.FragmentLoginBindingImpl
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.login.handler.FacebookOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.GoogleOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.KakaoOAuthLoginHandler
@@ -62,44 +69,104 @@ class LoginFragment: Fragment() {
 
 
     private val naverLoginOnClickListener: (View?) -> Unit = {
-        naverCallbackManager.startOauthLoginActivity(
-            mainActivity(),
-            naverOAuthLoginHandler
-        )
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            Logger.d("token: ${token}")
+            User.fcmToken = token
+
+            naverCallbackManager.startOauthLoginActivity(
+                mainActivity(),
+                naverOAuthLoginHandler
+            )
+        })
     }
 
     private val kakaoLoginOnClickListener: (View?) -> Unit = {
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
-            UserApiClient.instance.loginWithKakaoTalk(
-                requireContext(),
-                callback = kakaoOAuthLoginHandler
-            )
-        } else {
-            UserApiClient.instance.loginWithKakaoAccount(
-                requireContext(),
-                callback = kakaoOAuthLoginHandler
-            )
-        }
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            Logger.d("token: ${token}")
+            User.fcmToken = token
+
+            if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
+                UserApiClient.instance.loginWithKakaoTalk(
+                    requireContext(),
+                    callback = kakaoOAuthLoginHandler
+                )
+            } else {
+                UserApiClient.instance.loginWithKakaoAccount(
+                    requireContext(),
+                    callback = kakaoOAuthLoginHandler
+                )
+            }
+        })
+
     }
 
     private val googleLoginOnClickListener: (View?) -> Unit = {
-        mainActivity().activityResultFactory.launch(
-            googleCallbackManager.signInIntent,
-            googleOAuthLoginHandler
-        )
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            Logger.d("token: ${token}")
+            User.fcmToken = token
+
+            mainActivity().activityResultFactory.launch(
+                googleCallbackManager.signInIntent,
+                googleOAuthLoginHandler
+            )
+        })
     }
 
     private val facebookLoginOnClickListener: (View?) -> Unit = {
-        LoginManager.getInstance().run {
-            logInWithReadPermissions(
-                this@LoginFragment,
-                listOf(
-                    SocialScopeConstant.FACEBOOK_SCOPE_EMAIL,
-                    SocialScopeConstant.FACEBOOK_SCOPE_PUBLIC_PROFILE
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            Logger.d("token: ${token}")
+            User.fcmToken = token
+
+            LoginManager.getInstance().run {
+                logInWithReadPermissions(
+                    this@LoginFragment,
+                    listOf(
+                        SocialScopeConstant.FACEBOOK_SCOPE_EMAIL,
+                        SocialScopeConstant.FACEBOOK_SCOPE_PUBLIC_PROFILE
+                    )
                 )
-            )
-            registerCallback(facebookCallbackManager, facebookOAuthLoginHandler)
-        }
+                registerCallback(facebookCallbackManager, facebookOAuthLoginHandler)
+            }
+        })
     }
 
     override fun onCreateView(
@@ -110,7 +177,7 @@ class LoginFragment: Fragment() {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        if(Token.accessToken.isNotBlank()) {
+        if(Settings.autoLoggedIn && Token.accessToken.isNotBlank()) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
         }
 

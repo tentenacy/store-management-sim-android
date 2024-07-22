@@ -9,10 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentMenuMngBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuMngFragment: Fragment() {
+class MenuMngFragment: BaseFragment() {
 
     private var _binding: FragmentMenuMngBinding? = null
     val binding: FragmentMenuMngBinding get() = _binding!!
@@ -39,14 +40,14 @@ class MenuMngFragment: Fragment() {
             findNavController().navigateUp()
         }
         binding.btnMenuMngCategory.setOnClickListener {
-            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationMainCategory())
+//            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationMainCategory())
         }
         binding.btnMenuMngMainMenu.setOnClickListener {
             MainMenusBeforeBottomSheetDialog(
                 onClickListener = { id, item ->
                     when (id) {
                         R.id.btn_bsmain_menus_before_search -> {
-                            (item as Triple<String?, String?, String?>).takeIf { it.first?.isNotBlank() == true && it.second?.isNotBlank() == true && it.third?.isNotBlank() == true }
+                            /*(item as Triple<String?, String?, String?>).takeIf { it.first?.isNotBlank() == true && it.second?.isNotBlank() == true && it.third?.isNotBlank() == true }
                                 ?.let {
                                     MenuMngFragmentDirections.actionMenuMngFragmentToNavigationMainMenu()
                                         .let { action ->
@@ -59,17 +60,17 @@ class MenuMngFragment: Fragment() {
                                                 }
                                             )
                                         }
-                                }
+                                }*/
                         }
                     }
                 }
             ).show(childFragmentManager, "mainMenusBeforeBottomSheetDialog")
         }
         binding.btnMenuMngOptionMenu.setOnClickListener {
-            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationOptionMenu())
+//            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationOptionMenu())
         }
         binding.btnMenuMngOptionGroup.setOnClickListener {
-            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationOptionGroup())
+//            findNavController().navigate(MenuMngFragmentDirections.actionMenuMngFragmentToNavigationOptionGroup())
         }
     }
 

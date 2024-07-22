@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,12 +15,14 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.main.MainFragmentDirections
 import com.tenutz.storemngsim.ui.menu.category.main.bs.MainCategoriesBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesEditFragmentArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs
 import com.tenutz.storemngsim.ui.review.menu.MenuReviewsViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -28,7 +31,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class MainCategoriesFragment : Fragment() {
+class MainCategoriesFragment : BaseFragment() {
 
     private val disposable = CompositeDisposable()
 
@@ -131,6 +134,9 @@ class MainCategoriesFragment : Fragment() {
         }
         binding.imageMainCategoriesHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageMainCategoriesHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.textMainCategoriesEdit.setOnClickListener {
             vm.mainCategories.value?.let {

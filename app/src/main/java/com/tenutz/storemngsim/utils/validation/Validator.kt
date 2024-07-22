@@ -43,7 +43,8 @@ object Validator {
         if(required) validateRequiredInput(categoryName)
         if(categoryName.isBlank()) return
         validateTextData(categoryName)
-        if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(categoryName) || categoryName.length > 50) {
+        //if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(categoryName) || categoryName.length > 50) {
+        if(!"""[^"'`]+""".toRegex().matches(categoryName) || categoryName.length > 50) {
             throw CategoryNameValidationException()
         }
     }
@@ -106,7 +107,8 @@ object Validator {
         if(required) validateRequiredInput(menuName)
         if(menuName.isBlank()) return
         validateTextData(menuName)
-        if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(menuName) || menuName.length > 100) {
+        //if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(menuName) || menuName.length > 100) {
+        if(!"""[^"'`]+""".toRegex().matches(menuName) || menuName.length > 100) {
             throw MenuNameValidationException()
         }
     }
@@ -171,7 +173,8 @@ object Validator {
         if(required) validateRequiredInput(memo)
         if(memo.isBlank()) return
         validateTextData(memo)
-        if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(memo) || memo.length > 200) {
+        //if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(memo) || memo.length > 200) {
+        if(!"""[^"'`]+""".toRegex().matches(memo) || memo.length > 200) {
             throw MemoValidationException()
         }
     }
@@ -189,7 +192,8 @@ object Validator {
         if(required) validateRequiredInput(optionGroupName)
         if(optionGroupName.isBlank()) return
         validateTextData(optionGroupName)
-        if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(optionGroupName) || optionGroupName.length > 200) {
+        //if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(optionGroupName) || optionGroupName.length > 200) {
+        if(!"""[^"'`]+""".toRegex().matches(optionGroupName) || optionGroupName.length > 200) {
             throw OptionGroupNameValidationException()
         }
     }

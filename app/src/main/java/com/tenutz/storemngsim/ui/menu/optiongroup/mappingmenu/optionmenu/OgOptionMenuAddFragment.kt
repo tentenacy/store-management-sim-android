@@ -12,6 +12,7 @@ import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionsMappedByRequest
 import com.tenutz.storemngsim.databinding.FragmentOgOptionMenuAddBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupAddViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +22,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class OgOptionMenuAddFragment: Fragment() {
+class OgOptionMenuAddFragment: BaseFragment() {
 
     private val disposable = CompositeDisposable()
 

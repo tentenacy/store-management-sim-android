@@ -17,6 +17,7 @@ import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreMainResponse
 import com.tenutz.storemngsim.databinding.FragmentSignupFormBinding
 import com.tenutz.storemngsim.databinding.FragmentSignupSuccessBinding
 import com.tenutz.storemngsim.databinding.FragmentSignupSuccessBindingImpl
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.login.handler.FacebookOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.GoogleOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.KakaoOAuthLoginHandler
@@ -27,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SignupSuccessFragment: Fragment() {
+class SignupSuccessFragment: BaseFragment() {
 
     private var _binding: FragmentSignupSuccessBinding? = null
     val binding: FragmentSignupSuccessBinding get() = _binding!!
@@ -48,7 +49,7 @@ class SignupSuccessFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        setOnClickListeners()
+        setOnClickListeners()
         observeData()
     }
 

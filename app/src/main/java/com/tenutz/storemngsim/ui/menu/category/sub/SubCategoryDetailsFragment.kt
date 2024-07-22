@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,13 +15,14 @@ import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryUpd
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryUpdateRequest
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.mainActivity
 import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SubCategoryDetailsFragment: Fragment() {
+class SubCategoryDetailsFragment: BaseFragment() {
 
     private var _binding: FragmentSubCategoryDetailsBinding? = null
     val binding: FragmentSubCategoryDetailsBinding get() = _binding!!
@@ -65,6 +67,9 @@ class SubCategoryDetailsFragment: Fragment() {
         }
         binding.imageSubCategoryDetailsHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageSubCategoryDetailsHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnSubCategoryDetailsCancel.setOnClickListener {
             binding.vm = vm

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,7 @@ import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.databinding.FragmentMainCategoryAddBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel.Companion.EVENT_NAVIGATE_UP
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel.Companion.EVENT_TOAST
 import com.tenutz.storemngsim.utils.MyToast
@@ -20,7 +22,7 @@ import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainCategoryAddFragment: Fragment() {
+class MainCategoryAddFragment: BaseFragment() {
 
     private var _binding: FragmentMainCategoryAddBinding? = null
     val binding: FragmentMainCategoryAddBinding get() = _binding!!
@@ -70,6 +72,9 @@ class MainCategoryAddFragment: Fragment() {
         }
         binding.imageMainCategoryAddHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageMainCategoryAddHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnMainCategoryAddSave.setOnClickListener {
 

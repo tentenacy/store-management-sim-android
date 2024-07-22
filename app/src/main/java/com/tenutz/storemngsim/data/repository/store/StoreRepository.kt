@@ -18,6 +18,8 @@ interface StoreRepository {
         request: StatisticsSaleByMenusRequest? = null,
     ): Single<Result<StatisticsSalesTotalByMenusResponse>>
 
+    fun statisticsSalesByMenuToday(): Single<Result<StatisticsSalesByMenusTodayResponse>>
+
     fun statisticsSalesByCreditCard(
         commonCond: CommonCondition,
     ): Single<Result<StatisticsSalesByCreditCardResponse>>

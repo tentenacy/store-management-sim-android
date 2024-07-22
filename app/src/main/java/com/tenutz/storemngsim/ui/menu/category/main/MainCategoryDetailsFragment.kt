@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,13 +16,14 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
 import com.tenutz.storemngsim.databinding.FragmentMainCategoryDetailsBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.mainActivity
 import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainCategoryDetailsFragment : Fragment() {
+class MainCategoryDetailsFragment : BaseFragment() {
 
     private var _binding: FragmentMainCategoryDetailsBinding? = null
     val binding: FragmentMainCategoryDetailsBinding get() = _binding!!
@@ -65,6 +67,9 @@ class MainCategoryDetailsFragment : Fragment() {
         }
         binding.imageMainCategoryDetailsHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageMainCategoryDetailsHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnMainCategoryDetailsCancel.setOnClickListener {
             binding.vm = vm

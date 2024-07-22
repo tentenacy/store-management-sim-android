@@ -14,13 +14,14 @@ import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreat
 import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyUpdateRequest
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.mainActivity
 import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MenuReplyPostFragment: Fragment() {
+class MenuReplyPostFragment: BaseFragment() {
 
     private var _binding: FragmentMenuReplyPostBinding? = null
     val binding: FragmentMenuReplyPostBinding get() = _binding!!

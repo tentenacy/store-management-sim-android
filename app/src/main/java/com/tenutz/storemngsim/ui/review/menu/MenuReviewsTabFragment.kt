@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.paging.entity.MenuReviews
 import com.tenutz.storemngsim.databinding.TabMenuReviewsBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.review.ReviewsFragmentDirections
 import com.tenutz.storemngsim.ui.review.ReviewsViewModel
 import com.tenutz.storemngsim.ui.review.bs.ReviewsBottomSheetDialog
@@ -31,7 +32,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MenuReviewsTabFragment: Fragment() {
+class MenuReviewsTabFragment: BaseFragment() {
 
     private val disposable = CompositeDisposable()
 

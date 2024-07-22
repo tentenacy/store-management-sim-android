@@ -4,28 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
-import com.tenutz.storemngsim.databinding.*
-import com.tenutz.storemngsim.ui.menu.MenuMngFragmentDirections
+import com.tenutz.storemngsim.databinding.FragmentOgMappingMenusBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusPagerAdapter.Companion.OG_MAIN_MENUS_PAGE_INDEX
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusPagerAdapter.Companion.OG_OPTION_MENUS_PAGE_INDEX
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenusTabFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.bs.OgMainMenuAddBeforeBottomSheetDialog
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu.OgOptionMenusTabFragment
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-import javax.inject.Provider
 
 @AndroidEntryPoint
-class OgMappingMenusFragment: Fragment() {
+class OgMappingMenusFragment: BaseFragment() {
 
     private var _binding: FragmentOgMappingMenusBinding? = null
     val binding: FragmentOgMappingMenusBinding get() = _binding!!
@@ -125,6 +122,9 @@ class OgMappingMenusFragment: Fragment() {
         }
         binding.imageOgMappingMenusHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageOgMappingMenusHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
     }
 

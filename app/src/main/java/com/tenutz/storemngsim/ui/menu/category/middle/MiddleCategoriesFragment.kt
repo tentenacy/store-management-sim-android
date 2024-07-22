@@ -4,19 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentMiddleCategoriesBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesFragmentDirections
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.bs.MiddleCategoriesBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MiddleCategoriesFragment : Fragment() {
+class MiddleCategoriesFragment : BaseFragment() {
 
     private var _binding: FragmentMiddleCategoriesBinding? = null
     val binding: FragmentMiddleCategoriesBinding get() = _binding!!
@@ -130,6 +133,9 @@ class MiddleCategoriesFragment : Fragment() {
         }
         binding.imageMiddleCategoriesHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageMiddleCategoriesHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.textMiddleCategoriesEdit.setOnClickListener {
             vm.middleCategories.value?.let {

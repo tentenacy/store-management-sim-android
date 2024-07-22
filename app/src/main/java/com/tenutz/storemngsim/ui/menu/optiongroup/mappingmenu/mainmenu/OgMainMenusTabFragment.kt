@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersResponse
 import com.tenutz.storemngsim.databinding.TabOgMainMenusBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragmentDirections
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusViewModel
@@ -19,7 +20,7 @@ import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusN
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OgMainMenusTabFragment: Fragment() {
+class OgMainMenusTabFragment: BaseFragment() {
 
     private var _binding: TabOgMainMenusBinding? = null
     val binding: TabOgMainMenusBinding get() = _binding!!

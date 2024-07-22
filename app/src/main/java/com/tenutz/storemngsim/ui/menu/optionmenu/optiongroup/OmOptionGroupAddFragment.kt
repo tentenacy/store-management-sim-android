@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedB
 import com.tenutz.storemngsim.databinding.FragmentOmOptionGroupAddBinding
 import com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenusViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -87,6 +89,9 @@ class OmOptionGroupAddFragment: Fragment() {
         }
         binding.imageOmOptionGroupAddHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageOmOptionGroupAddHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
     }
 

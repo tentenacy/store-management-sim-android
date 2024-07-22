@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -12,12 +13,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentStatisticsBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.common.DatePickerDialog
 import com.tenutz.storemngsim.utils.ext.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StatisticsFragment: Fragment() {
+class StatisticsFragment: BaseFragment() {
 
     private var _binding: FragmentStatisticsBinding? = null
     val binding: FragmentStatisticsBinding get() = _binding!!
@@ -90,6 +92,9 @@ class StatisticsFragment: Fragment() {
         }
         binding.imageStatisticsHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageStatisticsHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.linearStatisticsMenuMainSdateContainer.setOnClickListener {
             DatePickerDialog(localDateFrom(binding.textStatisticsMenuMainSdate.text.toString())) {

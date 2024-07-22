@@ -7,6 +7,7 @@ import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialLoginRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialSignupRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.user.UserDetailsResponse
 import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
+import com.tenutz.storemngsim.data.datasource.sharedpref.User
 import com.tenutz.storemngsim.utils.type.SocialType
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class UserRepositoryImpl @Inject constructor(
     ): Single<TokenResponse> =
         SMSApi.socialLogin(
             socialType.name,
-            SocialLoginRequest(OAuthToken.accessToken),
+            SocialLoginRequest(OAuthToken.accessToken, User.fcmToken),
         )
 
     override fun reissue(request: TokenRequest): Single<TokenResponse> =

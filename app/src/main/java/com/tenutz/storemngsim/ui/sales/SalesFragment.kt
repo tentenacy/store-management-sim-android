@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,11 +15,13 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.paging.entity.SalesList
 import com.tenutz.storemngsim.databinding.FragmentSalesBinding
 import com.tenutz.storemngsim.databinding.FragmentSalesBindingImpl
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.sales.bs.SalesFilterBottomSheetDialog
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SalesFragment: Fragment() {
+class SalesFragment: BaseFragment() {
 
     private var _binding: FragmentSalesBinding? = null
     val binding: FragmentSalesBinding get() = _binding!!
@@ -89,6 +92,9 @@ class SalesFragment: Fragment() {
         }
         binding.imageSalesHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageSalesHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.constraintSalesFilterContainer.setOnClickListener {
             SalesFilterBottomSheetDialog { id, _ ->

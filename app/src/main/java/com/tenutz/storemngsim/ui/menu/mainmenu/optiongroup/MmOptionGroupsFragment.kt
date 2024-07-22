@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsNavArgs
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MmOptionGroupsFragment: Fragment() {
+class MmOptionGroupsFragment: BaseFragment() {
 
     private var _binding: FragmentMmOptionGroupsBinding? = null
     val binding: FragmentMmOptionGroupsBinding get() = _binding!!
@@ -84,6 +87,9 @@ class MmOptionGroupsFragment: Fragment() {
         }
         binding.imageMmOptionGroupsHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_mainFragment)
+        }
+        binding.imageMmOptionGroupsHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.textMmOptionGroupsEdit.setOnClickListener {
             vm.mainMenuMappers.value?.let {

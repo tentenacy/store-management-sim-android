@@ -13,6 +13,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyUpdateRequest
 import com.tenutz.storemngsim.databinding.*
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.review.store.StoreReplyPostFragmentArgs
 import com.tenutz.storemngsim.ui.review.store.StoreReplyPostViewModel
 import com.tenutz.storemngsim.ui.review.store.StoreReviewsViewModel
@@ -22,7 +23,7 @@ import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StoreReplyPostFragment: Fragment() {
+class StoreReplyPostFragment: BaseFragment() {
 
     private var _binding: FragmentStoreReplyPostBinding? = null
     val binding: FragmentStoreReplyPostBinding get() = _binding!!

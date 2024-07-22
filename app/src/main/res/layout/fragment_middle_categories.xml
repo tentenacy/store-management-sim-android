@@ -58,14 +58,26 @@
                 android:id="@+id/image_middle_categories_home"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="4dp"
                 android:contentDescription="메인으로 이동"
                 android:src="@drawable/ic_black_home"
+                app:layout_constraintEnd_toStartOf="@id/image_middle_categories_hamburger"
                 app:layout_constraintBottom_toBottomOf="@+id/image_middle_categories_back"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/image_middle_categories_back"
                 tools:ignore="HardcodedText" />
 
+            <ImageView
+                android:id="@+id/image_middle_categories_hamburger"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="햄버거 열기"
+                android:src="@drawable/ic_black_hamburger"
+                app:layout_constraintBottom_toBottomOf="@id/image_middle_categories_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/image_middle_categories_back"
+                tools:ignore="HardcodedText" />
+            
             <TextView
                 android:id="@+id/text_middle_categories_main_category_name"
                 style="@style/Text"

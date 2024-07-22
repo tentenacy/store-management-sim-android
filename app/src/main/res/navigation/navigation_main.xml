@@ -49,41 +49,41 @@
         android:id="@+id/mainFragment"
         android:name="com.tenutz.storemngsim.ui.main.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main">
-        <action
-            android:id="@+id/action_mainFragment_to_menuMngFragment"
-            app:destination="@id/menuMngFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_helpsFragment"
-            app:destination="@id/helpsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_navigation_review"
-            app:destination="@id/navigation_review" />
+        tools:layout="@layout/fragment_main_v2">
+
         <action
             android:id="@+id/action_mainFragment_to_navigation_statistics"
             app:destination="@id/navigation_statistics" />
         <action
-            android:id="@+id/action_mainFragment_to_salesFragment"
-            app:destination="@id/salesFragment" />
+            android:id="@+id/action_mainFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+
+        <!--
+                <action
+                    android:id="@+id/action_mainFragment_to_menuMngFragment"
+                    app:destination="@id/menuMngFragment" />
+        -->
     </fragment>
-    <fragment
-        android:id="@+id/menuMngFragment"
-        android:name="com.tenutz.storemngsim.ui.menu.MenuMngFragment"
-        android:label="MenuMngFragment"
-        tools:layout="@layout/fragment_menu_mng">
-        <action
-            android:id="@+id/action_menuMngFragment_to_navigation_main_category"
-            app:destination="@id/navigation_main_category" />
-        <action
-            android:id="@+id/action_menuMngFragment_to_navigation_main_menu"
-            app:destination="@id/navigation_main_menu" />
-        <action
-            android:id="@+id/action_menuMngFragment_to_navigation_option_menu"
-            app:destination="@id/navigation_option_menu" />
-        <action
-            android:id="@+id/action_menuMngFragment_to_navigation_option_group"
-            app:destination="@id/navigation_option_group" />
-    </fragment>
+    <!--
+        <fragment
+            android:id="@+id/menuMngFragment"
+            android:name="com.tenutz.storemngsim.ui.menu.MenuMngFragment"
+            android:label="MenuMngFragment"
+            tools:layout="@layout/fragment_menu_mng">
+            <action
+                android:id="@+id/action_menuMngFragment_to_navigation_main_category"
+                app:destination="@id/navigation_main_category" />
+            <action
+                android:id="@+id/action_menuMngFragment_to_navigation_main_menu"
+                app:destination="@id/navigation_main_menu" />
+            <action
+                android:id="@+id/action_menuMngFragment_to_navigation_option_menu"
+                app:destination="@id/navigation_option_menu" />
+            <action
+                android:id="@+id/action_menuMngFragment_to_navigation_option_group"
+                app:destination="@id/navigation_option_group" />
+        </fragment>
+    -->
     <fragment
         android:id="@+id/helpsFragment"
         android:name="com.tenutz.storemngsim.ui.help.HelpsFragment"
@@ -105,6 +105,7 @@
 
         <argument android:name="title" app:argType="string" />
         <argument android:name="termsCode" app:argType="string" />
+        <argument android:name="readOnly" app:argType="boolean" android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/salesFragment"
@@ -116,4 +117,43 @@
         app:destination="@id/mainFragment"
         app:popUpTo="@id/mainFragment"
         app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_helpsFragment"
+        app:destination="@id/helpsFragment" />
+    <action
+        android:id="@+id/action_global_notificationFragment"
+        app:destination="@id/notificationFragment" />
+    <action
+        android:id="@+id/action_global_settingsFragment"
+        app:destination="@id/settingsFragment" />
+    <action
+        android:id="@+id/action_global_nav_review"
+        app:destination="@id/navigation_review" />
+    <action
+        android:id="@+id/action_global_nav_statistics"
+        app:destination="@id/navigation_statistics" />
+    <action
+        android:id="@+id/action_global_to_salesFragment"
+        app:destination="@id/salesFragment" />
+    <action
+        android:id="@+id/action_global_to_loginFragment"
+        app:destination="@id/loginFragment" />
+    <action android:id="@+id/action_global_nav_mainCategory" app:destination="@id/navigation_main_category" />
+    <action android:id="@+id/action_global_nav_mainMenu" app:destination="@id/navigation_main_menu" />
+    <action android:id="@+id/action_global_nav_optionMenu" app:destination="@id/navigation_option_menu" />
+    <action android:id="@+id/action_global_nav_optionGroup" app:destination="@id/navigation_option_group" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.tenutz.storemngsim.ui.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tenutz.storemngsim.ui.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
+    </fragment>
 </navigation>

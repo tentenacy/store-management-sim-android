@@ -25,6 +25,7 @@ import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.application.MainActivity
 import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialSignupRequest
 import com.tenutz.storemngsim.databinding.FragmentSignupFormBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.login.handler.FacebookOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.GoogleOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.KakaoOAuthLoginHandler
@@ -40,7 +41,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class SignupFormFragment : Fragment() {
+class SignupFormFragment : BaseFragment() {
 
     private var _binding: FragmentSignupFormBinding? = null
     val binding: FragmentSignupFormBinding get() = _binding!!
@@ -255,16 +256,16 @@ class SignupFormFragment : Fragment() {
         binding.textSignupFormTerms1Details.setOnClickListener {
             findNavController().navigate(
                 SignupFormFragmentDirections.actionSignupFormFragmentToTermsFragment(
-                    binding.checkSignupFormTerms1.text.toString(),
-                    "1"
+                    "개인정보 처리방침",
+                    "1",
                 )
             )
         }
         binding.textSignupFormTerms2Details.setOnClickListener {
             findNavController().navigate(
                 SignupFormFragmentDirections.actionSignupFormFragmentToTermsFragment(
-                    binding.checkSignupFormTerms2.text.toString(),
-                    "2"
+                    "이용약관",
+                    "2",
                 )
             )
         }

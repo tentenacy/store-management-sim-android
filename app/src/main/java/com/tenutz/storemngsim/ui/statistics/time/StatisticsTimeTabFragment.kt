@@ -17,6 +17,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByTimeResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByTimeResponse
 import com.tenutz.storemngsim.databinding.TabStatisticsTimeBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.common.ChartMarker
 import com.tenutz.storemngsim.ui.common.ChartMarkerV2
 import com.tenutz.storemngsim.ui.common.args.ChartMakerV2Data
@@ -27,7 +28,7 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class StatisticsTimeTabFragment : Fragment() {
+class StatisticsTimeTabFragment : BaseFragment() {
 
     private var _binding: TabStatisticsTimeBinding? = null
     val binding: TabStatisticsTimeBinding get() = _binding!!

@@ -13,6 +13,7 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.common.MainMenuSearchRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.MainMenusMappedByRequest
 import com.tenutz.storemngsim.databinding.FragmentOgMainMenuAddBinding
+import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenuAddViewModel.Companion.EVENT_NAVIGATE_UP
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class OgMainMenuAddFragment: Fragment() {
+class OgMainMenuAddFragment: BaseFragment() {
 
     private val disposable = CompositeDisposable()
 
