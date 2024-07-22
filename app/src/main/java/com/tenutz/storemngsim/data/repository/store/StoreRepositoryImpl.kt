@@ -5,15 +5,16 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.store.*
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
+import com.tenutz.storemngsim.utils.ext.toDateFormat
 import com.tenutz.storemngsim.utils.ext.toDateTimeFormat
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class StoreRepositoryImpl @Inject constructor(
-    private val SMSApi: SMSApi,
+    private val sckApi: SMSApi,
 ) : StoreRepository {
     override fun equipments(): Single<Result<EquipmentsResponse>> =
-        SMSApi.equipments()
+        sckApi.equipments()
             .map { Result.success(it) }
             .compose(
                 applyRetryPolicy(
@@ -26,7 +27,7 @@ class StoreRepositoryImpl @Inject constructor(
         commonCond: CommonCondition,
         request: SalesRequest
     ): Single<Result<SalesTotalResponse>> =
-        SMSApi.salesTotal(
+        sckApi.salesTotal(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -47,7 +48,7 @@ class StoreRepositoryImpl @Inject constructor(
         commonCond: CommonCondition,
         request: StatisticsSaleByMenusRequest?,
     ): Single<Result<StatisticsSalesTotalByMenusResponse>> =
-        SMSApi.statisticsSalesTotalByMenu(
+        sckApi.statisticsSalesTotalByMenu(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -63,7 +64,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun statisticsSalesByCreditCard(commonCond: CommonCondition): Single<Result<StatisticsSalesByCreditCardResponse>> =
-        SMSApi.statisticsSalesByCreditCard(
+        sckApi.statisticsSalesByCreditCard(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -78,7 +79,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun statisticsSalesTotalByCreditCard(commonCond: CommonCondition): Single<Result<StatisticsSalesTotalByCreditCardResponse>> =
-        SMSApi.statisticsSalesTotalByCreditCard(
+        sckApi.statisticsSalesTotalByCreditCard(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -93,7 +94,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun statisticsSalesByTime(commonCond: CommonCondition): Single<Result<StatisticsSalesByTimeResponse>> =
-        SMSApi.statisticsSalesByTime(
+        sckApi.statisticsSalesByTime(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -108,7 +109,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun statisticsSalesTotalByTime(commonCond: CommonCondition): Single<Result<StatisticsSalesTotalByTimeResponse>> =
-        SMSApi.statisticsSalesTotalByTime(
+        sckApi.statisticsSalesTotalByTime(
             dateFrom = commonCond.dateFrom.toDateTimeFormat(),
             dateTo = commonCond.dateTo.toDateTimeFormat(),
             query = commonCond.query,
@@ -126,7 +127,7 @@ class StoreRepositoryImpl @Inject constructor(
         reviewSeq: Long,
         request: ReviewReplyCreateRequest
     ): Single<Result<Unit>> =
-        SMSApi.createStoreReviewReply(
+        sckApi.createStoreReviewReply(
             reviewSeq,
             request,
         )
@@ -142,7 +143,7 @@ class StoreRepositoryImpl @Inject constructor(
         replySeq: Long,
         request: ReviewReplyUpdateRequest
     ): Single<Result<Unit>> =
-        SMSApi.updateStoreReviewReply(
+        sckApi.updateStoreReviewReply(
             replySeq,
             request,
         )
@@ -155,7 +156,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteStoreReviewReply(replySeq: Long): Single<Result<Unit>> =
-        SMSApi.deleteStoreReviewReply(replySeq)
+        sckApi.deleteStoreReviewReply(replySeq)
             .toSingle {  }
             .map { Result.success(it) }
             .compose(
@@ -169,7 +170,7 @@ class StoreRepositoryImpl @Inject constructor(
         reviewSeq: Long,
         request: ReviewReplyCreateRequest
     ): Single<Result<Unit>> =
-        SMSApi.createMenuReviewReply(
+        sckApi.createMenuReviewReply(
             reviewSeq,
             request,
         )
@@ -185,7 +186,7 @@ class StoreRepositoryImpl @Inject constructor(
         replySeq: Long,
         request: ReviewReplyUpdateRequest
     ): Single<Result<Unit>> =
-        SMSApi.updateMenuReviewReply(
+        sckApi.updateMenuReviewReply(
             replySeq,
             request,
         )
@@ -198,7 +199,7 @@ class StoreRepositoryImpl @Inject constructor(
                 ) { Result.failure(it) })
 
     override fun deleteMenuReviewReply(replySeq: Long): Single<Result<Unit>> =
-        SMSApi.deleteMenuReviewReply(replySeq)
+        sckApi.deleteMenuReviewReply(replySeq)
             .toSingle {  }
             .map { Result.success(it) }
             .compose(
@@ -207,4 +208,13 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
                 ) { Result.failure(it) })
+
+    override fun storeMain(): Single<Result<StoreMainResponse>> = sckApi.storeMain()
+        .map { Result.success(it) }
+        .compose(
+            applyRetryPolicy(
+                RetryPolicyConstant.TIMEOUT,
+                RetryPolicyConstant.NETWORK,
+                RetryPolicyConstant.SERVICE_UNAVAILABLE,
+            ) { Result.failure(it) })
 }

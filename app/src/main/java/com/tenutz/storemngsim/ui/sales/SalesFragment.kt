@@ -30,8 +30,8 @@ class SalesFragment: Fragment() {
 
         }.apply {
             addLoadStateListener { loadState ->
-                binding.textSalesEmpty.isVisible =
-                    loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1
+                vm.empty.value =
+                    !(loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1)
             }
         }
     }

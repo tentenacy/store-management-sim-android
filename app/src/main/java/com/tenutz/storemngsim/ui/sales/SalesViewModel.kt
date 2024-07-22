@@ -30,6 +30,8 @@ class SalesViewModel @Inject constructor(
         const val EVENT_REFRESH_SALES_LIST = 1000
     }
 
+    val empty = MutableLiveData(true)
+
     val conditionsReset = MediatorLiveData<Boolean?>()
 
     private val _dateFrom = MutableLiveData<Date?>()

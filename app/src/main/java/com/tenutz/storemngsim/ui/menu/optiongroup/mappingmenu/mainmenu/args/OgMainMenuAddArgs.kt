@@ -22,6 +22,9 @@ data class OgMainMenuAddArgs(
         val mainCategoryCode: String?,
         val middleCategoryCode: String?,
         val subCategoryCode: String?,
+        val mainCategoryName: String?,
+        val middleCategoryName: String?,
+        val subCategoryName: String?,
         var expanded: Boolean = false,
     ): Parcelable
 }

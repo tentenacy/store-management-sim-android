@@ -14,6 +14,7 @@
             type="com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByCreditCardResponse.StatisticsSalesByCreditCard" />
 
         <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
+        <import type="com.tenutz.storemngsim.utils.ext.TimeExtKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,18 +53,34 @@
             tools:text="삼성카드" />
 
         <TextView
+            android:id="@+id/text_itstatistics_card_date"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:text="@{TimeExtKt.toDateFormat(args.date)}"
+            android:textColor="@color/rect_4481"
+            android:layout_marginTop="13dp"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2022-09-01" />
+
+
+        <TextView
             android:id="@+id/text_itstatistics_card_amount"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="6dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/ns_regular"
             android:textColor="@color/rect_4474"
             android:textSize="12sp"
             android:text='@{TextExtKt.getToCurrency(args.creditCardSalesAmount)+"원"}'
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_itstatistics_card_date"
             tools:text="10,000,000원" />
 
         <ImageView

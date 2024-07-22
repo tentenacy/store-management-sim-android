@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.statistics.menu.StatisticsMenuViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_tstatistics_menu_container"
         android:layout_width="match_parent"
@@ -45,6 +54,7 @@
             android:text="목록이 없습니다."
             android:textColor="@color/rect_4481"
             android:textSize="16sp"
+            android:visibility="@{vm.empty ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/recycler_tstatistics_menu"
             app:layout_constraintEnd_toEndOf="@id/recycler_tstatistics_menu"
             app:layout_constraintStart_toStartOf="@id/recycler_tstatistics_menu"

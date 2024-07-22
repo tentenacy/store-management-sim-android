@@ -34,8 +34,8 @@ class StatisticsMenuTabFragment: Fragment() {
     val adapter: StatisticsMenuAdapter by lazy {
         StatisticsMenuAdapter().apply {
             addLoadStateListener { loadState ->
-                binding.textTstatisticsMenuEmpty.isVisible =
-                    loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1
+                vm.empty.value =
+                    !(loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1)
             }
         }
     }
@@ -53,6 +53,9 @@ class StatisticsMenuTabFragment: Fragment() {
     ): View? {
 
         _binding = TabStatisticsMenuBinding.inflate(inflater, container, false)
+
+        binding.vm = vm
+        binding.lifecycleOwner = this
 
         return binding.root
     }

@@ -32,6 +32,8 @@ class StatisticsMenuViewModel @Inject constructor(
         const val EVENT_REFRESH_MENU_SALES_LIST = 1000
     }
 
+    val empty = MutableLiveData(true)
+
     private val _menuSalesTotal = MutableLiveData<StatisticsSalesTotalByMenusResponse>()
     val menuSalesTotal: LiveData<StatisticsSalesTotalByMenusResponse> = _menuSalesTotal
 

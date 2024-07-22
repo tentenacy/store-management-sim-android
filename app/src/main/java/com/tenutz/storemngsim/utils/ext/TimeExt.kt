@@ -77,9 +77,9 @@ fun dateFrom(dateText: String, pattern: String = "yyyy-MM-dd"): Date? {
     }
 }
 
-fun localDateFrom(dateText: String, pattern: String = "yyyy-MM-dd"): LocalDate? {
+fun localDateFrom(dateText: String?, pattern: String = "yyyy-MM-dd"): LocalDate? {
     return try {
-        LocalDate.parse(dateText, DateTimeFormatter.ofPattern(pattern))
+        dateText.takeIf { !it.isNullOrBlank() }?.let { LocalDate.parse(it, DateTimeFormatter.ofPattern(pattern)) }
     } catch (e: DateTimeParseException) {
         null
     }

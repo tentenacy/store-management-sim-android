@@ -7,7 +7,7 @@ enum class ValidationErrorCode(
 
     INVALID_TEXT_DATA("VALID-001", "입력에 유효하지 않은 문자가 포함되어 있습니다."),
     INVALID_NUMBER_DATA("VALID-002", "숫자 입력에 문자가 포함되어 있습니다."),
-    INVALID_DATE_DATA("VALID-003", "숫자 입력에 문자가 포함되어 있습니다."),
+    INVALID_DATE_DATA("VALID-003", "날짜 입력이 아닙니다."),
     INPUT_REQUIRED("VALID-004", "필수 항목을 입력해야 합니다."),
     INVALID_CATEGORY_CODE("VALID-005", "카테고리 코드는 10자 이내여야 합니다."),
     INVALID_CATEGORY_NAME("VALID-006", "카테고리명은 한글만 입력 가능하며, 50자 이내여야 합니다."),

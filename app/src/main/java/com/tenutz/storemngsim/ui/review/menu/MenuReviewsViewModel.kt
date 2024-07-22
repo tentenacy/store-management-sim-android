@@ -26,6 +26,8 @@ class MenuReviewsViewModel @Inject constructor(
         const val EVENT_REFRESH_MENU_REVIEWS = 1000
     }
 
+    val empty = MutableLiveData(true)
+
     private val query = MutableLiveData("")
 
     private val _queryType = MutableLiveData<Pair<Int?, String?>>(Pair(R.id.radio_tmenu_reviews_all, null))

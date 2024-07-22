@@ -82,7 +82,7 @@ class SubCategoryAddFragment: Fragment() {
         binding.btnSubCategoryAddSave.setOnClickListener {
             Validator.validate(
                 onValidation = {
-                    Validator.validateCategoryName(binding.editSubCategoryAddCategoryCode.text.toString(), true)
+                    Validator.validateCategoryName(binding.editSubCategoryAddCategoryName.text.toString(), true)
                     Validator.validateCategoryCode(binding.editSubCategoryAddCategoryCode.text.toString(), true)
                 },
                 onSuccess = {

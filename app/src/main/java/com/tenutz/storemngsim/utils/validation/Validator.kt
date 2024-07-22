@@ -25,7 +25,7 @@ object Validator {
     }
 
     private fun validateDateData(date: String) {
-        if("""\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])""".toRegex().matches(date)) {
+        if(!"""\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])""".toRegex().matches(date)) {
             throw DateDataValidationException()
         }
     }
@@ -141,28 +141,28 @@ object Validator {
         }
     }
 
-    fun validateShowDate(showDateFrom: String, showDateTo: String, required: Boolean= false) {
+    fun validateShowDate(showDateFrom: String, showDateTo: String, required: Boolean = false) {
         if(required) {
             validateRequiredInput(showDateFrom)
             validateRequiredInput(showDateTo)
         }
-        if(showDateFrom.isBlank() || showDateTo.isBlank()) return
-        validateDateData(showDateFrom)
-        validateDateData(showDateTo)
-        if(localDateFrom(showDateFrom)!!.isBefore(localDateFrom(showDateTo)!!)) {
+        if(showDateFrom.isBlank() && showDateTo.isBlank()) return
+//        validateDateData(showDateFrom)
+//        validateDateData(showDateTo)
+        if(localDateFrom(showDateFrom)?.let { localDateFrom(showDateTo)?.isBefore(it) != false } != false) {
             throw ShowDateValidationException()
         }
     }
 
-    fun validateEventDate(eventDateFrom: String, eventDateTo: String, required: Boolean= false) {
+    fun validateEventDate(eventDateFrom: String, eventDateTo: String, required: Boolean = false) {
         if(required) {
             validateRequiredInput(eventDateFrom)
             validateRequiredInput(eventDateFrom)
         }
-        if(eventDateFrom.isBlank() || eventDateTo.isBlank()) return
-        validateDateData(eventDateFrom)
-        validateDateData(eventDateTo)
-        if(localDateFrom(eventDateFrom)!!.isBefore(localDateFrom(eventDateTo)!!)) {
+        if(eventDateFrom.isBlank() && eventDateTo.isBlank()) return
+//        validateDateData(eventDateFrom)
+//        validateDateData(eventDateTo)
+        if(localDateFrom(eventDateFrom)?.let { localDateFrom(eventDateTo)?.isBefore(it) != false } != false) {
             throw EventDateValidationException()
         }
     }

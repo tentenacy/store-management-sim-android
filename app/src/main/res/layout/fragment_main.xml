@@ -3,26 +3,163 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.tenutz.storemngsim.ui.main.MainViewModel" />
+
+        <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
+        <import type="kotlin.text.StringsKt" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/rect_4476">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_main_top_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btn_main_logout_for_test"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="로그아웃"
+                android:src="@drawable/ic_off_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
-            android:id="@+id/text_main_title"
+            android:id="@+id/text_main_title_1"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ns_regular"
             android:text="메뉴를\n선택해주세요."
+            tools:text="안녕하세요."
             android:textColor="@color/white"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/text_main_title_2"
             app:layout_constraintStart_toStartOf="@+id/btn_main_menu_mng"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.375"
+            app:layout_constraintTop_toBottomOf="@id/constraint_main_top_container"
             tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_title_2"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:text='@{vm.storeMain.storeName+","}'
+            tools:text="메가커피 신촌점,"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/text_main_title_3"
+            app:layout_constraintTop_toBottomOf="@id/text_main_title_1"
+            app:layout_constraintStart_toStartOf="@+id/btn_main_menu_mng"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_title_3"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:text="홍길동 "
+            android:text='@{(vm.storeMain.storeManagerName == null || StringsKt.isBlank(vm.storeMain.storeManagerName)) ? "" : vm.storeMain.storeManagerName+" "}'
+            app:layout_constraintBottom_toTopOf="@id/text_main_title_4"
+            app:layout_constraintTop_toBottomOf="@id/text_main_title_2"
+            app:layout_constraintStart_toStartOf="@+id/btn_main_menu_mng"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_title_3_1"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:text="담당자님"
+            app:layout_constraintTop_toTopOf="@id/text_main_title_3"
+            app:layout_constraintBottom_toBottomOf="@id/text_main_title_3"
+            app:layout_constraintStart_toEndOf="@id/text_main_title_3"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_title_4"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:text="오늘 매출은"
+            app:layout_constraintBottom_toTopOf="@id/text_main_title_5"
+            app:layout_constraintTop_toBottomOf="@id/text_main_title_3"
+            app:layout_constraintStart_toStartOf="@+id/btn_main_menu_mng"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_title_5"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:text="총 "
+            app:layout_constraintBottom_toTopOf="@id/btn_main_menu_mng"
+            app:layout_constraintTop_toBottomOf="@id/text_main_title_4"
+            app:layout_constraintStart_toStartOf="@+id/btn_main_menu_mng"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_main_title_5_2"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_bold"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:text="100,000,000"
+            android:text="@{TextExtKt.getToCurrency(vm.storeMain.todaySalesAmountTotal)}"
+            app:layout_constraintTop_toTopOf="@id/text_main_title_5"
+            app:layout_constraintBottom_toBottomOf="@id/text_main_title_5"
+            app:layout_constraintStart_toEndOf="@id/text_main_title_5"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/text_main_title_5_3"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ns_regular"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:text="원 입니다."
+            app:layout_constraintTop_toTopOf="@id/text_main_title_5_2"
+            app:layout_constraintBottom_toBottomOf="@id/text_main_title_5_2"
+            app:layout_constraintStart_toEndOf="@id/text_main_title_5_2"
+            tools:ignore="HardcodedText" />
+
 
         <Button
             android:id="@+id/btn_main_menu_mng"
@@ -40,9 +177,9 @@
             android:textSize="18sp"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toStartOf="@id/btn_main_statistics"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_main_title"
+            app:layout_constraintTop_toBottomOf="@id/text_main_title_5"
+            app:layout_constraintBottom_toTopOf="@id/btn_main_review_mng"
             app:layout_constraintWidth_max="200dp"
             tools:ignore="HardcodedText" />
 
@@ -82,6 +219,7 @@
             android:textColor="@color/rect_4476"
             android:textSize="18sp"
             app:cornerRadius="16dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_main_help"
             app:layout_constraintEnd_toStartOf="@id/btn_main_sales"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,6 +263,7 @@
             android:textColor="@color/rect_4476"
             android:textSize="18sp"
             app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_main_space"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,28 +282,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_main_help"
             app:layout_constraintTop_toTopOf="@id/btn_main_help"
-            app:layout_constraintWidth_max="200dp"  />
-
-
-
-        <Button
-            android:id="@+id/btn_main_logout_for_test"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/ns_regular"
-            android:padding="12dp"
-            android:text="로그아웃(테스트용)"
-            android:textColor="@color/rect_4476"
-            android:textSize="18sp"
-            app:cornerRadius="16dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintWidth_max="200dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

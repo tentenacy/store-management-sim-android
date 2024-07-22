@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreMainResponse
 import com.tenutz.storemngsim.databinding.FragmentSignupFormBinding
 import com.tenutz.storemngsim.databinding.FragmentSignupSuccessBinding
 import com.tenutz.storemngsim.databinding.FragmentSignupSuccessBindingImpl
@@ -30,6 +32,8 @@ class SignupSuccessFragment: Fragment() {
     private var _binding: FragmentSignupSuccessBinding? = null
     val binding: FragmentSignupSuccessBinding get() = _binding!!
 
+    val vm: SignupSuccessViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,8 +48,28 @@ class SignupSuccessFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        setOnClickListeners()
+        observeData()
+    }
+
+    private fun observeData() {
+        vm.viewEvent.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let {
+                when (it.first) {
+                    SignupSuccessViewModel.EVENT_NAVIGATE_TO_MAIN -> {
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setOnClickListeners() {
         binding.btnSignupSuccessMainMain.setOnClickListener {
-            findNavController().navigate(SignupSuccessFragmentDirections.actionSignupSuccessFragmentToMainFragment())
+//            vm.eventNavigateToMain()
+            findNavController().navigate(
+                SignupSuccessFragmentDirections.actionSignupSuccessFragmentToMainFragment()
+            )
         }
     }
 

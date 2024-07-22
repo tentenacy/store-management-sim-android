@@ -101,8 +101,8 @@ class StoreReviewsTabFragment: Fragment() {
             }
         }.apply {
             addLoadStateListener { loadState ->
-                binding.textTstoreReviewsEmpty.isVisible =
-                    loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1
+                vm.empty.value =
+                    !(loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1)
             }
         }
     }

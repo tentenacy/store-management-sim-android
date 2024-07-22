@@ -21,5 +21,8 @@ data class OptionGroupMainMenusResponse(
         val mainCategoryCode: String?,
         val middleCategoryCode: String?,
         val subCategoryCode: String?,
+        val mainCategoryName: String?,
+        val middleCategoryName: String?,
+        val subCategoryName: String?,
     ): Parcelable
 }

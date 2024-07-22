@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.paging.LoadState
@@ -24,6 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -105,9 +108,16 @@ class MenuReviewsTabFragment: Fragment() {
                 }
             }
         }.apply {
+//            viewLifecycleOwner.lifecycleScope.launch {
+//                loadStateFlow.collectLatest {
+//                    if(it.refresh is LoadState.NotLoading) {
+//                        binding.textTmenuReviewsEmpty.isVisible = adapter.itemCount < 1
+//                    }
+//                }
+//            }
             addLoadStateListener { loadState ->
-                binding.textTmenuReviewsEmpty.isVisible =
-                    loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1
+                vm.empty.value =
+                    !(loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1)
             }
         }
     }

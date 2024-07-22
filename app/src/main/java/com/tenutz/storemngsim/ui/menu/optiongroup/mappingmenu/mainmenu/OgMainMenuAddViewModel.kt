@@ -65,6 +65,9 @@ class OgMainMenuAddViewModel @Inject constructor(
                                     it.mainCategoryCode,
                                     it.middleCategoryCode,
                                     it.subCategoryCode,
+                                    it.mainCategoryName,
+                                    it.middleCategoryName,
+                                    it.subCategoryName,
                                 )
                             }
                         )

@@ -8,6 +8,7 @@ import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.ui.base.Loginable
+import com.tenutz.storemngsim.ui.signup.SignupSuccessViewModel
 import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import com.tenutz.storemngsim.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel

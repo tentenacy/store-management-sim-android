@@ -57,4 +57,6 @@ interface StoreRepository {
     ): Single<Result<Unit>>
 
     fun deleteMenuReviewReply(replySeq: Long): Single<Result<Unit>>
+
+    fun storeMain(): Single<Result<StoreMainResponse>>
 }

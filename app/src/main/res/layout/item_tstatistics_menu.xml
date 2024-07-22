@@ -10,8 +10,10 @@
             type="com.tenutz.storemngsim.data.datasource.paging.entity.MenuSalesList.MenuSales" />
 
         <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
+
         <import type="android.view.View" />
 
+        <import type="com.tenutz.storemngsim.utils.ext.TimeExtKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,6 +54,21 @@
             app:layout_constraintStart_toEndOf="@id/text_itstatistics_menu_menu_name"
             app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_menu_name"
             tools:text="17" />
+
+        <TextView
+            android:id="@+id/text_itstatistics_menu_sold_at"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/ns_regular"
+            android:text="@{TimeExtKt.toDateFormat(args.soldAt)}"
+            android:textColor="@color/rect_4481"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_itstatistics_menu_menu_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_itstatistics_menu_menu_name"
+            tools:text="2022-09-01" />
 
         <TextView
             android:id="@+id/text_itstatistics_menu_card_count"

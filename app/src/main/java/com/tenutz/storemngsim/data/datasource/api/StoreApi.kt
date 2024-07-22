@@ -144,4 +144,7 @@ interface StoreApi {
 
     @HTTP(method = "DELETE", path = "/stores/menus/reviews/replies/{replySeq}", hasBody = true)
     fun deleteMenuReviewReply(@Path("replySeq") replySeq: Long): Completable
+
+    @GET("/stores/main")
+    fun storeMain(): Single<StoreMainResponse>
 }
