@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.ui.menu.category.main.args
 
-import java.util.*
+import java.util.Date
 
 data class MainCategoriesEditArgs(
     val mainCategoriesEdit: List<MainCategoryEdit>,

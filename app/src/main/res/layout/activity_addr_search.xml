@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginStart="16dp"
-                    android:fontFamily="@font/ns_bold"
+                    android:fontFamily="@font/suit_bold"
                     android:gravity="center|start"
                     android:text="주소 검색"
                     android:textColor="@color/rect_4474"

@@ -1,11 +1,7 @@
 package com.tenutz.storemngsim.application
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.android.datatransport.runtime.scheduling.persistence.EventStoreModule_DbNameFactory
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.application.manager.OAuthLoginManagerSubject
-import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreMainResponse
 import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
 import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.network.authenticator.TokenAuthenticator
@@ -26,13 +22,6 @@ class GlobalViewModel @Inject constructor(
     
     init {
         tokenAuthenticator.registerObserver(this)
-    }
-
-    private val _storeMain = MutableLiveData<StoreMainResponse>()
-    val storeMain: LiveData<StoreMainResponse> = _storeMain
-
-    fun setStoreMain(storeMain: StoreMainResponse) {
-        _storeMain.value = storeMain
     }
 
     override fun onRefreshTokenExpired() {

@@ -1,7 +1,6 @@
 package com.tenutz.storemngsim.ui.signup
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -10,9 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,20 +20,21 @@ import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.kakao.sdk.user.UserApiClient
-import com.nhn.android.naverlogin.OAuthLogin
-import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.application.MainActivity
+import com.navercorp.nid.NaverIdLoginSDK
+import com.tenutz.storemngsim.application.AddressSearchActivity
 import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialSignupRequest
 import com.tenutz.storemngsim.databinding.FragmentSignupFormBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.login.handler.FacebookOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.GoogleOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.KakaoOAuthLoginHandler
-import com.tenutz.storemngsim.ui.login.handler.NaverOAuthLoginHandler
+import com.tenutz.storemngsim.ui.login.handler.NaverOAuthLoginCallback
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.constant.SocialScopeConstant
 import com.tenutz.storemngsim.utils.ext.getNavigationResult
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.randomNumber
+import com.tenutz.storemngsim.utils.ext.toBusinessNumber
 import com.tenutz.storemngsim.utils.type.SocialType
 import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +52,7 @@ class SignupFormFragment : BaseFragment() {
     val vm: SignupFormViewModel by viewModels()
 
     @Inject
-    lateinit var naverOAuthLoginHandler: NaverOAuthLoginHandler
+    lateinit var naverOAuthLoginCallback: NaverOAuthLoginCallback
 
     @Inject
     lateinit var facebookOAuthLoginHandler: FacebookOAuthLoginHandler
@@ -70,16 +71,8 @@ class SignupFormFragment : BaseFragment() {
     @Inject
     lateinit var facebookCallbackManager: CallbackManager
 
-    @Inject
-    lateinit var naverCallbackManager: OAuthLogin
-
-
-
     private val naverLoginOnClickListener: () -> Unit = {
-        naverCallbackManager.startOauthLoginActivity(
-            mainActivity(),
-            naverOAuthLoginHandler
-        )
+        NaverIdLoginSDK.authenticate(mainActivity(), naverOAuthLoginCallback)
     }
 
     private val kakaoLoginOnClickListener: () -> Unit = {
@@ -133,6 +126,16 @@ class SignupFormFragment : BaseFragment() {
         }
     }
 
+    private val startAddressSearchActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            when (it.resultCode) {
+                AppCompatActivity.RESULT_OK -> {
+//                    it.data?.getStringExtra("address") ?: ""
+                    binding.textSignupFormAddress.text = it.data?.getStringExtra("roadAddress") ?: ""
+                }
+            }
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -141,6 +144,7 @@ class SignupFormFragment : BaseFragment() {
 
         _binding = FragmentSignupFormBinding.inflate(inflater, container, false)
 
+        binding.args = args.socialProfile
         binding.vm = vm
         binding.lifecycleOwner = this
 
@@ -202,7 +206,7 @@ class SignupFormFragment : BaseFragment() {
                     }
                     SignupFormViewModel.EVENT_SOCIAL_LOGIN -> {
                         (it.second as SocialType?)?.let {
-                            vm.socialLogin(args.accessToken, it)
+                            vm.socialLogin(args.socialProfile)
                         }
                         /*(it.second as SocialType?)?.let {
                             when(it) {
@@ -232,19 +236,41 @@ class SignupFormFragment : BaseFragment() {
         binding.btnSignupFormPhone.setOnClickListener {
             requestPhoneNumber()
         }
+        binding.btnSignupFormSearch.setOnClickListener {
+            startAddressSearchActivity.launch(
+                Intent(
+                    mainActivity(),
+                    AddressSearchActivity::class.java
+                )
+            )
+        }
+        binding.textSignupFormAddress.setOnClickListener {
+            startAddressSearchActivity.launch(
+                Intent(
+                    mainActivity(),
+                    AddressSearchActivity::class.java
+                )
+            )
+        }
         binding.btnSignupFormSignup.setOnClickListener {
             Validator.validate(
                 onValidation = {
-                    Validator.validateBusinessNumber(binding.editSignupFormBizNo.text.toString(), true)
+                    Validator.validateBusinessNumber(binding.editSignupFormBizNo.text.toString().replace("-", ""), true)
+                    Validator.validateRepresentative(binding.editSignupFormOwnerName.text.toString())
                     Validator.validatePhoneNumber(binding.editSignupFormPhone.text.toString(), true)
+                    Validator.validateStoreName(binding.editSignupFormName.text.toString(), true)
+                    Validator.validateAddress(binding.textSignupFormAddress.text.toString(), binding.editSignupFormAddressDetail.text.toString())
                 },
                 onSuccess = {
                     vm.signup(
-                        args.socialType,
+                        args.socialProfile.socialType.name,
                         SocialSignupRequest(
-                            args.accessToken,
-                            binding.editSignupFormBizNo.text.toString(),
+                            args.socialProfile.accessToken,
+                            binding.editSignupFormBizNo.text.toString().replace("-", ""),
                             binding.editSignupFormPhone.text.toString(),
+                            binding.editSignupFormOwnerName.text.toString(),
+                            binding.editSignupFormName.text.toString(),
+                            "${binding.textSignupFormAddress.text}|${binding.editSignupFormAddressDetail.text}".trim(),
                         )
                     )
                 },
@@ -252,6 +278,10 @@ class SignupFormFragment : BaseFragment() {
                     MyToast.create(mainActivity(), e.errorCode.message, 80)?.show()
                 },
             )
+        }
+        binding.btnSignupFormAutoCreate.setOnClickListener {
+            binding.editSignupFormBizNo.setText(randomNumber(10).toBusinessNumber)
+
         }
         binding.textSignupFormTerms1Details.setOnClickListener {
             findNavController().navigate(

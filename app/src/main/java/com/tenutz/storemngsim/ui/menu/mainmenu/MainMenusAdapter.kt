@@ -1,6 +1,5 @@
 package com.tenutz.storemngsim.ui.menu.mainmenu
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse

@@ -13,7 +13,7 @@ import com.tenutz.storemngsim.ui.base.BaseViewHolder
 import com.tenutz.storemngsim.ui.menu.category.main.args.MainCategoriesEditArgs
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
-import java.util.*
+import java.util.Collections
 
 class MainCategoriesEditViewHolder(
     val binding: ItemMainCategoriesEditBinding,

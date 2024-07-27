@@ -3,8 +3,6 @@ package com.tenutz.storemngsim.ui.menu.category.middle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryUpdateRequest
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
@@ -34,7 +32,7 @@ class MiddleCategoryDetailsViewModel @Inject constructor(
         _editMode.value = false
     }
 
-    fun middleCategory(mainCateCd: String, middleCateCd: String) {
+    fun middleCategory(mainCateCd: String = "2000", middleCateCd: String) {
         categoryRepository.middleCategory(mainCateCd, middleCateCd)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -47,10 +45,10 @@ class MiddleCategoryDetailsViewModel @Inject constructor(
                         Logger.e("$it")
                     },
                 )
-            }
+            }.addTo(compositeDisposable)
     }
 
-    fun updateMiddleCategory(mainCateCd: String, middleCateCd: String, request: MiddleCategoryUpdateRequest, callback: () -> Unit) {
+    fun updateMiddleCategory(mainCateCd: String = "2000", middleCateCd: String = "3000", request: MiddleCategoryUpdateRequest, callback: () -> Unit) {
         categoryRepository.updateMiddleCategory(mainCateCd, middleCateCd, request)
             .flatMap {
                 categoryRepository.middleCategory(mainCateCd, middleCateCd)

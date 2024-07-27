@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
-import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
-import com.tenutz.storemngsim.data.repository.menu.MenuRepository
 import com.tenutz.storemngsim.data.repository.option.OptionRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +31,10 @@ class OptionMenusViewModel @Inject constructor(
 
     private val _hideRemoval = MutableLiveData(true)
     val hideRemoval: LiveData<Boolean> = _hideRemoval
+
+    init {
+        optionMenus()
+    }
 
     fun showRemoval() {
         _hideRemoval.value = false

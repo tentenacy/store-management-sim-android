@@ -4,7 +4,20 @@ import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.MainMenuSearchRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.*
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.MainMenusMappedByRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMapperPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMapperPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMappersDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionsMappedByRequest
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
 import io.reactivex.rxjava3.core.Single
@@ -21,6 +34,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun optionGroup(optionGroupCd: String): Single<Result<OptionGroupResponse>> =
@@ -31,6 +45,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun createOptionGroup(request: OptionGroupCreateRequest): Single<Result<Unit>> =
@@ -41,6 +56,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun updateOptionGroup(optionGroupCd: String, request: OptionGroupUpdateRequest): Single<Result<Unit>> =
@@ -54,6 +70,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteOptionGroup(optionGroupCd: String): Single<Result<Unit>> =
@@ -65,6 +82,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteOptionGroups(request: OptionGroupsDeleteRequest): Single<Result<Unit>> =
@@ -76,6 +94,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun optionGroupOptions(optionGroupCd: String, commonCond: CommonCondition?): Single<Result<OptionGroupOptionsResponse>> =
@@ -86,6 +105,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun optionGroupOptionMappers(optionGroupCd: String): Single<Result<OptionGroupOptionMappersResponse>> =
@@ -96,6 +116,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun mapToOptions(optionGroupCd: String, request: OptionsMappedByRequest): Single<Result<Unit>> =
@@ -109,6 +130,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun changeOptionGroupOptionMapperPriorities(
@@ -125,6 +147,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteOptionGroupOptionMappers(
@@ -142,6 +165,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun optionGroupMainMenus(
@@ -162,6 +186,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun optionGroupMainMenuMappers(optionGroupCd: String): Single<Result<OptionGroupMainMenuMappersResponse>> =
@@ -172,6 +197,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun mapToMainMenus(optionGroupCd: String, request: MainMenusMappedByRequest): Single<Result<Unit>> =
@@ -185,6 +211,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun changeOptionGroupMainMenuMapperPriorities(
@@ -201,6 +228,7 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteOptionGroupMainMenuMappers(
@@ -218,5 +246,6 @@ class OptionGroupRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 }

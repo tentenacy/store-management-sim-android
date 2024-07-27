@@ -2,6 +2,7 @@ package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.esafirm.imagepicker.model.Image
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuResponse
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainMenuDetailsViewModel @Inject constructor(
     private val menuRepository: MenuRepository,
+    savedStateHandle: SavedStateHandle,
 ): BaseViewModel() {
 
     private val _mainMenu = MutableLiveData<MainMenuResponse>()
@@ -27,6 +29,12 @@ class MainMenuDetailsViewModel @Inject constructor(
 
     private val _image = MutableLiveData<Image?>()
     val image: LiveData<Image?> = _image
+
+    private val args = MainMenuDetailsFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    init {
+        mainMenu()
+    }
 
     fun setImageUri(image: Image) {
         _image.value = image
@@ -40,26 +48,27 @@ class MainMenuDetailsViewModel @Inject constructor(
         _editMode.value = false
     }
 
-    fun mainMenu(mainCateCd: String, middleCateCd: String, subCateCd: String, mainMenuCd: String) {
-        menuRepository.mainMenu(mainCateCd, middleCateCd, subCateCd, mainMenuCd)
+    private fun mainMenu(mainCateCd: String = "2000", middleCateCd: String = "3000", callback: () -> Unit = {}) {
+        menuRepository.mainMenu(mainCateCd, middleCateCd, args.subCategory.subCategoryCode, args.mainMenuCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
                 result.fold(
                     onSuccess = {
                         _mainMenu.value = it
+                        callback()
                     },
                     onFailure = {
                         Logger.e("$it")
                     },
                 )
-            }
+            }.addTo(compositeDisposable)
     }
 
-    fun updateMainMenu(mainCateCd: String, middleCateCd: String, subCateCd: String, mainMenuCd: String, request: MainMenuUpdateRequest, callback: () -> Unit) {
-        menuRepository.updateMainMenu(mainCateCd, middleCateCd, subCateCd, mainMenuCd, request)
+    fun updateMainMenu(mainCateCd: String = "2000", middleCateCd: String = "3000", request: MainMenuUpdateRequest, callback: () -> Unit) {
+        menuRepository.updateMainMenu(mainCateCd, middleCateCd, args.subCategory.subCategoryCode, args.mainMenuCode, request)
             .flatMap {
-                menuRepository.mainMenu(mainCateCd, middleCateCd, subCateCd, mainMenuCd)
+                menuRepository.mainMenu(mainCateCd, middleCateCd, args.subCategory.subCategoryCode, args.mainMenuCode)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

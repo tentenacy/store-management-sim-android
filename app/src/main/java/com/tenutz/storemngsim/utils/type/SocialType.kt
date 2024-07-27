@@ -1,6 +1,10 @@
 package com.tenutz.storemngsim.utils.type
 
-sealed class SocialType {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+sealed class SocialType: Parcelable {
     object KAKAO : SocialType()
     object GOOGLE : SocialType()
     object NAVER : SocialType()

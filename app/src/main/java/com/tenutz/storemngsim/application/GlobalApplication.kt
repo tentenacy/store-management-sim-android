@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.chibatching.kotpref.Kotpref
 import com.facebook.appevents.AppEventsLogger
 import com.kakao.sdk.common.KakaoSdk
+import com.navercorp.nid.NaverIdLoginSDK
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.BuildConfig
@@ -24,6 +25,12 @@ class GlobalApplication : Application() {
         Logger.addLogAdapter(AndroidLogAdapter())
         Kotpref.init(this)
         KakaoSdk.init(this, BuildConfig.SOCIAL_KAKAO_CLIENT_ID)
+        NaverIdLoginSDK.initialize(
+            applicationContext,
+            BuildConfig.SOCIAL_NAVER_CLIENT_ID,
+            BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
+            BuildConfig.SOCIAL_NAVER_CLIENT_NAME
+        )
         AppEventsLogger.activateApp(this)
 
         RxJavaPlugins.setErrorHandler { e ->

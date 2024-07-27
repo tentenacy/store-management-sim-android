@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentMiddleCategoriesBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesFragmentDirections
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.bs.MiddleCategoriesBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,47 +30,41 @@ class MiddleCategoriesFragment : BaseFragment() {
     lateinit var args: MiddleCategoriesNavArgs
 
     private val adapter: MiddleCategoriesAdapter by lazy {
-        MiddleCategoriesAdapter {
+        MiddleCategoriesAdapter { middleCategory ->
             MiddleCategoriesBottomSheetDialog(
                 onClickListener = { id, _ ->
                     when (id) {
                         R.id.btn_bsmiddle_categories_sub -> {
-                            it.categoryCode?.let { _ ->
-                                MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToNavigationSubCategory().let { action ->
-                                    findNavController().navigate(
-                                        action.actionId,
-                                        Bundle().apply {
-                                            putParcelable(
-                                                "middleCategory",
-                                                SubCategoriesNavArgs(
-                                                    it.storeCode,
-                                                    args.categoryCode,
-                                                    it.categoryCode,
-                                                    it.categoryName,
-                                                    it.use,
-                                                    it.imageName,
-                                                    it.imageUrl,
-                                                    it.order,
-                                                    it.tel,
-                                                    it.address,
-                                                    it.createdAt,
-                                                    it.lastModifiedAt,
-                                                )
+                            MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToNavigationSubCategory().let { action ->
+                                findNavController().navigate(
+                                    action.actionId,
+                                    Bundle().apply {
+                                        putParcelable(
+                                            "middleCategory",
+                                            SubCategoriesNavArgs(
+                                                middleCategory.storeCode,
+                                                args.categoryCode,
+                                                middleCategory.categoryCode,
+                                                middleCategory.categoryName,
+                                                middleCategory.imageName,
+                                                middleCategory.imageUrl,
+                                                middleCategory.tel,
+                                                middleCategory.address,
+                                                middleCategory.createdAt,
+                                                middleCategory.lastModifiedAt,
                                             )
-                                        }
-                                    )
-                                }
+                                        )
+                                    }
+                                )
                             }
                         }
                         R.id.btn_bsmiddle_categories_details -> {
-                            it.categoryCode?.let {
-                                findNavController().navigate(
-                                    MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToMiddleCategoryDetailsFragment(
-                                        args.categoryCode,
-                                        it,
-                                    )
+                            findNavController().navigate(
+                                MiddleCategoriesFragmentDirections.actionMiddleCategoriesFragmentToMiddleCategoryDetailsFragment(
+                                    args.categoryCode,
+                                    middleCategory.categoryCode,
                                 )
-                            }
+                            )
                         }
                     }
                 }
@@ -132,7 +125,7 @@ class MiddleCategoriesFragment : BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageMiddleCategoriesHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMiddleCategoriesHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

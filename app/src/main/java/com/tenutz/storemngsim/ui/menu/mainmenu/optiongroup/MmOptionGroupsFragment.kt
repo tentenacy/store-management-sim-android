@@ -5,23 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
-import com.tenutz.storemngsim.databinding.*
-import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsNavArgs
+import com.tenutz.storemngsim.databinding.FragmentMmOptionGroupsBinding
+import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.base.NavMmOptionGroupFragment
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MmOptionGroupsFragment: BaseFragment() {
+class MmOptionGroupsFragment: NavMmOptionGroupFragment() {
 
     private var _binding: FragmentMmOptionGroupsBinding? = null
     val binding: FragmentMmOptionGroupsBinding get() = _binding!!
 
-    private lateinit var args: MmOptionGroupsNavArgs
+    private val args: MmOptionGroupsFragmentArgs by navArgs()
 
     val vm: MmOptionGroupsViewModel by navGraphViewModels(R.id.navigation_mm_option_group) {
         defaultViewModelProviderFactory
@@ -31,14 +31,6 @@ class MmOptionGroupsFragment: BaseFragment() {
         MmOptionGroupsAdapter {
 
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        args = requireArguments().getParcelable("mainMenu")!!
-
-        vm.mmOptionGroups(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode, args.menuCode)
     }
 
     override fun onCreateView(
@@ -64,7 +56,7 @@ class MmOptionGroupsFragment: BaseFragment() {
     }
 
     private fun initViews() {
-        binding.args = args
+        binding.args = args.mainMenu
         binding.recyclerMmOptionGroups.adapter = adapter
     }
 
@@ -86,7 +78,7 @@ class MmOptionGroupsFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageMmOptionGroupsHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMmOptionGroupsHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
@@ -94,20 +86,12 @@ class MmOptionGroupsFragment: BaseFragment() {
         binding.textMmOptionGroupsEdit.setOnClickListener {
             vm.mainMenuMappers.value?.let {
                 findNavController().navigate(
-                    MmOptionGroupsFragmentDirections.actionMmOptionGroupsFragmentToMmOptionGroupsEditFragment(
-                        args,
-                        it,
-                    )
+                    MmOptionGroupsFragmentDirections.actionMmOptionGroupsFragmentToMmOptionGroupsEditFragment(args.subCategory, args.mainMenu)
                 )
             }
         }
         binding.fabMmOptionGroupsAdd.setOnClickListener {
-            findNavController().navigate(MmOptionGroupsFragmentDirections.actionMmOptionGroupsFragmentToMmOptionGroupAddFragment(
-                args.mainCategoryCode,
-                args.middleCategoryCode,
-                args.subCategoryCode,
-                args.menuCode,
-            ))
+            findNavController().navigate(MmOptionGroupsFragmentDirections.actionMmOptionGroupsFragmentToMmOptionGroupAddFragment(args.subCategory, args.mainMenu))
         }
     }
 

@@ -18,6 +18,7 @@ import com.tenutz.storemngsim.databinding.FragmentSignupFormBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusPagerAdapter
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -81,7 +82,7 @@ class ReviewsFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageReviewsHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageReviewsHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)

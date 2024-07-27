@@ -2,7 +2,12 @@ package com.tenutz.storemngsim.di.module
 
 import android.content.Context
 import com.tenutz.storemngsim.data.datasource.database.AppDatabase
-import com.tenutz.storemngsim.data.datasource.paging.dao.*
+import com.tenutz.storemngsim.data.datasource.paging.dao.MenuReviewDao
+import com.tenutz.storemngsim.data.datasource.paging.dao.MenuReviewRemoteKeysDao
+import com.tenutz.storemngsim.data.datasource.paging.dao.MenuSalesDao
+import com.tenutz.storemngsim.data.datasource.paging.dao.MenuSalesRemoteKeysDao
+import com.tenutz.storemngsim.data.datasource.paging.dao.StoreReviewDao
+import com.tenutz.storemngsim.data.datasource.paging.dao.StoreReviewRemoteKeysDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

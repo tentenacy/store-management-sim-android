@@ -1,14 +1,11 @@
 package com.tenutz.storemngsim.ui.common
 
-import com.github.mikephil.charting.components.MarkerView
-import com.github.mikephil.charting.utils.MPPointF
-
 import android.content.Context
-
 import android.widget.TextView
+import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
-import com.tenutz.storemngsim.ui.common.args.ChartMakerV2Data
+import com.github.mikephil.charting.utils.MPPointF
 import com.tenutz.storemngsim.ui.statistics.time.args.PieChartMarkerData
 import com.tenutz.storemngsim.utils.ext.toCurrency
 import dagger.hilt.android.AndroidEntryPoint

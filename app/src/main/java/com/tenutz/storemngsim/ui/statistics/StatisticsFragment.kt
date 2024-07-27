@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -15,7 +14,16 @@ import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentStatisticsBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.common.DatePickerDialog
-import com.tenutz.storemngsim.utils.ext.*
+import com.tenutz.storemngsim.utils.ext.dateFrom
+import com.tenutz.storemngsim.utils.ext.end
+import com.tenutz.storemngsim.utils.ext.localDateFrom
+import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
+import com.tenutz.storemngsim.utils.ext.noon
+import com.tenutz.storemngsim.utils.ext.start
+import com.tenutz.storemngsim.utils.ext.toDate
+import com.tenutz.storemngsim.utils.ext.tomorrow
+import com.tenutz.storemngsim.utils.ext.yesterday
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -91,7 +99,7 @@ class StatisticsFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageStatisticsHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageStatisticsHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)

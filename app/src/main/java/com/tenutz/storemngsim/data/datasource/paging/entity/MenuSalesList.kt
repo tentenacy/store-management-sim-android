@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
-import java.util.*
+import java.util.Date
 
 @Parcelize
 data class MenuSalesList(
@@ -24,8 +24,6 @@ data class MenuSalesList(
         val soldAt: Date?,
         val menuName: String?,
         val categoryName: String?,
-        val mainEquipmentName: String?,
-        val middleEquipmentName: String?,
         val mainCategoryCode: String?,
         val middleCategoryCode: String?,
         val subCategoryCode: String?,

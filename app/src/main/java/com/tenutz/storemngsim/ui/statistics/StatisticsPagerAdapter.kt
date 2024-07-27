@@ -2,17 +2,9 @@ package com.tenutz.storemngsim.ui.statistics
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.tenutz.storemngsim.databinding.TabStatisticsCardBinding
-import com.tenutz.storemngsim.databinding.TabStatisticsMenuBinding
-import com.tenutz.storemngsim.databinding.TabStatisticsTimeBinding
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenusTabFragment
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu.OgOptionMenusTabFragment
-import com.tenutz.storemngsim.ui.review.menu.MenuReviewsTabFragment
-import com.tenutz.storemngsim.ui.review.store.StoreReviewsTabFragment
 import com.tenutz.storemngsim.ui.statistics.card.StatisticsCardTabFragment
 import com.tenutz.storemngsim.ui.statistics.menu.StatisticsMenuTabFragment
 import com.tenutz.storemngsim.ui.statistics.time.StatisticsTimeTabFragment
-import java.lang.IndexOutOfBoundsException
 
 class StatisticsPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
 

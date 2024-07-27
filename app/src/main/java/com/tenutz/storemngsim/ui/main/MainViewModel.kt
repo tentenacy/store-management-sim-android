@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByMenusTodayResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByMenusResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreMainResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.user.UserDetailsResponse
 import com.tenutz.storemngsim.data.repository.store.StoreRepository
+import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -25,11 +26,7 @@ class MainViewModel @Inject constructor(
     private val _pieMenus = MutableLiveData<StatisticsSalesByMenusTodayResponse>()
     val pieMenus: LiveData<StatisticsSalesByMenusTodayResponse> = _pieMenus
 
-    fun setStoreMain(storeMain: StoreMainResponse) {
-        _storeMain.value = storeMain
-    }
-
-    fun storeMain() {
+    fun storeMain(callback: (String, String) -> Unit = { _, _ -> }) {
         storeRepository.storeMain()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -37,9 +34,10 @@ class MainViewModel @Inject constructor(
                 result.fold(
                     onSuccess = {
                         _storeMain.value = it
+                        callback(it.mainCategoryCode, it.middleCategoryCode)
                     },
                     onFailure = {
-                        Logger.e("$it")
+                        Logger.e("${it.message}")
                     },
                 )
             }.addTo(compositeDisposable)
@@ -55,10 +53,9 @@ class MainViewModel @Inject constructor(
                         _pieMenus.value = it
                     },
                     onFailure = {
-                        Logger.e("$it")
+                        Logger.e("${it.message}")
                     },
                 )
             }.addTo(compositeDisposable)
     }
-
 }

@@ -6,17 +6,13 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MotionEventCompat
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenuPrioritiesChangeRequest
 import com.tenutz.storemngsim.databinding.ItemMainMenusEditBinding
-import com.tenutz.storemngsim.databinding.ItemMiddleCategoriesEditBinding
 import com.tenutz.storemngsim.ui.base.BaseRecyclerView
 import com.tenutz.storemngsim.ui.base.BaseViewHolder
-import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusEditArgs
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
-import java.util.*
+import java.util.Collections
 
 class MainMenusEditViewHolder(
     val binding: ItemMainMenusEditBinding,

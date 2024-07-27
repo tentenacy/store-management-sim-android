@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.github.mikephil.charting.charts.PieChart
@@ -15,8 +14,8 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.application.GlobalViewModel
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByMenusTodayResponse
 import com.tenutz.storemngsim.data.datasource.sharedpref.Events
 import com.tenutz.storemngsim.databinding.FragmentMainV2Binding
@@ -25,7 +24,6 @@ import com.tenutz.storemngsim.ui.common.PieMarker
 import com.tenutz.storemngsim.ui.statistics.time.args.PieChartMarkerData
 import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.max
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -34,18 +32,12 @@ class MainFragment: BaseFragment() {
     private var _binding: FragmentMainV2Binding? = null
     val binding: FragmentMainV2Binding get() = _binding!!
 
-    val vm: MainViewModel by navGraphViewModels(R.id.navigation_main_xml) {
+    val vm: MainViewModel by navGraphViewModels(R.id.navigation_main) {
         defaultViewModelProviderFactory
     }
 
     val adapter: PieMenusAdapter by lazy {
         PieMenusAdapter(mainActivity())
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.storeMain()
     }
 
     override fun onCreateView(
@@ -70,10 +62,18 @@ class MainFragment: BaseFragment() {
         observeData()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        vm.storeMain()
+    }
+
     private fun observeData() {
+
         vm.storeMain.observe(viewLifecycleOwner) {
-            mainActivity().vm.setStoreMain(it)
+            mainActivity().updateDrawerMenu(it)
         }
+
         vm.pieMenus.observe(viewLifecycleOwner) { response ->
             response.contents.size.takeIf { it > 3 }?.let {
                 adapter.updateItems(response.contents.subList(0, 3))

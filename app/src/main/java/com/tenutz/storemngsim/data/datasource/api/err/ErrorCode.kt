@@ -26,7 +26,7 @@ enum class ErrorCode(
     LOGIN_FAIL(HttpsURLConnection.HTTP_BAD_REQUEST, "MZS-1000", "존재하지 않는 계정이거나, 잘못된 비밀번호입니다."),
     ALREADY_SIGNEDUP(HttpsURLConnection.HTTP_BAD_REQUEST, "MZS-1001", "이미 가입한 사용자입니다."),
     USER_NOT_AUTHENTICATION(HttpsURLConnection.HTTP_UNAUTHORIZED, "MZS-1002", "인증된 사용자가 아닙니다."),
-    USER_NOT_FOUND(HttpsURLConnection.HTTP_BAD_REQUEST, "MZS-1003", "사용자가 존재하지 않습니다."),
+    USER_NOT_FOUND(HttpsURLConnection.HTTP_UNAUTHORIZED, "MZS-1003", "사용자가 존재하지 않습니다."),
     MENU_REVIEW_NOT_FOUND(HttpsURLConnection.HTTP_BAD_REQUEST, "MZS-1004", "메뉴 평가 정보가 존재하지 않습니다."),
     STORE_REVIEW_NOT_FOUND(HttpsURLConnection.HTTP_BAD_REQUEST, "MZS-1005", "가맹점 평가 정보가 존재하지 않습니다."),
     CATEGORY_NOT_FOUND(HttpsURLConnection.HTTP_BAD_REQUEST, "MZS-1006", "카테고리가 존재하지 않습니다."),

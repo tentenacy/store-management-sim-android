@@ -2,12 +2,13 @@ package com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMapperPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersResponse
 import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragmentArgs
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMainMenusEditArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OgMainMenusEditViewModel @Inject constructor(
     private val optionGroupRepository: OptionGroupRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     companion object {
@@ -30,15 +32,12 @@ class OgMainMenusEditViewModel @Inject constructor(
     private val _checkedItemCount = MutableLiveData(0)
     val checkedItemCount: LiveData<Int> = _checkedItemCount
 
-    fun updateCheckedItemCount() {
-        ogMainMenusEdit.value?.let {
-            _checkedItemCount.value = it.ogMainMenuMappersEdit.count { it.checked }
-        }
-    }
+    private val ogMappingMenusArgs = OgMappingMenusFragmentArgs.fromSavedStateHandle(savedStateHandle)
+    private val args = OgMainMenusEditFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    fun setOgMainMenusEdit(args: OptionGroupMainMenuMappersResponse) {
+    init {
         _ogMainMenusEdit.value = OgMainMenusEditArgs(
-            args.optionGroupMainMenuMappers.map {
+            args.ogMainMenuMappers.optionGroupMainMenuMappers.map {
                 OgMainMenusEditArgs.OptionGroupMainMenuMapper(
                     it.storeCode,
                     it.mainCategoryCode,
@@ -58,8 +57,14 @@ class OgMainMenusEditViewModel @Inject constructor(
         )
     }
 
-    fun deleteOgMainMenus(optionGroupCd: String, request: OptionGroupMainMenuMappersDeleteRequest, callback: () -> Unit) {
-        optionGroupRepository.deleteOptionGroupMainMenuMappers(optionGroupCd, request)
+    fun updateCheckedItemCount() {
+        ogMainMenusEdit.value?.let {
+            _checkedItemCount.value = it.ogMainMenuMappersEdit.count { it.checked }
+        }
+    }
+
+    fun deleteOgMainMenus(request: OptionGroupMainMenuMappersDeleteRequest, callback: () -> Unit) {
+        optionGroupRepository.deleteOptionGroupMainMenuMappers(ogMappingMenusArgs.optionGroup.optionGroupCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
@@ -76,8 +81,8 @@ class OgMainMenusEditViewModel @Inject constructor(
             .addTo(compositeDisposable)
     }
 
-    fun changeMiddleCategoryPriorities(mainCateCd: String, request: OptionGroupMainMenuMapperPrioritiesChangeRequest, callback: () -> Unit) {
-        optionGroupRepository.changeOptionGroupMainMenuMapperPriorities(mainCateCd, request)
+    fun changeMiddleCategoryPriorities(request: OptionGroupMainMenuMapperPrioritiesChangeRequest, callback: () -> Unit) {
+        optionGroupRepository.changeOptionGroupMainMenuMapperPriorities(ogMappingMenusArgs.optionGroup.optionGroupCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->

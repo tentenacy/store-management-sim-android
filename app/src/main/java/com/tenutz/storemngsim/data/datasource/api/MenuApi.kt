@@ -3,11 +3,24 @@ package com.tenutz.storemngsim.data.datasource.api
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.menu.*
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuOptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenuPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenusDeleteRequest
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.HTTP
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MenuApi {
 
@@ -43,7 +56,6 @@ interface MenuApi {
         @Part("outOfStock") outOfStock: Boolean,
         @Part("use") use: Boolean,
         @Part("ingredientDisplay") ingredientDisplay: Boolean,
-        @Part("mainMenuNameKor") mainMenuNameKor: String? = null,
         @Part("highlightType") highlightType: String,
         @Part("showDateFrom") showDateFrom: String? = null,
         @Part("showDateTo") showDateTo: String? = null,
@@ -55,7 +67,7 @@ interface MenuApi {
         @Part("eventTimeFrom") eventTimeFrom: String? = null,
         @Part("eventTimeTo") eventTimeTo: String? = null,
         @Part("eventDayOfWeek") eventDayOfWeek: String? = null,
-        @Part("memoKor") memoKor: String? = null,
+        @Part("memo") memo: String? = null,
         @Part("ingredientDetails") ingredientDetails: String? = null,
     ): Single<Unit>
 
@@ -75,7 +87,6 @@ interface MenuApi {
         @Part("outOfStock") outOfStock: Boolean,
         @Part("use") use: Boolean?,
         @Part("ingredientDisplay") ingredientDisplay: Boolean,
-        @Part("mainMenuNameKor") mainMenuNameKor: String? = null,
         @Part("highlightType") highlightType: String,
         @Part("showDateFrom") showDateFrom: String? = null,
         @Part("showDateTo") showDateTo: String? = null,
@@ -87,7 +98,7 @@ interface MenuApi {
         @Part("eventTimeFrom") eventTimeFrom: String? = null,
         @Part("eventTimeTo") eventTimeTo: String? = null,
         @Part("eventDayOfWeek") eventDayOfWeek: String? = null,
-        @Part("memoKor") memoKor: String? = null,
+        @Part("memo") memo: String? = null,
         @Part("ingredientDetails") ingredientDetails: String? = null,
     ): Single<Unit>
 

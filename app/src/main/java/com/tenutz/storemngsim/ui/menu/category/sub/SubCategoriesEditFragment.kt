@@ -5,34 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
-import com.tenutz.storemngsim.databinding.*
-import com.tenutz.storemngsim.ui.base.BaseFragment
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
+import com.tenutz.storemngsim.databinding.FragmentSubCategoriesEditBinding
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditViewModel
-import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesEditViewHolder
-import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesEditArgs
+import com.tenutz.storemngsim.ui.menu.category.sub.base.NavSubCategoryFragment
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SubCategoriesEditFragment: BaseFragment(), OnDragListener<SubCategoriesEditViewHolder.SubCategoryEditViewHolder> {
+class SubCategoriesEditFragment: NavSubCategoryFragment(), OnDragListener<SubCategoriesEditViewHolder.SubCategoryEditViewHolder> {
 
     private var _binding: FragmentSubCategoriesEditBinding? = null
     val binding: FragmentSubCategoriesEditBinding get() = _binding!!
-
-    val args: SubCategoriesEditFragmentArgs by navArgs()
 
     val vm: SubCategoriesEditViewModel by viewModels()
 
@@ -42,7 +37,6 @@ class SubCategoriesEditFragment: BaseFragment(), OnDragListener<SubCategoriesEdi
 
     private val adapter: SubCategoriesEditAdapter by lazy {
         SubCategoriesEditAdapter(
-            args = args.middleCategory,
             vm = vm,
             onCheckedChangeListener = {
                 vm.updateCheckedItemCount()
@@ -62,12 +56,6 @@ class SubCategoriesEditFragment: BaseFragment(), OnDragListener<SubCategoriesEdi
     }
 
     private lateinit var itemTouchHelper: ItemTouchHelper
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.setSubCategoriesEdit(args.subCategories)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,38 +81,15 @@ class SubCategoriesEditFragment: BaseFragment(), OnDragListener<SubCategoriesEdi
 
     private fun initViews() {
         binding.recyclerSubCategoriesEdit.adapter = adapter
-        adapter.updateItems(listOf(SubCategoriesEditItem.Header))
+        adapter.updateItems(listOf(SubCategoriesEditItem.Header(MiddleCategoryResponse.empty())))
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
         itemTouchHelper.attachToRecyclerView(binding.recyclerSubCategoriesEdit)
-    }
-
-    private fun setOnClickListeners() {
-        binding.imageSubCategoriesEditBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
-        binding.imageSubCategoriesEditHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
-        }
-        binding.imageSubCategoriesEditHamburger.setOnClickListener {
-            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
-        }
-        binding.btnSubCategoriesEditBottomContainer.setOnClickListener {
-            vm.deleteSubCategories(
-                args.middleCategory.mainCategoryCode,
-                args.middleCategory.categoryCode,
-                CategoriesDeleteRequest(
-                    adapter.items.filterIsInstance<SubCategoriesEditItem.Data>().filter { it.value.checked }.mapNotNull { it.value.categoryCode }
-                )
-            ) {
-                pVm.subCategories(args.middleCategory.mainCategoryCode, args.middleCategory.categoryCode)
-            }
-        }
     }
 
     private fun observeData() {
         vm.subCategoriesEdit.observe(viewLifecycleOwner) {
             val arrayListOf = arrayListOf<SubCategoriesEditItem>()
-            arrayListOf.add(SubCategoriesEditItem.Header)
+            arrayListOf.add(SubCategoriesEditItem.Header(it.middleCategory))
             arrayListOf.addAll(it.subCategoriesEdit.map { SubCategoriesEditItem.Data(it) })
             adapter.updateItems(arrayListOf)
         }
@@ -136,6 +101,27 @@ class SubCategoriesEditFragment: BaseFragment(), OnDragListener<SubCategoriesEdi
                         findNavController().navigateUp()
                     }
                 }
+            }
+        }
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageSubCategoriesEditBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.imageSubCategoriesEditHome.setOnClickListener {
+            mainActivity().navigateToMainFragment()
+        }
+        binding.imageSubCategoriesEditHamburger.setOnClickListener {
+            mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
+        }
+        binding.btnSubCategoriesEditBottomContainer.setOnClickListener {
+            vm.deleteSubCategories(
+                request = CategoriesDeleteRequest(
+                    adapter.items.filterIsInstance<SubCategoriesEditItem.Data>().filter { it.value.checked }.mapNotNull { it.value.categoryCode }
+                )
+            ) {
+                pVm.subCategories()
             }
         }
     }
@@ -152,9 +138,7 @@ class SubCategoriesEditFragment: BaseFragment(), OnDragListener<SubCategoriesEdi
     override fun onDragOver() {
         Logger.i(adapter.items.toString())
         vm.changeSubCategoryPriorities(
-            args.middleCategory.mainCategoryCode,
-            args.middleCategory.categoryCode,
-            CategoryPrioritiesChangeRequest(
+            request = CategoryPrioritiesChangeRequest(
                 adapter.items.filterIsInstance<SubCategoriesEditItem.Data>().mapIndexedNotNull { priority: Int, item ->
                     item.value.categoryCode?.let {
                         CategoryPrioritiesChangeRequest.MainCategory(
@@ -164,7 +148,7 @@ class SubCategoriesEditFragment: BaseFragment(), OnDragListener<SubCategoriesEdi
                 }
             ),
         ) {
-            pVm.subCategories(args.middleCategory.mainCategoryCode, args.middleCategory.categoryCode)
+            pVm.subCategories()
         }
     }
 }

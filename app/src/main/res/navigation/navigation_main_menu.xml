@@ -11,16 +11,37 @@
         tools:layout="@layout/fragment_main_menus">
         <action
             android:id="@+id/action_mainMenusFragment_to_mainMenusEditFragment"
-            app:destination="@id/mainMenusEditFragment" />
+            app:destination="@id/mainMenusEditFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainMenusFragment_to_mainMenuAddFragment"
-            app:destination="@id/mainMenuAddFragment" />
+            app:destination="@id/mainMenuAddFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainMenusFragment_to_mainMenuDetailsFragment"
-            app:destination="@id/mainMenuDetailsFragment" />
+            app:destination="@id/mainMenuDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <argument android:name="subCategory" app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs" />
+
         <action
-            android:id="@+id/action_mainMenusFragment_to_mmOptionGroupsFragment"
-            app:destination="@id/navigation_mm_option_group" />
+            android:id="@+id/show_mm_option_group"
+            app:destination="@id/navigation_mm_option_group"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right">
+            <argument android:name="subCategory" app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs" />
+            <argument android:name="mainMenu" app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsNavArgs" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/mainMenusEditFragment"
@@ -28,13 +49,8 @@
         android:label="MainMenusEditFragment"
         tools:layout="@layout/fragment_main_menus">
 
-        <argument
-            android:name="subCategory"
-            app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs" />
-
-        <argument
-            android:name="mainMenus"
-            app:argType="com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse" />
+        <argument android:name="mainMenus" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse" />
+        <argument android:name="subCategory" app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs" />
     </fragment>
     <fragment
         android:id="@+id/mainMenuAddFragment"
@@ -42,9 +58,7 @@
         android:label="MainMenuAddFragment"
         tools:layout="@layout/fragment_main_menu_add">
 
-        <argument android:name="mainCategoryCode" app:argType="string" />
-        <argument android:name="middleCategoryCode" app:argType="string" />
-        <argument android:name="subCategoryCode" app:argType="string" />
+        <argument android:name="subCategory" app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs" />
     </fragment>
     <fragment
         android:id="@+id/mainMenuDetailsFragment"
@@ -52,10 +66,11 @@
         android:label="MainMenuDetailsFragment"
         tools:layout="@layout/fragment_main_menu_details">
 
-        <argument android:name="mainCategoryCode" app:argType="string" />
-        <argument android:name="middleCategoryCode" app:argType="string" />
-        <argument android:name="subCategoryCode" app:argType="string" />
         <argument android:name="mainMenuCode" app:argType="string" />
+        <argument android:name="subCategory" app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs" />
     </fragment>
     <include app:graph="@navigation/navigation_mm_option_group" />
+    <action
+        android:id="@+id/show_main_menu"
+        app:destination="@id/mainMenusFragment" />
 </navigation>

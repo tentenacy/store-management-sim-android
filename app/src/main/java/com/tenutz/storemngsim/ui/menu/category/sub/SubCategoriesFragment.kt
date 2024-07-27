@@ -5,24 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
 import com.tenutz.storemngsim.databinding.FragmentSubCategoriesBinding
-import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
+import com.tenutz.storemngsim.ui.menu.category.sub.base.NavSubCategoryFragment
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SubCategoriesFragment : BaseFragment() {
+class SubCategoriesFragment : NavSubCategoryFragment() {
 
     private var _binding: FragmentSubCategoriesBinding? = null
     val binding: FragmentSubCategoriesBinding get() = _binding!!
-
-    lateinit var args: SubCategoriesNavArgs
 
     private val vm: SubCategoriesViewModel by navGraphViewModels(R.id.navigation_sub_category) {
         defaultViewModelProviderFactory
@@ -30,7 +28,6 @@ class SubCategoriesFragment : BaseFragment() {
 
     private val adapter: SubCategoriesAdapter by lazy {
         SubCategoriesAdapter(
-            args,
             onClickListener = { id, item ->
                 when (id) {
                     R.id.btn_sub_categories_top_details -> {
@@ -38,36 +35,19 @@ class SubCategoriesFragment : BaseFragment() {
                     }
                     R.id.text_sub_categories_top_edit -> {
                         vm.subCategories.value?.let {
-                            findNavController().navigate(
-                                SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoriesEditFragment(
-                                    args,
-                                    it
-                                )
-                            )
+                            findNavController().navigate(SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoriesEditFragment(it))
                         }
                     }
                     R.id.constraint_isub_categories_container -> {
-                        (item as SubCategoriesResponse.SubCategory).categoryCode?.let {
+                        (item as SubCategoriesResponse.SubCategory).let {
                             findNavController().navigate(
-                                SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoryDetailsFragment(
-                                    args.mainCategoryCode,
-                                    args.categoryCode,
-                                    it,
-                                )
+                                SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoryDetailsFragment(it.categoryCode)
                             )
                         }
                     }
                 }
             },
         )
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        args = requireArguments().getParcelable("middleCategory")!!
-
-        vm.subCategories(args.mainCategoryCode, args.categoryCode)
     }
 
     override fun onCreateView(
@@ -94,30 +74,28 @@ class SubCategoriesFragment : BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageSubCategoriesHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageSubCategoriesHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.fabSubCategoriesAdd.setOnClickListener {
             findNavController().navigate(
-                SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoryAddFragment(
-                    args.mainCategoryCode,
-                    args.categoryCode
-                )
+                SubCategoriesFragmentDirections.actionSubCategoriesFragmentToSubCategoryAddFragment()
             )
         }
     }
 
     private fun initViews() {
         binding.recyclerSubCategories.adapter = adapter
-        adapter.updateItems(listOf(SubCategoriesItem.Header))
+        adapter.updateItems(listOf(SubCategoriesItem.Header(MiddleCategoryResponse.empty())))
     }
 
     private fun observeData() {
+
         vm.subCategories.observe(viewLifecycleOwner) {
             val arrayListOf = arrayListOf<SubCategoriesItem>()
-            arrayListOf.add(SubCategoriesItem.Header)
+            arrayListOf.add(SubCategoriesItem.Header(it.middleCategory))
             arrayListOf.addAll(it.subCategories.map { SubCategoriesItem.Data(it) })
             adapter.updateItems(arrayListOf)
         }

@@ -1,10 +1,29 @@
 package com.tenutz.storemngsim.data.datasource.api
 
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.*
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.MainMenusMappedByRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMapperPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMapperPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMappersDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionsMappedByRequest
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.HTTP
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface OptionGroupApi {
 

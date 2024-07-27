@@ -2,13 +2,13 @@ package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.esafirm.imagepicker.model.Image
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
 import com.tenutz.storemngsim.data.repository.menu.MenuRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.ui.menu.category.sub.SubCategoryAddViewModel
 import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -19,10 +19,13 @@ import javax.inject.Inject
 @HiltViewModel
 class MainMenuAddViewModel @Inject constructor(
     private val mainMenuRepository: MenuRepository,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     private val _image = MutableLiveData<Image?>()
     val image: LiveData<Image?> = _image
+
+    private val args = MainMenuAddFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     companion object {
         const val EVENT_NAVIGATE_UP = 1000
@@ -33,8 +36,8 @@ class MainMenuAddViewModel @Inject constructor(
         _image.value = image
     }
 
-    fun createMainMenu(mainCateCd: String, middleCateCd: String, subCateSub: String, request: MainMenuCreateRequest, callback: () -> Unit) {
-        mainMenuRepository.createMainMenu(mainCateCd, middleCateCd, subCateSub, request)
+    fun createMainMenu(mainCateCd: String = "2000", middleCateCd: String = "3000", request: MainMenuCreateRequest, callback: () -> Unit) {
+        mainMenuRepository.createMainMenu(mainCateCd, middleCateCd, args.subCategory.subCategoryCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->

@@ -5,7 +5,14 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.menu.*
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuOptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenuPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenusDeleteRequest
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
 import io.reactivex.rxjava3.core.Single
@@ -33,6 +40,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun mainMenu(
@@ -53,6 +61,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun createMainMenu(
@@ -75,7 +84,6 @@ class MenuRepositoryImpl @Inject constructor(
             request.outOfStock,
             request.use,
             request.ingredientDisplay,
-            request.mainMenuNameKor,
             request.highlightType,
             request.showDateFrom,
             request.showDateTo,
@@ -87,7 +95,7 @@ class MenuRepositoryImpl @Inject constructor(
             request.eventTimeFrom,
             request.eventTimeTo,
             request.eventDayOfWeek,
-            request.memoKor,
+            request.memo,
             request.ingredientDetails,
         )
             .map { Result.success(it) }
@@ -96,6 +104,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun updateMainMenu(
@@ -119,7 +128,6 @@ class MenuRepositoryImpl @Inject constructor(
             request.outOfStock,
             request.use,
             request.ingredientDisplay,
-            request.mainMenuNameKor,
             request.highlightType,
             request.showDateFrom,
             request.showDateTo,
@@ -131,7 +139,7 @@ class MenuRepositoryImpl @Inject constructor(
             request.eventTimeFrom,
             request.eventTimeTo,
             request.eventDayOfWeek,
-            request.memoKor,
+            request.memo,
             request.ingredientDetails,
         )
             .map { Result.success(it) }
@@ -140,6 +148,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteMainMenu(
@@ -161,6 +170,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteMainMenus(
@@ -182,6 +192,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun changeMainMenuPriorities(
@@ -202,6 +213,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun mainMenuOptionGroups(
@@ -224,6 +236,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun mainMenuMappers(
@@ -244,6 +257,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun mapToOptionGroups(
@@ -266,6 +280,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteMainMenuMappers(
@@ -289,6 +304,7 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun changeMainMenuMapperPriorities(
@@ -311,5 +327,6 @@ class MenuRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 }

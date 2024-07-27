@@ -19,6 +19,7 @@ class DateDeserializer : JsonDeserializer<Date?> {
         jsonElement: JsonElement, typeOF: Type?,
         context: JsonDeserializationContext?
     ): Date? {
+        if(jsonElement.asString.isBlank()) return null
         for (format: String? in DATE_FORMATS) {
             try {
                 return SimpleDateFormat(format, Locale.KOREA).parse(jsonElement.asString)

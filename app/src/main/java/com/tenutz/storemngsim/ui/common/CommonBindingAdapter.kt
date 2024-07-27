@@ -16,9 +16,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.esafirm.imagepicker.model.Image
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
+import com.tenutz.storemngsim.utils.BusinessNumberTextWatcher
 import com.tenutz.storemngsim.utils.HourTextWatcher
 import com.tenutz.storemngsim.utils.MinuteTextWatcher
+import com.tenutz.storemngsim.utils.ext.orEmpty
 import com.tenutz.storemngsim.utils.ext.toPx
+import com.tenutz.storemngsim.utils.type.SocialType
 import kotlin.math.min
 
 
@@ -136,6 +139,12 @@ object CommonBindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("bind:businessNumberFormat")
+    fun setBusinessNumberFormat(editText: EditText, ignored: Any?) {
+        editText.addTextChangedListener(BusinessNumberTextWatcher(editText))
+    }
+
+    @JvmStatic
     @BindingAdapter("bind:rating")
     fun setRating(imageView: ImageView, rating: Int?) {
         when(rating) {
@@ -145,5 +154,29 @@ object CommonBindingAdapter {
             4 -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_star_4))
             5 -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_star_5))
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:socialType")
+    fun setSocialType(imageView: ImageView, socialTypeName: String?) {
+        if(socialTypeName == null) {
+            imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.placeholder_logo))
+            return
+        }
+
+        when(SocialType.of(socialTypeName)) {
+            SocialType.KAKAO -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_kakao))
+            SocialType.GOOGLE -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_google))
+            SocialType.FACEBOOK -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_facebook))
+            SocialType.NAVER -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.ic_naver))
+            else -> imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.placeholder_logo))
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:fullAddress")
+    fun setFullAddress(textView :TextView, fullAddress: String?) {
+        textView.text = fullAddress?.split("|")?.joinToString(" ")?.ifBlank { "주소가 등록되지 않음" } ?: "주소가 등록되지 않음"
+        textView.setTextColor(ContextCompat.getColor(textView.context, if(fullAddress?.replace("|", "").isNullOrBlank()) R.color.rect_4480 else R.color.rect_4474))
     }
 }

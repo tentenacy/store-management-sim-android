@@ -1,40 +1,39 @@
- package com.tenutz.storemngsim.ui.menu.mainmenu
+package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
-import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
 import com.tenutz.storemngsim.databinding.FragmentMainMenusBinding
-import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusViewModel.Companion.EVENT_HIDE_REMOVAL
 import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusViewModel.Companion.EVENT_SHOW_REMOVAL
-import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs
+import com.tenutz.storemngsim.ui.menu.mainmenu.base.NavMainMenuFragment
 import com.tenutz.storemngsim.ui.menu.mainmenu.bs.MainMenusBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.args.MmOptionGroupsNavArgs
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
- @AndroidEntryPoint
-class MainMenusFragment: BaseFragment() {
+@AndroidEntryPoint
+class MainMenusFragment : NavMainMenuFragment() {
 
     private val disposable = CompositeDisposable()
 
     private var _binding: FragmentMainMenusBinding? = null
     val binding: FragmentMainMenusBinding get() = _binding!!
 
-    lateinit var args: MainMenusNavArgs
+    private val args: MainMenusFragmentArgs by navArgs()
 
     val vm: MainMenusViewModel by navGraphViewModels(R.id.navigation_main_menu) {
         defaultViewModelProviderFactory
@@ -43,54 +42,35 @@ class MainMenusFragment: BaseFragment() {
     private val adapter: MainMenusAdapter by lazy {
         MainMenusAdapter(
             onClickListener = { id, item ->
-                when(id) {
+                when (id) {
                     R.id.constraint_imain_menus_container -> {
                         MainMenusBottomSheetDialog(
                             onClickListener = { id2, _ ->
-                                when(id2) {
+                                when (id2) {
                                     R.id.btn_bsmain_menus_option_group -> {
-                                        (item as MainMenusResponse.MainMenu).takeIf {
-                                            !it.mainCategoryCode.isNullOrBlank() &&
-                                            !it.middleCategoryCode.isNullOrBlank() &&
-                                            !it.subCategoryCode.isNullOrBlank() &&
-                                            !it.menuCode.isNullOrBlank()
-                                        }?.let {
-                                            MainMenusFragmentDirections.actionMainMenusFragmentToMmOptionGroupsFragment().let { action ->
-                                                findNavController().navigate(
-                                                    action.actionId,
-                                                    Bundle().apply {
-                                                        putParcelable(
-                                                            "mainMenu",
-                                                            MmOptionGroupsNavArgs(
-                                                                it.storeCode,
-                                                                it.mainCategoryCode!!,
-                                                                it.middleCategoryCode!!,
-                                                                it.subCategoryCode!!,
-                                                                it.menuCode!!,
-                                                                it.menuName,
-                                                                it.imageUrl,
-                                                                it.outOfStock,
-                                                                it.price,
-                                                                it.discountingPrice,
-                                                                it.discountedPrice,
-                                                                it.use,
-                                                            )
-                                                        )
-                                                    }
+                                        (item as MainMenusResponse.MainMenu).let {
+                                            findNavController().navigate(
+                                                MainMenusFragmentDirections.showMmOptionGroup(
+                                                    args.subCategory,
+                                                    MmOptionGroupsNavArgs(
+                                                        it.menuCode,
+                                                        it.menuName,
+                                                        it.imageUrl,
+                                                        it.outOfStock,
+                                                        it.price,
+                                                        it.discountingPrice,
+                                                        it.discountedPrice,
+                                                        it.use,
+                                                    )
                                                 )
-                                            }
+                                            )
                                         }
                                     }
+
                                     R.id.btn_bsmain_menus_details -> {
-                                        val mainMenu = item as MainMenusResponse.MainMenu
-                                        mainMenu.menuCode?.let {
+                                        (item as MainMenusResponse.MainMenu).menuCode.let {
                                             findNavController().navigate(
-                                                MainMenusFragmentDirections.actionMainMenusFragmentToMainMenuDetailsFragment(
-                                                    args.mainCategoryCode,
-                                                    args.middleCategoryCode,
-                                                    args.subCategoryCode,
-                                                    mainMenu.menuCode,
-                                                )
+                                                MainMenusFragmentDirections.actionMainMenusFragmentToMainMenuDetailsFragment(it, args.subCategory)
                                             )
                                         }
                                     }
@@ -103,22 +83,6 @@ class MainMenusFragment: BaseFragment() {
         ).apply {
             setHasStableIds(true)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        requireArguments().apply {
-            args = MainMenusNavArgs(
-                getString("mainCategoryCode")!!,
-                getString("middleCategoryCode")!!,
-                getString("subCategoryCode")!!,
-            )
-        }
-
-        Logger.i(args.toString())
-
-        vm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode)
     }
 
     override fun onCreateView(
@@ -145,21 +109,37 @@ class MainMenusFragment: BaseFragment() {
 
     private fun observeData() {
         vm.mainMenus.observe(viewLifecycleOwner) {
-            if(vm.hideRemoval.value == true) {
-                adapter.updateItems(it.mainMenus.filter { it.use != null })
+
+            if (vm.hideRemoval.value == true) {
+                adapter.updateItems(it.mainMenus.filter { it.use != null }
+                    .map { it.apply { subCategoryName = args.subCategory.subCategoryName } })
             } else {
-                adapter.updateItems(it.mainMenus)
+                adapter.updateItems(it.mainMenus.map {
+                    it.apply {
+                        subCategoryName = args.subCategory.subCategoryName
+                    }
+                })
             }
             binding.recyclerMainMenus.scrollToPosition(0)
         }
         vm.viewEvent.observe(viewLifecycleOwner) { event ->
             event?.getContentIfNotHandled()?.let {
-                when(it.first) {
+                when (it.first) {
                     EVENT_HIDE_REMOVAL -> {
-                        adapter.updateItems(vm.mainMenus.value?.mainMenus?.filter { it.use != null })
+                        adapter.updateItems(vm.mainMenus.value?.mainMenus?.filter { it.use != null }
+                            ?.map {
+                                it.apply {
+                                    subCategoryName = args.subCategory.subCategoryName
+                                }
+                            })
                     }
+
                     EVENT_SHOW_REMOVAL -> {
-                        adapter.updateItems(vm.mainMenus.value?.mainMenus)
+                        adapter.updateItems(vm.mainMenus.value?.mainMenus?.map {
+                            it.apply {
+                                subCategoryName = args.subCategory.subCategoryName
+                            }
+                        })
                     }
                 }
             }
@@ -172,7 +152,7 @@ class MainMenusFragment: BaseFragment() {
             .debounce(500, TimeUnit.MILLISECONDS).skip(1)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                vm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode, it)
+                vm.mainMenus(searchText = it)
             }
             .addTo(disposable)
     }
@@ -182,21 +162,25 @@ class MainMenusFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageMainMenusHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMainMenusHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.textMainMenusEdit.setOnClickListener {
             vm.mainMenus.value?.let {
-                findNavController().navigate(MainMenusFragmentDirections.actionMainMenusFragmentToMainMenusEditFragment(args, MainMenusResponse(it.mainMenus.filter { it.use != null })))
+                findNavController().navigate(
+                    MainMenusFragmentDirections.actionMainMenusFragmentToMainMenusEditFragment(
+                        MainMenusResponse(it.mainMenus.filter { it.use != null }), args.subCategory
+                    )
+                )
             }
         }
         binding.fabMainMenusAdd.setOnClickListener {
-            findNavController().navigate(MainMenusFragmentDirections.actionMainMenusFragmentToMainMenuAddFragment(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode))
+            findNavController().navigate(MainMenusFragmentDirections.actionMainMenusFragmentToMainMenuAddFragment(args.subCategory))
         }
         binding.textMainMenusShowHideRemoval.setOnClickListener {
-            if(vm.hideRemoval.value == true) {
+            if (vm.hideRemoval.value == true) {
                 vm.showRemoval()
             } else {
                 vm.hideRemoval()

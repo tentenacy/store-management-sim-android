@@ -11,16 +11,34 @@
         tools:layout="@layout/fragment_og_mapping_menus">
         <action
             android:id="@+id/action_ogMappingMenusFragment_to_ogOptionMenusEditFragment"
-            app:destination="@id/ogOptionMenusEditFragment" />
+            app:destination="@id/ogOptionMenusEditFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_ogMappingMenusFragment_to_ogOptionMenuAddFragment"
-            app:destination="@id/ogOptionMenuAddFragment" />
+            app:destination="@id/ogOptionMenuAddFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_ogMappingMenusFragment_to_ogMainMenusEditFragment"
-            app:destination="@id/ogMainMenusEditFragment" />
+            app:destination="@id/ogMainMenusEditFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_ogMappingMenusFragment_to_ogMainMenuAddFragment"
-            app:destination="@id/ogMainMenuAddFragment" />
+            app:destination="@id/ogMainMenuAddFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+
+        <argument android:name="optionGroup" app:argType="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs" />
     </fragment>
     <fragment
         android:id="@+id/ogOptionMenusEditFragment"
@@ -28,8 +46,8 @@
         android:label="OgOptionMenusEditFragment"
         tools:layout="@layout/fragment_og_option_menus_edit">
 
-        <argument android:name="optionGroup" app:argType="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs" />
         <argument android:name="ogOptionMenuMappers" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMappersResponse" />
+        <argument android:name="optionGroup" app:argType="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs" />
     </fragment>
     <fragment
         android:id="@+id/ogOptionMenuAddFragment"
@@ -37,7 +55,7 @@
         android:label="OgOptionMenuAddFragment"
         tools:layout="@layout/fragment_og_option_menu_add">
 
-        <argument android:name="optionGroupCode" app:argType="string" />
+        <argument android:name="optionGroup" app:argType="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs" />
     </fragment>
     <fragment
         android:id="@+id/ogMainMenusEditFragment"
@@ -45,8 +63,8 @@
         android:label="OgMainMenusEditFragment"
         tools:layout="@layout/fragment_og_main_menus_edit">
 
-        <argument android:name="optionGroup" app:argType="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs" />
         <argument android:name="ogMainMenuMappers" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersResponse" />
+        <argument android:name="optionGroup" app:argType="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs" />
     </fragment>
     <fragment
         android:id="@+id/ogMainMenuAddFragment"
@@ -54,9 +72,10 @@
         android:label="OgMainMenuAddFragment"
         tools:layout="@layout/fragment_og_main_menu_add">
 
-        <argument android:name="optionGroupCode" app:argType="string" />
-        <argument android:name="mainCategoryCode" app:argType="string" />
-        <argument android:name="middleCategoryCode" app:argType="string" app:nullable="true" />
         <argument android:name="subCategoryCode" app:argType="string" app:nullable="true" />
+        <argument android:name="optionGroup" app:argType="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs" />
     </fragment>
+    <action
+        android:id="@+id/show_og_mapping_menu"
+        app:destination="@id/ogMappingMenusFragment" />
 </navigation>

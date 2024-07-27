@@ -5,7 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MainMenusNavArgs(
-    val mainCategoryCode: String,
-    val middleCategoryCode: String,
     val subCategoryCode: String,
+    val subCategoryName: String,
 ): Parcelable

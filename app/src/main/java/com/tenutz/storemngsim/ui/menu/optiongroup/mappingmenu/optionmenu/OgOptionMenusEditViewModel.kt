@@ -2,10 +2,13 @@ package com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.*
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMapperPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupOptionMappersDeleteRequest
 import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragmentArgs
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgOptionMenusEditArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -16,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OgOptionMenusEditViewModel @Inject constructor(
     private val optionGroupRepository: OptionGroupRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     companion object {
@@ -28,24 +32,19 @@ class OgOptionMenusEditViewModel @Inject constructor(
     private val _checkedItemCount = MutableLiveData(0)
     val checkedItemCount: LiveData<Int> = _checkedItemCount
 
-    fun updateCheckedItemCount() {
-        ogOptionMenusEdit.value?.let {
-            _checkedItemCount.value = it.ogOptionMenuMappersEdit.count { it.checked }
-        }
-    }
+    private val ogMappingMenusArgs = OgMappingMenusFragmentArgs.fromSavedStateHandle(savedStateHandle)
+    private val args = OgOptionMenusEditFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    fun setOgOptionMenusEdit(args: OptionGroupOptionMappersResponse) {
+
+    init {
         _ogOptionMenusEdit.value = OgOptionMenusEditArgs(
-            args.optionGroupOptionMappers.map {
+            args.ogOptionMenuMappers.optionGroupOptionMappers.map {
                 OgOptionMenusEditArgs.OptionGroupOptionMenuMapper(
                     it.storeCode,
                     it.optionCode,
                     it.optionName,
                     it.imageUrl,
-                    it.outOfStock,
                     it.price,
-                    it.discountingPrice,
-                    it.discountedPrice,
                     it.use,
                     it.priority,
                 )
@@ -53,8 +52,14 @@ class OgOptionMenusEditViewModel @Inject constructor(
         )
     }
 
-    fun deleteOgOptionMenus(optionGroupCd: String, request: OptionGroupOptionMappersDeleteRequest, callback: () -> Unit) {
-        optionGroupRepository.deleteOptionGroupOptionMappers(optionGroupCd, request)
+    fun updateCheckedItemCount() {
+        ogOptionMenusEdit.value?.let {
+            _checkedItemCount.value = it.ogOptionMenuMappersEdit.count { it.checked }
+        }
+    }
+
+    fun deleteOgOptionMenus(request: OptionGroupOptionMappersDeleteRequest, callback: () -> Unit) {
+        optionGroupRepository.deleteOptionGroupOptionMappers(ogMappingMenusArgs.optionGroup.optionGroupCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
@@ -71,8 +76,8 @@ class OgOptionMenusEditViewModel @Inject constructor(
             .addTo(compositeDisposable)
     }
 
-    fun changeMiddleCategoryPriorities(mainCateCd: String, request: OptionGroupOptionMapperPrioritiesChangeRequest, callback: () -> Unit) {
-        optionGroupRepository.changeOptionGroupOptionMapperPriorities(mainCateCd, request)
+    fun changeMiddleCategoryPriorities(request: OptionGroupOptionMapperPrioritiesChangeRequest, callback: () -> Unit) {
+        optionGroupRepository.changeOptionGroupOptionMapperPriorities(ogMappingMenusArgs.optionGroup.optionGroupCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->

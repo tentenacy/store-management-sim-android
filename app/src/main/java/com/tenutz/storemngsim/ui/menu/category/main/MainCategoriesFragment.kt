@@ -5,28 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
-import com.tenutz.storemngsim.NavigationMainCategoryDirections
 import com.tenutz.storemngsim.R
-import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
-import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.main.MainFragmentDirections
 import com.tenutz.storemngsim.ui.menu.category.main.bs.MainCategoriesBottomSheetDialog
-import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoriesEditFragmentArgs
 import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesNavArgs
-import com.tenutz.storemngsim.ui.review.menu.MenuReviewsViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
@@ -133,7 +124,7 @@ class MainCategoriesFragment : BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageMainCategoriesHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMainCategoriesHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)

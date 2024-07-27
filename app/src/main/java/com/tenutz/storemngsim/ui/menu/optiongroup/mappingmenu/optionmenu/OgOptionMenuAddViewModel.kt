@@ -2,11 +2,13 @@ package com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionsMappedByRequest
 import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragmentArgs
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgOptionMenuAddArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -17,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OgOptionMenuAddViewModel @Inject constructor(
     private val optionGroupRepository: OptionGroupRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     companion object {
@@ -28,12 +31,18 @@ class OgOptionMenuAddViewModel @Inject constructor(
     private val _ogOptionMenusAdd = MutableLiveData<OgOptionMenuAddArgs>()
     val ogOptionMenusAdd: LiveData<OgOptionMenuAddArgs> = _ogOptionMenusAdd
 
+    private val args = OgOptionMenuAddFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    init {
+        ogOptionMenusAdd()
+    }
+
     fun ogOptionMenusAdd(
-        optionGroupCd: String,
         searchText: String? = null,
+        callback: () -> Unit = {}
     ) {
         searchText?.let { query.value = it }
-        optionGroupRepository.optionGroupOptions(optionGroupCd, CommonCondition(query = query.value))
+        optionGroupRepository.optionGroupOptions(args.optionGroup.optionGroupCode, CommonCondition(query = query.value))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
@@ -46,14 +55,12 @@ class OgOptionMenuAddViewModel @Inject constructor(
                                     it.optionCode,
                                     it.optionName,
                                     it.imageUrl,
-                                    it.outOfStock,
                                     it.price,
-                                    it.discountingPrice,
-                                    it.discountedPrice,
                                     it.use,
                                 )
                             }
                         )
+                        callback()
                     },
                     onFailure = {
                         Logger.e("$it")
@@ -63,12 +70,11 @@ class OgOptionMenuAddViewModel @Inject constructor(
     }
 
     fun mapToOptionMenus(
-        optionGroupCd: String,
         request: OptionsMappedByRequest,
         callback: () -> Unit,
     ) {
         optionGroupRepository.mapToOptions(
-            optionGroupCd,
+            args.optionGroup.optionGroupCode,
             request,
         )
             .subscribeOn(Schedulers.io())

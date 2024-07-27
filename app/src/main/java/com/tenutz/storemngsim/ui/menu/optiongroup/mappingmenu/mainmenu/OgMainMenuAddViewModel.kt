@@ -2,12 +2,14 @@ package com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.MainMenuSearchRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.MainMenusMappedByRequest
 import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragmentArgs
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMainMenuAddArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OgMainMenuAddViewModel @Inject constructor(
     private val optionGroupRepository: OptionGroupRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     companion object {
@@ -32,19 +35,30 @@ class OgMainMenuAddViewModel @Inject constructor(
     private val _expandedItemCount = MutableLiveData(0)
     val expandedItemCount: LiveData<Int> = _expandedItemCount
 
+    private val args =
+        OgMainMenuAddFragmentArgs.fromSavedStateHandle(savedStateHandle)
+    private val ogMappingMenusArgs: OgMappingMenusFragmentArgs = OgMappingMenusFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
     fun updateExpandedItemCount() {
         _ogMainMenusAdd.value?.let {
             _expandedItemCount.value = it.ogMainMenus.count { it.expanded }
         }
     }
 
+    init {
+        ogMainMenusAdd()
+    }
+
     fun ogMainMenusAdd(
-        optionGroupCd: String,
-        request: MainMenuSearchRequest,
         searchText: String? = null,
+        callback: () -> Unit = {}
     ) {
         searchText?.let { query.value = it }
-        optionGroupRepository.optionGroupMainMenus(optionGroupCd, request, CommonCondition(query = query.value))
+        optionGroupRepository.optionGroupMainMenus(
+            ogMappingMenusArgs.optionGroup.optionGroupCode,
+            MainMenuSearchRequest(subCateCd = args.subCategoryCode),
+            CommonCondition(query = query.value)
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
@@ -71,6 +85,7 @@ class OgMainMenuAddViewModel @Inject constructor(
                                 )
                             }
                         )
+                        callback()
                     },
                     onFailure = {
                         Logger.e("$it")
@@ -80,12 +95,11 @@ class OgMainMenuAddViewModel @Inject constructor(
     }
 
     fun mapToMainMenus(
-        optionGroupCd: String,
         request: MainMenusMappedByRequest,
         callback: () -> Unit,
     ) {
         optionGroupRepository.mapToMainMenus(
-            optionGroupCd,
+            ogMappingMenusArgs.optionGroup.optionGroupCode,
             request,
         )
             .subscribeOn(Schedulers.io())

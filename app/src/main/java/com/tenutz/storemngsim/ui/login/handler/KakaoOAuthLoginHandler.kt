@@ -4,9 +4,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.UserApiClient
 import com.tenutz.storemngsim.ui.base.Loginable
 import com.tenutz.storemngsim.ui.login.LoginFragment
 import com.tenutz.storemngsim.ui.login.LoginViewModel
+import com.tenutz.storemngsim.ui.login.args.SocialProfileArgs
 import com.tenutz.storemngsim.ui.signup.SignupFormViewModel
 import com.tenutz.storemngsim.utils.type.SocialType
 
@@ -37,7 +39,14 @@ class KakaoOAuthLoginHandler(private val fragment: Fragment): (OAuthToken?, Thro
             refreshToken = token.refreshToken,
             socialType = SocialType.KAKAO.name,
         )
-        viewModel.socialLogin(accessToken = token.accessToken, SocialType.KAKAO)
+
+        UserApiClient.instance.me { user, error ->
+            if(error != null) {
+                viewModel.socialLogin(SocialProfileArgs(token.accessToken, SocialType.KAKAO))
+            } else if(user != null) {
+                viewModel.socialLogin(SocialProfileArgs(token.accessToken, SocialType.KAKAO, user.kakaoAccount?.profile?.nickname, user.kakaoAccount?.email, user.kakaoAccount?.profile?.thumbnailImageUrl))
+            }
+        }
     }
 
     private fun onCancel() {

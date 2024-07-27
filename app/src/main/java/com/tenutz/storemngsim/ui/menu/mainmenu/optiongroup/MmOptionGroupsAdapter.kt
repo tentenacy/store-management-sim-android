@@ -2,10 +2,7 @@ package com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuMappersResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuOptionGroupsResponse
-import com.tenutz.storemngsim.databinding.ItemMiddleCategoriesBinding
 import com.tenutz.storemngsim.databinding.ItemMmOptionGroupsBinding
 import com.tenutz.storemngsim.ui.base.BaseRecyclerView
 import com.tenutz.storemngsim.ui.base.BaseViewHolder

@@ -2,13 +2,17 @@ package com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersResponse
 import com.tenutz.storemngsim.data.repository.option.OptionRepository
+import com.tenutz.storemngsim.di.qualifier.NavigationGraphReference
+import com.tenutz.storemngsim.di.qualifier.NavigationGraphs
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsEditArgs
+import com.tenutz.storemngsim.usecase.GetSharedDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -18,6 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OmOptionGroupsEditViewModel @Inject constructor(
     private val optionRepository: OptionRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     companion object {
@@ -30,15 +35,11 @@ class OmOptionGroupsEditViewModel @Inject constructor(
     private val _checkedItemCount = MutableLiveData(0)
     val checkedItemCount: LiveData<Int> = _checkedItemCount
 
-    fun updateCheckedItemCount() {
-        omOptionGroupsEdit.value?.let {
-            _checkedItemCount.value = it.omOptionGroupsEdit.count { it.checked }
-        }
-    }
+    val args = OmOptionGroupsEditFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    fun setOmOptionGroupsEdit(args: OptionMappersResponse) {
+    init {
         _omOptionGroupsEdit.value = OmOptionGroupsEditArgs(
-            args.optionMappers.map {
+            args.optionMappers.optionMappers.map {
                 OmOptionGroupsEditArgs.OptionOptionGroupEdit(
                     it.optionGroupCode,
                     it.optionName,
@@ -50,8 +51,14 @@ class OmOptionGroupsEditViewModel @Inject constructor(
         )
     }
 
-    fun deleteOptionMenuMappers(optionCd: String, request: OptionGroupsDeleteRequest, callback: () -> Unit) {
-        optionRepository.deleteOptionMappers(optionCd, request)
+    fun updateCheckedItemCount() {
+        omOptionGroupsEdit.value?.let {
+            _checkedItemCount.value = it.omOptionGroupsEdit.count { it.checked }
+        }
+    }
+
+    fun deleteOptionMenuMappers(request: OptionGroupsDeleteRequest, callback: () -> Unit) {
+        optionRepository.deleteOptionMappers(args.optionMenu.optionCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
@@ -68,8 +75,8 @@ class OmOptionGroupsEditViewModel @Inject constructor(
             .addTo(compositeDisposable)
     }
 
-    fun changeOptionMenuMapperPriorities(optionCd: String, request: OptionGroupPrioritiesChangeRequest, callback: () -> Unit) {
-        optionRepository.changeOptionMapperPriorities(optionCd, request)
+    fun changeOptionMenuMapperPriorities(request: OptionGroupPrioritiesChangeRequest, callback: () -> Unit) {
+        optionRepository.changeOptionMapperPriorities(args.optionMenu.optionCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->

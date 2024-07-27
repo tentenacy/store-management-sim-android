@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,6 +19,7 @@ import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -91,7 +91,7 @@ class MainCategoriesEditFragment: BaseFragment(), OnDragListener<MainCategoriesE
             findNavController().navigateUp()
         }
         binding.imageMainCategoriesEditHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMainCategoriesEditHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)

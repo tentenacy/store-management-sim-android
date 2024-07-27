@@ -17,7 +17,7 @@ import com.tenutz.storemngsim.utils.ext.today
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel

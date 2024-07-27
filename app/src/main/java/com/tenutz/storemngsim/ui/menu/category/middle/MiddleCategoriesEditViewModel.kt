@@ -55,7 +55,7 @@ class MiddleCategoriesEditViewModel @Inject constructor(
         )
     }
 
-    fun deleteMiddleCategories(mainCateCd: String, request: CategoriesDeleteRequest, callback: () -> Unit) {
+    fun deleteMiddleCategories(mainCateCd: String = "2000", request: CategoriesDeleteRequest, callback: () -> Unit) {
         categoryRepository.deleteMiddleCategories(mainCateCd, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -73,7 +73,7 @@ class MiddleCategoriesEditViewModel @Inject constructor(
             .addTo(compositeDisposable)
     }
 
-    fun changeMiddleCategoryPriorities(mainCateCd: String, request: CategoryPrioritiesChangeRequest, callback: () -> Unit) {
+    fun changeMiddleCategoryPriorities(mainCateCd: String = "2000", request: CategoryPrioritiesChangeRequest, callback: () -> Unit) {
         categoryRepository.changeMiddleCategoryPriorities(mainCateCd, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

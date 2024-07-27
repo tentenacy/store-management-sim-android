@@ -1,9 +1,9 @@
 package com.tenutz.storemngsim.ui.base
 
-import com.tenutz.storemngsim.utils.type.SocialType
+import com.tenutz.storemngsim.ui.login.args.SocialProfileArgs
 
 interface Loginable {
 
-    fun socialLogin(accessToken: String, socialType: SocialType)
+    fun socialLogin(args: SocialProfileArgs)
     fun logout()
 }

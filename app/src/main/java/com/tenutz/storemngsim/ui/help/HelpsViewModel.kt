@@ -3,13 +3,10 @@ package com.tenutz.storemngsim.ui.help
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
-import com.tenutz.storemngsim.data.datasource.api.dto.help.HelpsResponse
 import com.tenutz.storemngsim.data.repository.help.HelpRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.ui.help.args.HelpsArgs
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMainMenuAddArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo

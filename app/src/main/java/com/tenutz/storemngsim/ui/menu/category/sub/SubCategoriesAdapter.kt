@@ -4,16 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
 import com.tenutz.storemngsim.databinding.ItemSubCategoriesBinding
 import com.tenutz.storemngsim.databinding.ItemSubCategoriesTopBinding
 import com.tenutz.storemngsim.ui.base.BaseMVHRecyclerView
-import com.tenutz.storemngsim.ui.base.BaseRecyclerView
 import com.tenutz.storemngsim.ui.base.BaseViewHolder
-import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
 
 sealed class SubCategoriesItem(val type: SubCategoriesType) {
-    object Header: SubCategoriesItem(SubCategoriesType.HEADER)
+    data class Header(val value: MiddleCategoryResponse): SubCategoriesItem(SubCategoriesType.HEADER)
     data class Data(val value: SubCategoriesResponse.SubCategory): SubCategoriesItem(SubCategoriesType.DATA)
 }
 
@@ -23,7 +22,7 @@ sealed class SubCategoriesViewHolder(
     class SubCategoriesTopViewHolder(
         val binding: ItemSubCategoriesTopBinding,
         private val onClickListener: (Int, Any?) -> Unit,
-    ) : BaseViewHolder<SubCategoriesNavArgs>(binding.root) {
+    ) : BaseViewHolder<MiddleCategoryResponse>(binding.root) {
 
         init {
             binding.btnSubCategoriesTopDetails.setOnClickListener {
@@ -34,7 +33,7 @@ sealed class SubCategoriesViewHolder(
             }
         }
 
-        override fun bind(position: Int, args: SubCategoriesNavArgs) {
+        override fun bind(position: Int, args: MiddleCategoryResponse) {
             binding.args = args
         }
     }
@@ -58,7 +57,6 @@ sealed class SubCategoriesViewHolder(
 enum class SubCategoriesType { HEADER, DATA }
 
 class SubCategoriesAdapter(
-    private val args: SubCategoriesNavArgs,
     private val onClickListener: (Int, Any?) -> Unit,
 ) : BaseMVHRecyclerView<SubCategoriesItem, RecyclerView.ViewHolder>() {
 
@@ -71,7 +69,7 @@ class SubCategoriesAdapter(
         items.getOrNull(position)?.let {
             when(holder) {
                 is SubCategoriesViewHolder.SubCategoriesTopViewHolder -> {
-                    holder.bind(position, args)
+                    holder.bind(position, (it as SubCategoriesItem.Header).value)
                 }
                 is SubCategoriesViewHolder.SubCategoryViewHolder -> {
                     holder.bind(position, (it as SubCategoriesItem.Data).value)

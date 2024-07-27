@@ -4,10 +4,15 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.menu.*
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuOptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenuPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenusDeleteRequest
 import io.reactivex.rxjava3.core.Single
-import okhttp3.MultipartBody
-import retrofit2.http.*
 
 interface MenuRepository {
 

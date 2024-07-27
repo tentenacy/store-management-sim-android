@@ -13,9 +13,9 @@ import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
 import com.tenutz.storemngsim.ui.base.Loginable
 import com.tenutz.storemngsim.ui.login.LoginFragment
 import com.tenutz.storemngsim.ui.login.LoginViewModel
+import com.tenutz.storemngsim.ui.login.args.SocialProfileArgs
 import com.tenutz.storemngsim.ui.signup.SignupFormViewModel
 import com.tenutz.storemngsim.utils.type.SocialType
-import java.lang.Exception
 
 class GoogleOAuthLoginHandler(private val fragment: Fragment): (ActivityResult) -> Unit {
 
@@ -47,7 +47,7 @@ class GoogleOAuthLoginHandler(private val fragment: Fragment): (ActivityResult) 
             socialType = SocialType.GOOGLE.name,
         )
 
-        viewModel.socialLogin(accessToken = account.idToken!!, SocialType.GOOGLE)
+        viewModel.socialLogin(SocialProfileArgs(account.idToken!!, SocialType.GOOGLE, "${account.familyName}${account.givenName}", account.email, account.photoUrl.toString()))
     }
 
     private fun onCancel() {

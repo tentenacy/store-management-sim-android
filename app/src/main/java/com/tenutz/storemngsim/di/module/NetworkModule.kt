@@ -18,7 +18,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
-import java.util.*
+import java.util.Date
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)

@@ -35,16 +35,32 @@
         tools:layout="@layout/fragment_main_categories">
         <action
             android:id="@+id/action_mainCategoriesFragment_to_mainCategoriesEditFragment"
-            app:destination="@id/mainCategoriesEditFragment" />
+            app:destination="@id/mainCategoriesEditFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainCategoriesFragment_to_mainCategoryAddFragment"
-            app:destination="@id/mainCategoryAddFragment" />
+            app:destination="@id/mainCategoryAddFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainCategoriesFragment_to_mainCategoryDetailsFragment"
-            app:destination="@id/mainCategoryDetailsFragment" />
+            app:destination="@id/mainCategoryDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainCategoriesFragment_to_navigationMiddleCategory"
-            app:destination="@id/navigation_middle_category" />
+            app:destination="@id/navigation_middle_category"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <action
         android:id="@+id/action_global_mainCategoryDetailsFragment"

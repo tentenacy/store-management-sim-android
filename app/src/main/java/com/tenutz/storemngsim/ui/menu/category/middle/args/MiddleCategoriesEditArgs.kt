@@ -1,8 +1,6 @@
 package com.tenutz.storemngsim.ui.menu.category.middle.args
 
-import android.os.Parcelable
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
-import java.util.*
+import java.util.Date
 
 data class MiddleCategoriesEditArgs(
     val middleCategoriesEdit: List<MiddleCategoryEdit>

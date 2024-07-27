@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -13,26 +12,22 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
-import com.tenutz.storemngsim.databinding.*
-import com.tenutz.storemngsim.ui.base.BaseFragment
+import com.tenutz.storemngsim.databinding.FragmentMmOptionGroupsEditBinding
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditViewModel
-import com.tenutz.storemngsim.ui.menu.category.middle.*
+import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.base.NavMmOptionGroupFragment
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MmOptionGroupsEditFragment: BaseFragment(), OnDragListener<MmOptionGroupsEditViewHolder> {
+class MmOptionGroupsEditFragment: NavMmOptionGroupFragment(), OnDragListener<MmOptionGroupsEditViewHolder> {
 
     private var _binding: FragmentMmOptionGroupsEditBinding? = null
     val binding: FragmentMmOptionGroupsEditBinding get() = _binding!!
-
-    val args: MmOptionGroupsEditFragmentArgs by navArgs()
 
     val vm: MmOptionGroupsEditViewModel by viewModels()
 
@@ -53,20 +48,15 @@ class MmOptionGroupsEditFragment: BaseFragment(), OnDragListener<MmOptionGroupsE
 
     private lateinit var itemTouchHelper: ItemTouchHelper
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.setMmOptionGroupsEdit(args.mainMenuMappers)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentMmOptionGroupsEditBinding.inflate(inflater, container, false)
 
+        val args: MmOptionGroupsFragmentArgs by navArgs()
         binding.args = args.mainMenu
         binding.vm = vm
         binding.lifecycleOwner = this
@@ -93,28 +83,17 @@ class MmOptionGroupsEditFragment: BaseFragment(), OnDragListener<MmOptionGroupsE
             findNavController().navigateUp()
         }
         binding.imageMmOptionGroupsEditHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMmOptionGroupsEditHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnMmOptionGroupsEditBottomContainer.setOnClickListener {
             vm.deleteMainMenuMappers(
-                args.mainMenu.mainCategoryCode,
-                args.mainMenu.middleCategoryCode,
-                args.mainMenu.subCategoryCode,
-                args.mainMenu.menuCode,
-                OptionGroupsDeleteRequest(
+                request = OptionGroupsDeleteRequest(
                     adapter.items.filter { it.checked }.mapNotNull { it.optionGroupCode }
                 )
-            ) {
-                pVm.mmOptionGroups(
-                    args.mainMenu.mainCategoryCode,
-                    args.mainMenu.middleCategoryCode,
-                    args.mainMenu.subCategoryCode,
-                    args.mainMenu.menuCode,
-                )
-            }
+            ) { pVm.mmOptionGroups() }
         }
 
         binding.constraintMmOptionGroupsEditAllContainer.setOnClickListener {
@@ -150,11 +129,7 @@ class MmOptionGroupsEditFragment: BaseFragment(), OnDragListener<MmOptionGroupsE
     override fun onDragOver() {
         Logger.i(adapter.items.toString())
         vm.changeMainMenuMapperPriorities(
-            args.mainMenu.mainCategoryCode,
-            args.mainMenu.middleCategoryCode,
-            args.mainMenu.subCategoryCode,
-            args.mainMenu.menuCode,
-            OptionGroupPrioritiesChangeRequest(
+            request = OptionGroupPrioritiesChangeRequest(
                 adapter.items.mapIndexedNotNull { priority: Int, item ->
                     item.optionGroupCode?.let {
                         OptionGroupPrioritiesChangeRequest.OptionGroup(
@@ -163,13 +138,6 @@ class MmOptionGroupsEditFragment: BaseFragment(), OnDragListener<MmOptionGroupsE
                     }
                 }
             ),
-        ) {
-            pVm.mmOptionGroups(
-                args.mainMenu.mainCategoryCode,
-                args.mainMenu.middleCategoryCode,
-                args.mainMenu.subCategoryCode,
-                args.mainMenu.menuCode,
-            )
-        }
+        ) { pVm.mmOptionGroups() }
     }
 }

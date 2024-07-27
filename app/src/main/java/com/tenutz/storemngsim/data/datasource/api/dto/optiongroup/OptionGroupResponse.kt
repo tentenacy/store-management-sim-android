@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.data.datasource.api.dto.optiongroup
 
-import java.util.*
+import java.util.Date
 
 data class OptionGroupResponse(
     val storeCode: String?,

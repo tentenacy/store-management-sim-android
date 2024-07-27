@@ -2,7 +2,18 @@ package com.tenutz.storemngsim.data.repository.store
 
 import com.tenutz.storemngsim.data.datasource.api.SMSApi
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
-import com.tenutz.storemngsim.data.datasource.api.dto.store.*
+import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.store.SalesRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.store.SalesTotalResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSaleByMenusRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByCreditCardResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByMenusTodayResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByTimeResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByCreditCardResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByTimeResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreMainResponse
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
 import com.tenutz.storemngsim.utils.ext.toDateTimeFormat
@@ -12,16 +23,6 @@ import javax.inject.Inject
 class StoreRepositoryImpl @Inject constructor(
     private val SMSApi: SMSApi,
 ) : StoreRepository {
-    override fun equipments(): Single<Result<EquipmentsResponse>> =
-        SMSApi.equipments()
-            .map { Result.success(it) }
-            .compose(
-                applyRetryPolicy(
-                    RetryPolicyConstant.TIMEOUT,
-                    RetryPolicyConstant.NETWORK,
-                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
-                ) { Result.failure(it) })
-
     override fun salesTotal(
         commonCond: CommonCondition,
         request: SalesRequest
@@ -41,6 +42,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun statisticsSalesTotalByMenu(
@@ -60,6 +62,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun statisticsSalesByMenuToday(): Single<Result<StatisticsSalesByMenusTodayResponse>> =
@@ -70,6 +73,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun statisticsSalesByCreditCard(commonCond: CommonCondition): Single<Result<StatisticsSalesByCreditCardResponse>> =
@@ -85,6 +89,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun statisticsSalesTotalByCreditCard(commonCond: CommonCondition): Single<Result<StatisticsSalesTotalByCreditCardResponse>> =
@@ -100,6 +105,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun statisticsSalesByTime(commonCond: CommonCondition): Single<Result<StatisticsSalesByTimeResponse>> =
@@ -115,6 +121,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun statisticsSalesTotalByTime(commonCond: CommonCondition): Single<Result<StatisticsSalesTotalByTimeResponse>> =
@@ -130,6 +137,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun createStoreReviewReply(
@@ -146,6 +154,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun updateStoreReviewReply(
@@ -162,6 +171,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteStoreReviewReply(replySeq: Long): Single<Result<Unit>> =
@@ -173,6 +183,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun createMenuReviewReply(
@@ -189,6 +200,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun updateMenuReviewReply(
@@ -205,6 +217,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteMenuReviewReply(replySeq: Long): Single<Result<Unit>> =
@@ -216,6 +229,7 @@ class StoreRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun storeMain(): Single<Result<StoreMainResponse>> = SMSApi.storeMain()

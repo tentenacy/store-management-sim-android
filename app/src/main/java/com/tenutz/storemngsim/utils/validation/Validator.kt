@@ -1,7 +1,30 @@
 package com.tenutz.storemngsim.utils.validation
 
 import com.tenutz.storemngsim.utils.ext.localDateFrom
-import com.tenutz.storemngsim.utils.validation.err.*
+import com.tenutz.storemngsim.utils.validation.err.AdditionalPackagingPriceValidationException
+import com.tenutz.storemngsim.utils.validation.err.AddressValidationException
+import com.tenutz.storemngsim.utils.validation.err.BusinessNumberValidationException
+import com.tenutz.storemngsim.utils.validation.err.CategoryCodeValidationException
+import com.tenutz.storemngsim.utils.validation.err.CategoryNameValidationException
+import com.tenutz.storemngsim.utils.validation.err.DateDataValidationException
+import com.tenutz.storemngsim.utils.validation.err.DiscountingPriceValidationException
+import com.tenutz.storemngsim.utils.validation.err.EventDateValidationException
+import com.tenutz.storemngsim.utils.validation.err.IngredientDetailsValidationException
+import com.tenutz.storemngsim.utils.validation.err.MemoValidationException
+import com.tenutz.storemngsim.utils.validation.err.MenuCodeValidationException
+import com.tenutz.storemngsim.utils.validation.err.MenuNameValidationException
+import com.tenutz.storemngsim.utils.validation.err.NumberDataValidationException
+import com.tenutz.storemngsim.utils.validation.err.OptionGroupCodeValidationException
+import com.tenutz.storemngsim.utils.validation.err.OptionGroupNameValidationException
+import com.tenutz.storemngsim.utils.validation.err.PhoneNumberValidationException
+import com.tenutz.storemngsim.utils.validation.err.PriceValidationException
+import com.tenutz.storemngsim.utils.validation.err.RepresentativeValidationException
+import com.tenutz.storemngsim.utils.validation.err.RequiredInputValidationException
+import com.tenutz.storemngsim.utils.validation.err.ReviewReplyContentValidationException
+import com.tenutz.storemngsim.utils.validation.err.ShowDateValidationException
+import com.tenutz.storemngsim.utils.validation.err.StoreNameValidationException
+import com.tenutz.storemngsim.utils.validation.err.TextDataValidationException
+import com.tenutz.storemngsim.utils.validation.err.TidValidationException
 import com.tenutz.storemngsim.utils.validation.err.base.ValidationException
 
 object Validator {
@@ -71,16 +94,16 @@ object Validator {
         if(required) validateRequiredInput(phoneNumber)
         if(phoneNumber.isBlank()) return
         validateTextData(phoneNumber)
-        if(!"""^\d{2,3}-?\d{3,4}-?\d{4}""".toRegex().matches(phoneNumber) || phoneNumber.length > 20) {
+        if(!"""^01([016789])-?([0-9]{3,4})-?([0-9]{4})${'$'}""".toRegex().matches(phoneNumber) || phoneNumber.length > 20) {
             throw PhoneNumberValidationException()
         }
     }
 
-    fun validateAddress(address: String, required: Boolean = false) {
+    fun validateAddress(address: String, addressDetail: String, required: Boolean = false) {
         if(required) validateRequiredInput(address)
-        if(address.isBlank()) return
-        validateTextData(address)
-        if(address.length > 500) {
+        if("$address $addressDetail".isBlank()) return
+        validateTextData("$address $addressDetail")
+        if("$address $addressDetail".length > 500 || (address.isBlank() && addressDetail.isNotBlank())) {
             throw AddressValidationException()
         }
     }
@@ -204,6 +227,16 @@ object Validator {
         validateTextData(content)
         if(content.length > 4000) {
             throw ReviewReplyContentValidationException()
+        }
+    }
+
+    fun validateStoreName(storeName: String, required: Boolean = false) {
+        if(required) validateRequiredInput(storeName)
+        if(storeName.isBlank()) return
+        validateTextData(storeName)
+        //if(!"""[ㄱ-ㅎㅏ-ㅣ가-힣0-9\{\}\[\]\/?.,;:|\)*~!^\-_+<>@\#${'$'}%&\\\=\(]+""".toRegex().matches(categoryName) || categoryName.length > 50) {
+        if(!"""[^"'`]+""".toRegex().matches(storeName) || storeName.length > 50) {
+            throw StoreNameValidationException()
         }
     }
 

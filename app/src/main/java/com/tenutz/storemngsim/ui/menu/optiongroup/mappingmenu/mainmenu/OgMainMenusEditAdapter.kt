@@ -12,7 +12,7 @@ import com.tenutz.storemngsim.ui.base.BaseViewHolder
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMainMenusEditArgs
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
-import java.util.*
+import java.util.Collections
 
 class OgMainMenusEditViewHolder(
     val binding: ItemTogMainMenusEditBinding,

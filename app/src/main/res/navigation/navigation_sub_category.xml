@@ -11,13 +11,25 @@
         tools:layout="@layout/fragment_sub_categories">
         <action
             android:id="@+id/action_subCategoriesFragment_to_subCategoriesEditFragment"
-            app:destination="@id/subCategoriesEditFragment" />
+            app:destination="@id/subCategoriesEditFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_subCategoriesFragment_to_subCategoryAddFragment"
-            app:destination="@id/subCategoryAddFragment" />
+            app:destination="@id/subCategoryAddFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_subCategoriesFragment_to_subCategoryDetailsFragment"
-            app:destination="@id/subCategoryDetailsFragment" />
+            app:destination="@id/subCategoryDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/subCategoriesEditFragment"
@@ -25,7 +37,6 @@
         android:label="SubCategoriesEditFragment"
         tools:layout="@layout/fragment_sub_categories_edit">
 
-        <argument android:name="middleCategory" app:argType="com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs" />
         <argument android:name="subCategories" app:argType="com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse" />
     </fragment>
     <fragment
@@ -33,9 +44,6 @@
         android:name="com.tenutz.storemngsim.ui.menu.category.sub.SubCategoryAddFragment"
         android:label="SubCategoryAddFragment"
         tools:layout="@layout/fragment_sub_category_add">
-
-        <argument android:name="mainCategoryCode" app:argType="string" />
-        <argument android:name="middleCategoryCode" app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/subCategoryDetailsFragment"
@@ -43,8 +51,9 @@
         android:label="SubCategoryDetailsFragment"
         tools:layout="@layout/fragment_sub_category_details">
 
-        <argument android:name="mainCategoryCode" app:argType="string" />
-        <argument android:name="middleCategoryCode" app:argType="string" />
         <argument android:name="subCategoryCode" app:argType="string" />
     </fragment>
+    <action
+        android:id="@+id/show_sub_category"
+        app:destination="@id/subCategoriesFragment" />
 </navigation>

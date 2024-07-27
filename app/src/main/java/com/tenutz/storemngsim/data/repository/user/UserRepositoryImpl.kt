@@ -6,8 +6,11 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.TokenResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialLoginRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialSignupRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.user.UserDetailsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.user.UserUpdateRequest
 import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
 import com.tenutz.storemngsim.data.datasource.sharedpref.User
+import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
+import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
 import com.tenutz.storemngsim.utils.type.SocialType
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
@@ -32,6 +35,25 @@ class UserRepositoryImpl @Inject constructor(
     override fun reissue(request: TokenRequest): Single<TokenResponse> =
         SMSApi.reissue(request)
 
-    override fun userDetails(): Single<UserDetailsResponse> =
+    override fun userDetails(): Single<Result<UserDetailsResponse>> =
         SMSApi.userDetails()
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
+                ) { Result.failure(it) })
+
+    override fun update(userSeq: String, request: UserUpdateRequest): Single<Result<Unit>> =
+        SMSApi.update(userSeq, request)
+            .map { Result.success(it) }
+            .compose(
+                applyRetryPolicy(
+                    RetryPolicyConstant.TIMEOUT,
+                    RetryPolicyConstant.NETWORK,
+                    RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
+                ) { Result.failure(it) })
 }

@@ -25,7 +25,7 @@
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ns_bold"
+            android:fontFamily="@font/suit_bold"
             android:text="평가 관리"
             android:textColor="@color/rect_4474"
             android:textSize="18sp"

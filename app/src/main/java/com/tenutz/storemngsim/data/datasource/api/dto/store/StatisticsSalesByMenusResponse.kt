@@ -1,14 +1,12 @@
 package com.tenutz.storemngsim.data.datasource.api.dto.store
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import java.util.Date
 
 data class StatisticsSalesByMenusResponse(
     val soldAt: Date?,
     val menuName: String?,
     val categoryName: String?,
-    val mainEquipmentName: String?,
-    val middleEquipmentName: String?,
     val mainCategoryCode: String?,
     val middleCategoryCode: String?,
     val subCategoryCode: String?,

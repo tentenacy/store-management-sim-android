@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.MutableCreationExtras
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.esafirm.imagepicker.features.ImagePickerConfig
 import com.esafirm.imagepicker.features.ImagePickerLauncher
@@ -16,16 +15,16 @@ import com.esafirm.imagepicker.features.ImagePickerMode
 import com.esafirm.imagepicker.features.registerImagePicker
 import com.esafirm.imagepicker.model.Image
 import com.tenutz.storemngsim.R
-import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenuUpdateRequest
-import com.tenutz.storemngsim.databinding.*
-import com.tenutz.storemngsim.ui.base.BaseFragment
+import com.tenutz.storemngsim.databinding.FragmentMainMenuDetailsBinding
 import com.tenutz.storemngsim.ui.common.CommonBindingAdapter
 import com.tenutz.storemngsim.ui.common.DatePickerDialog
 import com.tenutz.storemngsim.ui.common.NumberPickerDialog
+import com.tenutz.storemngsim.ui.menu.mainmenu.base.NavMainMenuFragment
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.localDateFrom
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import com.tenutz.storemngsim.utils.ext.toDateFormat
 import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,12 +36,10 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 @AndroidEntryPoint
-class MainMenuDetailsFragment: BaseFragment() {
+class MainMenuDetailsFragment: NavMainMenuFragment() {
 
     private var _binding: FragmentMainMenuDetailsBinding? = null
     val binding: FragmentMainMenuDetailsBinding get() = _binding!!
-
-    val args: MainMenuDetailsFragmentArgs by navArgs()
 
     val vm: MainMenuDetailsViewModel by viewModels()
 
@@ -58,8 +55,6 @@ class MainMenuDetailsFragment: BaseFragment() {
         imagePickerLauncher = registerImagePicker { result: List<Image> ->
             result.getOrNull(0)?.let { it -> vm.setImageUri(it) }
         }
-
-        vm.mainMenu(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode, args.mainMenuCode)
     }
 
     override fun onCreateView(
@@ -94,7 +89,7 @@ class MainMenuDetailsFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageMainMenuDetailsHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.btnMainMenuDetailsCancel.setOnClickListener {
             binding.vm = vm
@@ -119,11 +114,7 @@ class MainMenuDetailsFragment: BaseFragment() {
                 onSuccess = {
                     lifecycleScope.launch {
                         vm.updateMainMenu(
-                            args.mainCategoryCode,
-                            args.middleCategoryCode,
-                            args.subCategoryCode,
-                            args.mainMenuCode,
-                            MainMenuUpdateRequest(
+                            request = MainMenuUpdateRequest(
                                 image = vm.image.value?.let {
                                     val createFormData = MultipartBody.Part.createFormData(
                                         "image",
@@ -165,7 +156,6 @@ class MainMenuDetailsFragment: BaseFragment() {
                                     }
                                 },
                                 ingredientDisplay = binding.radiogroupMainMenuDetailsIngredient.checkedRadioButtonId == R.id.radio_main_menu_details_show_ingredient,
-                                mainMenuNameKor = binding.editMainMenuDetailsName.text.toString(),
                                 highlightType = binding.textMainMenuDetailsHighlight.text.toString().let {
                                     when (it) {
                                         "신규" -> {
@@ -211,11 +201,11 @@ class MainMenuDetailsFragment: BaseFragment() {
                                     binding.textMainMenuDetailsEventWeekdaySat.text.toString().takeIf { binding.textMainMenuDetailsEventWeekdaySat.isChecked },
                                     binding.textMainMenuDetailsEventWeekdaySun.text.toString().takeIf { binding.textMainMenuDetailsEventWeekdaySun.isChecked },
                                 ).joinToString(","),
-                                memoKor = binding.editMainMenuDetailsMemo.text.toString(),
+                                memo = binding.editMainMenuDetailsMemo.text.toString(),
                                 ingredientDetails = binding.editMainMenuDetailsIngredientDetails.text.toString(),
                             )
                         ) {
-                            pVm.mainMenus(args.mainCategoryCode, args.middleCategoryCode, args.subCategoryCode)
+                            pVm.mainMenus()
                         }
                     }
                 },

@@ -4,10 +4,14 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.option.*
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionOptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
 import io.reactivex.rxjava3.core.Single
-import okhttp3.MultipartBody
-import retrofit2.http.*
 
 interface OptionRepository {
 

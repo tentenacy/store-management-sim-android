@@ -1,7 +1,6 @@
 package com.tenutz.storemngsim.data.datasource.sharedpref
 
 import com.chibatching.kotpref.KotprefModel
-import com.tenutz.storemngsim.utils.type.SocialType
 
 object OAuthToken: KotprefModel() {
     var accessToken by stringPref()

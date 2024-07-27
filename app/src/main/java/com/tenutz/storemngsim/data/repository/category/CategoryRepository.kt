@@ -1,8 +1,20 @@
 package com.tenutz.storemngsim.data.repository.category
 
-import com.tenutz.storemngsim.data.datasource.api.dto.category.*
+import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryUpdateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 interface CategoryRepository {
@@ -39,8 +51,8 @@ interface CategoryRepository {
     ): Single<Result<MiddleCategoriesResponse>>
 
     fun middleCategory(
-        mainCateCd: String,
-        middleCateCd: String,
+        mainCateCd: String = "2000",
+        middleCateCd: String = "3000",
     ): Single<Result<MiddleCategoryResponse>>
 
     fun createMiddleCategory(

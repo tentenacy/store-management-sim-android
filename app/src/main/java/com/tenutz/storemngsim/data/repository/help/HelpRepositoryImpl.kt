@@ -20,5 +20,6 @@ class HelpRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 }

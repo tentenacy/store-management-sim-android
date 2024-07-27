@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="args"
+            type="com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.args.OgMainMenuAddArgs.OptionGroupMainMenus" />
+
+        <import type="android.view.View" />
+        <import type="com.tenutz.storemngsim.utils.ext.TextExtKt" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_iog_main_menu_add_v2_thumbnail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/placeholder_logo"
+            android:contentDescription="메뉴 썸네일"
+            bind:showImage="@{args.imageUrl}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_iog_main_menu_add_v2_code"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/suit_regular"
+            android:text="@{args.menuCode}"
+            android:textColor="@color/rect_4480"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/image_iog_main_menu_add_v2_thumbnail"
+            app:layout_constraintTop_toTopOf="@+id/image_iog_main_menu_add_v2_thumbnail"
+            tools:text="0000000000" />
+
+        <TextView
+            android:id="@+id/text_iog_main_menu_add_v2_name"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/suit_regular"
+            android:maxLines="1"
+            android:textColor="@color/rect_4474"
+            android:textSize="16sp"
+            android:text="@{args.menuName}"
+            app:layout_constraintStart_toStartOf="@id/text_iog_main_menu_add_v2_code"
+            app:layout_constraintTop_toBottomOf="@id/text_iog_main_menu_add_v2_code"
+            tools:text="카라멜 마끼아또" />
+
+        <TextView
+            android:id="@+id/text_iog_main_menu_add_v2_price"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="17dp"
+            android:fontFamily="@font/suit_regular"
+            android:textColor="@color/rect_4475"
+            android:textSize="12sp"
+            android:text='@{TextExtKt.getToCurrency(args.price)+"원"}'
+            app:layout_constraintStart_toStartOf="@+id/text_iog_main_menu_add_v2_name"
+            app:layout_constraintTop_toBottomOf="@id/text_iog_main_menu_add_v2_name"
+            tools:text="1,000원" />
+
+        <TextView
+            android:id="@+id/text_iog_main_menu_add_v2_codes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Text"
+            android:text='@{String.valueOf(args.subCategoryName)+" ("+String.valueOf(args.subCategoryCode)+")"}'
+            tools:text="커피 (1001)"
+            android:fontFamily="@font/suit_regular"
+            android:textSize="12sp"
+            android:textColor="@color/rect_4480"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_iog_main_menu_add_v2_price"
+            app:layout_constraintStart_toStartOf="@id/text_iog_main_menu_add_v2_price" />
+
+
+        <TextView
+            android:id="@+id/text_iog_main_menu_add_v2"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/radius_8dp_edf4f9"
+            android:fontFamily="@font/suit_regular"
+            android:paddingHorizontal="17dp"
+            android:paddingVertical="6dp"
+            android:text="추가"
+            android:textColor="@color/rect_4475"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

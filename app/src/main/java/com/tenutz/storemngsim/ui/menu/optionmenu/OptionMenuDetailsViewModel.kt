@@ -2,6 +2,7 @@ package com.tenutz.storemngsim.ui.menu.optionmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.esafirm.imagepicker.model.Image
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionResponse
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OptionMenuDetailsViewModel @Inject constructor(
     private val optionRepository: OptionRepository,
+    savedStateHandle: SavedStateHandle,
 ): BaseViewModel() {
 
     private val _optionMenu = MutableLiveData<OptionResponse>()
@@ -27,6 +29,8 @@ class OptionMenuDetailsViewModel @Inject constructor(
 
     private val _image = MutableLiveData<Image?>()
     val image: LiveData<Image?> = _image
+
+    private val args = OptionMenuDetailsFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     fun setImageUri(image: Image) {
         _image.value = image
@@ -40,7 +44,11 @@ class OptionMenuDetailsViewModel @Inject constructor(
         _editMode.value = false
     }
 
-    fun optionMenu(optionCd: String) {
+    init {
+        optionMenu(args.optionCode)
+    }
+
+    private fun optionMenu(optionCd: String, callback: () -> Unit = {}) {
         optionRepository.option(optionCd)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -48,12 +56,13 @@ class OptionMenuDetailsViewModel @Inject constructor(
                 result.fold(
                     onSuccess = {
                         _optionMenu.value = it
+                        callback()
                     },
                     onFailure = {
                         Logger.e("$it")
                     },
                 )
-            }
+            }.addTo(compositeDisposable)
     }
 
     fun updateOptionMenu(optionCd: String, request: OptionUpdateRequest, callback: () -> Unit) {

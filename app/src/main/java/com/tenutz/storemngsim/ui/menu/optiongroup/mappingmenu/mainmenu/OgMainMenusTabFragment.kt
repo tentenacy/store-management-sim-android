@@ -4,23 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
-import androidx.recyclerview.widget.RecyclerView
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersResponse
 import com.tenutz.storemngsim.databinding.TabOgMainMenusBinding
-import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragment
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragmentArgs
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragmentDirections
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusViewModel
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.base.NavOgMainMenuFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OgMainMenusTabFragment: BaseFragment() {
+class OgMainMenusTabFragment: NavOgMainMenuFragment() {
 
     private var _binding: TabOgMainMenusBinding? = null
     val binding: TabOgMainMenusBinding get() = _binding!!
@@ -29,7 +25,9 @@ class OgMainMenusTabFragment: BaseFragment() {
         defaultViewModelProviderFactory
     }
 
-    lateinit var args: MappingMenusNavArgs
+    private val args: OgMappingMenusFragmentArgs by lazy {
+        (requireParentFragment() as OgMappingMenusFragment).args
+    }
 
     private val adapter: OgMainMenusAdapter by lazy {
         OgMainMenusAdapter {
@@ -37,14 +35,6 @@ class OgMainMenusTabFragment: BaseFragment() {
         }.apply {
             setHasStableIds(true)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        args = (parentFragment as OgMappingMenusFragment).args
-
-        vm.ogMainMenuMappers(args.optionGroupCode)
     }
 
     override fun onCreateView(
@@ -75,7 +65,9 @@ class OgMainMenusTabFragment: BaseFragment() {
     }
 
     private fun observeData() {
+
         vm.ogMainMenuMappers.observe(viewLifecycleOwner) {
+
             if(vm.hideRemoval.value == true) {
                 adapter.updateItems(it.optionGroupMainMenuMappers.filter { it.use != null })
             } else {
@@ -83,6 +75,7 @@ class OgMainMenusTabFragment: BaseFragment() {
             }
             binding.recyclerTogMainMenus.scrollToPosition(0)
         }
+
         vm.viewEvent.observe(viewLifecycleOwner) { event ->
             event?.getContentIfNotHandled()?.let {
                 when (it.first) {
@@ -102,8 +95,8 @@ class OgMainMenusTabFragment: BaseFragment() {
             vm.ogMainMenuMappers.value?.let {
                 findNavController().navigate(
                     OgMappingMenusFragmentDirections.actionOgMappingMenusFragmentToOgMainMenusEditFragment(
-                        args,
                         OptionGroupMainMenuMappersResponse((it.optionGroupMainMenuMappers.filter { it.use != null })),
+                        args.optionGroup
                     )
                 )
             }

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -16,9 +15,9 @@ import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel.Companion.EVENT_NAVIGATE_UP
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel.Companion.EVENT_TOAST
 import com.tenutz.storemngsim.utils.MyToast
-import com.tenutz.storemngsim.utils.validation.Validator
-import com.tenutz.storemngsim.utils.validation.err.base.ValidationException
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
+import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -71,7 +70,7 @@ class MainCategoryAddFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageMainCategoryAddHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMainCategoryAddHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)

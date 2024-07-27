@@ -2,11 +2,8 @@ package com.tenutz.storemngsim.ui.review
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.OgMainMenusTabFragment
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu.OgOptionMenusTabFragment
 import com.tenutz.storemngsim.ui.review.menu.MenuReviewsTabFragment
 import com.tenutz.storemngsim.ui.review.store.StoreReviewsTabFragment
-import java.lang.IndexOutOfBoundsException
 
 class ReviewsPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
 

@@ -8,9 +8,8 @@ import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.ui.base.Loginable
-import com.tenutz.storemngsim.ui.signup.SignupSuccessViewModel
+import com.tenutz.storemngsim.ui.login.args.SocialProfileArgs
 import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
-import com.tenutz.storemngsim.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -29,8 +28,8 @@ class LoginViewModel @Inject constructor(
         const val EVENT_NAVIGATE_TO_SIGNUP = 1001
     }
 
-    override fun socialLogin(accessToken: String, socialType: SocialType) {
-        userRepository.socialLogin(socialType)
+    override fun socialLogin(args: SocialProfileArgs) {
+        userRepository.socialLogin(args.socialType)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
@@ -49,7 +48,7 @@ class LoginViewModel @Inject constructor(
                 t.toErrorResponseOrNull()?.let {
                     return@let when(it.code) {
                         ErrorCode.USER_NOT_FOUND.code -> {
-                            viewEvent(Pair(EVENT_NAVIGATE_TO_SIGNUP, Pair(accessToken, socialType.name)))
+                            viewEvent(Pair(EVENT_NAVIGATE_TO_SIGNUP, args))
                             return@let false
                         }
                         else -> {

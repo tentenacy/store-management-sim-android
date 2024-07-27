@@ -5,19 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.databinding.FragmentMmOptionGroupAddBinding
-import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel
-import com.tenutz.storemngsim.ui.menu.mainmenu.MainMenusViewModel
+import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.base.NavMmOptionGroupFragment
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -25,14 +22,12 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class MmOptionGroupAddFragment: BaseFragment() {
+class MmOptionGroupAddFragment: NavMmOptionGroupFragment() {
 
     private val disposable = CompositeDisposable()
 
     private var _binding: FragmentMmOptionGroupAddBinding? = null
     val binding: FragmentMmOptionGroupAddBinding get() = _binding!!
-
-    private val args: MmOptionGroupAddFragmentArgs by navArgs()
 
     val vm: MmOptionGroupAddViewModel by viewModels()
 
@@ -44,34 +39,12 @@ class MmOptionGroupAddFragment: BaseFragment() {
         MmOptionGroupAddAdapter {
             it.optionGroupCode?.let {
                 vm.mapToOptionGroups(
-                    args.mainCategoryCode,
-                    args.middleCategoryCode,
-                    args.subCategoryCode,
-                    args.mainMenuCode,
-                    OptionGroupsMappedByRequest(
+                    request = OptionGroupsMappedByRequest(
                         listOf(it)
                     )
-                ) {
-                    pVm.mmOptionGroups(
-                        args.mainCategoryCode,
-                        args.middleCategoryCode,
-                        args.subCategoryCode,
-                        args.mainMenuCode,
-                    )
-                }
+                ) { pVm.mmOptionGroups() }
             }
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.mmOptionGroups(
-            args.mainCategoryCode,
-            args.middleCategoryCode,
-            args.subCategoryCode,
-            args.mainMenuCode,
-        )
     }
 
     override fun onCreateView(
@@ -101,7 +74,7 @@ class MmOptionGroupAddFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageMmOptionGroupAddHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMmOptionGroupAddHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
@@ -129,12 +102,7 @@ class MmOptionGroupAddFragment: BaseFragment() {
             .debounce(500, TimeUnit.MILLISECONDS).skip(1)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                vm.mmOptionGroups(
-                    args.mainCategoryCode,
-                    args.middleCategoryCode,
-                    args.subCategoryCode,
-                    args.mainMenuCode,
-                )
+                vm.mmOptionGroups()
             }
             .addTo(disposable)
     }

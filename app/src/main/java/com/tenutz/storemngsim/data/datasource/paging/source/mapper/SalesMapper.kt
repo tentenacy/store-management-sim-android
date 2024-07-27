@@ -49,8 +49,6 @@ class SalesMapper @Inject constructor(
                         it.soldAt,
                         it.menuName,
                         it.categoryName,
-                        it.mainEquipmentName,
-                        it.middleEquipmentName,
                         it.mainCategoryCode,
                         it.middleCategoryCode,
                         it.subCategoryCode,

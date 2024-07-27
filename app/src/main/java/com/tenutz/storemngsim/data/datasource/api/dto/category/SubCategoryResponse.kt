@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.data.datasource.api.dto.category
 
-import java.util.*
+import java.util.Date
 
 data class SubCategoryResponse(
     val storeCode: String?,

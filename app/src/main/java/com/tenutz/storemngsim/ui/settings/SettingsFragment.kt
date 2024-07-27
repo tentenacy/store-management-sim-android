@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
+import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.sharedpref.Settings
 import com.tenutz.storemngsim.databinding.FragmentSettingsBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.signup.SignupFormFragmentDirections
+import com.tenutz.storemngsim.ui.settings.profile.ProfileDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,6 +53,9 @@ class SettingsFragment: BaseFragment() {
     }
 
     private fun setOnClickListeners() {
+        binding.constraintSettingsProfileContainer.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToProfileDetailsFragment())
+        }
         binding.imageSettingsBack.setOnClickListener {
             findNavController().navigateUp()
         }

@@ -2,12 +2,16 @@ package com.tenutz.storemngsim.ui.menu.optiongroup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupsResponse
 import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepository
+import com.tenutz.storemngsim.di.qualifier.NavigationGraphReference
+import com.tenutz.storemngsim.di.qualifier.NavigationGraphs
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.ui.menu.optiongroup.args.OptionGroupsEditArgs
+import com.tenutz.storemngsim.usecase.GetSharedDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -17,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OptionGroupsEditViewModel @Inject constructor(
     private val optionGroupRepository: OptionGroupRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     companion object {
@@ -29,15 +34,11 @@ class OptionGroupsEditViewModel @Inject constructor(
     private val _checkedItemCount = MutableLiveData(0)
     val checkedItemCount: LiveData<Int> = _checkedItemCount
 
-    fun updateCheckedItemCount() {
-        optionGroupsEdit.value?.let {
-            _checkedItemCount.value = it.optionGroupsEdit.count { it.checked }
-        }
-    }
+    val args = OptionGroupsEditFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    fun setOptionGroupsEdit(args: OptionGroupsResponse) {
+    init {
         _optionGroupsEdit.value = OptionGroupsEditArgs(
-            args.optionGroups.map {
+            args.optionGroups.optionGroups.map {
                 OptionGroupsEditArgs.OptionGroup(
                     it.optionGroupCode,
                     it.optionGroupName,
@@ -46,6 +47,12 @@ class OptionGroupsEditViewModel @Inject constructor(
                 )
             }
         )
+    }
+
+    fun updateCheckedItemCount() {
+        optionGroupsEdit.value?.let {
+            _checkedItemCount.value = it.optionGroupsEdit.count { it.checked }
+        }
     }
 
     fun deleteOptionGroups(request: OptionGroupsDeleteRequest, callback: () -> Unit) {

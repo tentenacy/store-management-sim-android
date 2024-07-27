@@ -12,16 +12,34 @@
         tools:layout="@layout/fragment_option_menus">
         <action
             android:id="@+id/action_optionMenusFragment_to_optionMenusEditFragment"
-            app:destination="@id/optionMenusEditFragment" />
+            app:destination="@id/optionMenusEditFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_optionMenusFragment_to_optionMenuAddFragment"
-            app:destination="@id/optionMenuAddFragment" />
+            app:destination="@id/optionMenuAddFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_optionMenusFragment_to_optionMenuDetailsFragment"
-            app:destination="@id/optionMenuDetailsFragment" />
+            app:destination="@id/optionMenuDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
-            android:id="@+id/action_optionMenusFragment_to_navigation_om_option_group"
-            app:destination="@id/navigation_om_option_group" />
+            android:id="@+id/show_om_option_group"
+            app:destination="@id/navigation_om_option_group"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right">
+            <argument android:name="optionMenu" app:argType="com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsNavArgs" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/optionMenusEditFragment"
@@ -42,7 +60,10 @@
         android:label="OptionMenuDetailsFragment"
         tools:layout="@layout/fragment_option_menu_details">
 
-        <argument android:name="optionMenuCode" app:argType="string" />
+        <argument android:name="optionCode" app:argType="string" />
     </fragment>
     <include app:graph="@navigation/navigation_om_option_group" />
+    <action
+        android:id="@+id/show_option_menu"
+        app:destination="@id/optionMenusFragment" />
 </navigation>

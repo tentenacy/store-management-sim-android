@@ -7,7 +7,6 @@ import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.paging.repository.PushAlarmPagingRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.ui.review.menu.MenuReviewsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo

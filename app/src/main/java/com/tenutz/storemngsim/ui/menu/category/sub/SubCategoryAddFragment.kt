@@ -5,30 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
-import com.tenutz.storemngsim.databinding.*
-import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel
+import com.tenutz.storemngsim.databinding.FragmentSubCategoryAddBinding
+import com.tenutz.storemngsim.ui.menu.category.sub.base.NavSubCategoryFragment
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SubCategoryAddFragment: BaseFragment() {
+class SubCategoryAddFragment: NavSubCategoryFragment() {
 
     private var _binding: FragmentSubCategoryAddBinding? = null
     val binding: FragmentSubCategoryAddBinding get() = _binding!!
-
-    val args: SubCategoryAddFragmentArgs by navArgs()
 
     val vm: SubCategoryAddViewModel by viewModels()
 
@@ -79,7 +73,7 @@ class SubCategoryAddFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageSubCategoryAddHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageSubCategoryAddHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
@@ -92,15 +86,13 @@ class SubCategoryAddFragment: BaseFragment() {
                 },
                 onSuccess = {
                     vm.createSubCategory(
-                        args.mainCategoryCode,
-                        args.middleCategoryCode,
-                        SubCategoryCreateRequest(
+                        request = SubCategoryCreateRequest(
                             categoryCode = binding.editSubCategoryAddCategoryCode.text.toString(),
                             categoryName = binding.editSubCategoryAddCategoryName.text.toString(),
                             use = binding.radiogroupSubCategoryAdd.checkedRadioButtonId == R.id.radio_sub_category_add_use,
                         )
                     ) {
-                        pVm.subCategories(args.mainCategoryCode, args.middleCategoryCode)
+                        pVm.subCategories()
                     }
                 },
                 onFailure = { e ->

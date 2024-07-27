@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,7 +12,7 @@
 
         <variable
             name="args"
-            type="com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs" />
+            type="com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse" />
 
         <import type="kotlin.text.StringsKt" />
     </data>
@@ -39,7 +40,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
             android:ellipsize="end"
-            android:fontFamily="@font/ns_regular"
+            android:fontFamily="@font/suit_regular"
             android:maxLines="2"
             android:text="@{args.categoryName}"
             android:textColor="@color/white"
@@ -55,10 +56,11 @@
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ns_regular"
+            android:fontFamily="@font/suit_regular"
             android:text="@{args.categoryCode}"
             android:textColor="@color/white"
             android:textSize="12sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/constraint_sub_categories_edit_top_main_category_use_container"
             app:layout_constraintStart_toStartOf="@id/text_sub_categories_edit_top_main_category_name"
             app:layout_constraintTop_toTopOf="@id/constraint_sub_categories_edit_top_main_category_use_container"
@@ -73,6 +75,7 @@
             android:background="@drawable/radius_8dp_f6f7f9"
             android:paddingHorizontal="13dp"
             android:paddingVertical="4dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_sub_categories_edit_top_main_category_name">
 
@@ -82,10 +85,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:enabled="@{args.use}"
-                android:fontFamily="@font/ns_regular"
-                android:text='@{args.use ? "사용" : "미사용"}'
-                android:textColor='@{args.use ? @color/rect_4475 : @color/rect_4480}'
+                android:enabled="true"
+                android:fontFamily="@font/suit_regular"
+                android:text="사용"
+                android:textColor="@color/rect_4475"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +101,7 @@
                 android:id="@+id/view_sub_categories_edit_top_main_category_use"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="@{args.use ? @drawable/circle_use : @drawable/circle_use_not}"
+                android:background="@drawable/circle_use"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -125,12 +128,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/ns_regular"
-                android:text='@{!(args.address == null || StringsKt.isBlank(args.address)) ? args.address : "주소가 등록되지 않음"}'
-                android:textColor="@{!(args.address == null || StringsKt.isBlank(args.address)) ? @color/rect_4474 : @color/rect_4480}"
+                android:fontFamily="@font/suit_regular"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                bind:fullAddress='@{args.address}'
                 tools:text="인천 남동구 구월동 1241-1"
                 tools:textColor="@color/rect_4474" />
 
@@ -142,7 +144,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="@font/ns_regular"
+                android:fontFamily="@font/suit_regular"
                 android:text='@{!(args.tel == null || StringsKt.isBlank(args.tel)) ? args.tel : "번호가 등록되지 않음"}'
                 android:textColor="@{!(args.tel == null || StringsKt.isBlank(args.tel)) ? @color/rect_4475 : @color/rect_4480}"
                 tools:textColor="@color/rect_4475"
@@ -180,8 +182,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/ns_bold"
-                android:text="소분류 목록"
+                android:fontFamily="@font/suit_bold"
+                android:text="카테고리 목록"
                 android:textColor="@color/rect_4474"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -204,7 +206,7 @@
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/ns_regular"
+                    android:fontFamily="@font/suit_regular"
                     android:text="전체"
                     android:textColor="@{vm.checkedItemCount == vm.subCategoriesEdit.subCategoriesEdit.size() ? @color/rect_4475 : @color/rect_4480}"
                     android:textSize="14sp"

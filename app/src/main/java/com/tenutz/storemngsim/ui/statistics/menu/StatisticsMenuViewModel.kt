@@ -7,19 +7,17 @@ import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
-import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByMenusResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByTimeResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByMenusResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByTimeResponse
 import com.tenutz.storemngsim.data.datasource.paging.entity.MenuSalesList
 import com.tenutz.storemngsim.data.datasource.paging.repository.SalesPagingRepository
 import com.tenutz.storemngsim.data.repository.store.StoreRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.utils.ext.*
+import com.tenutz.storemngsim.utils.ext.end
+import com.tenutz.storemngsim.utils.ext.today
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel

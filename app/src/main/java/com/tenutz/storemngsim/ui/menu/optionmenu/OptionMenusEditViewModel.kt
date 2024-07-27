@@ -2,9 +2,9 @@ package com.tenutz.storemngsim.ui.menu.optionmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
 import com.tenutz.storemngsim.data.repository.option.OptionRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.ui.menu.optionmenu.args.OptionMenusEditArgs
@@ -17,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OptionMenusEditViewModel @Inject constructor(
     private val optionRepository: OptionRepository,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     companion object {
@@ -29,28 +30,27 @@ class OptionMenusEditViewModel @Inject constructor(
     private val _checkedItemCount = MutableLiveData(0)
     val checkedItemCount: LiveData<Int> = _checkedItemCount
 
-    fun updateCheckedItemCount() {
-        optionMenusEdit.value?.let {
-            _checkedItemCount.value = it.optionMenusEdit.count { it.checked }
-        }
-    }
+    private val args = OptionMenusEditFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    fun setOptionMenusEdit(args: OptionsResponse) {
+    init {
         _optionMenusEdit.value = OptionMenusEditArgs(
-            args.options.map {
+            args.optionMenus.options.map {
                 OptionMenusEditArgs.OptionEdit(
                     it.storeCode,
                     it.optionCode,
                     it.optionName,
                     it.imageUrl,
-                    it.outOfStock,
                     it.price,
-                    it.discountingPrice,
-                    it.discountedPrice,
                     it.use,
                 )
             }
         )
+    }
+
+    fun updateCheckedItemCount() {
+        optionMenusEdit.value?.let {
+            _checkedItemCount.value = it.optionMenusEdit.count { it.checked }
+        }
     }
 
     fun deleteOptionMenus(request: OptionsDeleteRequest, callback: () -> Unit) {

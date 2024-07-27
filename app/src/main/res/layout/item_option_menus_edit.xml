@@ -38,10 +38,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:ellipsize="end"
-            android:fontFamily="@font/ns_regular"
+            android:fontFamily="@font/suit_regular"
             android:maxLines="1"
             android:text="@{args.optionName}"
-            android:textColor="@{args.outOfStock ? @color/rect_4480 : @color/rect_4474}"
+            android:textColor="@color/rect_4474"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/image_imain_menus_thumbnail"
             app:layout_constraintTop_toTopOf="@id/image_imain_menus_thumbnail"
@@ -49,31 +49,12 @@
             tools:textColor="@color/rect_4474" />
 
         <TextView
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/radius_4dp_a0a0a0"
-            android:fontFamily="@font/ns_regular"
-            android:paddingHorizontal="6dp"
-            android:paddingVertical="1dp"
-            android:text="품절"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:visibility="@{args.outOfStock ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/text_imain_menus_name"
-            app:layout_constraintStart_toEndOf="@id/text_imain_menus_name"
-            app:layout_constraintTop_toTopOf="@id/text_imain_menus_name"
-            tools:ignore="HardcodedText"
-            tools:visibility="invisible" />
-
-        <TextView
             android:id="@+id/text_imain_menus_code"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/ns_regular"
+            android:fontFamily="@font/suit_regular"
             android:text="@{args.optionCode}"
             android:textColor="@color/rect_4480"
             android:textSize="12sp"
@@ -89,7 +70,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="17dp"
-            android:fontFamily="@font/ns_regular"
+            android:fontFamily="@font/suit_regular"
             android:text='@{args.use != null ? (args.use ? "사용" : "미사용") : "삭제됨"}'
             android:textColor='@{args.use != null ? (args.use ? @color/rect_4475 : @color/rect_4480) : @color/rect_4480}'
             android:textSize="12sp"

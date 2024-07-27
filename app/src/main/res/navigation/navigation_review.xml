@@ -12,10 +12,18 @@
         tools:layout="@layout/fragment_reviews">
         <action
             android:id="@+id/action_reviewsFragment_to_storeReplyPostFragment"
-            app:destination="@id/storeReplyPostFragment" />
+            app:destination="@id/storeReplyPostFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_reviewsFragment_to_menuReplyPostFragment"
-            app:destination="@id/menuReplyPostFragment" />
+            app:destination="@id/menuReplyPostFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/storeReplyPostFragment"

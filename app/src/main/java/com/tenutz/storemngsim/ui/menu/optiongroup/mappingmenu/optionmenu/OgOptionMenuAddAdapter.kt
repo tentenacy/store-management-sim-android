@@ -1,10 +1,7 @@
 package com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.tenutz.storemngsim.databinding.ItemOgOptionMenuAddBinding
 import com.tenutz.storemngsim.ui.base.BaseRecyclerView
 import com.tenutz.storemngsim.ui.base.BaseViewHolder

@@ -1,10 +1,15 @@
 package com.tenutz.storemngsim.di.module
 
 import com.tenutz.storemngsim.data.datasource.api.SMSApi
-import com.tenutz.storemngsim.data.datasource.paging.repository.*
+import com.tenutz.storemngsim.data.datasource.paging.repository.PushAlarmPagingRepository
+import com.tenutz.storemngsim.data.datasource.paging.repository.PushAlarmPagingRepositoryImpl
+import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepository
+import com.tenutz.storemngsim.data.datasource.paging.repository.ReviewPagingRepositoryImpl
+import com.tenutz.storemngsim.data.datasource.paging.repository.SalesPagingRepository
+import com.tenutz.storemngsim.data.datasource.paging.repository.SalesPagingRepositoryImpl
 import com.tenutz.storemngsim.data.datasource.paging.source.mapper.PushAlarmsMapper
-import com.tenutz.storemngsim.data.datasource.paging.source.mapper.SalesMapper
 import com.tenutz.storemngsim.data.datasource.paging.source.mapper.ReviewsMapper
+import com.tenutz.storemngsim.data.datasource.paging.source.mapper.SalesMapper
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.data.repository.category.CategoryRepositoryImpl
 import com.tenutz.storemngsim.data.repository.help.HelpRepository
@@ -15,12 +20,16 @@ import com.tenutz.storemngsim.data.repository.option.OptionRepository
 import com.tenutz.storemngsim.data.repository.option.OptionRepositoryImpl
 import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepository
 import com.tenutz.storemngsim.data.repository.optiongroup.OptionGroupRepositoryImpl
+import com.tenutz.storemngsim.data.repository.sharing.SharedRepository
+import com.tenutz.storemngsim.data.repository.sharing.SharedRepositoryImpl
 import com.tenutz.storemngsim.data.repository.store.StoreRepository
 import com.tenutz.storemngsim.data.repository.store.StoreRepositoryImpl
 import com.tenutz.storemngsim.data.repository.terms.TermsRepository
 import com.tenutz.storemngsim.data.repository.terms.TermsRepositoryImpl
 import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.data.repository.user.UserRepositoryImpl
+import com.tenutz.storemngsim.di.qualifier.NavigationGraphReference
+import com.tenutz.storemngsim.di.qualifier.NavigationGraphs
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -101,4 +110,18 @@ abstract class RepositoryModule {
     abstract fun provideTermsRepository(
         repository: TermsRepositoryImpl
     ): TermsRepository
+
+    @Binds
+    @Singleton
+    @NavigationGraphReference(NavigationGraphs.MAIN)
+    abstract fun provideSharedRepository(
+        repository: SharedRepositoryImpl
+    ): SharedRepository
+
+    /*@Binds
+    @Singleton
+    @NavigationGraphReference(NavigationGraphs.SUB_CATEGORY)
+    abstract fun provideSubCategoryNavSharedRepository(
+        repository: SharedRepositoryImpl
+    ): SharedRepository*/
 }

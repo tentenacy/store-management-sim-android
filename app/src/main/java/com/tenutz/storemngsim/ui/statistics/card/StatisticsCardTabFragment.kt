@@ -4,22 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.navGraphViewModels
-import androidx.paging.PagingData
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByCreditCardResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByCreditCardResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByMenusResponse
-import com.tenutz.storemngsim.data.datasource.paging.entity.MenuSalesList
 import com.tenutz.storemngsim.databinding.TabStatisticsCardBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.statistics.StatisticsViewModel
-import com.tenutz.storemngsim.ui.statistics.menu.StatisticsMenuViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Date
 
 @AndroidEntryPoint
 class StatisticsCardTabFragment: BaseFragment() {

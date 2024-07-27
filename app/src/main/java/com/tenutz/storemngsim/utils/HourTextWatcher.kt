@@ -1,7 +1,5 @@
 package com.tenutz.storemngsim.utils
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.EditText
 import kotlin.math.min
 

@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
 import com.tenutz.storemngsim.databinding.FragmentOmOptionGroupAddBinding
-import com.tenutz.storemngsim.ui.menu.optionmenu.OptionMenusViewModel
+import com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.base.NavOmOptionGroupFragment
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -23,14 +22,12 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class OmOptionGroupAddFragment: Fragment() {
+class OmOptionGroupAddFragment: NavOmOptionGroupFragment() {
 
     private val disposable = CompositeDisposable()
 
     private var _binding: FragmentOmOptionGroupAddBinding? = null
     val binding: FragmentOmOptionGroupAddBinding get() = _binding!!
-
-    private val args: OmOptionGroupAddFragmentArgs by navArgs()
 
     val vm: OmOptionGroupAddViewModel by viewModels()
 
@@ -40,25 +37,10 @@ class OmOptionGroupAddFragment: Fragment() {
 
     private val adapter: OmOptionGroupAddAdapter by lazy {
         OmOptionGroupAddAdapter {
-            it.optionGroupCode?.let {
-                vm.mapToOptionGroups(
-                    args.optionMenuCode,
-                    OptionGroupsMappedByRequest(
-                        listOf(it)
-                    )
-                ) {
-                    pVm.omOptionGroups(
-                        args.optionMenuCode,
-                    )
-                }
-            }
+            vm.mapToOptionGroups(
+                OptionGroupsMappedByRequest(listOf(it.optionGroupCode)),
+            ) { pVm.omOptionGroups() }
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.omOptionGroups(args.optionMenuCode)
     }
 
     override fun onCreateView(
@@ -88,7 +70,7 @@ class OmOptionGroupAddFragment: Fragment() {
             findNavController().navigateUp()
         }
         binding.imageOmOptionGroupAddHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageOmOptionGroupAddHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
@@ -116,7 +98,7 @@ class OmOptionGroupAddFragment: Fragment() {
             .debounce(500, TimeUnit.MILLISECONDS).skip(1)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                vm.omOptionGroups(args.optionMenuCode, it)
+                vm.omOptionGroups(it)
             }
             .addTo(disposable)
     }

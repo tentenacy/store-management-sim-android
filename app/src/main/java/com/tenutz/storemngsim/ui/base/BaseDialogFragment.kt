@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.tenutz.storemngsim.R
 
 
 abstract class BaseDialogFragment<VB : ViewDataBinding>(private val layoutId: Int) :

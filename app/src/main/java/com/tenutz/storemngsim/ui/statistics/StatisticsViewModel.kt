@@ -3,13 +3,17 @@ package com.tenutz.storemngsim.ui.statistics
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.utils.Event
-import com.tenutz.storemngsim.utils.ext.*
+import com.tenutz.storemngsim.utils.ext.end
+import com.tenutz.storemngsim.utils.ext.minusDay
+import com.tenutz.storemngsim.utils.ext.minusMonth
+import com.tenutz.storemngsim.utils.ext.noon
+import com.tenutz.storemngsim.utils.ext.start
+import com.tenutz.storemngsim.utils.ext.today
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel

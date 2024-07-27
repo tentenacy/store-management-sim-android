@@ -1,7 +1,20 @@
 package com.tenutz.storemngsim.data.repository.category
 
 import com.tenutz.storemngsim.data.datasource.api.SMSApi
-import com.tenutz.storemngsim.data.datasource.api.dto.category.*
+import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryUpdateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
@@ -22,6 +35,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun mainCategory(mainCateCd: String): Single<Result<MainCategoryResponse>> =
@@ -32,6 +46,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun createMainCategory(request: MainCategoryCreateRequest): Single<Result<Unit>> =
@@ -42,6 +57,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun updateMainCategory(
@@ -58,6 +74,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteMainCategory(mainCateCd: String): Single<Result<Unit>> =
@@ -69,6 +86,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteMainCategories(request: CategoriesDeleteRequest): Single<Result<Unit>> =
@@ -80,6 +98,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun changeMainCategoryPriorities(request: CategoryPrioritiesChangeRequest): Single<Result<Unit>> =
@@ -90,6 +109,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun middleCategories(mainCateCd: String): Single<Result<MiddleCategoriesResponse>> =
@@ -100,6 +120,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun middleCategory(
@@ -116,6 +137,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun createMiddleCategory(
@@ -140,6 +162,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun updateMiddleCategory(
@@ -165,6 +188,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteMiddleCategory(
@@ -182,6 +206,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteMiddleCategories(
@@ -199,6 +224,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun changeMiddleCategoryPriorities(
@@ -215,6 +241,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun subCategories(
@@ -231,6 +258,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun subCategory(
@@ -249,6 +277,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun createSubCategory(
@@ -267,6 +296,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun updateSubCategory(
@@ -287,6 +317,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteSubCategory(
@@ -306,6 +337,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteSubCategories(
@@ -325,6 +357,7 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun changeSubCategoryPriorities(
@@ -343,5 +376,6 @@ class CategoryRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 }

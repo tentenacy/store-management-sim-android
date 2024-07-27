@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.data.datasource.api.dto.store
 
-import java.util.*
+import java.util.Date
 
 data class StatisticsSalesByCreditCardResponse(
     val contents: List<StatisticsSalesByCreditCard>,

@@ -7,7 +7,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.application.manager.OAuthLoginManagerSubject
-import com.tenutz.storemngsim.data.datasource.api.dto.user.SignupRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialSignupRequest
 import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
 import com.tenutz.storemngsim.data.datasource.sharedpref.OAuthToken
@@ -15,7 +14,7 @@ import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.data.repository.user.UserRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.ui.base.Loginable
-import com.tenutz.storemngsim.ui.login.LoginViewModel
+import com.tenutz.storemngsim.ui.login.args.SocialProfileArgs
 import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import com.tenutz.storemngsim.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -108,8 +107,8 @@ class SignupFormViewModel @Inject constructor(
             ).addTo(compositeDisposable)
     }
 
-    override fun socialLogin(accessToken: String, socialType: SocialType) {
-        userRepository.socialLogin(socialType)
+    override fun socialLogin(args: SocialProfileArgs) {
+        userRepository.socialLogin(args.socialType)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->

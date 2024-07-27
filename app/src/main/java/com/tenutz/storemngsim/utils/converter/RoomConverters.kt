@@ -1,7 +1,7 @@
 package com.tenutz.storemngsim.utils.converter
 
 import androidx.room.TypeConverter
-import java.util.*
+import java.util.Date
 
 
 class RoomConverters {

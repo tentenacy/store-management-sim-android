@@ -1,9 +1,6 @@
 package com.tenutz.storemngsim.ui.menu.category.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository

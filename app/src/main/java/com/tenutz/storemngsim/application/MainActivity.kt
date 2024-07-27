@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.telephony.TelephonyManager
@@ -12,32 +11,46 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
-import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.lifecycle.ViewModelProvider
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.core.result.ActivityResultFactory
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreMainResponse
 import com.tenutz.storemngsim.data.datasource.sharedpref.Events
 import com.tenutz.storemngsim.data.datasource.sharedpref.EventsSharedPref
 import com.tenutz.storemngsim.databinding.ActivityMainBinding
 import com.tenutz.storemngsim.databinding.DrawermenuBinding
 import com.tenutz.storemngsim.ui.common.LogoutDialog
-import com.tenutz.storemngsim.ui.menu.MainMenusBeforeBottomSheetDialog
-import com.tenutz.storemngsim.utils.ext.*
+import com.tenutz.storemngsim.ui.main.MainViewModel
+import com.tenutz.storemngsim.utils.MyToast
+import com.tenutz.storemngsim.utils.ext.dismissAllDialogs
+import com.tenutz.storemngsim.utils.ext.navController
+import com.tenutz.storemngsim.utils.ext.navigateToHelpsFragment
+import com.tenutz.storemngsim.utils.ext.navigateToLoginFragment
+import com.tenutz.storemngsim.utils.ext.navigateToMainMenusFragmentV2
+import com.tenutz.storemngsim.utils.ext.navigateToNotificationFragment
+import com.tenutz.storemngsim.utils.ext.navigateToOptionGroupsFragment
+import com.tenutz.storemngsim.utils.ext.navigateToOptionMenusFragment
+import com.tenutz.storemngsim.utils.ext.navigateToReviewsFragment
+import com.tenutz.storemngsim.utils.ext.navigateToSalesFragment
+import com.tenutz.storemngsim.utils.ext.navigateToSettingsFragment
+import com.tenutz.storemngsim.utils.ext.navigateToStatisticsFragment
+import com.tenutz.storemngsim.utils.ext.navigateToSubCategoriesFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    companion object {
-        const val PERMISSION_REQUEST_CODE = 100
-    }
 
     @Inject
     lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
@@ -51,33 +64,53 @@ class MainActivity : AppCompatActivity() {
 
     val vm: GlobalViewModel by viewModels()
 
+    private val mainVm: MainViewModel by lazy {
+        ViewModelProvider(
+            navController.getViewModelStoreOwner(R.id.navigation_main),
+            defaultViewModelProviderFactory
+        )[MainViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        drawermenuBinding = DataBindingUtil.inflate(layoutInflater, R.layout.drawermenu, binding.navMain, true)
-
-        binding.drawerMain.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
-        setOnClickListeners()
 
         Events.existsNewNotification.value = EventsSharedPref.existsNewNotification
+
+        initViews()
+        setOnClickListeners()
+        observeData()
+    }
+
+    private fun initViews() {
+        drawermenuBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.drawermenu, binding.navMain, true)
+
+        binding.drawerMain.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    fun updateDrawerMenu(storeMain: StoreMainResponse) {
+        drawermenuBinding.username = storeMain.storeManagerName
+        drawermenuBinding.storeName = storeMain.storeName
+        drawermenuBinding.textDrawermenu2Menu1.setOnClickListener { v: View ->
+            navigateToSubCategoriesFragment()
+            binding.drawerMain.closeDrawer(GravityCompat.END)
+        }
+    }
+
+    private fun observeData() {
 
         Events.existsNewNotification.observe(this) {
             drawermenuBinding.viewDrawermenu2Menu9.visibility = if(it) View.VISIBLE else View.GONE
         }
 
-        vm.storeMain.observe(this) {
-            drawermenuBinding.username = it.storeManagerName
-            drawermenuBinding.storeName = it.storeName
-        }
-
         vm.viewEvent.observe(this) { event ->
             event?.getContentIfNotHandled()?.let {
-                when(it.first) {
+                when (it.first) {
                     GlobalViewModel.EVENT_GLOBAL_NAVIGATE_TO_LOGIN -> {
-/*
+                        /*
                         if (currentDestinationId() != R.id.loginFragment) {
                             val navController = findNavController(R.id.container)
                             val navHostFragment: NavHostFragment =
@@ -89,7 +122,15 @@ class MainActivity : AppCompatActivity() {
                             navController.graph = graph
                         }
 */
-                        navigateToLoginFragment()
+                        Single.timer(1, TimeUnit.SECONDS)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe { _ ->
+                                MyToast.create(this, "장시간 이용하지 않아 자동 로그아웃 되었습니다.", 200)?.show()
+                                supportFragmentManager.dismissAllDialogs()
+                                navigateToLoginFragment()
+
+                            }
+                            .dispose()
                     }
                 }
             }
@@ -104,12 +145,8 @@ class MainActivity : AppCompatActivity() {
             }.show(supportFragmentManager, "logoutDialog")
         }
         drawermenuBinding.btnDrawermenuClose.setOnClickListener(menuCloseOnClickListener)
-        drawermenuBinding.textDrawermenu2Menu1.setOnClickListener {
-            navigateToMainCategoriesFragment()
-            binding.drawerMain.closeDrawer(GravityCompat.END)
-        }
         drawermenuBinding.textDrawermenu2Menu2.setOnClickListener {
-            navigateToMainMenusFragment()
+            navigateToMainMenusFragmentV2()
             binding.drawerMain.closeDrawer(GravityCompat.END)
         }
         drawermenuBinding.textDrawermenu2Menu3.setOnClickListener {
@@ -147,7 +184,6 @@ class MainActivity : AppCompatActivity() {
 //        drawermenuBinding.constraintDrawermenu2Menu9Container.setOnClickListener { navigateToMainCategoriesFragment() }
 //        drawermenuBinding.textDrawermenu2Menu10.setOnClickListener { navigateToMainCategoriesFragment() }
     }
-
 
     fun phoneNumber(): String? = (getSystemService(TELEPHONY_SERVICE) as TelephonyManager).line1Number?.replace("+82", "0")
 

@@ -2,16 +2,12 @@ package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenuPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MenusDeleteRequest
 import com.tenutz.storemngsim.data.repository.menu.MenuRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusEditArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -22,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainMenusEditViewModel @Inject constructor(
     private val mainMenuRepository: MenuRepository,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     companion object {
@@ -34,15 +31,11 @@ class MainMenusEditViewModel @Inject constructor(
     private val _checkedItemCount = MutableLiveData(0)
     val checkedItemCount: LiveData<Int> = _checkedItemCount
 
-    fun updateCheckedItemCount() {
-        mainMenusEdit.value?.let {
-            _checkedItemCount.value = it.mainMenusEdit.count { it.checked }
-        }
-    }
+    private val args = MainMenusEditFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    fun setMainMenusEdit(args: MainMenusResponse) {
+    init {
         _mainMenusEdit.value = MainMenusEditArgs(
-            args.mainMenus.map {
+            args.mainMenus.mainMenus.map {
                 MainMenusEditArgs.MainMenuEdit(
                     it.storeCode,
                     it.mainCategoryCode,
@@ -56,13 +49,20 @@ class MainMenusEditViewModel @Inject constructor(
                     it.discountingPrice,
                     it.discountedPrice,
                     it.use,
+                    it.subCategoryName,
                 )
             }
         )
     }
 
-    fun deleteMainMenus(mainCateCd: String, middleCateCd: String, subCateCd: String, request: MenusDeleteRequest, callback: () -> Unit) {
-        mainMenuRepository.deleteMainMenus(mainCateCd, middleCateCd, subCateCd, request)
+    fun updateCheckedItemCount() {
+        mainMenusEdit.value?.let {
+            _checkedItemCount.value = it.mainMenusEdit.count { it.checked }
+        }
+    }
+
+    fun deleteMainMenus(mainCateCd: String = "2000", middleCateCd: String = "3000", request: MenusDeleteRequest, callback: () -> Unit) {
+        mainMenuRepository.deleteMainMenus(mainCateCd, middleCateCd, args.subCategory.subCategoryCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
@@ -79,8 +79,8 @@ class MainMenusEditViewModel @Inject constructor(
             .addTo(compositeDisposable)
     }
 
-    fun changeMainMenuPriorities(mainCateCd: String, middleCateCd: String, subCateCd: String, request: MenuPrioritiesChangeRequest, callback: () -> Unit) {
-        mainMenuRepository.changeMainMenuPriorities(mainCateCd, middleCateCd, subCateCd, request)
+    fun changeMainMenuPriorities(mainCateCd: String = "2000", middleCateCd: String = "3000", request: MenuPrioritiesChangeRequest, callback: () -> Unit) {
+        mainMenuRepository.changeMainMenuPriorities(mainCateCd, middleCateCd, args.subCategory.subCategoryCode, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->

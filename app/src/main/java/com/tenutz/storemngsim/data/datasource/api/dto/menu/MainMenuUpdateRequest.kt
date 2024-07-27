@@ -12,7 +12,6 @@ data class MainMenuUpdateRequest(
     val outOfStock: Boolean,
     val use: Boolean?,
     val ingredientDisplay: Boolean,
-    val mainMenuNameKor: String? = null,
     val highlightType: String,
     val showDateFrom: String? = null,
     val showDateTo: String? = null,
@@ -24,6 +23,6 @@ data class MainMenuUpdateRequest(
     val eventTimeFrom: String? = null,
     val eventTimeTo: String? = null,
     val eventDayOfWeek: String? = null,
-    val memoKor: String? = null,
+    val memo: String? = null,
     val ingredientDetails: String? = null,
 )

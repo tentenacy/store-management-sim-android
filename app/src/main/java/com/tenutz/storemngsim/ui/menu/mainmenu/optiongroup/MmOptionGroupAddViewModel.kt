@@ -2,6 +2,7 @@ package com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MmOptionGroupAddViewModel @Inject constructor(
     private val mainMenuRepository: MenuRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     companion object {
@@ -28,15 +30,19 @@ class MmOptionGroupAddViewModel @Inject constructor(
     private val _mmOptionGroups = MutableLiveData<MainMenuOptionGroupsResponse>()
     val mmOptionGroups: LiveData<MainMenuOptionGroupsResponse> = _mmOptionGroups
 
+    private val args = MmOptionGroupsFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    init {
+        mmOptionGroups()
+    }
+
     fun mmOptionGroups(
-        mainCateCd: String,
-        middleCateCd: String,
-        subCateCd: String,
-        mainMenuCd: String,
+        mainCateCd: String = "2000",
+        middleCateCd: String = "3000",
         searchText: String? = null,
     ) {
         searchText?.let { query.value = it }
-        mainMenuRepository.mainMenuOptionGroups(mainCateCd, middleCateCd, subCateCd, mainMenuCd, CommonCondition(query = query.value))
+        mainMenuRepository.mainMenuOptionGroups(mainCateCd, middleCateCd, args.subCategory.subCategoryCode, args.mainMenu.menuCode, CommonCondition(query = query.value))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
@@ -52,18 +58,16 @@ class MmOptionGroupAddViewModel @Inject constructor(
     }
 
     fun mapToOptionGroups(
-        mainCateCd: String,
-        middleCateCd: String,
-        subCateCd: String,
-        mainMenuCd: String,
+        mainCateCd: String = "2000",
+        middleCateCd: String = "3000",
         request: OptionGroupsMappedByRequest,
         callback: () -> Unit,
     ) {
         mainMenuRepository.mapToOptionGroups(
             mainCateCd,
             middleCateCd,
-            subCateCd,
-            mainMenuCd,
+            args.subCategory.subCategoryCode,
+            args.mainMenu.menuCode,
             request
         )
             .subscribeOn(Schedulers.io())

@@ -5,19 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByCreditCardResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByTimeResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByCreditCardResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByTimeResponse
 import com.tenutz.storemngsim.data.repository.store.StoreRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import com.tenutz.storemngsim.utils.ext.end
-import com.tenutz.storemngsim.utils.ext.minusMonth
 import com.tenutz.storemngsim.utils.ext.today
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel

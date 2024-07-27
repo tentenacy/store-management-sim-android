@@ -1,7 +1,7 @@
 package com.tenutz.storemngsim.data.datasource.api.dto.push
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import java.util.Date
 
 data class PushAlarmsResponse(
     val seq: Int,

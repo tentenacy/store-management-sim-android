@@ -9,9 +9,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.user.UserApiClient
-import com.nhn.android.naverlogin.OAuthLogin
 import com.tenutz.storemngsim.BuildConfig
-import com.tenutz.storemngsim.application.manager.*
+import com.tenutz.storemngsim.application.manager.FacebookLoginManager
+import com.tenutz.storemngsim.application.manager.GoogleLoginManager
+import com.tenutz.storemngsim.application.manager.KakaoLoginManager
+import com.tenutz.storemngsim.application.manager.NaverLoginManager
+import com.tenutz.storemngsim.application.manager.OAuthLoginManagerSubject
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -37,18 +40,6 @@ abstract class ManagerModule {
         @Singleton
         fun provideLoginManager(): LoginManager {
             return LoginManager.getInstance()
-        }
-
-        @Provides
-        @Singleton
-        fun provideOAuthLogin(application: Application): OAuthLogin {
-            OAuthLogin.getInstance().init(
-                application.applicationContext,
-                BuildConfig.SOCIAL_NAVER_CLIENT_ID,
-                BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
-                BuildConfig.SOCIAL_NAVER_CLIENT_NAME
-            )
-            return OAuthLogin.getInstance()
         }
 
         @Provides

@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.navGraphViewModels
 import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.CombinedData
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
@@ -18,13 +23,13 @@ import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByTim
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByTimeResponse
 import com.tenutz.storemngsim.databinding.TabStatisticsTimeBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.common.ChartMarker
 import com.tenutz.storemngsim.ui.common.ChartMarkerV2
 import com.tenutz.storemngsim.ui.common.args.ChartMakerV2Data
 import com.tenutz.storemngsim.ui.statistics.StatisticsViewModel
-import com.tenutz.storemngsim.utils.ext.*
+import com.tenutz.storemngsim.utils.ext.hour
+import com.tenutz.storemngsim.utils.ext.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Date
 
 
 @AndroidEntryPoint

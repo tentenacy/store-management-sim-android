@@ -9,7 +9,7 @@ data class OptionGroupsResponse(
 ): Parcelable {
     @Parcelize
     data class OptionGroup(
-        val optionGroupCode: String?,
+        val optionGroupCode: String,
         val optionGroupName: String?,
         val toggleSelect: Boolean,
         val required: Boolean,

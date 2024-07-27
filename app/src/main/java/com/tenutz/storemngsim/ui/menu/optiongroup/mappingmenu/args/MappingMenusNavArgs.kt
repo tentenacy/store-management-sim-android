@@ -1,7 +1,6 @@
 package com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args
 
 import android.os.Parcelable
-import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupsResponse
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

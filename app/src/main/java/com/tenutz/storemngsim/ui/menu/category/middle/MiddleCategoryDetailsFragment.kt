@@ -8,24 +8,18 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.application.AddressSearchActivity
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryUpdateRequest
-import com.tenutz.storemngsim.databinding.FragmentMainCategoriesBinding
-import com.tenutz.storemngsim.databinding.FragmentMenuMngBinding
-import com.tenutz.storemngsim.databinding.FragmentMiddleCategoriesBinding
 import com.tenutz.storemngsim.databinding.FragmentMiddleCategoryDetailsBinding
 import com.tenutz.storemngsim.ui.base.BaseFragment
-import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryDetailsFragmentArgs
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import com.tenutz.storemngsim.utils.validation.Validator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -84,7 +78,7 @@ class MiddleCategoryDetailsFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageMiddleCategoryDetailsHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageMiddleCategoryDetailsHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
@@ -116,7 +110,7 @@ class MiddleCategoryDetailsFragment: BaseFragment() {
                     Validator.validateBusinessNumber(binding.editMiddleCategoryDetailsBizNo.text.toString(), true)
                     Validator.validateRepresentative(binding.editMiddleCategoryDetailsOwnerName.text.toString())
                     Validator.validatePhoneNumber(binding.editMiddleCategoryDetailsPhone.text.toString())
-                    Validator.validateAddress(binding.editMiddleCategoryDetailsAddressDetail.text.toString())
+                    Validator.validateAddress(binding.textMiddleCategoryDetailsAddress.text.toString(), binding.editMiddleCategoryDetailsAddressDetail.text.toString())
                     Validator.validateTid(binding.editMiddleCategoryDetailsTid.text.toString())
                 },
                 onSuccess = {

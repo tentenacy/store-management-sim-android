@@ -1,16 +1,10 @@
 package com.tenutz.storemngsim.ui.menu.category.sub
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.ui.menu.category.middle.MiddleCategoryAddViewModel
 import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -28,7 +22,7 @@ class SubCategoryAddViewModel @Inject constructor(
         const val EVENT_TOAST = 1001
     }
 
-    fun createSubCategory(mainCateCd: String, middleCateCd: String, request: SubCategoryCreateRequest, callback: () -> Unit) {
+    fun createSubCategory(mainCateCd: String = "2000", middleCateCd: String = "3000", request: SubCategoryCreateRequest, callback: () -> Unit) {
         categoryRepository.createSubCategory(mainCateCd, middleCateCd, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

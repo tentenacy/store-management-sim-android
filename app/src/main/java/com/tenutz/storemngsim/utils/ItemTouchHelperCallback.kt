@@ -2,7 +2,6 @@ package com.tenutz.storemngsim.utils
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.orhanobut.logger.Logger
 
 class ItemTouchHelperCallback(private val onItemMoveListener: OnItemMoveListener): ItemTouchHelper.Callback() {
 

@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentOptionGroupsBinding
-import com.tenutz.storemngsim.ui.base.BaseFragment
+import com.tenutz.storemngsim.ui.menu.optiongroup.base.NavOptionGroupFragment
 import com.tenutz.storemngsim.ui.menu.optiongroup.bs.OptionGroupsBottomSheetDialog
 import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.args.MappingMenusNavArgs
-import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu.OgOptionMenuAddViewModel
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -23,7 +22,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class OptionGroupsFragment: BaseFragment() {
+class OptionGroupsFragment : NavOptionGroupFragment() {
 
     private val disposable = CompositeDisposable()
 
@@ -40,37 +39,27 @@ class OptionGroupsFragment: BaseFragment() {
                 onClickListener = { id, _ ->
                     when (id) {
                         R.id.btn_bsoption_groups_mapping_menus -> {
-                            it.optionGroupCode?.let { _ ->
-                                OptionGroupsFragmentDirections.actionOptionGroupsFragmentToNavigationOgMappingMenu().let { action ->
-                                    findNavController().navigate(
-                                        action.actionId,
-                                        Bundle().apply { putParcelable("optionGroup",
-                                            MappingMenusNavArgs(
-                                                it.optionGroupCode,
-                                                it.optionGroupName,
-                                                it.toggleSelect,
-                                                it.required,
-                                            )
-                                        ) }
-                                    )
-                                }
-                            }
+                            findNavController().navigate(
+                                OptionGroupsFragmentDirections.showOgMappingMenu(MappingMenusNavArgs(
+                                    it.optionGroupCode,
+                                    it.optionGroupName,
+                                    it.toggleSelect,
+                                    it.required,
+                                ))
+                            )
                         }
+
                         R.id.btn_bsoption_groups_details -> {
-                            it.optionGroupCode?.let { findNavController().navigate(
-                                OptionGroupsFragmentDirections.actionOptionGroupsFragmentToOptionGroupDetailsFragment(it)) }
+                            findNavController().navigate(
+                                OptionGroupsFragmentDirections.actionOptionGroupsFragmentToOptionGroupDetailsFragment(
+                                    it.optionGroupCode
+                                )
+                            )
                         }
                     }
-
                 },
             ).show(childFragmentManager, "optionGroupsBottomSheetDialog")
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.optionGroups()
     }
 
     override fun onCreateView(
@@ -112,7 +101,7 @@ class OptionGroupsFragment: BaseFragment() {
         }
         vm.viewEvent.observe(viewLifecycleOwner) { event ->
             event?.getContentIfNotHandled()?.let {
-                when(it.first) {
+                when (it.first) {
                 }
             }
         }
@@ -123,14 +112,16 @@ class OptionGroupsFragment: BaseFragment() {
             findNavController().navigateUp()
         }
         binding.imageOptionGroupsHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageOptionGroupsHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.textOptionGroupsEdit.setOnClickListener {
             vm.optionGroups.value?.let {
-                findNavController().navigate(OptionGroupsFragmentDirections.actionOptionGroupsFragmentToOptionGroupsEditFragment(it))
+                findNavController().navigate(
+                    OptionGroupsFragmentDirections.actionOptionGroupsFragmentToOptionGroupsEditFragment(it)
+                )
             }
         }
         binding.fabOptionGroupsAdd.setOnClickListener {

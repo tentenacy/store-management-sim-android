@@ -5,10 +5,12 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.TokenResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialLoginRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.user.SocialSignupRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.user.UserDetailsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.user.UserUpdateRequest
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface UserApi {
@@ -30,4 +32,10 @@ interface UserApi {
 
     @GET("/users/details")
     fun userDetails(): Single<UserDetailsResponse>
+
+    @PUT("/users/{userSeq}")
+    fun update(
+        @Path("userSeq") userSeq: String,
+        @Body request: UserUpdateRequest,
+    ): Single<Unit>
 }

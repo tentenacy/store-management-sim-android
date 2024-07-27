@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.terms.TermsDetailsResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.terms.TermsResponse
 import com.tenutz.storemngsim.data.repository.terms.TermsRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -51,6 +51,6 @@ class TermsViewModel @Inject constructor(
                         Logger.e("$it")
                     },
                 )
-            }
+            }.addTo(compositeDisposable)
     }
 }

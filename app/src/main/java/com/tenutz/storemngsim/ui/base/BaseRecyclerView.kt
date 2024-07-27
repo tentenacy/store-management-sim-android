@@ -1,14 +1,8 @@
 package com.tenutz.storemngsim.ui.base
 
 import android.annotation.SuppressLint
-import android.view.MotionEvent
-import android.view.View
-import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditAdapter
-import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditViewHolder
-import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesViewHolder
 import com.tenutz.storemngsim.utils.DiffUtilCallback
 
 abstract class BaseRecyclerView<T: Any, VH: BaseViewHolder<T>>: RecyclerView.Adapter<VH>() {

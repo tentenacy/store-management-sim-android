@@ -19,10 +19,10 @@ object RetryPolicyConstant {
     val NETWORK: RETRY_PREDICATE = { it is IOException }
     val SERVICE_UNAVAILABLE: RETRY_PREDICATE = { it is HttpException && it.code() == 503 }
     val ACCESS_TOKEN_EXPIRED: RETRY_PREDICATE = {
-        it is HttpException && it.response()?.errorBody()?.toErrorResponseOrNull()
+        /*it is HttpException && it.response()?.errorBody()?.toErrorResponseOrNull()
             ?.run {
                 Logger.e("code: $code")
                 code == ErrorCode.ACCESS_TOKEN_ERROR.code
-            } ?: false
+            } ?: */false
     }
 }

@@ -1,12 +1,29 @@
 package com.tenutz.storemngsim.data.datasource.api
 
-import com.tenutz.storemngsim.data.datasource.api.dto.category.*
+import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryUpdateRequest
 import io.reactivex.rxjava3.core.Completable
-import retrofit2.http.*
-
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
-import java.util.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.HTTP
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CategoryApi {
 

@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.webkit.JavascriptInterface
-import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import com.tenutz.storemngsim.BuildConfig
 import com.tenutz.storemngsim.databinding.ActivityAddrSearchBinding
 
 class AddressSearchActivity: AppCompatActivity() {
@@ -21,13 +23,19 @@ class AddressSearchActivity: AppCompatActivity() {
         // javascript 를 사용할 수 있게 셋팅.
         binding.webAddrSearch.settings.javaScriptEnabled = true
 
+        binding.webAddrSearch.settings.domStorageEnabled = true
+
         // javascript 의 window.open 허용.
         binding.webAddrSearch.settings.javaScriptCanOpenWindowsAutomatically = true
 
-        binding.webAddrSearch.webChromeClient = WebChromeClient()
+        binding.webAddrSearch.addJavascriptInterface(AndroidBridge(), "SMS")
 
-        binding.webAddrSearch.addJavascriptInterface(AndroidBridge(), "OMS")
-        binding.webAddrSearch.loadUrl("http://mbiz.bizsalad.net/addr.jsp")
+        binding.webAddrSearch.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView?, url: String?) {
+                binding.webAddrSearch.loadUrl("javascript:execKakaoPostcode();")
+            }
+        }
+        binding.webAddrSearch.loadUrl("${BuildConfig.API_URL_BASE}/addr")
     }
 
     private inner class AndroidBridge {
@@ -41,5 +49,10 @@ class AddressSearchActivity: AppCompatActivity() {
             setResult(RESULT_OK, intent)
             finish()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.webAddrSearch.destroy()
     }
 }

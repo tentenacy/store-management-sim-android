@@ -15,21 +15,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.user.UserApiClient
-import com.nhn.android.naverlogin.OAuthLogin
+import com.navercorp.nid.NaverIdLoginSDK
 import com.orhanobut.logger.Logger
+import com.tenutz.storemngsim.application.GlobalViewModel
 import com.tenutz.storemngsim.data.datasource.sharedpref.Settings
 import com.tenutz.storemngsim.data.datasource.sharedpref.Token
 import com.tenutz.storemngsim.data.datasource.sharedpref.User
 import com.tenutz.storemngsim.databinding.FragmentLoginBinding
-import com.tenutz.storemngsim.databinding.FragmentLoginBindingImpl
-import com.tenutz.storemngsim.ui.base.BaseFragment
+import com.tenutz.storemngsim.ui.login.args.SocialProfileArgs
 import com.tenutz.storemngsim.ui.login.handler.FacebookOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.GoogleOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.KakaoOAuthLoginHandler
-import com.tenutz.storemngsim.ui.login.handler.NaverOAuthLoginHandler
+import com.tenutz.storemngsim.ui.login.handler.NaverOAuthLoginCallback
 import com.tenutz.storemngsim.utils.constant.SocialScopeConstant
 import com.tenutz.storemngsim.utils.ext.mainActivity
-import com.tenutz.storemngsim.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -39,12 +38,12 @@ class LoginFragment: Fragment() {
     private var _binding: FragmentLoginBinding? = null
     val binding: FragmentLoginBinding get() = _binding!!
 
-    private val viewModel by lazy {
+    private val vm by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
     @Inject
-    lateinit var naverOAuthLoginHandler: NaverOAuthLoginHandler
+    lateinit var naverOAuthLoginCallback: NaverOAuthLoginCallback
 
     @Inject
     lateinit var facebookOAuthLoginHandler: FacebookOAuthLoginHandler
@@ -63,10 +62,6 @@ class LoginFragment: Fragment() {
     @Inject
     lateinit var facebookCallbackManager: CallbackManager
 
-    @Inject
-    lateinit var naverCallbackManager: OAuthLogin
-
-
 
     private val naverLoginOnClickListener: (View?) -> Unit = {
 
@@ -83,10 +78,7 @@ class LoginFragment: Fragment() {
             Logger.d("token: ${token}")
             User.fcmToken = token
 
-            naverCallbackManager.startOauthLoginActivity(
-                mainActivity(),
-                naverOAuthLoginHandler
-            )
+            NaverIdLoginSDK.authenticate(mainActivity(), naverOAuthLoginCallback)
         })
     }
 
@@ -177,6 +169,7 @@ class LoginFragment: Fragment() {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        //자동 로그인
         if(Settings.autoLoggedIn && Token.accessToken.isNotBlank()) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
         }
@@ -192,15 +185,17 @@ class LoginFragment: Fragment() {
     }
 
     private fun observeData() {
-        viewModel.viewEvent.observe(viewLifecycleOwner) {
+        vm.viewEvent.observe(viewLifecycleOwner) {
             it?.getContentIfNotHandled()?.let {
                 when (it.first) {
                     LoginViewModel.EVENT_NAVIGATE_TO_MAIN -> {
                         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
                     }
                     LoginViewModel.EVENT_NAVIGATE_TO_SIGNUP -> {
-                        val (accessToken, socialType) = it.second as Pair<String, String>
-                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFormFragment(accessToken, socialType))
+                        val args = it.second as SocialProfileArgs
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFormFragment(
+                            SocialProfileArgs(args.accessToken, args.socialType, args.name, args.email,args.profileImageUrl)
+                        ))
                     }
                 }
             }

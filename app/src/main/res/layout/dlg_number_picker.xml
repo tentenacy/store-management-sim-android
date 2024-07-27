@@ -36,7 +36,7 @@
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ns_regular"
+            android:fontFamily="@font/suit_regular"
             android:padding="8dp"
             android:text="선택"
             android:textColor="@color/rect_4475"

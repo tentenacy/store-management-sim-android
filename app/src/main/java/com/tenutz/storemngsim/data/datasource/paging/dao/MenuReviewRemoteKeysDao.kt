@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.tenutz.storemngsim.data.datasource.paging.entity.MenuReviews
-import com.tenutz.storemngsim.data.datasource.paging.entity.StoreReviews
 
 @Dao
 interface MenuReviewRemoteKeysDao {

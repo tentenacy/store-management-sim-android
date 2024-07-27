@@ -2,6 +2,7 @@ package com.tenutz.storemngsim.ui.menu.optiongroup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupUpdateRequest
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OptionGroupDetailsViewModel @Inject constructor(
     private val optionGroupRepository: OptionGroupRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     private val _optionGroup = MutableLiveData<OptionGroupResponse>()
@@ -23,6 +25,8 @@ class OptionGroupDetailsViewModel @Inject constructor(
 
     private val _editMode = MutableLiveData<Boolean>(false)
     val editMode: LiveData<Boolean> = _editMode
+
+    private val args = OptionGroupDetailsFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
     fun switchToEditMode() {
         _editMode.value = true
@@ -32,14 +36,19 @@ class OptionGroupDetailsViewModel @Inject constructor(
         _editMode.value = false
     }
 
-    fun optionGroup(mainCateCd: String) {
-        optionGroupRepository.optionGroup(mainCateCd)
+    init {
+        optionGroup()
+    }
+
+    fun optionGroup(callback: () -> Unit = {}) {
+        optionGroupRepository.optionGroup(args.optionGroupCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
                 result.fold(
                     onSuccess = {
                         _optionGroup.value = it
+                        callback()
                     },
                     onFailure = {
                         Logger.e("$it")
@@ -48,10 +57,10 @@ class OptionGroupDetailsViewModel @Inject constructor(
             }.addTo(compositeDisposable)
     }
 
-    fun updateOptionGroup(mainCateCd: String, request: OptionGroupUpdateRequest, callback: () -> Unit) {
-        optionGroupRepository.updateOptionGroup(mainCateCd, request)
+    fun updateOptionGroup(request: OptionGroupUpdateRequest, callback: () -> Unit) {
+        optionGroupRepository.updateOptionGroup(args.optionGroupCode, request)
             .flatMap {
-                optionGroupRepository.optionGroup(mainCateCd)
+                optionGroupRepository.optionGroup(args.optionGroupCode)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

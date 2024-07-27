@@ -9,14 +9,11 @@ data class OptionsResponse(
 ): Parcelable {
     @Parcelize
     data class Option(
-        val storeCode: String?,
-        val optionCode: String?,
+        val storeCode: String,
+        val optionCode: String,
         val optionName: String?,
         val imageUrl: String?,
-        val outOfStock: Boolean,
         val price: Int,
-        val discountingPrice: Int,
-        val discountedPrice: Int,
         val use: Boolean?,
     ): Parcelable
 }

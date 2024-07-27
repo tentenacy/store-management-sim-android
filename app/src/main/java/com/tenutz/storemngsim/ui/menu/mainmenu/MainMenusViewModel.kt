@@ -2,6 +2,7 @@ package com.tenutz.storemngsim.ui.menu.mainmenu
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.menu.MainMenusResponse
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainMenusViewModel @Inject constructor(
     private val menuRepository: MenuRepository,
+    savedStateHandle: SavedStateHandle,
 ): BaseViewModel() {
 
     companion object {
@@ -32,6 +34,8 @@ class MainMenusViewModel @Inject constructor(
     private val _hideRemoval = MutableLiveData(true)
     val hideRemoval: LiveData<Boolean> = _hideRemoval
 
+    private val args = MainMenusFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
     fun showRemoval() {
         _hideRemoval.value = false
         viewEvent(Pair(EVENT_SHOW_REMOVAL, Unit))
@@ -42,17 +46,22 @@ class MainMenusViewModel @Inject constructor(
         viewEvent(Pair(EVENT_HIDE_REMOVAL, Unit))
     }
 
-    fun mainMenus(mainCateCd: String, middleCateCd: String, subCateCd: String, searchText: String? = null) {
+    init {
+        mainMenus()
+    }
+
+    fun mainMenus(mainCateCd: String = "2000", middleCateCd: String = "3000", searchText: String? = null, callback: () -> Unit = {}) {
 
         searchText?.let { query.value = it }
 
-        menuRepository.mainMenus(mainCateCd, middleCateCd, subCateCd, CommonCondition(query = query.value))
+        menuRepository.mainMenus(mainCateCd, middleCateCd, args.subCategory.subCategoryCode, CommonCondition(query = query.value))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
                 result.fold(
                     onSuccess = {
                         _mainMenus.value = it
+                        callback()
                     },
                     onFailure = {
                         Logger.e("$it")

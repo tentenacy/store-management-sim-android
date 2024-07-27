@@ -2,7 +2,7 @@ package com.tenutz.storemngsim.data.datasource.api.dto.category
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.util.*
+import java.util.Date
 
 @Parcelize
 data class MiddleCategoriesResponse(
@@ -10,9 +10,9 @@ data class MiddleCategoriesResponse(
 ): Parcelable {
     @Parcelize
     data class MiddleCategory(
-        val storeCode: String?,
-        val mainCategoryCode: String?,
-        val categoryCode: String?,
+        val storeCode: String,
+        val mainCategoryCode: String,
+        val categoryCode: String,
         val categoryName: String?,
         val use: Boolean,
         val imageName: String?,

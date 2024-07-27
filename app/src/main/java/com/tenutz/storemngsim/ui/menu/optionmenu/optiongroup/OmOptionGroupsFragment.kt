@@ -5,22 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.databinding.FragmentOmOptionGroupsBinding
-import com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.args.OmOptionGroupsNavArgs
+import com.tenutz.storemngsim.ui.menu.optionmenu.optiongroup.base.NavOmOptionGroupFragment
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OmOptionGroupsFragment: Fragment() {
+class OmOptionGroupsFragment: NavOmOptionGroupFragment() {
 
     private var _binding: FragmentOmOptionGroupsBinding? = null
     val binding: FragmentOmOptionGroupsBinding get() = _binding!!
 
-    private lateinit var args: OmOptionGroupsNavArgs
+    private val args: OmOptionGroupsFragmentArgs by navArgs()
 
     val vm: OmOptionGroupsViewModel by navGraphViewModels(R.id.navigation_om_option_group) {
         defaultViewModelProviderFactory
@@ -30,14 +31,6 @@ class OmOptionGroupsFragment: Fragment() {
         OmOptionGroupsAdapter {
 
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        args = requireArguments().getParcelable("optionMenu")!!
-
-        vm.omOptionGroups(args.optionCode)
     }
 
     override fun onCreateView(
@@ -63,7 +56,7 @@ class OmOptionGroupsFragment: Fragment() {
     }
 
     private fun initViews() {
-        binding.args = args
+        binding.args = args.optionMenu
         binding.recyclerOmOptionGroups.adapter = adapter
     }
 
@@ -85,7 +78,7 @@ class OmOptionGroupsFragment: Fragment() {
             findNavController().navigateUp()
         }
         binding.imageOmOptionGroupsHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageOmOptionGroupsHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
@@ -93,15 +86,12 @@ class OmOptionGroupsFragment: Fragment() {
         binding.textOmOptionGroupsEdit.setOnClickListener {
             vm.optionMenuMappers.value?.let {
                 findNavController().navigate(
-                    OmOptionGroupsFragmentDirections.actionOmOptionGroupsFragmentToOmOptionGroupsEditFragment(
-                        args,
-                        it,
-                    )
+                    OmOptionGroupsFragmentDirections.actionOmOptionGroupsFragmentToOmOptionGroupsEditFragment(args.optionMenu, it)
                 )
             }
         }
         binding.fabOmOptionGroupsAdd.setOnClickListener {
-            findNavController().navigate(OmOptionGroupsFragmentDirections.actionOmOptionGroupsFragmentToOmOptionGroupAddFragment(args.optionCode))
+            findNavController().navigate(OmOptionGroupsFragmentDirections.actionOmOptionGroupsFragmentToOmOptionGroupAddFragment(args.optionMenu))
         }
     }
 

@@ -5,7 +5,13 @@ import com.tenutz.storemngsim.data.datasource.api.dto.common.CommonCondition
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.option.*
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionOptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
 import com.tenutz.storemngsim.utils.constant.RetryPolicyConstant
 import com.tenutz.storemngsim.utils.ext.applyRetryPolicy
 import io.reactivex.rxjava3.core.Single
@@ -22,6 +28,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun option(optionCd: String): Single<Result<OptionResponse>> =
@@ -32,6 +39,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun createOption(request: OptionCreateRequest): Single<Result<Unit>> =
@@ -40,22 +48,7 @@ class OptionRepositoryImpl @Inject constructor(
             request.optionCode,
             request.optionName,
             request.price,
-            request.discountedPrice,
-            request.additionalPackagingPrice,
-            request.packaging,
-            request.outOfStock,
             request.use,
-            request.optionNameKor,
-            request.showDateFrom,
-            request.showDateTo,
-            request.showTimeFrom,
-            request.showTimeTo,
-            request.showDayOfWeek,
-            request.eventDateFrom,
-            request.eventDateTo,
-            request.eventTimeFrom,
-            request.eventTimeTo,
-            request.eventDayOfWeek,
         )
             .map { Result.success(it) }
             .compose(
@@ -63,6 +56,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun updateOption(optionCd: String, request: OptionUpdateRequest): Single<Result<Unit>> =
@@ -71,22 +65,7 @@ class OptionRepositoryImpl @Inject constructor(
             request.image,
             request.optionName,
             request.price,
-            request.discountedPrice,
-            request.additionalPackagingPrice,
-            request.packaging,
-            request.outOfStock,
             request.use,
-            request.optionNameKor,
-            request.showDateFrom,
-            request.showDateTo,
-            request.showTimeFrom,
-            request.showTimeTo,
-            request.showDayOfWeek,
-            request.eventDateFrom,
-            request.eventDateTo,
-            request.eventTimeFrom,
-            request.eventTimeTo,
-            request.eventDayOfWeek,
         )
             .map { Result.success(it) }
             .compose(
@@ -94,6 +73,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteOption(optionCd: String): Single<Result<Unit>> =
@@ -105,6 +85,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteOptions(request: OptionsDeleteRequest): Single<Result<Unit>> =
@@ -116,6 +97,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun optionOptionGroups(optionCd: String, commonCond: CommonCondition?): Single<Result<OptionOptionGroupsResponse>> =
@@ -126,6 +108,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun optionMappers(optionCd: String): Single<Result<OptionMappersResponse>> =
@@ -136,6 +119,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun mapToOptionGroups(
@@ -152,6 +136,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun deleteOptionMappers(
@@ -169,6 +154,7 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 
     override fun changeOptionMapperPriorities(
@@ -185,5 +171,6 @@ class OptionRepositoryImpl @Inject constructor(
                     RetryPolicyConstant.TIMEOUT,
                     RetryPolicyConstant.NETWORK,
                     RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                    RetryPolicyConstant.ACCESS_TOKEN_EXPIRED,
                 ) { Result.failure(it) })
 }

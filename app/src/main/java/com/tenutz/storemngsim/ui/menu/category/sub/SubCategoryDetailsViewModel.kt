@@ -2,9 +2,8 @@ package com.tenutz.storemngsim.ui.menu.category.sub
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryUpdateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoryUpdateRequest
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
@@ -18,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SubCategoryDetailsViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     private val _subCategory = MutableLiveData<SubCategoryResponse>()
@@ -25,6 +25,13 @@ class SubCategoryDetailsViewModel @Inject constructor(
 
     private val _editMode = MutableLiveData<Boolean>(false)
     val editMode: LiveData<Boolean> = _editMode
+
+    private val args =
+        SubCategoryDetailsFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    init {
+        subCategory()
+    }
 
     fun switchToEditMode() {
         _editMode.value = true
@@ -34,26 +41,27 @@ class SubCategoryDetailsViewModel @Inject constructor(
         _editMode.value = false
     }
 
-    fun subCategory(mainCateCd: String, middleCateCd: String, subCateCd: String) {
-        categoryRepository.subCategory(mainCateCd, middleCateCd, subCateCd)
+    fun subCategory(mainCateCd: String = "2000", middleCateCd: String = "3000", callback: () -> Unit = {}) {
+        categoryRepository.subCategory(mainCateCd, middleCateCd, args.subCategoryCode)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { result ->
                 result.fold(
                     onSuccess = {
                         _subCategory.value = it
+                        callback()
                     },
                     onFailure = {
                         Logger.e("$it")
                     },
                 )
-            }
+            }.addTo(compositeDisposable)
     }
 
-    fun updateSubCategory(mainCateCd: String, middleCateCd: String, subCateCd: String, request: SubCategoryUpdateRequest, callback: () -> Unit) {
-        categoryRepository.updateSubCategory(mainCateCd, middleCateCd, subCateCd, request)
+    fun updateSubCategory(mainCateCd: String = "2000", middleCateCd: String = "3000", request: SubCategoryUpdateRequest, callback: () -> Unit = {}) {
+        categoryRepository.updateSubCategory(mainCateCd, middleCateCd, args.subCategoryCode, request)
             .flatMap {
-                categoryRepository.subCategory(mainCateCd, middleCateCd, subCateCd)
+                categoryRepository.subCategory(mainCateCd, middleCateCd, args.subCategoryCode)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

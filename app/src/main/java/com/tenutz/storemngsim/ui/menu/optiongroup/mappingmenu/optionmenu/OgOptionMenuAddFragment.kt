@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionsMappedByRequest
 import com.tenutz.storemngsim.databinding.FragmentOgOptionMenuAddBinding
-import com.tenutz.storemngsim.ui.base.BaseFragment
 import com.tenutz.storemngsim.ui.menu.mainmenu.optiongroup.MmOptionGroupAddViewModel
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.optionmenu.base.NavOgOptionMenuFragment
 import com.tenutz.storemngsim.utils.ext.editTextObservable
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -22,14 +20,12 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class OgOptionMenuAddFragment: BaseFragment() {
+class OgOptionMenuAddFragment: NavOgOptionMenuFragment() {
 
     private val disposable = CompositeDisposable()
 
     private var _binding: FragmentOgOptionMenuAddBinding? = null
     val binding: FragmentOgOptionMenuAddBinding get() = _binding!!
-
-    val args: OgOptionMenuAddFragmentArgs by navArgs()
 
     val vm: OgOptionMenuAddViewModel by viewModels()
 
@@ -38,29 +34,17 @@ class OgOptionMenuAddFragment: BaseFragment() {
     }
 
     private val adapter: OgOptionMenuAddAdapter by lazy {
-        OgOptionMenuAddAdapter(
-        ) {
+        OgOptionMenuAddAdapter {
             it.optionCode?.let {
                 vm.mapToOptionMenus(
-                    args.optionGroupCode,
-                    OptionsMappedByRequest(
-                        listOf(it)
-                    )
+                    OptionsMappedByRequest(listOf(it))
                 ) {
-                    pVm.ogOptionMenuMappers(
-                        args.optionGroupCode,
-                    )
+                    pVm.ogOptionMenuMappers()
                 }
             }
         }.apply {
             setHasStableIds(true)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.ogOptionMenusAdd(args.optionGroupCode)
     }
 
     override fun onCreateView(
@@ -112,7 +96,7 @@ class OgOptionMenuAddFragment: BaseFragment() {
             .debounce(500, TimeUnit.MILLISECONDS).skip(1)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                vm.ogOptionMenusAdd(args.optionGroupCode, it)
+                vm.ogOptionMenusAdd(it)
             }
             .addTo(disposable)
     }

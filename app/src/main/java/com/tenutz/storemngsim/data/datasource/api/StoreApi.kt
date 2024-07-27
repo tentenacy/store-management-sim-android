@@ -1,16 +1,31 @@
 package com.tenutz.storemngsim.data.datasource.api
 
 import com.tenutz.storemngsim.data.datasource.api.dto.common.PageResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.store.*
+import com.tenutz.storemngsim.data.datasource.api.dto.store.MenuReviewsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyCreateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.store.ReviewReplyUpdateRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.store.SalesResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.SalesTotalResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByCreditCardResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByMenusTodayResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesByTimeResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByCreditCardResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByMenusResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StatisticsSalesTotalByTimeResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreMainResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreReviewsResponse
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.*
-import java.util.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.HTTP
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface StoreApi {
-
-    @GET("/stores/equipments")
-    fun equipments(): Single<EquipmentsResponse>
 
     @GET("/stores/sales")
     fun sales(

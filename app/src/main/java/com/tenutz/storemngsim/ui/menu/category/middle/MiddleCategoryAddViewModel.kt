@@ -1,15 +1,10 @@
 package com.tenutz.storemngsim.ui.menu.category.middle
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoriesResponse
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MainCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryCreateRequest
 import com.tenutz.storemngsim.data.datasource.api.err.ErrorCode
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.ui.menu.category.main.MainCategoryAddViewModel
 import com.tenutz.storemngsim.utils.ext.toErrorResponseOrNull
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -27,7 +22,7 @@ class MiddleCategoryAddViewModel @Inject constructor(
         const val EVENT_TOAST = 1001
     }
 
-    fun createMiddleCategory(mainCateCd: String, request: MiddleCategoryCreateRequest, callback: () -> Unit) {
+    fun createMiddleCategory(mainCateCd: String = "2000", request: MiddleCategoryCreateRequest, callback: () -> Unit) {
         categoryRepository.createMiddleCategory(mainCateCd, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

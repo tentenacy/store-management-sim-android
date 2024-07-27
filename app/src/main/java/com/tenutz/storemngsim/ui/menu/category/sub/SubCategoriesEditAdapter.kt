@@ -1,7 +1,6 @@
 package com.tenutz.storemngsim.ui.menu.category.sub
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -9,22 +8,20 @@ import android.view.ViewGroup
 import androidx.core.view.MotionEventCompat
 import androidx.core.view.doOnAttach
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoryResponse
 import com.tenutz.storemngsim.databinding.ItemSubCategoriesEditBinding
 import com.tenutz.storemngsim.databinding.ItemSubCategoriesEditTopBinding
 import com.tenutz.storemngsim.ui.base.BaseMVHRecyclerView
 import com.tenutz.storemngsim.ui.base.BaseViewHolder
 import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesEditArgs
-import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesNavArgs
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
-import java.util.*
+import java.util.Collections
 
 sealed class SubCategoriesEditItem(val type: SubCategoriesEditType) {
-    object Header : SubCategoriesEditItem(SubCategoriesEditType.HEADER)
+    data class Header(val value: MiddleCategoryResponse) : SubCategoriesEditItem(SubCategoriesEditType.HEADER)
     data class Data(val value: SubCategoriesEditArgs.SubCategoryEdit) :
         SubCategoriesEditItem(SubCategoriesEditType.DATA)
 }
@@ -37,7 +34,7 @@ sealed class SubCategoriesEditViewHolder(
         val binding: ItemSubCategoriesEditTopBinding,
         vm: SubCategoriesEditViewModel,
         private val onClickListener: (Int, Any?) -> Unit,
-    ) : BaseViewHolder<SubCategoriesNavArgs>(binding.root) {
+    ) : BaseViewHolder<MiddleCategoryResponse>(binding.root) {
 
         init {
 
@@ -51,7 +48,7 @@ sealed class SubCategoriesEditViewHolder(
             }
         }
 
-        override fun bind(position: Int, args: SubCategoriesNavArgs) {
+        override fun bind(position: Int, args: MiddleCategoryResponse) {
             binding.args = args
         }
     }
@@ -87,7 +84,6 @@ sealed class SubCategoriesEditViewHolder(
 enum class SubCategoriesEditType { HEADER, DATA }
 
 class SubCategoriesEditAdapter(
-    private val args: SubCategoriesNavArgs,
     private val vm: SubCategoriesEditViewModel,
     private val onClickListener: (Int, Any?) -> Unit,
     private val onCheckedChangeListener: () -> Unit,
@@ -114,7 +110,7 @@ class SubCategoriesEditAdapter(
         items.getOrNull(position)?.let {
             when (holder) {
                 is SubCategoriesEditViewHolder.SubCategoriesEditTopViewHolder -> {
-                    holder.bind(position, args)
+                    holder.bind(position, (it as SubCategoriesEditItem.Header).value)
                 }
                 is SubCategoriesEditViewHolder.SubCategoryEditViewHolder -> {
                     holder.bind(position, (it as SubCategoriesEditItem.Data).value)
@@ -170,7 +166,7 @@ class SubCategoriesEditAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun checkOrUncheckAll() {
         val items = arrayListOf<SubCategoriesEditItem>()
-        items.add(SubCategoriesEditItem.Header)
+        items.add(this.items.filterIsInstance<SubCategoriesEditItem.Header>().first())
         items.addAll(
             if (this.items.filterIsInstance<SubCategoriesEditItem.Data>()
                     .count { it.value.checked } == this.items.filterIsInstance<SubCategoriesEditItem.Data>().size

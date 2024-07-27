@@ -1,11 +1,10 @@
 package com.tenutz.storemngsim.di.module
 
 import androidx.fragment.app.Fragment
-import com.nhn.android.naverlogin.OAuthLogin
 import com.tenutz.storemngsim.ui.login.handler.FacebookOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.GoogleOAuthLoginHandler
 import com.tenutz.storemngsim.ui.login.handler.KakaoOAuthLoginHandler
-import com.tenutz.storemngsim.ui.login.handler.NaverOAuthLoginHandler
+import com.tenutz.storemngsim.ui.login.handler.NaverOAuthLoginCallback
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +15,8 @@ import dagger.hilt.android.components.FragmentComponent
 class LoginHandlerModule {
 
     @Provides
-    fun provideNaverOAuthLoginHandler(fragment: Fragment, naverLoginManager: OAuthLogin): NaverOAuthLoginHandler {
-        return NaverOAuthLoginHandler(fragment, naverLoginManager)
+    fun provideNaverOAuthLoginCallback(fragment: Fragment): NaverOAuthLoginCallback {
+        return NaverOAuthLoginCallback(fragment)
     }
 
     @Provides

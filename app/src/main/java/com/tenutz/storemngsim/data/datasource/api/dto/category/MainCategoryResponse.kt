@@ -2,7 +2,7 @@ package com.tenutz.storemngsim.data.datasource.api.dto.category
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.util.*
+import java.util.Date
 
 @Parcelize
 data class MainCategoryResponse(

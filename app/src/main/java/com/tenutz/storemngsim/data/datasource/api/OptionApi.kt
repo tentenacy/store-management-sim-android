@@ -3,11 +3,23 @@ package com.tenutz.storemngsim.data.datasource.api
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.common.OptionGroupsMappedByRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.option.*
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionMappersResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionOptionGroupsResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionResponse
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsDeleteRequest
+import com.tenutz.storemngsim.data.datasource.api.dto.option.OptionsResponse
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.HTTP
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface OptionApi {
 
@@ -24,22 +36,7 @@ interface OptionApi {
         @Part("optionCode") optionCode: String,
         @Part("optionName") optionName: String,
         @Part("price") price: Int,
-        @Part("discountedPrice") discountedPrice: Int? = null,
-        @Part("additionalPackagingPrice") additionalPackagingPrice: Int? = null,
-        @Part("packaging") packaging: String,
-        @Part("outOfStock") outOfStock: Boolean,
         @Part("use") use: Boolean,
-        @Part("optionNameKor") optionNameKor: String? = null,
-        @Part("showDateFrom") showDateFrom: String? = null,
-        @Part("showDateTo") showDateTo: String? = null,
-        @Part("showTimeFrom") showTimeFrom: String? = null,
-        @Part("showTimeTo") showTimeTo: String? = null,
-        @Part("showDayOfWeek") showDayOfWeek: String? = null,
-        @Part("eventDateFrom") eventDateFrom: String? = null,
-        @Part("eventDateTo") eventDateTo: String? = null,
-        @Part("eventTimeFrom") eventTimeFrom: String? = null,
-        @Part("eventTimeTo") eventTimeTo: String? = null,
-        @Part("eventDayOfWeek") eventDayOfWeek: String? = null,
     ): Single<Unit>
 
     @Multipart
@@ -49,22 +46,7 @@ interface OptionApi {
         @Part image: MultipartBody.Part? = null,
         @Part("optionName") optionName: String,
         @Part("price") price: Int,
-        @Part("discountedPrice") discountedPrice: Int? = null,
-        @Part("additionalPackagingPrice") additionalPackagingPrice: Int? = null,
-        @Part("packaging") packaging: String,
-        @Part("outOfStock") outOfStock: Boolean,
         @Part("use") use: Boolean?,
-        @Part("optionNameKor") optionNameKor: String? = null,
-        @Part("showDateFrom") showDateFrom: String? = null,
-        @Part("showDateTo") showDateTo: String? = null,
-        @Part("showTimeFrom") showTimeFrom: String? = null,
-        @Part("showTimeTo") showTimeTo: String? = null,
-        @Part("showDayOfWeek") showDayOfWeek: String? = null,
-        @Part("eventDateFrom") eventDateFrom: String? = null,
-        @Part("eventDateTo") eventDateTo: String? = null,
-        @Part("eventTimeFrom") eventTimeFrom: String? = null,
-        @Part("eventTimeTo") eventTimeTo: String? = null,
-        @Part("eventDayOfWeek") eventDayOfWeek: String? = null,
     ): Single<Unit>
 
     @HTTP(method = "DELETE", path = "/options/{optionCd}", hasBody = true)

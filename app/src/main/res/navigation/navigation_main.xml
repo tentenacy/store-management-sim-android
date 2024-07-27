@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_main.xml"
+    android:id="@+id/navigation_main"
     app:startDestination="@id/loginFragment">
 
     <fragment
@@ -12,12 +12,20 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signupFormFragment"
-            app:destination="@id/signupFormFragment" />
+            app:destination="@id/signupFormFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/signupFormFragment"
@@ -27,12 +35,20 @@
         <action
             android:id="@+id/action_signupFormFragment_to_signupSuccessFragment"
             app:destination="@id/signupSuccessFragment"
-            app:popUpTo="@id/loginFragment" />
+            app:popUpTo="@id/loginFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_signupFormFragment_to_termsFragment"
-            app:destination="@id/termsFragment" />
-        <argument android:name="accessToken" app:argType="string" />
-        <argument android:name="socialType" app:argType="string" />
+            app:destination="@id/termsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
+        <argument android:name="socialProfile"
+            app:argType="com.tenutz.storemngsim.ui.login.args.SocialProfileArgs" />
     </fragment>
     <fragment
         android:id="@+id/signupSuccessFragment"
@@ -43,7 +59,11 @@
             android:id="@+id/action_signupSuccessFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -53,10 +73,18 @@
 
         <action
             android:id="@+id/action_mainFragment_to_navigation_statistics"
-            app:destination="@id/navigation_statistics" />
+            app:destination="@id/navigation_statistics"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_mainFragment_to_notificationFragment"
-            app:destination="@id/notificationFragment" />
+            app:destination="@id/notificationFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
 
         <!--
                 <action
@@ -89,12 +117,48 @@
         android:name="com.tenutz.storemngsim.ui.help.HelpsFragment"
         android:label="HelpsFragment"
         tools:layout="@layout/fragment_helps" />
+    <!--
     <include app:graph="@navigation/navigation_main_category" />
     <include app:graph="@navigation/navigation_middle_category" />
+    -->
     <include app:graph="@navigation/navigation_sub_category" />
+    <action
+        android:id="@+id/show_sub_category"
+        app:destination="@id/navigation_sub_category"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
+
     <include app:graph="@navigation/navigation_main_menu" />
+    <action
+        android:id="@+id/show_main_menu"
+        app:destination="@id/navigation_main_menu"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right">
+        <argument android:name="subCategory" app:argType="com.tenutz.storemngsim.ui.menu.mainmenu.args.MainMenusNavArgs" />
+    </action>
+
     <include app:graph="@navigation/navigation_option_menu" />
+    <action
+        android:id="@+id/show_option_menu"
+        app:destination="@id/navigation_option_menu"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
+
     <include app:graph="@navigation/navigation_option_group" />
+    <action
+        android:id="@+id/show_option_group"
+        app:destination="@id/navigation_option_group"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
+
     <include app:graph="@navigation/navigation_review" />
     <include app:graph="@navigation/navigation_statistics" />
     <fragment
@@ -116,32 +180,60 @@
         android:id="@+id/action_global_mainFragment"
         app:destination="@id/mainFragment"
         app:popUpTo="@id/mainFragment"
-        app:popUpToInclusive="true" />
+        app:popUpToInclusive="true"
+        app:enterAnim="@anim/to_left"
+        app:exitAnim="@anim/from_right"
+        app:popEnterAnim="@anim/to_right"
+        app:popExitAnim="@anim/from_left" />
     <action
         android:id="@+id/action_global_helpsFragment"
-        app:destination="@id/helpsFragment" />
+        app:destination="@id/helpsFragment"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
     <action
         android:id="@+id/action_global_notificationFragment"
-        app:destination="@id/notificationFragment" />
+        app:destination="@id/notificationFragment"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
     <action
         android:id="@+id/action_global_settingsFragment"
-        app:destination="@id/settingsFragment" />
+        app:destination="@id/settingsFragment"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
     <action
         android:id="@+id/action_global_nav_review"
-        app:destination="@id/navigation_review" />
+        app:destination="@id/navigation_review"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
     <action
         android:id="@+id/action_global_nav_statistics"
-        app:destination="@id/navigation_statistics" />
+        app:destination="@id/navigation_statistics"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
     <action
         android:id="@+id/action_global_to_salesFragment"
-        app:destination="@id/salesFragment" />
+        app:destination="@id/salesFragment"
+        app:enterAnim="@anim/from_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_left"
+        app:popExitAnim="@anim/to_right" />
     <action
         android:id="@+id/action_global_to_loginFragment"
-        app:destination="@id/loginFragment" />
-    <action android:id="@+id/action_global_nav_mainCategory" app:destination="@id/navigation_main_category" />
-    <action android:id="@+id/action_global_nav_mainMenu" app:destination="@id/navigation_main_menu" />
-    <action android:id="@+id/action_global_nav_optionMenu" app:destination="@id/navigation_option_menu" />
-    <action android:id="@+id/action_global_nav_optionGroup" app:destination="@id/navigation_option_group" />
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/to_left"
+        app:exitAnim="@anim/from_right"
+        app:popEnterAnim="@anim/to_right"
+        app:popExitAnim="@anim/from_left" />
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.tenutz.storemngsim.ui.notification.NotificationFragment"
@@ -154,6 +246,40 @@
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_termsFragment"
-            app:destination="@id/termsFragment" />
+            app:destination="@id/termsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_settingsFragment_to_profileDetailsFragment"
+            app:destination="@id/profileDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileDetailsFragment"
+        android:name="com.tenutz.storemngsim.ui.settings.profile.ProfileDetailsFragment"
+        android:label="ProfileDetailsFragment"
+        tools:layout="@layout/fragment_profile_details" >
+        <action
+            android:id="@+id/action_profileDetailsFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.tenutz.storemngsim.ui.settings.profile.ProfileEditFragment"
+        android:label="ProfileEditFragment"
+        tools:layout="@layout/fragment_profile_edit">
+
+        <argument
+            android:name="profile"
+            app:argType="com.tenutz.storemngsim.ui.settings.profile.args.ProfileArgs" />
     </fragment>
 </navigation>

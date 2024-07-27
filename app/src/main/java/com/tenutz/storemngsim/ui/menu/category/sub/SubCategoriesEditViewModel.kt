@@ -2,15 +2,17 @@ package com.tenutz.storemngsim.ui.menu.category.sub
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoriesDeleteRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.category.CategoryPrioritiesChangeRequest
-import com.tenutz.storemngsim.data.datasource.api.dto.category.MiddleCategoriesResponse
 import com.tenutz.storemngsim.data.datasource.api.dto.category.SubCategoriesResponse
 import com.tenutz.storemngsim.data.repository.category.CategoryRepository
+import com.tenutz.storemngsim.di.qualifier.NavigationGraphReference
+import com.tenutz.storemngsim.di.qualifier.NavigationGraphs
 import com.tenutz.storemngsim.ui.base.BaseViewModel
-import com.tenutz.storemngsim.ui.menu.category.middle.args.MiddleCategoriesEditArgs
 import com.tenutz.storemngsim.ui.menu.category.sub.args.SubCategoriesEditArgs
+import com.tenutz.storemngsim.usecase.GetSharedDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -20,6 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SubCategoriesEditViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
     companion object {
@@ -32,31 +35,34 @@ class SubCategoriesEditViewModel @Inject constructor(
     private val _checkedItemCount = MutableLiveData(0)
     val checkedItemCount: LiveData<Int> = _checkedItemCount
 
+    private val args = SubCategoriesEditFragmentArgs.fromSavedStateHandle(savedStateHandle)
+
+    init {
+        _subCategoriesEdit.value = SubCategoriesEditArgs(
+            args.subCategories.subCategories.map { subCategory ->
+                SubCategoriesEditArgs.SubCategoryEdit(
+                    subCategory.storeCode,
+                    subCategory.mainCategoryCode,
+                    subCategory.middleCategoryCode,
+                    subCategory.categoryCode,
+                    subCategory.categoryName,
+                    subCategory.use,
+                    subCategory.order,
+                    subCategory.createdAt,
+                    subCategory.lastModifiedAt,
+                )
+            },
+            args.subCategories.middleCategory,
+        )
+    }
+
     fun updateCheckedItemCount() {
         subCategoriesEdit.value?.let {
             _checkedItemCount.value = it.subCategoriesEdit.count { it.checked }
         }
     }
 
-    fun setSubCategoriesEdit(args: SubCategoriesResponse) {
-        _subCategoriesEdit.value = SubCategoriesEditArgs(
-            args.subCategories.map {
-                SubCategoriesEditArgs.SubCategoryEdit(
-                    it.storeCode,
-                    it.mainCategoryCode,
-                    it.middleCategoryCode,
-                    it.categoryCode,
-                    it.categoryName,
-                    it.use,
-                    it.order,
-                    it.createdAt,
-                    it.lastModifiedAt,
-                )
-            }
-        )
-    }
-
-    fun deleteSubCategories(mainCateCd: String, middleCateCd: String, request: CategoriesDeleteRequest, callback: () -> Unit) {
+    fun deleteSubCategories(mainCateCd: String = "2000", middleCateCd: String = "3000", request: CategoriesDeleteRequest, callback: () -> Unit) {
         categoryRepository.deleteSubCategories(mainCateCd, middleCateCd, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -74,7 +80,7 @@ class SubCategoriesEditViewModel @Inject constructor(
             .addTo(compositeDisposable)
     }
 
-    fun changeSubCategoryPriorities(mainCateCd: String, middleCateCd: String, request: CategoryPrioritiesChangeRequest, callback: () -> Unit) {
+    fun changeSubCategoryPriorities(mainCateCd: String = "2000", middleCateCd: String = "3000", request: CategoryPrioritiesChangeRequest, callback: () -> Unit) {
         categoryRepository.changeSubCategoryPriorities(mainCateCd, middleCateCd, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,26 +14,26 @@ import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMapperPrioritiesChangeRequest
 import com.tenutz.storemngsim.data.datasource.api.dto.optiongroup.OptionGroupMainMenuMappersDeleteRequest
-import com.tenutz.storemngsim.databinding.*
-import com.tenutz.storemngsim.ui.base.BaseFragment
+import com.tenutz.storemngsim.databinding.FragmentOgMainMenusEditBinding
 import com.tenutz.storemngsim.ui.menu.category.main.MainCategoriesEditViewModel
-import com.tenutz.storemngsim.ui.menu.category.middle.*
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusFragmentArgs
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.OgMappingMenusViewModel
+import com.tenutz.storemngsim.ui.menu.optiongroup.mappingmenu.mainmenu.base.NavOgMainMenuFragment
 import com.tenutz.storemngsim.utils.ItemTouchHelperCallback
 import com.tenutz.storemngsim.utils.OnDragListener
 import com.tenutz.storemngsim.utils.ext.mainActivity
+import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OgMainMenusEditFragment: BaseFragment(), OnDragListener<OgMainMenusEditViewHolder> {
+class OgMainMenusEditFragment: NavOgMainMenuFragment(), OnDragListener<OgMainMenusEditViewHolder> {
 
     private var _binding: FragmentOgMainMenusEditBinding? = null
     val binding: FragmentOgMainMenusEditBinding get() = _binding!!
 
-    val args: OgMainMenusEditFragmentArgs by navArgs()
-
     val vm: OgMainMenusEditViewModel by viewModels()
 
-    private val pVm: OgMainMenusViewModel by navGraphViewModels(R.id.navigation_og_mapping_menu) {
+    private val ogMainMenusVm: OgMainMenusViewModel by navGraphViewModels(R.id.navigation_og_mapping_menu) {
         defaultViewModelProviderFactory
     }
 
@@ -50,12 +49,6 @@ class OgMainMenusEditFragment: BaseFragment(), OnDragListener<OgMainMenusEditVie
     }
 
     private lateinit var itemTouchHelper: ItemTouchHelper
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.setOgMainMenusEdit(args.ogMainMenuMappers)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,6 +73,7 @@ class OgMainMenusEditFragment: BaseFragment(), OnDragListener<OgMainMenusEditVie
     }
 
     private fun initViews() {
+        val args: OgMappingMenusFragmentArgs by navArgs()
         binding.args = args.optionGroup
         binding.recyclerOgMainMenusEdit.adapter = adapter
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
@@ -91,14 +85,13 @@ class OgMainMenusEditFragment: BaseFragment(), OnDragListener<OgMainMenusEditVie
             findNavController().navigateUp()
         }
         binding.imageOgMainMenusEditHome.setOnClickListener {
-            findNavController().navigate(R.id.action_global_mainFragment)
+            mainActivity().navigateToMainFragment()
         }
         binding.imageOgMainMenusEditHamburger.setOnClickListener {
             mainActivity().binding.drawerMain.openDrawer(GravityCompat.END)
         }
         binding.btnOgMainMenusEditBottomContainer.setOnClickListener {
             vm.deleteOgMainMenus(
-                args.optionGroup.optionGroupCode,
                 OptionGroupMainMenuMappersDeleteRequest(
                     adapter.items.filter { it.checked }.mapNotNull {
                         it.takeIf {
@@ -117,7 +110,7 @@ class OgMainMenusEditFragment: BaseFragment(), OnDragListener<OgMainMenusEditVie
                     }
                 )
             ) {
-                pVm.ogMainMenuMappers(args.optionGroup.optionGroupCode)
+                ogMainMenusVm.ogMainMenuMappers()
             }
         }
 
@@ -154,7 +147,6 @@ class OgMainMenusEditFragment: BaseFragment(), OnDragListener<OgMainMenusEditVie
     override fun onDragOver() {
         Logger.i(adapter.items.toString())
         vm.changeMiddleCategoryPriorities(
-            args.optionGroup.optionGroupCode,
             OptionGroupMainMenuMapperPrioritiesChangeRequest(
                 adapter.items.mapIndexedNotNull { priority: Int, item ->
                     item.takeIf {
@@ -174,7 +166,7 @@ class OgMainMenusEditFragment: BaseFragment(), OnDragListener<OgMainMenusEditVie
                 }
             ),
         ) {
-            pVm.ogMainMenuMappers(args.optionGroup.optionGroupCode)
+            ogMainMenusVm.ogMainMenuMappers()
         }
     }
 }

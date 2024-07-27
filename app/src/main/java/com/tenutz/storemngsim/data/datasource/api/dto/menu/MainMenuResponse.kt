@@ -1,6 +1,6 @@
 package com.tenutz.storemngsim.data.datasource.api.dto.menu
 
-import java.util.*
+import java.util.Date
 
 data class MainMenuResponse(
     val storeCode: String?,
