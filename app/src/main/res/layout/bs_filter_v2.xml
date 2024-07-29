@@ -13,7 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_bsfilter_container"
+        android:id="@+id/constraint_bsfilter_v2_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:behavior_hideable="true"
@@ -21,7 +21,7 @@
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <ImageView
-            android:id="@+id/image_bsfilter_refresh"
+            android:id="@+id/image_bsfilter_v2_refresh"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="15dp"
@@ -33,7 +33,7 @@
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_bsfilter_title"
+            android:id="@+id/text_bsfilter_v2_title"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,14 +41,14 @@
             android:text="필터검색"
             android:textColor="#000000"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/image_bsfilter_refresh"
+            app:layout_constraintBottom_toBottomOf="@id/image_bsfilter_v2_refresh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image_bsfilter_refresh"
+            app:layout_constraintTop_toTopOf="@id/image_bsfilter_v2_refresh"
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/text_bsfilter_label_pay_type"
+            android:id="@+id/text_bsfilter_v2_label_pay_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="결제유형"
@@ -58,23 +58,23 @@
             android:textColor="@color/black"
             android:layout_marginTop="18dp"
             android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_title"
+            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_v2_title"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText" />
 
         <RadioGroup
-            android:id="@+id/radiogroup_bsfilter_pay_type_l1"
+            android:id="@+id/radiogroup_bsfilter_v2_pay_type_l1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:orientation="horizontal"
-            tools:checkedButton="@id/radio_bsfilter_pay_type_1"
+            tools:checkedButton="@id/radio_bsfilter_v2_pay_type_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_label_pay_type">
+            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_v2_label_pay_type">
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_pay_type_1"
+                android:id="@+id/radio_bsfilter_v2_pay_type_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -93,7 +93,7 @@
                 tools:ignore="HardcodedText" />
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_pay_type_2"
+                android:id="@+id/radio_bsfilter_v2_pay_type_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -112,7 +112,7 @@
                 tools:ignore="HardcodedText" />
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_pay_type_3"
+                android:id="@+id/radio_bsfilter_v2_pay_type_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -131,7 +131,7 @@
                 tools:ignore="HardcodedText" />
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_pay_type_4"
+                android:id="@+id/radio_bsfilter_v2_pay_type_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -151,8 +151,39 @@
 
         </RadioGroup>
 
+        <RadioGroup
+            android:id="@+id/radiogroup_bsfilter_v2_pay_type_l2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            tools:checkedButton="@id/radio_bsfilter_v2_pay_type_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_bsfilter_v2_pay_type_l1">
+
+            <RadioButton
+                android:id="@+id/radio_bsfilter_v2_pay_type_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_radius_8dp"
+                style="@style/Text"
+                android:button="@null"
+                android:fontFamily="@font/suit_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:layout_marginHorizontal="4dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="멤버쉽"
+                android:textColor="@color/radio_text_2"
+                android:checked='@{pVm.paymentType.equals("04")}'
+                tools:ignore="HardcodedText" />
+        </RadioGroup>
+
         <TextView
-            android:id="@+id/text_bsfilter_label_approval_type"
+            android:id="@+id/text_bsfilter_v2_label_approval_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="승인유형"
@@ -162,23 +193,23 @@
             android:textColor="@color/black"
             android:layout_marginTop="16dp"
             android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/radiogroup_bsfilter_pay_type_l1"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_bsfilter_v2_pay_type_l2"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText" />
 
         <RadioGroup
-            android:id="@+id/radiogroup_bsfilter_approval_type"
+            android:id="@+id/radiogroup_bsfilter_v2_approval_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:orientation="horizontal"
-            android:checkedButton="@id/radio_bsfilter_approval_type_1"
+            android:checkedButton="@id/radio_bsfilter_v2_approval_type_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_label_approval_type">
+            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_v2_label_approval_type">
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_approval_type_1"
+                android:id="@+id/radio_bsfilter_v2_approval_type_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -197,7 +228,7 @@
                 tools:ignore="HardcodedText" />
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_approval_type_2"
+                android:id="@+id/radio_bsfilter_v2_approval_type_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -216,7 +247,7 @@
                 tools:ignore="HardcodedText" />
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_approval_type_3"
+                android:id="@+id/radio_bsfilter_v2_approval_type_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -237,7 +268,7 @@
         </RadioGroup>
 
         <TextView
-            android:id="@+id/text_bsfilter_label_order_type"
+            android:id="@+id/text_bsfilter_v2_label_order_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="주문타입"
@@ -247,23 +278,23 @@
             android:textColor="@color/black"
             android:layout_marginTop="16dp"
             android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/radiogroup_bsfilter_approval_type"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_bsfilter_v2_approval_type"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText" />
 
         <RadioGroup
-            android:id="@+id/radiogroup_bsfilter_order_type"
+            android:id="@+id/radiogroup_bsfilter_v2_order_type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:orientation="horizontal"
-            android:checkedButton="@id/radio_bsfilter_order_type_1"
+            android:checkedButton="@id/radio_bsfilter_v2_order_type_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_label_order_type">
+            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_v2_label_order_type">
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_order_type_1"
+                android:id="@+id/radio_bsfilter_v2_order_type_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -282,7 +313,7 @@
                 tools:ignore="HardcodedText" />
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_order_type_2"
+                android:id="@+id/radio_bsfilter_v2_order_type_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -301,7 +332,7 @@
                 tools:ignore="HardcodedText" />
 
             <RadioButton
-                android:id="@+id/radio_bsfilter_order_type_3"
+                android:id="@+id/radio_bsfilter_v2_order_type_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_radius_8dp"
@@ -319,10 +350,30 @@
                 android:checked='@{pVm.orderType.equals("06")}'
                 tools:ignore="HardcodedText" />
 
+            <RadioButton
+                android:id="@+id/radio_bsfilter_v2_order_type_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_radius_8dp"
+                style="@style/Text"
+                android:button="@null"
+                android:fontFamily="@font/suit_regular"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:layout_marginHorizontal="4dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="태블릿"
+                android:textColor="@color/radio_text_2"
+                android:checked='@{pVm.orderType.equals("08")}'
+                tools:ignore="HardcodedText" />
+
+
         </RadioGroup>
 
         <TextView
-            android:id="@+id/text_bsfilter_label_duration"
+            android:id="@+id/text_bsfilter_v2_label_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="기간선택"
@@ -332,22 +383,22 @@
             android:textColor="@color/black"
             android:layout_marginTop="16dp"
             android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/radiogroup_bsfilter_order_type"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_bsfilter_v2_order_type"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_bsfilter_duration_from_container"
+            android:id="@+id/constraint_bsfilter_v2_duration_from_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:background="@drawable/border_radius_8dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_label_duration"
+            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_v2_label_duration"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/text_bsfilter_duration_from"
+                android:id="@+id/text_bsfilter_v2_duration_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Text"
@@ -359,20 +410,20 @@
                 android:layout_marginVertical="10dp"
                 android:text='@{pVm.dateFrom != null ? TimeExtKt.toDateFormat(pVm.dateFrom) : "0000-00-00"}'
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintEnd_toStartOf="@id/image_bsfilter_duration_from"
+                app:layout_constraintEnd_toStartOf="@id/image_bsfilter_v2_duration_from"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
             <ImageView
-                android:id="@+id/image_bsfilter_duration_from"
+                android:id="@+id/image_bsfilter_v2_duration_from"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_black_calendar"
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="5.5dp"
                 android:layout_marginVertical="10dp"
-                app:layout_constraintStart_toEndOf="@id/text_bsfilter_duration_from"
+                app:layout_constraintStart_toEndOf="@id/text_bsfilter_v2_duration_from"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -381,7 +432,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/text_bsfilter_duration_from_to"
+            android:id="@+id/text_bsfilter_v2_duration_from_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -390,23 +441,23 @@
             android:text="~"
             android:fontFamily="@font/suit_regular"
             android:layout_marginStart="10dp"
-            app:layout_constraintTop_toTopOf="@id/constraint_bsfilter_duration_from_container"
-            app:layout_constraintBottom_toBottomOf="@id/constraint_bsfilter_duration_from_container"
-            app:layout_constraintStart_toEndOf="@id/constraint_bsfilter_duration_from_container"
+            app:layout_constraintTop_toTopOf="@id/constraint_bsfilter_v2_duration_from_container"
+            app:layout_constraintBottom_toBottomOf="@id/constraint_bsfilter_v2_duration_from_container"
+            app:layout_constraintStart_toEndOf="@id/constraint_bsfilter_v2_duration_from_container"
             tools:ignore="HardcodedText" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_bsfilter_duration_to_container"
+            android:id="@+id/constraint_bsfilter_v2_duration_to_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:background="@drawable/border_radius_8dp"
-            app:layout_constraintTop_toTopOf="@id/text_bsfilter_duration_from_to"
-            app:layout_constraintBottom_toBottomOf="@id/text_bsfilter_duration_from_to"
-            app:layout_constraintStart_toEndOf="@id/text_bsfilter_duration_from_to">
+            app:layout_constraintTop_toTopOf="@id/text_bsfilter_v2_duration_from_to"
+            app:layout_constraintBottom_toBottomOf="@id/text_bsfilter_v2_duration_from_to"
+            app:layout_constraintStart_toEndOf="@id/text_bsfilter_v2_duration_from_to">
 
             <TextView
-                android:id="@+id/text_bsfilter_duration_to"
+                android:id="@+id/text_bsfilter_v2_duration_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Text"
@@ -418,20 +469,20 @@
                 android:layout_marginVertical="10dp"
                 android:text='@{pVm.dateTo != null ? TimeExtKt.toDateFormat(pVm.dateTo) : "0000-00-00"}'
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintEnd_toStartOf="@id/image_bsfilter_duration_to"
+                app:layout_constraintEnd_toStartOf="@id/image_bsfilter_v2_duration_to"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
             <ImageView
-                android:id="@+id/image_bsfilter_duration_to"
+                android:id="@+id/image_bsfilter_v2_duration_to"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_black_calendar"
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="5.5dp"
                 android:layout_marginVertical="10dp"
-                app:layout_constraintStart_toEndOf="@id/text_bsfilter_duration_to"
+                app:layout_constraintStart_toEndOf="@id/text_bsfilter_v2_duration_to"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -440,7 +491,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/text_bsfilter_label_order_search"
+            android:id="@+id/text_bsfilter_v2_label_order_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="주문번호 검색"
@@ -450,12 +501,12 @@
             android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/constraint_bsfilter_duration_from_container"
+            app:layout_constraintTop_toBottomOf="@id/constraint_bsfilter_v2_duration_from_container"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText" />
 
         <EditText
-            android:id="@+id/edit_bsfilter_label_order_search"
+            android:id="@+id/edit_bsfilter_v2_label_order_search"
             style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -475,11 +526,11 @@
             android:text="@{pVm.query}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_label_order_search"
+            app:layout_constraintTop_toBottomOf="@id/text_bsfilter_v2_label_order_search"
             tools:ignore="HardcodedText" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_bsfilter_apply"
+            android:id="@+id/btn_bsfilter_v2_apply"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_bottom"
@@ -493,7 +544,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_bsfilter_label_order_search"
+            app:layout_constraintTop_toBottomOf="@+id/edit_bsfilter_v2_label_order_search"
             tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

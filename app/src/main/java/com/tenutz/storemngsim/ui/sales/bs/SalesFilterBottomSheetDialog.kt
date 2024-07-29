@@ -28,16 +28,16 @@ class SalesFilterBottomSheetDialog(
         override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
 
             binding.radiogroupBsfilterPayTypeL1.setOnCheckedChangeListener(null)
-            binding.radiogroupBsfilterPayTypeL2.setOnCheckedChangeListener(null)
+//            binding.radiogroupBsfilterPayTypeL2.setOnCheckedChangeListener(null)
 
             if(group == binding.radiogroupBsfilterPayTypeL1) {
-                binding.radiogroupBsfilterPayTypeL2.clearCheck()
+//                binding.radiogroupBsfilterPayTypeL2.clearCheck()
             } else {
                 binding.radiogroupBsfilterPayTypeL1.clearCheck()
             }
 
             binding.radiogroupBsfilterPayTypeL1.setOnCheckedChangeListener(this)
-            binding.radiogroupBsfilterPayTypeL2.setOnCheckedChangeListener(this)
+//            binding.radiogroupBsfilterPayTypeL2.setOnCheckedChangeListener(this)
         }
     }
 
@@ -61,9 +61,9 @@ class SalesFilterBottomSheetDialog(
         binding.radiogroupBsfilterPayTypeL1.setOnCheckedChangeListener(
             onPayTypeCheckedChangeListener
         )
-        binding.radiogroupBsfilterPayTypeL2.setOnCheckedChangeListener(
-            onPayTypeCheckedChangeListener
-        )
+//        binding.radiogroupBsfilterPayTypeL2.setOnCheckedChangeListener(
+//            onPayTypeCheckedChangeListener
+//        )
     }
 
     private fun setOnClickListeners() {
@@ -84,7 +84,7 @@ class SalesFilterBottomSheetDialog(
                     R.id.radio_bsfilter_pay_type_3 -> "02"
                     R.id.radio_bsfilter_pay_type_4 -> "03"
                     else -> null
-                } ?: if(binding.radiogroupBsfilterPayTypeL2.checkedRadioButtonId == R.id.radio_bsfilter_pay_type_5) "04" else null,
+                }/* ?: if(binding.radiogroupBsfilterPayTypeL2.checkedRadioButtonId == R.id.radio_bsfilter_pay_type_5) "04" else null*/,
                 approvalType = when(binding.radiogroupBsfilterApprovalType.checkedRadioButtonId) {
                     R.id.radio_bsfilter_approval_type_2 -> "N"
                     R.id.radio_bsfilter_approval_type_3 -> "C"
@@ -93,7 +93,7 @@ class SalesFilterBottomSheetDialog(
                 orderType = when(binding.radiogroupBsfilterOrderType.checkedRadioButtonId) {
                     R.id.radio_bsfilter_order_type_2 -> "05"
                     R.id.radio_bsfilter_order_type_3 -> "06"
-                    R.id.radio_bsfilter_order_type_4 -> "08"
+                    /*R.id.radio_bsfilter_order_type_4 -> "08"*/
                     else -> null
                 },
                 binding.editBsfilterLabelOrderSearch.text.toString(),

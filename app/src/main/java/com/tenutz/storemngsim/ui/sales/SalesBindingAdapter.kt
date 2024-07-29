@@ -18,9 +18,9 @@ object SalesBindingAdapter {
             "03" -> {
                 textView.text = "쿠폰"
             }
-            "04" -> {
-                textView.text = "멤버쉽"
-            }
+//            "04" -> {
+//                textView.text = "멤버쉽"
+//            }
         }
     }
 
@@ -49,9 +49,9 @@ object SalesBindingAdapter {
             "06" -> {
                 textView.text = "포장"
             }
-            "08" -> {
-                textView.text = "태블릿"
-            }
+//            "08" -> {
+//                textView.text = "태블릿"
+//            }
         }
     }
 

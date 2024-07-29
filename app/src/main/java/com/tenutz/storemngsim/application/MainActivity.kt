@@ -16,7 +16,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModelProvider
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.core.result.ActivityResultFactory
 import com.tenutz.storemngsim.data.datasource.api.dto.store.StoreMainResponse
@@ -25,10 +24,8 @@ import com.tenutz.storemngsim.data.datasource.sharedpref.EventsSharedPref
 import com.tenutz.storemngsim.databinding.ActivityMainBinding
 import com.tenutz.storemngsim.databinding.DrawermenuBinding
 import com.tenutz.storemngsim.ui.common.LogoutDialog
-import com.tenutz.storemngsim.ui.main.MainViewModel
 import com.tenutz.storemngsim.utils.MyToast
 import com.tenutz.storemngsim.utils.ext.dismissAllDialogs
-import com.tenutz.storemngsim.utils.ext.navController
 import com.tenutz.storemngsim.utils.ext.navigateToHelpsFragment
 import com.tenutz.storemngsim.utils.ext.navigateToLoginFragment
 import com.tenutz.storemngsim.utils.ext.navigateToMainMenusFragmentV2
@@ -45,7 +42,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
-import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -62,14 +58,9 @@ class MainActivity : AppCompatActivity() {
         binding.drawerMain.closeDrawer(GravityCompat.END)
     }
 
-    val vm: GlobalViewModel by viewModels()
+    private val compositeDisposable = CompositeDisposable()
 
-    private val mainVm: MainViewModel by lazy {
-        ViewModelProvider(
-            navController.getViewModelStoreOwner(R.id.navigation_main),
-            defaultViewModelProviderFactory
-        )[MainViewModel::class.java]
-    }
+    val vm: GlobalViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +75,11 @@ class MainActivity : AppCompatActivity() {
         observeData()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+    }
+
     private fun initViews() {
         drawermenuBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.drawermenu, binding.navMain, true)
@@ -94,10 +90,6 @@ class MainActivity : AppCompatActivity() {
     fun updateDrawerMenu(storeMain: StoreMainResponse) {
         drawermenuBinding.username = storeMain.storeManagerName
         drawermenuBinding.storeName = storeMain.storeName
-        drawermenuBinding.textDrawermenu2Menu1.setOnClickListener { v: View ->
-            navigateToSubCategoriesFragment()
-            binding.drawerMain.closeDrawer(GravityCompat.END)
-        }
     }
 
     private fun observeData() {
@@ -122,15 +114,19 @@ class MainActivity : AppCompatActivity() {
                             navController.graph = graph
                         }
 */
-                        Single.timer(1, TimeUnit.SECONDS)
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe { _ ->
-                                MyToast.create(this, "장시간 이용하지 않아 자동 로그아웃 되었습니다.", 200)?.show()
-                                supportFragmentManager.dismissAllDialogs()
-                                navigateToLoginFragment()
+                        val refreshTokenExpired = it.second as Boolean
 
-                            }
-                            .dispose()
+                        if(refreshTokenExpired) {
+                            MyToast.create(this, "장시간 이용하지 않아 자동 로그아웃 되었습니다.", 200)?.show()
+                            Single.timer(1, TimeUnit.SECONDS)
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe { _ ->
+                                    supportFragmentManager.dismissAllDialogs()
+                                    navigateToLoginFragment()
+                                }.addTo(compositeDisposable)
+                        } else {
+                            navigateToLoginFragment()
+                        }
                     }
                 }
             }
@@ -145,6 +141,10 @@ class MainActivity : AppCompatActivity() {
             }.show(supportFragmentManager, "logoutDialog")
         }
         drawermenuBinding.btnDrawermenuClose.setOnClickListener(menuCloseOnClickListener)
+        drawermenuBinding.textDrawermenu2Menu1.setOnClickListener { v: View ->
+            navigateToSubCategoriesFragment()
+            binding.drawerMain.closeDrawer(GravityCompat.END)
+        }
         drawermenuBinding.textDrawermenu2Menu2.setOnClickListener {
             navigateToMainMenusFragmentV2()
             binding.drawerMain.closeDrawer(GravityCompat.END)

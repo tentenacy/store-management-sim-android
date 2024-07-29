@@ -47,6 +47,7 @@
             app:layout_constraintBottom_toTopOf="@id/image_login_kakao"
             app:layout_constraintEnd_toEndOf="@id/view_login_divider1"
             app:layout_constraintStart_toStartOf="@id/view_login_divider1"
+            tools:text="키오스크Sim 시작하기"
             tools:ignore="HardcodedText,TextContrastCheck" />
 
         <ImageView

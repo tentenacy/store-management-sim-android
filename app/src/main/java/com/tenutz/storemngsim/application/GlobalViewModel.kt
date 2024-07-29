@@ -26,7 +26,7 @@ class GlobalViewModel @Inject constructor(
 
     override fun onRefreshTokenExpired() {
         Logger.d("onRefreshTokenExpired")
-        logout()
+        logout(true)
     }
 
     override fun onCleared() {
@@ -34,10 +34,10 @@ class GlobalViewModel @Inject constructor(
         super.onCleared()
     }
 
-    fun logout() {
+    fun logout(refreshTokenExpired: Boolean = false) {
         oauthLoginManagerMap[OAuthToken.socialType]?.logout()
         OAuthToken.clear()
         Token.clear()
-        viewEvent(Pair(EVENT_GLOBAL_NAVIGATE_TO_LOGIN, Unit))
+        viewEvent(Pair(EVENT_GLOBAL_NAVIGATE_TO_LOGIN, refreshTokenExpired))
     }
 }
