@@ -6,10 +6,11 @@ import java.util.Date
 
 @Parcelize
 data class StoreMainResponse(
-    val siteCode: String?,
-    val storeCode: String?,
+    val siteCode: String,
+    val storeCode: String,
     val storeName: String?,
     val storeManagerName: String?,
+    val kioskCode: String,
     val todaySalesAmountTotal: Int?,
     val yesterdaySalesAmountTotal: Int?,
     val thisMonthSalesAmountTotal: Int?,

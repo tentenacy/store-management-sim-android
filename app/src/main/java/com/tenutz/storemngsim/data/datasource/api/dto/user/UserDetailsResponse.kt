@@ -17,5 +17,6 @@ data class UserDetailsResponse(
     val phoneNumber: String,
     val storeName: String?,
     var address: String?,
+    val kioskCode: String,
     val registeredAt: Date?,
 ): Parcelable

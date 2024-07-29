@@ -26,6 +26,9 @@ class SignupSuccessFragment: BaseFragment() {
 
         _binding = FragmentSignupSuccessBinding.inflate(inflater, container, false)
 
+        binding.vm = vm
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 
@@ -33,19 +36,6 @@ class SignupSuccessFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setOnClickListeners()
-        observeData()
-    }
-
-    private fun observeData() {
-        vm.viewEvent.observe(viewLifecycleOwner) { event ->
-            event.getContentIfNotHandled()?.let {
-                when (it.first) {
-                    SignupSuccessViewModel.EVENT_NAVIGATE_TO_MAIN -> {
-
-                    }
-                }
-            }
-        }
     }
 
     private fun setOnClickListeners() {

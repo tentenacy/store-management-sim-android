@@ -64,18 +64,57 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/text_profile_details_biz_no"
+                    android:id="@+id/text_profile_details_kiosk_code"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="23dp"
                     android:fontFamily="@font/suit_regular"
-                    android:text="사업자 번호"
+                    android:text="키오스크 코드"
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/edit_profile_details_kiosk_code"
+                    style="@style/Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:enabled="false"
+                    android:fontFamily="@font/suit_regular"
+                    android:gravity="center"
+                    android:importantForAutofill="no"
+                    android:inputType="numberSigned"
+                    android:maxLength="12"
+                    android:padding="14dp"
+                    android:text="@{vm.details.kioskCode}"
+                    android:textColor="@color/rect_4474"
+                    android:textColorHint="@color/rect_4481"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_profile_details_kiosk_code"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text_profile_details_biz_no"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/suit_regular"
+                    android:text="사업자 번호"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_profile_details_kiosk_code"
                     tools:ignore="HardcodedText" />
 
                 <EditText

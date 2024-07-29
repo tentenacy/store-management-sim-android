@@ -17,6 +17,7 @@ data class ProfileArgs(
     val phoneNumber: String,
     val storeName: String,
     var address: String?,
+    var kioskCode: String,
     val registeredAt: Date?,
 ): Parcelable {
     companion object {
@@ -31,6 +32,7 @@ data class ProfileArgs(
             phoneNumber = dto.phoneNumber,
             storeName = dto.storeName ?: "",
             address = dto.address,
+            kioskCode = dto.kioskCode,
             registeredAt = dto.registeredAt,
         )
     }

@@ -25,43 +25,96 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <ImageView
+            android:id="@+id/image_profile_edit_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="뒤로가기"
+            android:src="@drawable/ic_black_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_profile_edit_title"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/suit_bold"
+            android:text="프로필 설정"
+            android:textColor="@color/rect_4474"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_profile_edit_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image_profile_edit_back"
+            tools:ignore="HardcodedText" />
+
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintBottom_toTopOf="@id/btn_profile_edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/text_profile_edit_title">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/image_profile_edit_back"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                <TextView
+                    android:id="@+id/text_profile_edit_kiosk_code"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="15dp"
-                    android:contentDescription="뒤로가기"
-                    android:src="@drawable/ic_black_arrow"
+                    android:layout_marginTop="23dp"
+                    android:fontFamily="@font/suit_regular"
+                    android:text="키오스크 코드"
+                    android:textColor="@color/rect_4474"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
-                <TextView
-                    android:id="@+id/text_profile_edit_title"
+                <View
+                    android:id="@+id/view_profile_edit_kiosk_code_required"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/circle_required"
+                    app:layout_constraintStart_toEndOf="@id/text_profile_edit_kiosk_code"
+                    app:layout_constraintTop_toTopOf="@id/text_profile_edit_kiosk_code" />
+
+
+                <EditText
+                    android:id="@+id/edit_profile_edit_kiosk_code"
                     style="@style/Text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/suit_bold"
-                    android:text="프로필 설정"
-                    android:textColor="@color/rect_4474"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/image_profile_edit_back"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/input_radius"
+                    android:enabled="false"
+                    android:fontFamily="@font/suit_regular"
+                    android:gravity="center"
+                    android:importantForAutofill="no"
+                    android:inputType="numberSigned"
+                    android:maxLength="12"
+                    android:padding="14dp"
+                    android:text="@{args.kioskCode}"
+                    android:textColor="@color/rect_4480"
+                    android:textColorHint="@color/rect_4481"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/image_profile_edit_back"
+                    app:layout_constraintTop_toBottomOf="@id/text_profile_edit_kiosk_code"
+                    tools:text="T8hAax90"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -70,13 +123,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="38dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/suit_regular"
                     android:text="사업자 번호"
                     android:textColor="@color/rect_4474"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_profile_edit_title"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_profile_edit_kiosk_code"
                     tools:ignore="HardcodedText" />
 
                 <View
