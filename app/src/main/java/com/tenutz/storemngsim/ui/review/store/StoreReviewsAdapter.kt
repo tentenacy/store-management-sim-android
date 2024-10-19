@@ -44,11 +44,13 @@ class StoreReviewsAdapter(private val onClickListener: (Int, Any?) -> Unit): Pag
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<StoreReviews.StoreReview>() {
             override fun areItemsTheSame(oldItem: StoreReviews.StoreReview, newItem: StoreReviews.StoreReview): Boolean {
-                return oldItem.seq == newItem.seq
+//                return oldItem.seq == newItem.seq
+                return false
             }
 
             override fun areContentsTheSame(oldItem: StoreReviews.StoreReview, newItem: StoreReviews.StoreReview): Boolean {
-                return oldItem == newItem
+//                return oldItem == newItem
+                return false
             }
         }
     }

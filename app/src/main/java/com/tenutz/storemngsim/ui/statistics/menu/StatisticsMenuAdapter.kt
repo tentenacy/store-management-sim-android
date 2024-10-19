@@ -34,11 +34,13 @@ class StatisticsMenuAdapter: PagingDataAdapter<MenuSalesList.MenuSales, Statisti
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<MenuSalesList.MenuSales>() {
             override fun areItemsTheSame(oldItem: MenuSalesList.MenuSales, newItem: MenuSalesList.MenuSales): Boolean {
-                return oldItem.id == newItem.id
+//                return oldItem.id == newItem.id
+                return false
             }
 
             override fun areContentsTheSame(oldItem: MenuSalesList.MenuSales, newItem: MenuSalesList.MenuSales): Boolean {
-                return oldItem == newItem
+//                return oldItem == newItem
+                return false
             }
         }
     }

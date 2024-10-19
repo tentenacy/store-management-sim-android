@@ -51,64 +51,6 @@ class SignupFormFragment : BaseFragment() {
 
     val vm: SignupFormViewModel by viewModels()
 
-    @Inject
-    lateinit var naverOAuthLoginCallback: NaverOAuthLoginCallback
-
-    @Inject
-    lateinit var facebookOAuthLoginHandler: FacebookOAuthLoginHandler
-
-    @Inject
-    lateinit var kakaoOAuthLoginHandler: KakaoOAuthLoginHandler
-
-    @Inject
-    lateinit var googleOAuthLoginHandler: GoogleOAuthLoginHandler
-
-
-
-    @Inject
-    lateinit var googleCallbackManager: GoogleSignInClient
-
-    @Inject
-    lateinit var facebookCallbackManager: CallbackManager
-
-    private val naverLoginOnClickListener: () -> Unit = {
-        NaverIdLoginSDK.authenticate(mainActivity(), naverOAuthLoginCallback)
-    }
-
-    private val kakaoLoginOnClickListener: () -> Unit = {
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
-            UserApiClient.instance.loginWithKakaoTalk(
-                requireContext(),
-                callback = kakaoOAuthLoginHandler
-            )
-        } else {
-            UserApiClient.instance.loginWithKakaoAccount(
-                requireContext(),
-                callback = kakaoOAuthLoginHandler
-            )
-        }
-    }
-
-    private val googleLoginOnClickListener: () -> Unit = {
-        mainActivity().activityResultFactory.launch(
-            googleCallbackManager.signInIntent,
-            googleOAuthLoginHandler
-        )
-    }
-
-    private val facebookLoginOnClickListener: () -> Unit = {
-        LoginManager.getInstance().run {
-            logInWithReadPermissions(
-                this@SignupFormFragment,
-                listOf(
-                    SocialScopeConstant.FACEBOOK_SCOPE_EMAIL,
-                    SocialScopeConstant.FACEBOOK_SCOPE_PUBLIC_PROFILE
-                )
-            )
-            registerCallback(facebookCallbackManager, facebookOAuthLoginHandler)
-        }
-    }
-
     private val requestPermissionLauncher: ActivityResultLauncher<String> = registerForActivityResult(
         RequestPermission()
     ) { isGranted: Boolean ->

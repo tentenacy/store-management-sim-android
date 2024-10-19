@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.tenutz.storemngsim.data.datasource.paging.entity.PushAlarms
 import com.tenutz.storemngsim.data.datasource.sharedpref.Events
 import com.tenutz.storemngsim.data.datasource.sharedpref.EventsSharedPref
@@ -25,8 +26,17 @@ class NotificationFragment: BaseFragment() {
 
     val vm: NotificationViewModel by viewModels()
 
+    private val adapterDataObserver = object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            if (positionStart == 0) {
+                binding.recyclerNotification.scrollToPosition(0)
+            }
+        }
+    }
+
     val adapter: NotificationAdapter by lazy {
         NotificationAdapter().apply {
+            registerAdapterDataObserver(adapterDataObserver)
             addLoadStateListener { loadState ->
                 vm.empty.value =
                     !(loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1)
@@ -95,6 +105,7 @@ class NotificationFragment: BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        adapter.unregisterAdapterDataObserver(adapterDataObserver)
         _binding = null
     }
 }

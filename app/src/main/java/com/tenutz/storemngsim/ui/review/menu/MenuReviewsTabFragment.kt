@@ -13,6 +13,7 @@ import androidx.navigation.navGraphViewModels
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.paging.entity.MenuReviews
 import com.tenutz.storemngsim.databinding.TabMenuReviewsBinding
@@ -45,6 +46,14 @@ class MenuReviewsTabFragment: BaseFragment() {
 
     private val pVm: ReviewsViewModel by navGraphViewModels(R.id.navigation_review) {
         defaultViewModelProviderFactory
+    }
+
+    private val adapterDataObserver = object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            if (positionStart == 0) {
+                binding.recyclerTmenuReviews.scrollToPosition(0)
+            }
+        }
     }
 
     private val adapter: MenuReviewsAdapter by lazy {
@@ -116,6 +125,7 @@ class MenuReviewsTabFragment: BaseFragment() {
 //                    }
 //                }
 //            }
+            registerAdapterDataObserver(adapterDataObserver)
             addLoadStateListener { loadState ->
                 vm.empty.value =
                     !(loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1)
@@ -203,6 +213,7 @@ class MenuReviewsTabFragment: BaseFragment() {
     override fun onDestroyView() {
         disposable.clear()
         super.onDestroyView()
+        adapter.unregisterAdapterDataObserver(adapterDataObserver)
         _binding = null
     }
 }

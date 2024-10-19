@@ -35,11 +35,13 @@ class SalesAdapter(private val onClickListener: (Int, Any?) -> Unit): PagingData
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<SalesList.Sales>() {
             override fun areItemsTheSame(oldItem: SalesList.Sales, newItem: SalesList.Sales): Boolean {
-                return oldItem.id == newItem.id
+//                return oldItem.id == newItem.id
+                return false
             }
 
             override fun areContentsTheSame(oldItem: SalesList.Sales, newItem: SalesList.Sales): Boolean {
-                return oldItem == newItem
+//                return oldItem == newItem
+                return false
             }
         }
     }

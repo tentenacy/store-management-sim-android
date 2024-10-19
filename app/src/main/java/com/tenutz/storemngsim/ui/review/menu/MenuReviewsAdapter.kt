@@ -44,11 +44,13 @@ class MenuReviewsAdapter(private val onClickListener: (Int, Any?) -> Unit): Pagi
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<MenuReviews.MenuReview>() {
             override fun areItemsTheSame(oldItem: MenuReviews.MenuReview, newItem: MenuReviews.MenuReview): Boolean {
-                return oldItem.seq == newItem.seq
+//                return oldItem.seq == newItem.seq
+                return false
             }
 
             override fun areContentsTheSame(oldItem: MenuReviews.MenuReview, newItem: MenuReviews.MenuReview): Boolean {
-                return oldItem == newItem
+//                return oldItem == newItem
+                return false
             }
         }
     }

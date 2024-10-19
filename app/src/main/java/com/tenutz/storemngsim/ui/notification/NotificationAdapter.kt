@@ -34,11 +34,13 @@ class NotificationAdapter: PagingDataAdapter<PushAlarms.PushAlarm, NotificationV
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<PushAlarms.PushAlarm>() {
             override fun areItemsTheSame(oldItem: PushAlarms.PushAlarm, newItem: PushAlarms.PushAlarm): Boolean {
-                return oldItem.seq == newItem.seq
+//                return oldItem.seq == newItem.seq
+                return false
             }
 
             override fun areContentsTheSame(oldItem: PushAlarms.PushAlarm, newItem: PushAlarms.PushAlarm): Boolean {
-                return oldItem == newItem
+//                return oldItem == newItem
+                return false
             }
         }
     }

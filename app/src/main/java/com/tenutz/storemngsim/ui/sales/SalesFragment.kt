@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.RecyclerView
+import com.orhanobut.logger.Logger
 import com.tenutz.storemngsim.R
 import com.tenutz.storemngsim.data.datasource.paging.entity.SalesList
 import com.tenutz.storemngsim.databinding.FragmentSalesBinding
@@ -17,6 +20,9 @@ import com.tenutz.storemngsim.ui.sales.bs.SalesFilterBottomSheetDialog
 import com.tenutz.storemngsim.utils.ext.mainActivity
 import com.tenutz.storemngsim.utils.ext.navigateToMainFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SalesFragment: BaseFragment() {
@@ -26,13 +32,21 @@ class SalesFragment: BaseFragment() {
 
     val vm: SalesViewModel by viewModels()
 
+    private val adapterDataObserver = object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            if (positionStart == 0) {
+                binding.recyclerSales.scrollToPosition(0)
+            }
+        }
+    }
+
     val adapter: SalesAdapter by lazy {
         SalesAdapter { id, _ ->
 
         }.apply {
+            registerAdapterDataObserver(adapterDataObserver)
             addLoadStateListener { loadState ->
-                vm.empty.value =
-                    !(loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1)
+                vm.empty.value = adapter.itemCount < 1
             }
         }
     }
@@ -103,6 +117,7 @@ class SalesFragment: BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        adapter.unregisterAdapterDataObserver(adapterDataObserver)
         _binding = null
     }
 }
